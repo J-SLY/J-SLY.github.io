@@ -1,0 +1,48 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "暂无文章",
+      "date": "9999-99-99",
+      "category": "生活随笔",
+      "excerpt": "---",
+      "content": "---",
+      "image": "",
+      "readTime": "-分钟阅读",
+      "views": 0
+    },
+    {
+      "id": 2,
+      "title": "暂无文章",
+      "date": "9999-99-99",
+      "category": "美食记录",
+      "excerpt": "---",
+      "content": "---",
+      "image": "",
+      "readTime": "-分钟阅读",
+      "views": 0
+    },
+    {
+      "id": 3,
+      "title": "暂无文章",
+      "date": "9999-99-99",
+      "category": "旅行日记",
+      "excerpt": "---",
+      "content": "---",
+      "image": "",
+      "readTime": "-分钟阅读",
+      "views": 0
+    },
+    {
+      "id": 4,
+      "title": "暂无文章",
+      "date": "9999-99-99",
+      "category": "读书笔记",
+      "excerpt": "---",
+      "content": "---",
+      "image": "",
+      "readTime": "-分钟阅读",
+      "views": 0
+    }
+  ]
+}

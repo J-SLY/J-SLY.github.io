@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="JS.svg">
+    <title>JSLY的个人博客</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">JSLY的个人博客</a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#articles">文章</a></li>
+                    <li><a href="#travel">旅行日记</a></li>
+                    <li><a href="#food">美食记录</a></li>
+                    <li><a href="#reading">读书笔记</a></li>
+                    <li><a href="#about">关于我</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>JSLY的个人博客</h1>
+                <a href="#articles" class="btn">开始阅读</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 博客内容区域 -->
+    <main class="container">
+        <div class="blog-content">
+            <!-- 文章列表 -->
+            <!--
+            <section id="articles" class="articles-section">
+                <h2 class="section-title">最新文章</h2>
+                <div id="articles-container" class="articles-grid">
+                </div>
+                <div class="load-more-container">
+                    <button id="load-more" class="btn">加载更多</button>
+                </div>
+            </section>
+            <br/>
+            -->
+            <!-- 在文章列表部分之后添加分类区域 -->
+            <section id="travel" class="articles-section">
+                <h2 class="section-title">旅行日记</h2>
+                <div id="travel-container" class="articles-grid">
+                    <!-- 旅行文章将通过JavaScript动态加载 -->
+                </div>
+            </section>
+
+            <section id="food" class="articles-section">
+                <h2 class="section-title">美食记录</h2>
+                <div id="food-container" class="articles-grid">
+                    <!-- 美食文章将通过JavaScript动态加载 -->
+                </div>
+            </section>
+
+            <section id="reading" class="articles-section">
+                <h2 class="section-title">读书笔记</h2>
+                <div id="reading-container" class="articles-grid">
+                    <!-- 读书文章将通过JavaScript动态加载 -->
+                </div>
+            </section>
+
+            <section id="life" class="articles-section">
+                <h2 class="section-title">生活随笔</h2>
+                <div id="life-container" class="articles-grid">
+                    <!-- 生活随笔文章将通过JavaScript动态加载 -->
+                </div>
+            </section>
+            <!--
+            <section id="travel" class="articles-section">
+                <h2 class="section-title">旅行日记</h2>
+                <div id="travel-container" class="articles-grid">
+
+                </div>
+            </section>
+
+            <section id="food" class="articles-section">
+                <h2 class="section-title">美食记录</h2>
+                <div id="food-container" class="articles-grid">
+
+                </div>
+            </section>
+
+            <section id="reading" class="articles-section">
+                <h2 class="section-title">读书笔记</h2>
+                <div id="reading-container" class="articles-grid">
+
+                </div>
+            </section>
+            -->
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">关于我</h3>
+                    <div class="about-me">
+                        <p>一位热爱技术的初中生。</p>
+                        <br/>
+                        <a href="#about" class="btn">了解更多</a>
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">文章分类</h3>
+                    <ul class="categories-list">
+                        <!--<li><a href="#articles">全部文章</a></li>-->
+                        <li><a href="#travel">旅行日记</a></li>
+                        <li><a href="#food">美食记录</a></li>
+                        <li><a href="#reading">读书笔记</a></li>
+                        <li><a href="#life">生活随笔</a></li>
+                    </ul>
+                </div>
+                
+                <!--
+                <div class="sidebar-widget">
+                    <h3 class="sidebar-title">热门标签</h3>
+                    <div class="tags">
+                        <a href="#" class="tag">生活感悟</a>
+                        <a href="#" class="tag">旅行</a>
+                        <a href="#" class="tag">美食</a>
+                        <a href="#" class="tag">读书</a>
+                        <a href="#" class="tag">摄影</a>
+                        <a href="#" class="tag">心情</a>
+                        <a href="#" class="tag">成长</a>
+                        <a href="#" class="tag">回忆</a>
+                    </div>
+                </div>
+                -->
+            </aside>
+        </div>
+    </main>
+
+    <!-- 关于我部分 -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>关于我</h2>
+                    <br/>
+                    <p>一位热爱技术的初中生。</p>
+                    <!--
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="subscribe">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>JSLY的个人博客</h3>
+                    <p>记录生活点滴，分享美好时光的个人博客。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">首页</a></li>
+                        <!--
+                        <li><a href="#articles">所有文章</a></li>
+                        -->
+                        <li><a href="#travel">旅行日记</a></li>
+                        <li><a href="#food">美食记录</a></li>
+                        <li><a href="#life">生活记录</a></li>
+                        <li><a href="#reading">读书笔记</a></li>
+                        <li><a href="#about">关于我</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>联系我</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> <!--contact@example.com--><a href="mailto:2029872426@qq.com">2029872426@qq.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> 中国，安徽，六安</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025  JSLY. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
