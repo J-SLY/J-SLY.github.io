@@ -46,7 +46,7 @@ function initSearch() {
         });
 
         function matchPinyin(text, query) {
-            if (window.pinyinPro && /[\u4e00-\u9fff]/.test(text)) {
+            if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
                 return pinyinPro.match(text, query) !== null;
             }
             return false;
@@ -103,7 +103,7 @@ function highlight(text, query) {
         return text.slice(0, idx) + '<strong>' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
     }
 
-    if (window.pinyinPro && /[\u4e00-\u9fff]/.test(text)) {
+    if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
         const pinyinArr = pinyinPro.pinyin(text, { type: 'array', toneType: 'none' });
         const pinyinStr = pinyinArr.join('').toLowerCase();
         const pIdx = pinyinStr.indexOf(query);
