@@ -3,25 +3,16 @@ let articlesData = [];
 
 // DOM 加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
-    // 从JSON文件加载文章数据
     loadArticlesFromJSON();
-    
-    // 初始化导航功能
     initNavigation();
-    
-    // 添加事件监听器
-    document.getElementById('load-more').addEventListener('click', loadMoreArticles);
-    document.getElementById('subscribe-form').addEventListener('submit', handleSubscribe);
-    
-    // 移动端菜单切换
+
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
-    
+
     menuToggle.addEventListener('click', function() {
         navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
     });
-    
-    // 响应式调整
+
     window.addEventListener('resize', function() {
         if (window.innerWidth > 992) {
             navLinks.style.display = 'flex';
@@ -29,9 +20,15 @@ document.addEventListener('DOMContentLoaded', function() {
             navLinks.style.display = 'none';
         }
     });
-    
-    // 监听滚动事件
+
     window.addEventListener('scroll', updateNavOnScroll);
+
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(element => {
+        element.style.opacity = "0";
+        element.style.transform = "translateY(20px)";
+        element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    });
 });
 
 // 从JSON文件加载文章
@@ -109,11 +106,13 @@ function createArticleElement(article) {
     const articleCard = document.createElement('article');
     articleCard.className = 'article-card fade-in';
     articleCard.setAttribute('data-article-id', article.id);
-    
+
+    const imageHtml = article.image
+        ? `<div class="article-image"><img src="${article.image}" alt="${article.title}" loading="lazy"></div>`
+        : `<div class="article-image article-image-placeholder"><span>${article.category}</span></div>`;
+
     articleCard.innerHTML = `
-        <div class="article-image">
-            <img src="${article.image}" alt="${article.title}" loading="lazy">
-        </div>
+        ${imageHtml}
         <div class="article-content">
             <span class="article-category">${article.category}</span>
             <h3>${article.title}</h3>
@@ -125,7 +124,7 @@ function createArticleElement(article) {
             </div>
         </div>
     `;
-    
+
     return articleCard;
 }
 
@@ -185,8 +184,7 @@ function updateActiveNav(clickedLink) {
         link.classList.remove('active');
     });
     
-    // 为当前点击的链接添加active类
-    if (clickedLink.classList.contains('nav-links')) {
+    if (clickedLink.closest('.nav-links')) {
         clickedLink.classList.add('active');
     }
 }
@@ -273,13 +271,15 @@ function showArticleDetail(article) {
         `<p>${paragraph}</p>`
     ).join('');
     
+    const heroHtml = article.image
+        ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
+        : `<div class="article-hero article-hero-placeholder"><span>${article.title}</span></div>`;
+
     modal.innerHTML = `
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <div class="article-detail">
-                <div class="article-hero">
-                    <img src="${article.image}" alt="${article.title}">
-                </div>
+                ${heroHtml}
                 <div class="article-body">
                     <span class="article-category">${article.category}</span>
                     <h2>${article.title}</h2>
@@ -331,26 +331,20 @@ function showArticleDetail(article) {
         this.innerHTML = '<i class="fas fa-heart"></i> 已点赞';
         this.style.background = '#e74c3c';
         this.disabled = true;
-        
-        // 在实际应用中，这里应该发送请求到服务器记录点赞
-        setTimeout(() => {
-            alert('感谢您的点赞！');
-        }, 300);
     }, {once: true});
     
     modal.querySelector('.share-btn').addEventListener('click', function() {
+        const url = window.location.href + '#article-' + article.id;
         if (navigator.share) {
             navigator.share({
                 title: article.title,
                 text: article.excerpt,
-                url: window.location.href + '#article-' + article.id,
+                url: url,
             })
             .catch(error => console.log('分享出错:', error));
         } else {
-            // 备用方案 - 复制链接到剪贴板
-            const url = window.location.href + '#article-' + article.id;
             navigator.clipboard.writeText(url).then(() => {
-                alert('文章链接已复制到剪贴板！');
+                this.innerHTML = '<i class="fas fa-check"></i> 链接已复制';
             });
         }
     }, {once: true});
@@ -364,27 +358,6 @@ function showArticleDetail(article) {
     };
     
     document.addEventListener('keydown', handleEscapeKey);
-}
-
-// 加载更多文章
-let currentLimit = 4;
-function loadMoreArticles() {
-    currentLimit += 2;
-    const articlesContainer = document.getElementById('articles-container');
-    const allArticles = articlesData.slice(0, currentLimit);
-    renderArticlesToContainer(allArticles, articlesContainer);
-}
-
-// 处理订阅表单
-function handleSubscribe(e) {
-    e.preventDefault();
-    const emailInput = e.target.querySelector('input[type="email"]');
-    const email = emailInput.value;
-    
-    if (email) {
-        alert(`感谢您的订阅！我们将发送更新到: ${email}`);
-        emailInput.value = '';
-    }
 }
 
 // 简单的滚动动画
@@ -402,15 +375,4 @@ const fadeInOnScroll = function() {
     });
 };
 
-// 初始设置
-document.addEventListener('DOMContentLoaded', function() {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach(element => {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(20px)";
-        element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-    });
-});
-
-// 监听滚动
 window.addEventListener('scroll', fadeInOnScroll);

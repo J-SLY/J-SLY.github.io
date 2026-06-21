@@ -7,7 +7,7 @@
       "category": "生活随笔",
       "excerpt": "---",
       "content": "---",
-      "image": "",
+      "image": "https://picsum.photos/seed/life/800/400",
       "readTime": "-分钟阅读",
       "views": 0
     },
@@ -18,7 +18,7 @@
       "category": "美食记录",
       "excerpt": "---",
       "content": "---",
-      "image": "",
+      "image": "https://picsum.photos/seed/food/800/400",
       "readTime": "-分钟阅读",
       "views": 0
     },
@@ -29,7 +29,7 @@
       "category": "旅行日记",
       "excerpt": "---",
       "content": "---",
-      "image": "",
+      "image": "https://picsum.photos/seed/travel/800/400",
       "readTime": "-分钟阅读",
       "views": 0
     },
@@ -40,7 +40,7 @@
       "category": "读书笔记",
       "excerpt": "---",
       "content": "---",
-      "image": "",
+      "image": "https://picsum.photos/seed/reading/800/400",
       "readTime": "-分钟阅读",
       "views": 0
     }
