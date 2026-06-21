@@ -14,6 +14,7 @@ function loadArticlesFromJSON() {
         .then(data => {
             articlesData = data.articles;
             renderAllArticles();
+            openArticleFromHash();
         })
         .catch(error => {
             console.error('加载文章数据时出错:', error);
@@ -137,6 +138,8 @@ function showArticleDetail(article) {
         </div>
     `;
 
+    updateOGTags(article);
+
     document.body.appendChild(modal);
 
     document.body.style.overflow = 'hidden';
@@ -144,6 +147,7 @@ function showArticleDetail(article) {
     const closeModal = () => {
         document.body.removeChild(modal);
         document.body.style.overflow = 'auto';
+        restoreOGTags();
         modal.removeEventListener('click', handleBackgroundClick);
     };
 
@@ -163,7 +167,8 @@ function showArticleDetail(article) {
     }, {once: true});
 
     modal.querySelector('.share-btn').addEventListener('click', function() {
-        const url = window.location.href + '#article-' + article.id;
+        const baseUrl = window.location.origin + window.location.pathname;
+        const url = baseUrl + '#article-' + article.id;
         if (navigator.share) {
             navigator.share({
                 title: article.title,
@@ -187,3 +192,67 @@ function showArticleDetail(article) {
 
     document.addEventListener('keydown', handleEscapeKey);
 }
+
+let originalOGTags = [];
+
+function updateOGTags(article) {
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    const ogUrl = document.querySelector('meta[property="og:url"]');
+
+    if (!originalOGTags.length) {
+        originalOGTags = [
+            ogTitle ? {el: ogTitle, content: ogTitle.getAttribute('content')} : null,
+            ogDesc ? {el: ogDesc, content: ogDesc.getAttribute('content')} : null,
+            ogImage ? {el: ogImage, content: ogImage.getAttribute('content')} : null,
+            ogUrl ? {el: ogUrl, content: ogUrl.getAttribute('content')} : null,
+        ];
+    }
+
+    if (ogTitle) ogTitle.setAttribute('content', article.title + ' - JSLY\'s Blog');
+    if (ogDesc) ogDesc.setAttribute('content', article.excerpt);
+
+    const fullUrl = window.location.origin + window.location.pathname + '#article-' + article.id;
+    if (ogUrl) ogUrl.setAttribute('content', fullUrl);
+
+    if (!ogImage && article.image) {
+        const meta = document.createElement('meta');
+        meta.setAttribute('property', 'og:image');
+        meta.setAttribute('content', window.location.origin + '/' + article.image);
+        document.head.appendChild(meta);
+    } else if (ogImage && article.image) {
+        ogImage.setAttribute('content', window.location.origin + '/' + article.image);
+    }
+}
+
+function restoreOGTags() {
+    originalOGTags.forEach(item => {
+        if (item && item.el) {
+            item.el.setAttribute('content', item.content);
+        }
+    });
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage && !originalOGTags[2]) {
+        ogImage.parentNode.removeChild(ogImage);
+    }
+    originalOGTags = [];
+}
+
+function openArticleFromHash() {
+    const match = window.location.hash.match(/^#article-(\d+)$/);
+    if (!match) return;
+
+    const articleId = parseInt(match[1], 10);
+    const article = articlesData.find(a => a.id === articleId);
+
+    if (article) {
+        setTimeout(() => {
+            showArticleDetail(article);
+        }, 300);
+    }
+}
+
+window.addEventListener('hashchange', function() {
+    openArticleFromHash();
+});
