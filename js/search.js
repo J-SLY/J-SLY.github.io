@@ -1,6 +1,34 @@
 /* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
+function findPinyinMatchRange(text, query) {
+    if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
+        const pinyinArr = pinyinPro.pinyin(text, { type: 'array', toneType: 'none' });
+        const pinyinStr = pinyinArr.join('').toLowerCase();
+        const pIdx = pinyinStr.indexOf(query);
+        if (pIdx !== -1) {
+            let pos = 0;
+            let startChar = -1;
+            let endChar = [...text].length;
+            for (let i = 0; i < pinyinArr.length; i++) {
+                const end = pos + pinyinArr[i].length;
+                if (startChar === -1 && pIdx < end) {
+                    startChar = i;
+                }
+                if (startChar !== -1 && pIdx + query.length <= end) {
+                    endChar = i + 1;
+                    break;
+                }
+                pos = end;
+            }
+            if (startChar !== -1) {
+                return { start: startChar, end: endChar };
+            }
+        }
+    }
+    return null;
+}
+
 function initSearch() {
     const searchIcon = document.querySelector('.search-icon');
     searchIcon.style.cursor = 'pointer';
@@ -46,10 +74,7 @@ function initSearch() {
         });
 
         function matchPinyin(text, query) {
-            if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
-                return pinyinPro.match(text, query) !== null;
-            }
-            return false;
+            return findPinyinMatchRange(text, query) !== null;
         }
 
         input.addEventListener('input', function() {
@@ -103,33 +128,9 @@ function highlight(text, query) {
         return text.slice(0, idx) + '<strong>' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
     }
 
-    if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
-        const pinyinArr = pinyinPro.pinyin(text, { type: 'array', toneType: 'none' });
-        const pinyinStr = pinyinArr.join('').toLowerCase();
-        const pIdx = pinyinStr.indexOf(query);
-        if (pIdx !== -1) {
-            const chars = [...text];
-            let pos = 0;
-            let startChar = -1;
-            let endChar = chars.length;
-            for (let i = 0; i < pinyinArr.length; i++) {
-                const end = pos + pinyinArr[i].length;
-                if (startChar === -1 && pIdx < end) {
-                    startChar = i;
-                }
-                if (startChar !== -1 && pIdx + query.length <= end) {
-                    endChar = i + 1;
-                    break;
-                }
-                pos = end;
-            }
-            if (startChar !== -1) {
-                const before = chars.slice(0, startChar).join('');
-                const matched = chars.slice(startChar, endChar).join('');
-                const after = chars.slice(endChar).join('');
-                return before + '<strong>' + matched + '</strong>' + after;
-            }
-        }
+    const range = findPinyinMatchRange(text, query);
+    if (range) {
+        return text.slice(0, range.start) + '<strong>' + text.slice(range.start, range.end) + '</strong>' + text.slice(range.end);
     }
 
     return text;

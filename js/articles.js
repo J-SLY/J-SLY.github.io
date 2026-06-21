@@ -81,7 +81,7 @@ function addArticleClickEvents() {
 
         card.addEventListener('click', function() {
             const articleId = this.getAttribute('data-article-id');
-            const article = articlesData.find(a => a.id == articleId);
+            const article = articlesData.find(a => a.id === Number(articleId));
 
             if (article) {
                 showArticleDetail(article);
@@ -144,11 +144,20 @@ function showArticleDetail(article) {
 
     document.body.style.overflow = 'hidden';
 
+    const handleEscapeKey = (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    };
+
     const closeModal = () => {
-        document.body.removeChild(modal);
+        if (document.body.contains(modal)) {
+            document.body.removeChild(modal);
+        }
         document.body.style.overflow = 'auto';
         restoreOGTags();
         modal.removeEventListener('click', handleBackgroundClick);
+        document.removeEventListener('keydown', handleEscapeKey);
     };
 
     const handleBackgroundClick = (e) => {
@@ -183,13 +192,6 @@ function showArticleDetail(article) {
         }
     }, {once: true});
 
-    const handleEscapeKey = (e) => {
-        if (e.key === 'Escape') {
-            closeModal();
-            document.removeEventListener('keydown', handleEscapeKey);
-        }
-    };
-
     document.addEventListener('keydown', handleEscapeKey);
 }
 
@@ -219,10 +221,10 @@ function updateOGTags(article) {
     if (!ogImage && article.image) {
         const meta = document.createElement('meta');
         meta.setAttribute('property', 'og:image');
-        meta.setAttribute('content', window.location.origin + '/' + article.image);
+        meta.setAttribute('content', window.location.origin + '/' + article.image.replace(/^\//, ''));
         document.head.appendChild(meta);
     } else if (ogImage && article.image) {
-        ogImage.setAttribute('content', window.location.origin + '/' + article.image);
+        ogImage.setAttribute('content', window.location.origin + '/' + article.image.replace(/^\//, ''));
     }
 }
 

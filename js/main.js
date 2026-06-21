@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
 
+    if (window.innerWidth <= 992) {
+        navLinks.style.display = 'none';
+    }
+
     menuToggle.addEventListener('click', function() {
         navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
     });

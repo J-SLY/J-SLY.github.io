@@ -3,10 +3,6 @@
 
 /* 响应式设计 */
 @media (max-width: 992px) {
-    .nav-links {
-        display: none;
-    }
-
     .menu-toggle {
         display: block;
     }
