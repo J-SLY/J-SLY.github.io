@@ -174,7 +174,7 @@ function initSearch() {
                 a.title.toLowerCase().includes(q) ||
                 (a.tags && a.tags.some(t => t.toLowerCase().includes(q))) ||
                 a.excerpt.toLowerCase().includes(q) ||
-                a.content.toLowerCase().includes(q)
+                a.content.join('\n').toLowerCase().includes(q)
             );
 
             if (matches.length === 0) {
@@ -278,7 +278,7 @@ function showArticleDetail(article) {
     const modal = document.createElement('div');
     modal.className = 'article-modal';
 
-    const contentHtml = marked.parse(article.content);
+    const contentHtml = marked.parse(article.content.join('\n'));
 
     const heroHtml = article.image
         ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
