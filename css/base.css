@@ -25,6 +25,34 @@ body {
     background-color: var(--light);
     color: var(--dark);
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode variables */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary: #81c784;
+        --primary-light: #a5d6a7;
+        --primary-dark: #66bb6a;
+        --secondary: #4db6ac;
+        --dark: #e0e0e0;
+        --light: #1a1a2e;
+        --gray: #b0b0b0;
+        --light-gray: #2a2a3e;
+        --border: #3a3a4e;
+    }
+}
+
+:root.dark-mode {
+    --primary: #81c784;
+    --primary-light: #a5d6a7;
+    --primary-dark: #66bb6a;
+    --secondary: #4db6ac;
+    --dark: #e0e0e0;
+    --light: #1a1a2e;
+    --gray: #b0b0b0;
+    --light-gray: #2a2a3e;
+    --border: #3a3a4e;
 }
 
 a {

@@ -25,6 +25,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Reading progress bar
+    const progressBar = document.getElementById('reading-progress-bar');
+    window.addEventListener('scroll', function() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+            const progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + '%';
+        } else {
+            progressBar.style.width = '0%';
+        }
+    });
+
     window.addEventListener('scroll', updateNavOnScroll);
 
     const fadeElements = document.querySelectorAll('.fade-in');
@@ -32,6 +45,49 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.opacity = "0";
         element.style.transform = "translateY(20px)";
         element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.querySelector('.dark-mode-toggle');
+    const icon = darkModeToggle.querySelector('i');
+
+    // Check saved preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+        icon.classList.replace('fa-moon', 'fa-sun');
+    } else if (savedTheme === 'light') {
+        // do nothing, default light
+    } else {
+        // No saved preference, check system
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+    }
+
+    darkModeToggle.addEventListener('click', function() {
+        const isDark = document.documentElement.classList.toggle('dark-mode');
+        if (isDark) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                document.documentElement.classList.add('dark-mode');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
     });
 });
 

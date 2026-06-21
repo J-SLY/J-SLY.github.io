@@ -69,8 +69,29 @@ function initSearch() {
             if (e.target === modal) closeSearch();
         });
 
+        let selectedIndex = -1;
+
         input.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeSearch();
+            if (e.key === 'Escape') {
+                closeSearch();
+            } else if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const items = results.querySelectorAll('.search-result-item');
+                if (items.length === 0) return;
+                selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+                items.forEach((el, i) => el.classList.toggle('selected', i === selectedIndex));
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                const items = results.querySelectorAll('.search-result-item');
+                if (items.length === 0) return;
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                items.forEach((el, i) => el.classList.toggle('selected', i === selectedIndex));
+            } else if (e.key === 'Enter') {
+                const items = results.querySelectorAll('.search-result-item');
+                if (selectedIndex >= 0 && selectedIndex < items.length) {
+                    items[selectedIndex].click();
+                }
+            }
         });
 
         function matchPinyin(text, query) {
@@ -98,15 +119,21 @@ function initSearch() {
                 return;
             }
 
-            results.innerHTML = matches.map(a => `
+            results.innerHTML = matches.map(a => {
+                const contentText = a.content.join('\n').replace(/[#*\-`]/g, '');
+                const excerptText = contentText.slice(0, 120);
+                return `
                 <div class="search-result-item" data-id="${a.id}">
                     <div class="search-result-title">${highlight(a.title, q)}</div>
+                    <div class="search-result-excerpt">${highlight(excerptText, q)}</div>
                     <div class="search-result-meta">
                         ${a.tags ? a.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
                         <span>${a.date}</span>
                     </div>
                 </div>
-            `).join('');
+            `}).join('');
+
+            selectedIndex = -1;
 
             results.querySelectorAll('.search-result-item').forEach(item => {
                 item.addEventListener('click', function() {

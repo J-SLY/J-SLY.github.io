@@ -246,3 +246,12 @@ footer {
     color: #aaa;
     font-size: 0.9rem;
 }
+
+.dark-mode header {
+    background: var(--light);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode footer {
+    background: #0d0d1a;
+}

@@ -332,6 +332,21 @@
     background: var(--light);
 }
 
+.search-result-item.selected {
+    background: var(--light-gray);
+}
+
+.search-result-excerpt {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+.search-result-excerpt strong {
+    color: var(--primary);
+}
+
 .search-result-title {
     font-size: 1rem;
     font-weight: 600;
@@ -379,4 +394,126 @@
 
 .error-message {
     color: #e74c3c;
+}
+
+/* Highlight.js overrides */
+.markdown-body pre {
+    position: relative;
+}
+
+.markdown-body pre code {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Article TOC */
+.article-toc {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+}
+
+.article-toc-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.article-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-toc-item {
+    margin-bottom: 4px;
+}
+
+.article-toc-item a {
+    color: var(--gray);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+    padding: 2px 0;
+}
+
+.article-toc-item a:hover {
+    color: var(--primary);
+}
+
+/* Reading Progress Bar */
+#reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 9999;
+    transition: width 0.1s ease;
+}
+
+/* Tag Filter */
+.tag-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.tag-filter-btn {
+    background: var(--light-gray);
+    color: var(--dark);
+    border: 1px solid var(--border);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.tag-filter-btn:hover {
+    background: var(--primary-light);
+    color: white;
+    border-color: var(--primary-light);
+}
+
+.tag-filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Dark mode overrides */
+.dark-mode .article-modal .modal-content {
+    background: var(--light);
+    color: var(--dark);
+}
+
+.dark-mode .search-modal-content {
+    background: var(--light);
+    color: var(--dark);
+}
+
+.dark-mode .article-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+}
+
+.dark-mode .markdown-body code {
+    background: var(--light-gray);
+}
+
+.dark-mode .markdown-body pre {
+    background: #0d0d1a;
+}
+
+.dark-mode .article-toc {
+    background: var(--light-gray);
 }

@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="feed.xml">
 </head>
 <body>
+    <div id="reading-progress-bar"></div>
     <header>
         <div class="container">
             <nav class="navbar">
@@ -30,6 +32,9 @@
                 </ul>
                 
                 <div class="nav-actions">
+                    <div class="dark-mode-toggle" title="切换暗色模式">
+                        <i class="fas fa-moon"></i>
+                    </div>
                     <div class="search-icon">
                         <i class="fas fa-search"></i>
                     </div>
@@ -54,6 +59,9 @@
         <div class="blog-content">
             <section id="articles" class="articles-section">
                 <h2 class="section-title">最新文章</h2>
+                <div class="tag-filter" id="tag-filter">
+                    <button class="tag-filter-btn active" data-tag="all">全部</button>
+                </div>
                 <div id="articles-container" class="articles-grid">
                 </div>
             </section>
@@ -123,6 +131,8 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
     <script src="js/articles.js"></script>
     <script src="js/search.js"></script>

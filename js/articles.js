@@ -14,6 +14,7 @@ function loadArticlesFromJSON() {
         .then(data => {
             articlesData = data.articles;
             renderAllArticles();
+            renderTagFilter();
             openArticleFromHash();
         })
         .catch(error => {
@@ -27,6 +28,57 @@ function renderAllArticles() {
     const container = document.getElementById('articles-container');
     container.innerHTML = '';
     renderArticlesToContainer(articlesData, container);
+}
+
+function renderTagFilter() {
+    const tagSet = new Set();
+    articlesData.forEach(article => {
+        if (article.tags && article.tags.length) {
+            article.tags.forEach(tag => tagSet.add(tag));
+        }
+    });
+
+    const filterContainer = document.getElementById('tag-filter');
+    if (!filterContainer) return;
+
+    filterContainer.innerHTML = '<button class="tag-filter-btn active" data-tag="all">全部</button>';
+
+    const sortedTags = Array.from(tagSet).sort();
+    sortedTags.forEach(tag => {
+        const btn = document.createElement('button');
+        btn.className = 'tag-filter-btn';
+        btn.setAttribute('data-tag', tag);
+        btn.textContent = tag;
+        filterContainer.appendChild(btn);
+    });
+
+    filterContainer.querySelectorAll('.tag-filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterContainer.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const selectedTag = this.getAttribute('data-tag');
+            filterArticles(selectedTag);
+        });
+    });
+}
+
+function filterArticles(tag) {
+    const container = document.getElementById('articles-container');
+    container.innerHTML = '';
+
+    let filtered;
+    if (tag === 'all') {
+        filtered = articlesData;
+    } else {
+        filtered = articlesData.filter(a => a.tags && a.tags.includes(tag));
+    }
+
+    renderArticlesToContainer(filtered, container);
+    container.querySelectorAll('.fade-in').forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(20px)";
+    });
+    fadeInOnScroll();
 }
 
 function renderArticlesToContainer(articles, container) {
@@ -141,6 +193,58 @@ function showArticleDetail(article) {
     updateOGTags(article);
 
     document.body.appendChild(modal);
+
+    modal.querySelectorAll('.markdown-body pre code').forEach((block) => {
+        hljs.highlightElement(block);
+    });
+
+    // Generate TOC from markdown headings
+    const markdownBody = modal.querySelector('.markdown-body');
+    if (markdownBody) {
+        const headings = markdownBody.querySelectorAll('h1, h2, h3');
+        if (headings.length > 1) {
+            const toc = document.createElement('nav');
+            toc.className = 'article-toc';
+            const tocTitle = document.createElement('div');
+            tocTitle.className = 'article-toc-title';
+            tocTitle.innerHTML = '<i class="fas fa-list"></i> 目录';
+            toc.appendChild(tocTitle);
+
+            const tocList = document.createElement('ul');
+            tocList.className = 'article-toc-list';
+
+            headings.forEach(h => {
+                if (!h.id) {
+                    h.id = h.textContent.toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/(^-|-$)/g, '');
+                }
+
+                const li = document.createElement('li');
+                li.className = 'article-toc-item';
+                li.style.paddingLeft = (parseInt(h.tagName[1]) - 1) * 16 + 'px';
+
+                const a = document.createElement('a');
+                a.href = '#' + h.id;
+                a.textContent = h.textContent;
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.getElementById(h.id);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+
+                li.appendChild(a);
+                tocList.appendChild(li);
+            });
+
+            toc.appendChild(tocList);
+
+            const articleBody = modal.querySelector('.article-body');
+            if (articleBody) {
+                articleBody.insertBefore(toc, articleBody.firstChild);
+            }
+        }
+    }
 
     document.body.style.overflow = 'hidden';
 
