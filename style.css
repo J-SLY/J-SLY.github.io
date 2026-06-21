@@ -410,13 +410,6 @@ footer {
     filter: brightness(0) invert(1);
 }
 
-.social-luogu-me-text {
-    font-size: 11px;
-    font-weight: bold;
-    line-height: 1;
-    letter-spacing: 0.5px;
-}
-
 .social-atcoder-text {
     font-size: 10px;
     font-weight: bold;
