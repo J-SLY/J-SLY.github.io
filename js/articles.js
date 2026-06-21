@@ -118,6 +118,7 @@ function addArticleClickEvents() {
 
 function buildArticleContent(article, showHero) {
     if (showHero === undefined) showHero = true;
+    if (article.showImage === false) showHero = false;
     const contentHtml = marked.parse(article.content.join('\n'));
 
     const heroHtml = showHero
