@@ -181,9 +181,7 @@ function showArticleDetail(article) {
     const modal = document.createElement('div');
     modal.className = 'article-modal';
 
-    const contentWithParagraphs = article.content.split('\n\n').map(paragraph => 
-        `<p>${paragraph}</p>`
-    ).join('');
+    const contentHtml = marked.parse(article.content);
 
     const heroHtml = article.image
         ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
@@ -206,8 +204,8 @@ function showArticleDetail(article) {
                         <span><i class="far fa-clock"></i> ${article.readTime}</span>
                         <span><i class="far fa-eye"></i> ${article.views}</span>
                     </div>
-                    <div class="article-content">
-                        ${contentWithParagraphs}
+                    <div class="article-content markdown-body">
+                        ${contentHtml}
                     </div>
                     <div class="article-actions">
                         <button class="btn like-btn">
