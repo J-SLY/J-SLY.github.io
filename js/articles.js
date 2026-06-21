@@ -133,7 +133,7 @@ function showArticleDetail(article) {
                             <i class="fas fa-share"></i> 分享
                         </button>
                     </div>
-                    <div class="article-comments"></div>
+                    <div class="article-comments giscus"></div>
                 </div>
             </div>
         </div>
@@ -196,23 +196,22 @@ function showArticleDetail(article) {
     }
 
     const commentsDiv = modal.querySelector('.article-comments');
-    if (commentsDiv && window.customElements && window.customElements.get('giscus-widget')) {
-        const widget = document.createElement('giscus-widget');
-        widget.setAttribute('repo', 'J-SLY/J-SLY.github.io');
-        widget.setAttribute('repo-id', 'R_kgDOSmP4AQ');
-        widget.setAttribute('category', 'General');
-        widget.setAttribute('mapping', 'specific');
-        widget.setAttribute('term', 'article-' + article.id);
-        widget.setAttribute('reactions-enabled', '1');
-        widget.setAttribute('emit-metadata', '0');
-        widget.setAttribute('input-position', 'bottom');
-        widget.setAttribute('theme', 'preferred_color_scheme');
-        widget.setAttribute('lang', 'zh-CN');
-        widget.setAttribute('crossorigin', 'anonymous');
-        widget.setAttribute('loading', 'lazy');
-        commentsDiv.appendChild(widget);
-    } else if (commentsDiv) {
-        commentsDiv.innerHTML = '<p style="color:var(--gray);font-size:0.9rem">评论功能需要刷新页面后才能使用。</p>';
+    if (commentsDiv) {
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'J-SLY/J-SLY.github.io');
+        script.setAttribute('data-repo-id', 'R_kgDOSmP4AQ');
+        script.setAttribute('data-category', 'General');
+        script.setAttribute('data-mapping', 'specific');
+        script.setAttribute('data-term', 'article-' + article.id);
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'bottom');
+        script.setAttribute('data-theme', 'preferred_color_scheme');
+        script.setAttribute('data-lang', 'zh-CN');
+        script.setAttribute('crossorigin', 'anonymous');
+        script.async = true;
+        commentsDiv.appendChild(script);
     }
 
     document.body.style.overflow = 'hidden';
