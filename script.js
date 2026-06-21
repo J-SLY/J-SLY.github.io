@@ -64,10 +64,10 @@ function renderAllArticles() {
     
     // 根据分类渲染文章到对应区域
     const categories = {
-        'travel': '旅行日记',
-        'food': '美食记录', 
-        'reading': '读书笔记',
-        'life': '生活随笔'
+        'tech': '技术分享',
+        'project': '项目实战',
+        'notes': '学习笔记',
+        'coding': '编程随笔'
     };
     
     // 渲染每个分类的文章
@@ -169,7 +169,7 @@ function initNavigation() {
                 });
                 
                 // 如果是分类链接，筛选文章
-                if (['articles', 'travel', 'food', 'reading', 'life'].includes(targetId)) {
+                if (['articles', 'tech', 'project', 'notes', 'coding'].includes(targetId)) {
                     filterArticlesByCategory(targetId);
                 }
             }
@@ -207,11 +207,11 @@ function filterArticlesByCategory(category) {
         const container = targetSection.querySelector('.articles-grid');
         if (container && container.children.length === 0) {
             const categoryMap = {
-                'travel': '旅行日记',
-                'food': '美食记录',
-                'reading': '读书笔记',
-                'life': '生活随笔',
-                'articles': '' // 全部文章
+                'tech': '技术分享',
+                'project': '项目实战',
+                'notes': '学习笔记',
+                'coding': '编程随笔',
+                'articles': ''
             };
             
             let categoryArticles;
