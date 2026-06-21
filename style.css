@@ -245,19 +245,16 @@ header {
     padding: 25px;
 }
 
-.article-category {
-    display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-size: 0.8rem;
-    margin-bottom: 15px;
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
 }
 
 .article-content h3 {
     font-size: 1.3rem;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     line-height: 1.4;
 }
 
@@ -315,23 +312,6 @@ header {
     font-size: 0.95rem;
 }
 
-.categories-list li {
-    margin-bottom: 10px;
-}
-
-.categories-list a {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.categories-list a:hover {
-    color: var(--primary);
-    padding-left: 5px;
-}
-
 .tags {
     display: flex;
     flex-wrap: wrap;
@@ -350,6 +330,13 @@ header {
 .tag:hover {
     background: var(--primary);
     color: white;
+}
+
+.article-tags .tag {
+    background: var(--primary-light);
+    color: white;
+    font-size: 0.8rem;
+    padding: 3px 12px;
 }
 
 /* 页脚 */
