@@ -406,17 +406,15 @@ footer {
     display: block;
 }
 
-.social-atcoder img {
-    display: block;
-    filter: invert(1);
-}
-
 .social-luogu:hover img {
     filter: brightness(0) invert(1);
 }
 
-.social-atcoder:hover img {
-    filter: brightness(0) invert(1);
+.social-atcoder-text {
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.5px;
 }
 
 .copyright {
