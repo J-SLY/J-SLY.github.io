@@ -93,7 +93,7 @@ function addArticleClickEvents() {
 function showArticleDetail(article) {
     const existingModal = document.querySelector('.article-modal');
     if (existingModal) {
-        document.body.removeChild(existingModal);
+        existingModal.remove();
     }
 
     const modal = document.createElement('div');
@@ -202,6 +202,7 @@ function showArticleDetail(article) {
         script.setAttribute('data-repo', 'J-SLY/J-SLY.github.io');
         script.setAttribute('data-repo-id', 'R_kgDOSmP4AQ');
         script.setAttribute('data-category', 'General');
+        script.setAttribute('data-category-id', 'DIC_kwDOSmP4Ac4C_k-w');
         script.setAttribute('data-mapping', 'specific');
         script.setAttribute('data-term', 'article-' + article.id);
         script.setAttribute('data-reactions-enabled', '1');

@@ -120,7 +120,7 @@ function initSearch() {
             }
 
             results.innerHTML = matches.map(a => {
-                const contentText = a.content.join('\n').replace(/[#*\-`]/g, '');
+                const contentText = a.content.join('\n').replace(/[#*\-`]+/g, '').replace(/\s{2,}/g, ' ');
                 const excerptText = contentText.slice(0, 120);
                 return `
                 <div class="search-result-item" data-id="${a.id}">

@@ -181,6 +181,7 @@
 
 .article-detail .article-content {
     line-height: 1.8;
+    padding: 0;
 }
 
 .markdown-body h1,

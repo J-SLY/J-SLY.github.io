@@ -69,6 +69,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     updateProfileCardTheme(initialDark);
+    updateHighlightTheme(initialDark);
+
+    function updateHighlightTheme(isDark) {
+        const link = document.getElementById('hljs-theme');
+        if (link) {
+            link.href = isDark
+                ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+                : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+        }
+    }
 
     function updateGiscusTheme(isDark) {
         const theme = isDark ? 'dark' : 'light';
@@ -96,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         updateGiscusTheme(isDark);
         updateProfileCardTheme(isDark);
+        updateHighlightTheme(isDark);
     }
 
     darkModeToggle.addEventListener('click', function() {
@@ -116,6 +127,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             updateGiscusTheme(isDark);
             updateProfileCardTheme(isDark);
+            updateHighlightTheme(isDark);
         }
     });
 });

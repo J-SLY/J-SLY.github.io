@@ -26,15 +26,7 @@
     }
 }
 
-/* 动画效果 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.fade-in {
-    animation: fadeIn 0.8s ease forwards;
-}
+/* 动画效果 — 由 JS 控制滚动渐入，fade-in 类仅作标记 */
 
 .dark-mode-toggle {
     font-size: 18px;
