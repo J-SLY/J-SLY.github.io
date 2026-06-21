@@ -1,8 +1,8 @@
 :root {
-    --primary: #ff7e5f;
-    --primary-light: #ff9e8a;
-    --primary-dark: #e8694d;
-    --secondary: #4a9fff;
+    --primary: #66bb6a;
+    --primary-light: #a5d6a7;
+    --primary-dark: #43a047;
+    --secondary: #26a69a;
     --dark: #333;
     --light: #f8f9fa;
     --gray: #6c757d;
@@ -55,7 +55,7 @@ ul {
 .btn:hover {
     background: var(--primary-dark);
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255, 126, 95, 0.3);
+    box-shadow: 0 10px 20px rgba(102, 187, 106, 0.3);
 }
 
 .section {
@@ -138,7 +138,7 @@ header {
 .hero {
     padding-top: 150px;
     padding-bottom: 80px;
-    background: var(--primary);
+    background: #e8f5e9;
     text-align: center;
 }
 
