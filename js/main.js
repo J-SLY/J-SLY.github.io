@@ -47,22 +47,17 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
     });
 
-    function updateAboutLinks(isDark) {
-        document.querySelectorAll('a[href="#about"]').forEach(function(el) {
-            el.textContent = isDark ? 'dark' : '关于我';
-        });
-    }
-
     // Dark mode toggle
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     const icon = darkModeToggle.querySelector('i');
 
     // Check saved preference
     const savedTheme = localStorage.getItem('theme');
+    let initialDark = false;
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark-mode');
         icon.classList.replace('fa-moon', 'fa-sun');
-        updateAboutLinks(true);
+        initialDark = true;
     } else if (savedTheme === 'light') {
         // do nothing, default light
     } else {
@@ -70,9 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark-mode');
             icon.classList.replace('fa-moon', 'fa-sun');
-            updateAboutLinks(true);
+            initialDark = true;
         }
     }
+    updateProfileCardTheme(initialDark);
 
     function updateGiscusTheme(isDark) {
         const theme = isDark ? 'dark' : 'light';
@@ -82,8 +78,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    darkModeToggle.addEventListener('click', function() {
-        const isDark = document.documentElement.classList.toggle('dark-mode');
+    function updateProfileCardTheme(isDark) {
+        const img = document.querySelector('.about-content img');
+        if (img) {
+            const base = 'https://www.cpoauth.com/api/users/JSLY/card.svg?lang=en';
+            img.src = isDark ? base + '&theme=dark' : base;
+        }
+    }
+
+    function applyDarkTheme(isDark) {
         if (isDark) {
             icon.classList.replace('fa-moon', 'fa-sun');
             localStorage.setItem('theme', 'dark');
@@ -91,8 +94,13 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
-        updateAboutLinks(isDark);
         updateGiscusTheme(isDark);
+        updateProfileCardTheme(isDark);
+    }
+
+    darkModeToggle.addEventListener('click', function() {
+        const isDark = document.documentElement.classList.toggle('dark-mode');
+        applyDarkTheme(isDark);
     });
 
     // Listen for system theme changes
@@ -106,8 +114,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.documentElement.classList.remove('dark-mode');
                 icon.classList.replace('fa-sun', 'fa-moon');
             }
-            updateAboutLinks(isDark);
             updateGiscusTheme(isDark);
+            updateProfileCardTheme(isDark);
         }
     });
 });

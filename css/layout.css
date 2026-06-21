@@ -253,7 +253,7 @@ footer {
 }
 
 .dark-mode .hero {
-    background: var(--light);
+    background: #0d2818;
 }
 
 .dark-mode footer {
