@@ -411,6 +411,27 @@ footer {
     transform: translateY(-5px);
 }
 
+.social-qzone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    font-size: 0.65rem;
+    font-weight: 700;
+    transition: var(--transition);
+    text-decoration: none;
+    color: #aaa;
+}
+
+.social-qzone:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-5px);
+}
+
 .copyright {
     text-align: center;
     padding-top: 30px;
