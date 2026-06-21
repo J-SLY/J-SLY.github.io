@@ -278,7 +278,7 @@ function showArticleDetail(article) {
     const modal = document.createElement('div');
     modal.className = 'article-modal';
 
-    const contentHtml = marked.parse(article.content.join('\n'));
+    const contentHtml = article.content.map(block => marked.parse(block)).join('');
 
     const heroHtml = article.image
         ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
