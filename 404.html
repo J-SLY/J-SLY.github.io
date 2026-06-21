@@ -18,6 +18,11 @@
         <div class="container">
             <nav class="navbar">
                 <a href="/" class="logo">JSLY's Blog</a>
+                <div class="nav-actions">
+                    <div class="dark-mode-toggle" title="切换暗色模式">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -37,5 +42,22 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        const toggle = document.querySelector('.dark-mode-toggle');
+        const icon = toggle.querySelector('i');
+        const saved = localStorage.getItem('theme');
+
+        if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark-mode');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        toggle.addEventListener('click', function() {
+            const isDark = document.documentElement.classList.toggle('dark-mode');
+            icon.classList.replace(isDark ? 'fa-moon' : 'fa-sun', isDark ? 'fa-sun' : 'fa-moon');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    </script>
 </body>
 </html>

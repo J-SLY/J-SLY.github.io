@@ -141,7 +141,7 @@ function initSearch() {
                     const article = articlesData.find(a => a.id === id);
                     if (article) {
                         closeSearch();
-                        showArticleDetail(article);
+                        openArticle(article);
                     }
                 });
             });

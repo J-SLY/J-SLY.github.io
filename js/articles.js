@@ -3,6 +3,25 @@
 
 let articlesData = [];
 
+const DISPLAY_MODE_COOKIE = 'article_display_mode';
+
+function getArticleDisplayMode() {
+    const match = document.cookie.match(new RegExp('(^| )' + DISPLAY_MODE_COOKIE + '=([^;]+)'));
+    return match ? match[2] : 'modal';
+}
+
+function setArticleDisplayMode(mode) {
+    document.cookie = DISPLAY_MODE_COOKIE + '=' + mode + ';path=/;max-age=31536000';
+}
+
+function openArticle(article) {
+    if (getArticleDisplayMode() === 'page') {
+        window.open('article.html?id=' + article.id, '_blank');
+    } else {
+        showArticleDetail(article);
+    }
+}
+
 function loadArticlesFromJSON() {
     fetch('articles.json')
         .then(response => {
@@ -84,10 +103,53 @@ function addArticleClickEvents() {
             const article = articlesData.find(a => a.id === Number(articleId));
 
             if (article) {
-                showArticleDetail(article);
+                openArticle(article);
             }
         });
     });
+}
+
+function buildArticleContent(article, showHero) {
+    if (showHero === undefined) showHero = true;
+    const contentHtml = marked.parse(article.content.join('\n'));
+
+    const heroHtml = showHero
+        ? (article.image
+            ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
+            : `<div class="article-hero article-hero-placeholder"><span>${article.title}</span></div>`)
+        : '';
+
+    const tagsHtml = article.tags && article.tags.length
+        ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        : '';
+
+    return `
+        ${heroHtml}
+        <div class="article-layout">
+            <div class="article-toc-sidebar"></div>
+            <div class="article-body">
+                <h2>${article.title}</h2>
+                ${tagsHtml}
+                <div class="article-meta">
+                    <span><i class="far fa-calendar"></i> ${article.date}</span>
+                    <span><i class="far fa-clock"></i> ${article.readTime}</span>
+                    <span><i class="far fa-eye"></i> ${article.views}</span>
+                </div>
+                <div class="article-content markdown-body">
+                    ${contentHtml}
+                </div>
+                <div class="article-actions">
+                    <button class="btn like-btn">
+                        <i class="far fa-heart"></i> 点赞
+                    </button>
+                    <button class="btn share-btn">
+                        <i class="fas fa-share"></i> 分享
+                    </button>
+                </div>
+                <div class="article-comments giscus"></div>
+            </div>
+        </div>
+    `;
 }
 
 function showArticleDetail(article) {
@@ -99,16 +161,6 @@ function showArticleDetail(article) {
     const modal = document.createElement('div');
     modal.className = 'article-modal';
 
-    const contentHtml = marked.parse(article.content.join('\n'));
-
-    const heroHtml = article.image
-        ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
-        : `<div class="article-hero article-hero-placeholder"><span>${article.title}</span></div>`;
-
-    const tagsHtml = article.tags && article.tags.length
-        ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
-        : '';
-
     modal.innerHTML = `
         <div class="modal-content">
             <div class="reading-progress-bar">
@@ -116,28 +168,7 @@ function showArticleDetail(article) {
             </div>
             <span class="close-modal">&times;</span>
             <div class="article-detail">
-                ${heroHtml}
-                <div class="article-body">
-                    <h2>${article.title}</h2>
-                    ${tagsHtml}
-                    <div class="article-meta">
-                        <span><i class="far fa-calendar"></i> ${article.date}</span>
-                        <span><i class="far fa-clock"></i> ${article.readTime}</span>
-                        <span><i class="far fa-eye"></i> ${article.views}</span>
-                    </div>
-                    <div class="article-content markdown-body">
-                        ${contentHtml}
-                    </div>
-                    <div class="article-actions">
-                        <button class="btn like-btn">
-                            <i class="far fa-heart"></i> 点赞
-                        </button>
-                        <button class="btn share-btn">
-                            <i class="fas fa-share"></i> 分享
-                        </button>
-                    </div>
-                    <div class="article-comments giscus"></div>
-                </div>
+                ${buildArticleContent(article)}
             </div>
         </div>
     `;
@@ -146,7 +177,6 @@ function showArticleDetail(article) {
 
     document.body.appendChild(modal);
 
-    // Reading progress bar for article modal
     const modalContent = modal.querySelector('.modal-content');
     const progressFill = modal.querySelector('.progress-fill');
     if (modalContent && progressFill) {
@@ -165,7 +195,6 @@ function showArticleDetail(article) {
         hljs.highlightElement(block);
     });
 
-    // Generate TOC from markdown headings
     const markdownBody = modal.querySelector('.markdown-body');
     if (markdownBody) {
         const headings = markdownBody.querySelectorAll('h1, h2, h3');
@@ -206,9 +235,20 @@ function showArticleDetail(article) {
 
             toc.appendChild(tocList);
 
-            const articleBody = modal.querySelector('.article-body');
-            if (articleBody) {
-                articleBody.insertBefore(toc, articleBody.firstChild);
+            const tocSidebar = modal.querySelector('.article-toc-sidebar');
+            if (tocSidebar) {
+                tocSidebar.appendChild(toc);
+                const modalContent = modal.querySelector('.modal-content');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            tocSidebar.querySelectorAll('.article-toc-item a').forEach(link => {
+                                link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+                            });
+                        }
+                    });
+                }, { root: modalContent, rootMargin: '0px 0px -80% 0px', threshold: 0 });
+                headings.forEach(h => observer.observe(h));
             }
         }
     }
@@ -341,9 +381,15 @@ function openArticleFromHash() {
     const article = articlesData.find(a => a.id === articleId);
 
     if (article) {
+        if (getArticleDisplayMode() === 'page') {
+            window.location.href = 'article.html?id=' + article.id;
+            return;
+        }
         setTimeout(() => {
             showArticleDetail(article);
         }, 300);
+    } else {
+        window.location.href = '404.html';
     }
 }
 

@@ -135,9 +135,8 @@
 }
 
 .modal-content {
-    background: white;
-    border-radius: 10px;
-    max-width: 800px;
+    background: transparent;
+    max-width: 1100px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
@@ -157,7 +156,9 @@
 .article-detail .article-hero {
     height: 300px;
     overflow: hidden;
-    border-radius: 10px 10px 0 0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: white;
 }
 
 .article-detail .article-hero img {
@@ -167,7 +168,16 @@
 }
 
 .article-body {
-    padding: 30px;
+    flex: 1;
+    min-width: 0;
+    padding: 25px 35px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.article-body > h2 {
+    margin-bottom: 16px;
 }
 
 .article-detail .article-meta {
@@ -304,6 +314,7 @@
     font-size: 1.1rem;
     padding: 4px 0;
     background: none;
+    color: inherit;
 }
 
 .search-close {
@@ -385,6 +396,117 @@
     border-top: 1px solid var(--border);
 }
 
+/* Settings dropdown (centered modal) */
+.settings-toggle {
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--gray);
+    transition: var(--transition);
+}
+
+.settings-toggle:hover {
+    color: var(--primary);
+}
+
+.settings-dropdown {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 5000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.settings-dropdown.show {
+    display: flex;
+}
+
+.settings-panel {
+    background: white;
+    border-radius: 10px;
+    max-width: 800px;
+    width: 100%;
+    padding: 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+.settings-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray);
+    line-height: 1;
+}
+
+.settings-close:hover {
+    color: var(--dark);
+}
+
+.settings-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 16px;
+}
+
+.settings-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--gray);
+    transition: var(--transition);
+}
+
+.settings-option:hover {
+    color: var(--primary);
+}
+
+.settings-option input[type="radio"] {
+    accent-color: var(--primary);
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+
+.dark-mode .settings-panel {
+    background: var(--light);
+}
+
+.dark-mode .settings-title {
+    color: var(--dark);
+}
+
+/* Article page (standalone article.html) */
+#article-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.back-to-blog {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.back-to-blog:hover {
+    color: var(--primary-dark);
+}
+
 /* 加载和错误消息样式 */
 .loading-message, .error-message {
     text-align: center;
@@ -408,20 +530,37 @@
     line-height: 1.5;
 }
 
-/* Article TOC */
-.article-toc {
-    background: var(--light);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 24px;
+/* Article TOC sidebar */
+.article-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.article-toc-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 10px;
+    max-height: calc(90vh - 60px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.article-toc-sidebar:empty {
+    display: none;
 }
 
 .article-toc-title {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
     color: var(--primary);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .article-toc-list {
@@ -431,20 +570,59 @@
 }
 
 .article-toc-item {
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .article-toc-item a {
     color: var(--gray);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-decoration: none;
     transition: var(--transition);
     display: block;
-    padding: 2px 0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1.4;
 }
 
 .article-toc-item a:hover {
     color: var(--primary);
+    background: var(--light);
+}
+
+.article-toc-item a.active {
+    color: var(--primary);
+    font-weight: 600;
+    background: var(--light);
+    border-left: 2px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+}
+
+#article-page .article-toc-sidebar {
+    top: 80px;
+    max-height: calc(100vh - 120px);
+}
+
+@media (max-width: 992px) {
+    .article-layout {
+        flex-direction: column;
+        gap: 0;
+    }
+    .article-toc-sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        margin-bottom: 20px;
+        padding: 12px 16px;
+        background: var(--light);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+    }
+    .article-toc-item a {
+        padding: 4px 0;
+    }
+    .article-toc-item a:hover {
+        background: none;
+    }
 }
 
 /* Reading Progress Bar (inside article modal) */
@@ -478,8 +656,30 @@
 
 /* Dark mode overrides */
 .dark-mode .article-modal .modal-content {
+    background: transparent;
+}
+
+.dark-mode .article-modal .article-hero,
+.dark-mode .article-modal .article-toc-sidebar,
+.dark-mode .article-modal .article-body {
     background: var(--light);
-    color: var(--dark);
+}
+
+.dark-mode .article-hero-placeholder {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+}
+
+.dark-mode #article-page .article-toc-sidebar,
+.dark-mode #article-page .article-body {
+    background: var(--light);
+}
+
+.dark-mode .article-modal .article-hero,
+.dark-mode .article-modal .article-toc-sidebar,
+.dark-mode .article-modal .article-body,
+.dark-mode #article-page .article-toc-sidebar,
+.dark-mode #article-page .article-body {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
 }
 
 .dark-mode .search-modal-content {
@@ -500,8 +700,14 @@
     background: #0d0d1a;
 }
 
-.dark-mode .article-toc {
+.dark-mode .article-toc-sidebar a:hover {
     background: var(--light-gray);
+}
+
+@media (max-width: 992px) {
+    .dark-mode .article-toc-sidebar {
+        background: var(--light-gray);
+    }
 }
 
 /* Custom scrollbar */

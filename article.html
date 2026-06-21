@@ -23,34 +23,15 @@
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#home" class="logo">JSLY's Blog</a>
-                
+                <a href="index.html" class="logo">JSLY's Blog</a>
                 <ul class="nav-links">
-                    <li><a href="#home" class="active">首页</a></li>
-                    <li><a href="#articles">文章</a></li>
-                    <li><a href="#about">关于我</a></li>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="index.html#articles">文章</a></li>
+                    <li><a href="index.html#about">关于我</a></li>
                 </ul>
-                
                 <div class="nav-actions">
                     <div class="dark-mode-toggle" title="切换暗色模式">
                         <i class="fas fa-moon"></i>
-                    </div>
-                    <div class="settings-toggle" title="阅读设置">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <div class="settings-dropdown">
-                        <div class="settings-panel">
-                            <span class="settings-close">&times;</span>
-                            <div class="settings-title">文章打开方式</div>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="modal" checked>
-                                <span>弹窗模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="page">
-                                <span>新页面模式</span>
-                            </label>
-                        </div>
                     </div>
                     <div class="search-icon">
                         <i class="fas fa-search"></i>
@@ -63,45 +44,19 @@
         </div>
     </header>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>JSLY's Blog</h1>
-                <a href="#articles" class="btn">开始阅读</a>
-            </div>
-        </div>
-    </section>
-
     <main class="container">
-        <div class="blog-content">
-            <section id="articles" class="articles-section">
-                <h2 class="section-title">最新文章</h2>
-                <div id="articles-container" class="articles-grid">
-                </div>
-            </section>
-
+        <div id="article-page">
+            <a href="index.html#articles" class="back-to-blog"><i class="fas fa-arrow-left"></i> 返回文章列表</a>
+            <div id="article-content"></div>
         </div>
     </main>
 
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="about-content">
-                <h2>关于我</h2>
-                <br/>
-                <img src="https://www.cpoauth.com/api/users/JSLY/card.svg?lang=en" alt="JSLY Profile Card" style="max-width:600px;width:100%;border-radius:10px;">
-            </div>
-        </div>
-    </section>
-
-    <footer id="subscribe">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>JSLY's Blog</h3>
-                    
                     <div class="social-links">
-                        <!-- <a href="#"><i class="fab fa-weibo"></i></a>
-                        <a href="#"><i class="fab fa-weixin"></i></a> -->
                         <a href="https://wpa.qq.com/msgrd?v=3&uin=2029872426&site=qq&menu=yes"><i class="fab fa-qq"></i></a>
                         <a href="https://github.com/J-SLY"><i class="fab fa-github"></i></a>
                         <a href="https://www.luogu.com.cn/user/1772464" class="social-luogu">
@@ -118,16 +73,14 @@
                         </a>
                     </div>
                 </div>
-                
                 <div class="footer-col">
                     <h3>快速链接</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#articles">文章</a></li>
-                        <li><a href="#about">关于我</a></li>
+                        <li><a href="index.html#home">首页</a></li>
+                        <li><a href="index.html#articles">文章</a></li>
+                        <li><a href="index.html#about">关于我</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-col">
                     <h3>联系我</h3>
                     <ul class="footer-links">
@@ -137,7 +90,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="copyright">
                 <p>&copy; 2026  JSLY. 保留所有权利. | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa">源代码 (AGPL-3.0)</a></p>
             </div>
@@ -149,7 +101,6 @@
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
     <script src="js/articles.js"></script>
     <script src="js/search.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/article-page.js"></script>
 </body>
 </html>

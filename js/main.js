@@ -101,6 +101,49 @@ document.addEventListener('DOMContentLoaded', function() {
         applyDarkTheme(isDark);
     });
 
+    // Article display mode setting
+    const settingsToggle = document.querySelector('.settings-toggle');
+    const settingsDropdown = document.querySelector('.settings-dropdown');
+    const settingsClose = document.querySelector('.settings-close');
+
+    if (settingsToggle && settingsDropdown) {
+        const currentMode = getArticleDisplayMode();
+        const checkedRadio = settingsDropdown.querySelector('input[value="' + currentMode + '"]');
+        if (checkedRadio) checkedRadio.checked = true;
+
+        settingsToggle.addEventListener('click', function() {
+            settingsDropdown.classList.add('show');
+        });
+
+        const closeSettings = function() {
+            settingsDropdown.classList.remove('show');
+        };
+
+        if (settingsClose) {
+            settingsClose.addEventListener('click', closeSettings);
+        }
+
+        settingsDropdown.addEventListener('click', function(e) {
+            if (e.target === settingsDropdown) {
+                closeSettings();
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && settingsDropdown.classList.contains('show')) {
+                closeSettings();
+            }
+        });
+
+        settingsDropdown.querySelectorAll('input[name="display-mode"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.checked) {
+                    setArticleDisplayMode(this.value);
+                }
+            });
+        });
+    }
+
     // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
         if (!localStorage.getItem('theme')) {
