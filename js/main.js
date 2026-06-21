@@ -47,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
         element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
     });
 
+    function updateAboutLinks(isDark) {
+        document.querySelectorAll('a[href="#about"]').forEach(function(el) {
+            el.textContent = isDark ? 'dark' : '关于我';
+        });
+    }
+
     // Dark mode toggle
     const darkModeToggle = document.querySelector('.dark-mode-toggle');
     const icon = darkModeToggle.querySelector('i');
@@ -56,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedTheme === 'dark') {
         document.documentElement.classList.add('dark-mode');
         icon.classList.replace('fa-moon', 'fa-sun');
+        updateAboutLinks(true);
     } else if (savedTheme === 'light') {
         // do nothing, default light
     } else {
@@ -63,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.documentElement.classList.add('dark-mode');
             icon.classList.replace('fa-moon', 'fa-sun');
+            updateAboutLinks(true);
         }
     }
 
@@ -83,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
+        updateAboutLinks(isDark);
         updateGiscusTheme(isDark);
     });
 
@@ -97,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.documentElement.classList.remove('dark-mode');
                 icon.classList.replace('fa-sun', 'fa-moon');
             }
+            updateAboutLinks(isDark);
             updateGiscusTheme(isDark);
         }
     });
