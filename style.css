@@ -408,9 +408,10 @@ footer {
 }
 
 .social-qzone-text {
-    font-size: 14px;
+    font-size: 11px;
     font-weight: bold;
     line-height: 1;
+    letter-spacing: 0.5px;
 }
 
 .copyright {
