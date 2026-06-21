@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <rect width="800" height="400" fill="#1e1e1e"/>
+  <rect x="0" y="0" width="800" height="35" fill="#333"/>
+  <circle cx="20" cy="17" r="6" fill="#ff5f57"/>
+  <circle cx="40" cy="17" r="6" fill="#ffbd2e"/>
+  <circle cx="60" cy="17" r="6" fill="#28c840"/>
+  <text x="400" y="24" fill="#ccc" font-family="monospace" font-size="14" text-anchor="middle">bash</text>
+  <text x="30" y="80" fill="#a5d6a7" font-family="monospace" font-size="18">$ opencode</text>
+  <text x="30" y="120" fill="#fff" font-family="monospace" font-size="16">
+    <tspan fill="#66bb6a">OpenCode</tspan> v1.0.0 ready
+  </text>
+  <text x="30" y="160" fill="#888" font-family="monospace" font-size="14">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+  <text x="30" y="200" fill="#a5d6a7" font-family="monospace" font-size="16">
+    <tspan fill="#999">&gt;</tspan> 帮我写一个排序算法
+  </text>
+  <text x="30" y="240" fill="#a5d6a7" font-family="monospace" font-size="16">
+    <tspan fill="#66bb6a">⚡</tspan> 正在分析代码库...
+  </text>
+  <text x="30" y="280" fill="#a5d6a7" font-family="monospace" font-size="16">
+    <tspan fill="#66bb6a">✓</tspan> 已生成快速排序实现
+  </text>
+  <text x="30" y="320" fill="#888" font-family="monospace" font-size="14">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
+  <text x="30" y="360" fill="#999" font-family="monospace" font-size="16">&gt;</text>
+</svg>
