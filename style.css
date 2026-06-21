@@ -395,20 +395,15 @@ footer {
     transform: translateY(-5px);
 }
 
-.social-qzone img,
-.social-luogu img,
-.social-atcoder img {
-    display: block;
-}
-
-.social-qzone:hover img,
-.social-luogu:hover img,
-.social-atcoder:hover img {
-    filter: brightness(0) invert(1);
-}
-
 .social-qzone-text {
     font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+.social-atcoder-text {
+    font-size: 12px;
     font-weight: bold;
     line-height: 1;
     letter-spacing: 0.5px;
