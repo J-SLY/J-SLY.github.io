@@ -402,20 +402,16 @@ footer {
     letter-spacing: 0.5px;
 }
 
-.social-luogu img {
+.social-luogu img,
+.social-atcoder img {
     display: block;
 }
 
-.social-luogu:hover img {
+.social-luogu:hover img,
+.social-atcoder:hover img {
     filter: brightness(0) invert(1);
 }
 
-.social-atcoder-text {
-    font-size: 10px;
-    font-weight: bold;
-    line-height: 1;
-    letter-spacing: 0.5px;
-}
 
 .copyright {
     text-align: center;
