@@ -66,6 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function updateGiscusTheme(isDark) {
+        const theme = isDark ? 'dark' : 'light';
+        const giscusIframe = document.querySelector('giscus-widget iframe');
+        if (giscusIframe) {
+            giscusIframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+        }
+    }
+
     darkModeToggle.addEventListener('click', function() {
         const isDark = document.documentElement.classList.toggle('dark-mode');
         if (isDark) {
@@ -75,18 +83,21 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.classList.replace('fa-sun', 'fa-moon');
             localStorage.setItem('theme', 'light');
         }
+        updateGiscusTheme(isDark);
     });
 
     // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
         if (!localStorage.getItem('theme')) {
-            if (e.matches) {
+            const isDark = e.matches;
+            if (isDark) {
                 document.documentElement.classList.add('dark-mode');
                 icon.classList.replace('fa-moon', 'fa-sun');
             } else {
                 document.documentElement.classList.remove('dark-mode');
                 icon.classList.replace('fa-sun', 'fa-moon');
             }
+            updateGiscusTheme(isDark);
         }
     });
 });

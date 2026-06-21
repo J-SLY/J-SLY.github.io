@@ -207,7 +207,8 @@ function showArticleDetail(article) {
         script.setAttribute('data-reactions-enabled', '1');
         script.setAttribute('data-emit-metadata', '0');
         script.setAttribute('data-input-position', 'bottom');
-        script.setAttribute('data-theme', 'preferred_color_scheme');
+        const giscusTheme = document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light';
+        script.setAttribute('data-theme', giscusTheme);
         script.setAttribute('data-lang', 'zh-CN');
         script.setAttribute('crossorigin', 'anonymous');
         script.async = true;
