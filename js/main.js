@@ -25,19 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Reading progress bar
-    const progressBar = document.getElementById('reading-progress-bar');
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        if (docHeight > 0) {
-            const progress = (scrollTop / docHeight) * 100;
-            progressBar.style.width = progress + '%';
-        } else {
-            progressBar.style.width = '0%';
-        }
-    });
-
     window.addEventListener('scroll', updateNavOnScroll);
 
     const fadeElements = document.querySelectorAll('.fade-in');

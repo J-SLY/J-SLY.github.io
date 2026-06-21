@@ -111,6 +111,9 @@ function showArticleDetail(article) {
 
     modal.innerHTML = `
         <div class="modal-content">
+            <div class="reading-progress-bar">
+                <div class="progress-fill"></div>
+            </div>
             <span class="close-modal">&times;</span>
             <div class="article-detail">
                 ${heroHtml}
@@ -142,6 +145,21 @@ function showArticleDetail(article) {
     updateOGTags(article);
 
     document.body.appendChild(modal);
+
+    // Reading progress bar for article modal
+    const modalContent = modal.querySelector('.modal-content');
+    const progressFill = modal.querySelector('.progress-fill');
+    if (modalContent && progressFill) {
+        modalContent.addEventListener('scroll', function () {
+            const scrollTop = modalContent.scrollTop;
+            const scrollHeight = modalContent.scrollHeight - modalContent.clientHeight;
+            if (scrollHeight > 0) {
+                progressFill.style.width = (scrollTop / scrollHeight) * 100 + '%';
+            } else {
+                progressFill.style.width = '0%';
+            }
+        });
+    }
 
     modal.querySelectorAll('.markdown-body pre code').forEach((block) => {
         hljs.highlightElement(block);
