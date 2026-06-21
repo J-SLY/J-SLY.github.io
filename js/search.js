@@ -45,6 +45,13 @@ function initSearch() {
             if (e.key === 'Escape') closeSearch();
         });
 
+        function matchPinyin(text, query) {
+            if (window.pinyinPro && /[\u4e00-\u9fff]/.test(text)) {
+                return pinyinPro.match(text, query) !== null;
+            }
+            return false;
+        }
+
         input.addEventListener('input', function() {
             const q = this.value.trim().toLowerCase();
             if (!q) {
@@ -54,8 +61,10 @@ function initSearch() {
 
             const matches = articlesData.filter(a =>
                 a.title.toLowerCase().includes(q) ||
-                (a.tags && a.tags.some(t => t.toLowerCase().includes(q))) ||
+                matchPinyin(a.title, q) ||
+                (a.tags && a.tags.some(t => t.toLowerCase().includes(q) || matchPinyin(t, q))) ||
                 a.excerpt.toLowerCase().includes(q) ||
+                matchPinyin(a.excerpt, q) ||
                 a.content.join('\n').toLowerCase().includes(q)
             );
 
