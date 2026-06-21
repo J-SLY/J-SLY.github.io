@@ -170,7 +170,8 @@ footer {
 
 .social-links {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-top: 20px;
 }
 
