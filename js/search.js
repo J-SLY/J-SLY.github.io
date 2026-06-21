@@ -99,6 +99,24 @@ function initSearch() {
 
 function highlight(text, query) {
     const idx = text.toLowerCase().indexOf(query);
-    if (idx === -1) return text;
-    return text.slice(0, idx) + '<strong>' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
+    if (idx !== -1) {
+        return text.slice(0, idx) + '<strong>' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
+    }
+
+    if (window.pinyinPro && /[\u4e00-\u9fff]/.test(text)) {
+        const matches = pinyinPro.match(text, query);
+        if (matches && matches.length > 0) {
+            let result = '';
+            let lastEnd = 0;
+            matches.forEach(m => {
+                result += text.slice(lastEnd, m.start);
+                result += '<strong>' + text.slice(m.start, m.end) + '</strong>';
+                lastEnd = m.end;
+            });
+            result += text.slice(lastEnd);
+            return result;
+        }
+    }
+
+    return text;
 }
