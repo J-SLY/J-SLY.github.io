@@ -14,7 +14,6 @@ function loadArticlesFromJSON() {
         .then(data => {
             articlesData = data.articles;
             renderAllArticles();
-            renderTagFilter();
             openArticleFromHash();
         })
         .catch(error => {
@@ -28,57 +27,6 @@ function renderAllArticles() {
     const container = document.getElementById('articles-container');
     container.innerHTML = '';
     renderArticlesToContainer(articlesData, container);
-}
-
-function renderTagFilter() {
-    const tagSet = new Set();
-    articlesData.forEach(article => {
-        if (article.tags && article.tags.length) {
-            article.tags.forEach(tag => tagSet.add(tag));
-        }
-    });
-
-    const filterContainer = document.getElementById('tag-filter');
-    if (!filterContainer) return;
-
-    filterContainer.innerHTML = '<button class="tag-filter-btn active" data-tag="all">全部</button>';
-
-    const sortedTags = Array.from(tagSet).sort();
-    sortedTags.forEach(tag => {
-        const btn = document.createElement('button');
-        btn.className = 'tag-filter-btn';
-        btn.setAttribute('data-tag', tag);
-        btn.textContent = tag;
-        filterContainer.appendChild(btn);
-    });
-
-    filterContainer.querySelectorAll('.tag-filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            filterContainer.querySelectorAll('.tag-filter-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            const selectedTag = this.getAttribute('data-tag');
-            filterArticles(selectedTag);
-        });
-    });
-}
-
-function filterArticles(tag) {
-    const container = document.getElementById('articles-container');
-    container.innerHTML = '';
-
-    let filtered;
-    if (tag === 'all') {
-        filtered = articlesData;
-    } else {
-        filtered = articlesData.filter(a => a.tags && a.tags.includes(tag));
-    }
-
-    renderArticlesToContainer(filtered, container);
-    container.querySelectorAll('.fade-in').forEach(el => {
-        el.style.opacity = "0";
-        el.style.transform = "translateY(20px)";
-    });
-    fadeInOnScroll();
 }
 
 function renderArticlesToContainer(articles, container) {

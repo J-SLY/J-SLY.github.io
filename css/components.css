@@ -458,38 +458,6 @@
     transition: width 0.1s ease;
 }
 
-/* Tag Filter */
-.tag-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 30px;
-}
-
-.tag-filter-btn {
-    background: var(--light-gray);
-    color: var(--dark);
-    border: 1px solid var(--border);
-    padding: 6px 18px;
-    border-radius: 30px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: var(--transition);
-    font-family: inherit;
-}
-
-.tag-filter-btn:hover {
-    background: var(--primary-light);
-    color: white;
-    border-color: var(--primary-light);
-}
-
-.tag-filter-btn.active {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
 /* Dark mode overrides */
 .dark-mode .article-modal .modal-content {
     background: var(--light);
