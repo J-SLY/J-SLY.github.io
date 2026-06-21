@@ -133,6 +133,7 @@ function showArticleDetail(article) {
                             <i class="fas fa-share"></i> 分享
                         </button>
                     </div>
+                    <div class="article-comments"></div>
                 </div>
             </div>
         </div>
@@ -192,6 +193,26 @@ function showArticleDetail(article) {
                 articleBody.insertBefore(toc, articleBody.firstChild);
             }
         }
+    }
+
+    const commentsDiv = modal.querySelector('.article-comments');
+    if (commentsDiv && window.customElements && window.customElements.get('giscus-widget')) {
+        const widget = document.createElement('giscus-widget');
+        widget.setAttribute('repo', 'J-SLY/J-SLY.github.io');
+        widget.setAttribute('repo-id', 'R_kgDOSmP4AQ');
+        widget.setAttribute('category', 'General');
+        widget.setAttribute('mapping', 'specific');
+        widget.setAttribute('term', 'article-' + article.id);
+        widget.setAttribute('reactions-enabled', '1');
+        widget.setAttribute('emit-metadata', '0');
+        widget.setAttribute('input-position', 'bottom');
+        widget.setAttribute('theme', 'preferred_color_scheme');
+        widget.setAttribute('lang', 'zh-CN');
+        widget.setAttribute('crossorigin', 'anonymous');
+        widget.setAttribute('loading', 'lazy');
+        commentsDiv.appendChild(widget);
+    } else if (commentsDiv) {
+        commentsDiv.innerHTML = '<p style="color:var(--gray);font-size:0.9rem">评论功能需要刷新页面后才能使用。</p>';
     }
 
     document.body.style.overflow = 'hidden';

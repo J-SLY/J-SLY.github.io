@@ -402,7 +402,7 @@
 }
 
 .markdown-body pre code {
-    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
     font-size: 0.875rem;
     line-height: 1.5;
 }
@@ -456,6 +456,17 @@
     background: linear-gradient(90deg, var(--primary), var(--secondary));
     z-index: 9999;
     transition: width 0.1s ease;
+}
+
+/* Article Comments (Giscus) */
+.article-comments {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.article-comments giscus-widget {
+    width: 100%;
 }
 
 /* Dark mode overrides */
