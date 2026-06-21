@@ -415,10 +415,10 @@ footer {
 }
 
 .social-atcoder-text {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: bold;
     line-height: 1;
-    letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .copyright {
