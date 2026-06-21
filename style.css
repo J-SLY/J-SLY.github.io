@@ -374,6 +374,7 @@ footer {
 
 .social-qzone,
 .social-luogu,
+.social-luogu-me,
 .social-atcoder {
     display: flex;
     align-items: center;
@@ -389,6 +390,7 @@ footer {
 
 .social-qzone:hover,
 .social-luogu:hover,
+.social-luogu-me:hover,
 .social-atcoder:hover {
     background: var(--primary);
     color: white;
@@ -403,15 +405,21 @@ footer {
 }
 
 .social-luogu img,
-.social-atcoder img {
+.social-luogu-me img {
     display: block;
 }
 
 .social-luogu:hover img,
-.social-atcoder:hover img {
+.social-luogu-me:hover img {
     filter: brightness(0) invert(1);
 }
 
+.social-atcoder-text {
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
 
 .copyright {
     text-align: center;
