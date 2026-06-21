@@ -21,10 +21,37 @@
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="/feed.xml">
 </head>
-<body>
+    <body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="/" class="logo">JSLY's Blog</a>
+                <ul class="nav-links">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/#articles">文章</a></li>
+                    <li><a href="/#about">关于我</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="dark-mode-toggle" title="切换暗色模式">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="search-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
     <main class="container" id="app-root">
         <!-- Content will be rendered by JS. If this is not an article route, a 404 message will be shown. -->
-        <div id="article-content"></div>
+        <div id="article-page">
+            <a href="/#articles" class="back-to-blog"><i class="fas fa-arrow-left"></i> 返回主页</a>
+            <div id="article-content"></div>
+        </div>
     </main>
 
     <!-- Third-party libs -->
