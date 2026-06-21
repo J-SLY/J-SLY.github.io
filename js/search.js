@@ -104,17 +104,31 @@ function highlight(text, query) {
     }
 
     if (window.pinyinPro && /[\u4e00-\u9fff]/.test(text)) {
-        const matches = pinyinPro.match(text, query);
-        if (matches && matches.length > 0) {
-            let result = '';
-            let lastEnd = 0;
-            matches.forEach(m => {
-                result += text.slice(lastEnd, m.start);
-                result += '<strong>' + text.slice(m.start, m.end) + '</strong>';
-                lastEnd = m.end;
-            });
-            result += text.slice(lastEnd);
-            return result;
+        const pinyinArr = pinyinPro.pinyin(text, { type: 'array', toneType: 'none' });
+        const pinyinStr = pinyinArr.join('').toLowerCase();
+        const pIdx = pinyinStr.indexOf(query);
+        if (pIdx !== -1) {
+            const chars = [...text];
+            let pos = 0;
+            let startChar = -1;
+            let endChar = chars.length;
+            for (let i = 0; i < pinyinArr.length; i++) {
+                const end = pos + pinyinArr[i].length;
+                if (startChar === -1 && pIdx < end) {
+                    startChar = i;
+                }
+                if (startChar !== -1 && pIdx + query.length <= end) {
+                    endChar = i + 1;
+                    break;
+                }
+                pos = end;
+            }
+            if (startChar !== -1) {
+                const before = chars.slice(0, startChar).join('');
+                const matched = chars.slice(startChar, endChar).join('');
+                const after = chars.slice(endChar).join('');
+                return before + '<strong>' + matched + '</strong>' + after;
+            }
         }
     }
 
