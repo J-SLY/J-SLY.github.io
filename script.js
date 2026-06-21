@@ -1,3 +1,6 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
 let articlesData = [];
 
 document.addEventListener('DOMContentLoaded', function() {
