@@ -128,6 +128,7 @@
     },
     {
       "id": 2,
+      "pinned": true,
       "title": "JSLY Blog 使用指南",
       "date": "2026-06-21",
       "tags": ["指南", "教程"],

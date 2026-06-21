@@ -24,6 +24,27 @@
 .article-image {
     height: 200px;
     overflow: hidden;
+    position: relative;
+}
+
+.pinned-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.pinned-badge i {
+    font-size: 0.75rem;
 }
 
 .article-image-placeholder {

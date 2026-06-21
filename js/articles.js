@@ -45,7 +45,12 @@ function loadArticlesFromJSON() {
 function renderAllArticles() {
     const container = document.getElementById('articles-container');
     container.innerHTML = '';
-    renderArticlesToContainer(articlesData, container);
+    const sorted = [...articlesData].sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+        return 0;
+    });
+    renderArticlesToContainer(sorted, container);
 }
 
 function renderArticlesToContainer(articles, container) {
@@ -69,9 +74,11 @@ function createArticleElement(article) {
     articleCard.className = 'article-card fade-in';
     articleCard.setAttribute('data-article-id', article.id);
 
+    const pinnedBadge = article.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> 置顶</span>' : '';
+
     const imageHtml = article.image
-        ? `<div class="article-image"><img src="${article.image}" alt="${article.title}" loading="lazy"></div>`
-        : `<div class="article-image article-image-placeholder"><span>${article.title}</span></div>`;
+        ? `<div class="article-image">${pinnedBadge}<img src="${article.image}" alt="${article.title}" loading="lazy"></div>`
+        : `<div class="article-image article-image-placeholder">${pinnedBadge}<span>${article.title}</span></div>`;
 
     const tagsHtml = article.tags && article.tags.length
         ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
