@@ -159,9 +159,6 @@ header {
 
 /* 博客内容 */
 .blog-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 40px;
     padding: 60px 0;
 }
 
@@ -271,45 +268,6 @@ header {
     font-size: 0.9rem;
     border-top: 1px solid var(--border);
     padding-top: 15px;
-}
-
-/* 侧边栏 */
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.sidebar-widget {
-    background: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.sidebar-title {
-    font-size: 1.3rem;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--border);
-}
-
-.about-me {
-    text-align: center;
-}
-
-.about-me img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 15px;
-    border: 5px solid var(--light-gray);
-}
-
-.about-me p {
-    color: var(--gray);
-    font-size: 0.95rem;
 }
 
 .tags {
@@ -442,10 +400,6 @@ footer {
 
 /* 响应式设计 */
 @media (max-width: 992px) {
-    .blog-content {
-        grid-template-columns: 1fr;
-    }
-    
     .nav-links {
         display: none;
     }
