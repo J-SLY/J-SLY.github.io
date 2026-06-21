@@ -395,6 +395,24 @@ footer {
     transform: translateY(-5px);
 }
 
+.social-qzone img,
+.social-luogu img,
+.social-atcoder img {
+    display: block;
+}
+
+.social-qzone:hover img,
+.social-luogu:hover img,
+.social-atcoder:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.social-qzone-text {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+}
+
 .copyright {
     text-align: center;
     padding-top: 30px;
