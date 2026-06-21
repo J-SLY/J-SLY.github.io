@@ -253,7 +253,7 @@ footer {
 }
 
 .dark-mode .hero {
-    background: var(--light);
+    background: linear-gradient(135deg, #16213e, #1a1a2e);
 }
 
 .dark-mode footer {
