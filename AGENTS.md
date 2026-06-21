@@ -10,7 +10,7 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
   - `likes.js` and `display-mode.js` must load first (cookie utilities)
   - `article-content.js` must load before `article-modal.js` (content builder → modal)
   - `articles.js` defines `articlesData`, loads article cards
-- **JS for standalone article page** (article.html:101–109): `likes.js` → `display-mode.js` → `article-content.js` → `dark-mode.js` → `search.js` → `article-page.js`
+-- **JS for standalone article page** (standalone route `/article/{id}` served via `404.html` router): `likes.js` → `display-mode.js` → `article-content.js` → `dark-mode.js` → `search.js` (rendering happens in the 404 router script)
 - **CSS**: modular — `base.css` (vars/reset), `layout.css` (header/hero/footer), `components/cards.css` (article grid/cards/tags), `components/overlay.css` (modal/search/settings overlays), `components/article.css` (article detail/TOC/comments), `responsive.css`
 - **External CDN deps**: Font Awesome 6.4.0, marked 9.1.6, highlight.js 11.9.0, pinyin-pro 3.26.0
 

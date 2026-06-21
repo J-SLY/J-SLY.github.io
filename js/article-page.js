@@ -7,11 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.getElementById('article-content');
 
     if (!id) {
-        window.location.href = '404.html';
+        window.location.href = '/404.html';
         return;
     }
 
-    fetch('articles.json')
+    fetch('/articles.json')
         .then(response => {
             if (!response.ok) throw new Error('网络响应不正常');
             return response.json();
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             const article = data.articles.find(a => a.id === id);
             if (!article) {
-                window.location.href = '404.html';
+                window.location.href = '/404.html';
                 return;
             }
             renderArticlePage(article);
@@ -61,7 +61,8 @@ function renderArticlePage(article) {
     initLikeButton(container, article);
 
     container.querySelector('.share-btn').addEventListener('click', function() {
-        const url = window.location.href;
+        // Use the clean /article/{id} URL as canonical share link
+        const url = window.location.origin + '/article/' + article.id;
         if (navigator.share) {
             navigator.share({
                 title: article.title,

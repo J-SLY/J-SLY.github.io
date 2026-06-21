@@ -154,8 +154,8 @@ function initShareButton(container, article) {
     const shareBtn = container.querySelector('.share-btn');
     if (!shareBtn) return;
     shareBtn.addEventListener('click', function() {
-        const baseUrl = window.location.origin + window.location.pathname;
-        const url = baseUrl + '#article-' + article.id;
+        // use clean path URL for standalone article
+        const url = window.location.origin + '/article/' + article.id;
         if (navigator.share) {
             navigator.share({
                 title: article.title,
@@ -194,7 +194,8 @@ function updateOGTags(article) {
     if (ogTitle) ogTitle.setAttribute('content', article.title + ' - JSLY\'s Blog');
     if (ogDesc) ogDesc.setAttribute('content', article.excerpt);
 
-    const fullUrl = window.location.origin + window.location.pathname + '#article-' + article.id;
+    // Use clean article path as canonical URL for OG
+    const fullUrl = window.location.origin + '/article/' + article.id;
     if (ogUrl) ogUrl.setAttribute('content', fullUrl);
 
     if (!ogImage && article.image) {

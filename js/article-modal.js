@@ -70,12 +70,13 @@ function openArticleFromHash() {
 
     if (article) {
         if (getArticleDisplayMode() === 'page') {
-            window.location.href = 'article.html?id=' + article.id;
+            // navigate to clean article URL
+            window.location.href = '/article/' + article.id;
             return;
         }
         setTimeout(() => showArticleDetail(article), 300);
     } else {
-        window.location.href = '404.html';
+        window.location.href = '/404.html';
     }
 }
 

@@ -14,7 +14,8 @@ function setArticleDisplayMode(mode) {
 
 function openArticle(article) {
     if (getArticleDisplayMode() === 'page') {
-        window.open('article.html?id=' + article.id, '_blank');
+        // open the clean URL; 404.html will route /article/<id> to rendered content
+        window.open('/article/' + article.id, '_blank');
     } else {
         showArticleDetail(article);
     }
