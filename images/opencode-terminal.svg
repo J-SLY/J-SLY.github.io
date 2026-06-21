@@ -1,24 +1,161 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
-  <rect width="800" height="400" fill="#1e1e1e"/>
-  <rect x="0" y="0" width="800" height="35" fill="#333"/>
-  <circle cx="20" cy="17" r="6" fill="#ff5f57"/>
-  <circle cx="40" cy="17" r="6" fill="#ffbd2e"/>
-  <circle cx="60" cy="17" r="6" fill="#28c840"/>
-  <text x="400" y="24" fill="#ccc" font-family="monospace" font-size="14" text-anchor="middle">bash</text>
-  <text x="30" y="80" fill="#a5d6a7" font-family="monospace" font-size="18">$ opencode</text>
-  <text x="30" y="120" fill="#fff" font-family="monospace" font-size="16">
-    <tspan fill="#66bb6a">OpenCode</tspan> v1.0.0 ready
-  </text>
-  <text x="30" y="160" fill="#888" font-family="monospace" font-size="14">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
-  <text x="30" y="200" fill="#a5d6a7" font-family="monospace" font-size="16">
-    <tspan fill="#999">&gt;</tspan> 帮我写一个排序算法
-  </text>
-  <text x="30" y="240" fill="#a5d6a7" font-family="monospace" font-size="16">
-    <tspan fill="#66bb6a">⚡</tspan> 正在分析代码库...
-  </text>
-  <text x="30" y="280" fill="#a5d6a7" font-family="monospace" font-size="16">
-    <tspan fill="#66bb6a">✓</tspan> 已生成快速排序实现
-  </text>
-  <text x="30" y="320" fill="#888" font-family="monospace" font-size="14">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</text>
-  <text x="30" y="360" fill="#999" font-family="monospace" font-size="16">&gt;</text>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1b26"/>
+      <stop offset="100%" stop-color="#0f0f1a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#66bb6a"/>
+      <stop offset="100%" stop-color="#43a047"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Main background -->
+  <rect width="800" height="400" fill="url(#bg)" rx="8"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="800" height="38" fill="#1e1e2e" rx="8"/>
+  <rect x="0" y="30" width="800" height="8" fill="#1e1e2e"/>
+
+  <!-- Window controls -->
+  <circle cx="20" cy="19" r="5" fill="#ff5f57"/>
+  <circle cx="38" cy="19" r="5" fill="#ffbd2e"/>
+  <circle cx="56" cy="19" r="5" fill="#28c840"/>
+
+  <!-- Title text -->
+  <text x="400" y="24" fill="#565f89" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" text-anchor="middle" font-weight="500">opencode-terminal</text>
+
+  <!-- Sidebar strip -->
+  <rect x="0" y="38" width="45" height="362" fill="#16161e"/>
+
+  <!-- Sidebar icons -->
+  <rect x="12" y="55" width="21" height="21" rx="4" fill="#2a2a3a"/>
+  <rect x="15" y="58" width="15" height="15" rx="2" fill="#66bb6a" opacity="0.3"/>
+  <rect x="18" y="61" width="9" height="9" rx="1.5" fill="#66bb6a"/>
+
+  <rect x="12" y="90" width="21" height="21" rx="4" fill="#2a2a3a"/>
+  <text x="22" y="104" fill="#565f89" font-family="monospace" font-size="12" text-anchor="middle">B</text>
+
+  <rect x="12" y="125" width="21" height="21" rx="4" fill="#2a2a3a"/>
+  <text x="22" y="139" fill="#565f89" font-family="monospace" font-size="12" text-anchor="middle">T</text>
+
+  <!-- Editor panel -->
+  <rect x="45" y="38" width="505" height="240" fill="#1a1b26"/>
+
+  <!-- Line numbers -->
+  <text x="60" y="70" fill="#3b3d54" font-family="monospace" font-size="13">1</text>
+  <text x="60" y="90" fill="#3b3d54" font-family="monospace" font-size="13">2</text>
+  <text x="60" y="110" fill="#3b3d54" font-family="monospace" font-size="13">3</text>
+  <text x="60" y="130" fill="#3b3d54" font-family="monospace" font-size="13">4</text>
+  <text x="60" y="150" fill="#3b3d54" font-family="monospace" font-size="13">5</text>
+  <text x="60" y="170" fill="#3b3d54" font-family="monospace" font-size="13">6</text>
+  <text x="60" y="190" fill="#3b3d54" font-family="monospace" font-size="13">7</text>
+  <text x="60" y="210" fill="#3b3d54" font-family="monospace" font-size="13">8</text>
+  <text x="60" y="230" fill="#3b3d54" font-family="monospace" font-size="13">9</text>
+  <text x="60" y="250" fill="#3b3d54" font-family="monospace" font-size="13">10</text>
+
+  <!-- Code -->
+  <text x="85" y="70" fill="#89b4fa" font-family="monospace" font-size="13">import</text>
+  <text x="125" y="70" fill="#f9e2af" font-family="monospace" font-size="13">{ opencode }</text>
+  <text x="200" y="70" fill="#89b4fa" font-family="monospace" font-size="13">from</text>
+  <text x="228" y="70" fill="#a6e3a1" font-family="monospace" font-size="13">'opencode'</text>
+
+  <text x="85" y="90" fill="#cba6f7" font-family="monospace" font-size="13">const</text>
+  <text x="118" y="90" fill="#f9e2af" font-family="monospace" font-size="13">task</text>
+  <text x="140" y="90" fill="#89b4fa" font-family="monospace" font-size="13">=</text>
+  <text x="150" y="90" fill="#a6e3a1" font-family="monospace" font-size="13">"帮我写一个排序算法"</text>
+
+  <text x="85" y="110" fill="#f9e2af" font-family="monospace" font-size="13">const</text>
+  <text x="118" y="110" fill="#f9e2af" font-family="monospace" font-size="13">result</text>
+  <text x="152" y="110" fill="#89b4fa" font-family="monospace" font-size="13">=</text>
+  <text x="162" y="110" fill="#89b4fa" font-family="monospace" font-size="13">await</text>
+  <text x="198" y="110" fill="#f9e2af" font-family="monospace" font-size="13">opencode</text>
+  <text x="254" y="110" fill="#89b4fa" font-family="monospace" font-size="13">.</text>
+  <text x="260" y="110" fill="#f9e2af" font-family="monospace" font-size="13">execute</text>
+  <text x="307" y="110" fill="#89b4fa" font-family="monospace" font-size="13">(</text>
+  <text x="314" y="110" fill="#f9e2af" font-family="monospace" font-size="13">task</text>
+  <text x="338" y="110" fill="#89b4fa" font-family="monospace" font-size="13">)</text>
+
+  <text x="85" y="130" fill="#6c7086" font-family="monospace" font-size="13">// 分析代码库...</text>
+
+  <text x="85" y="150" fill="#f9e2af" font-family="monospace" font-size="13">console</text>
+  <text x="140" y="150" fill="#89b4fa" font-family="monospace" font-size="13">.</text>
+  <text x="146" y="150" fill="#f9e2af" font-family="monospace" font-size="13">log</text>
+  <text x="165" y="150" fill="#89b4fa" font-family="monospace" font-size="13">(</text>
+  <text x="172" y="150" fill="#a6e3a1" font-family="monospace" font-size="13">"正在分析..."</text>
+  <text x="245" y="150" fill="#89b4fa" font-family="monospace" font-size="13">)</text>
+
+  <text x="85" y="170" fill="#6c7086" font-family="monospace" font-size="13">// 生成快速排序</text>
+
+  <text x="85" y="190" fill="#f9e2af" font-family="monospace" font-size="13">opencode</text>
+  <text x="141" y="190" fill="#89b4fa" font-family="monospace" font-size="13">.</text>
+  <text x="147" y="190" fill="#f9e2af" font-family="monospace" font-size="13">generate</text>
+  <text x="196" y="190" fill="#89b4fa" font-family="monospace" font-size="13">(</text>
+  <text x="203" y="190" fill="#a6e3a1" font-family="monospace" font-size="13">"快速排序"</text>
+  <text x="272" y="190" fill="#89b4fa" font-family="monospace" font-size="13">)</text>
+
+  <!-- Terminal panel -->
+  <rect x="45" y="275" width="505" height="125" fill="#0f0f1a"/>
+
+  <!-- Terminal tab bar -->
+  <rect x="45" y="275" width="505" height="28" fill="#181825"/>
+  <rect x="45" y="275" width="100" height="28" fill="#0f0f1a" rx="4"/>
+  <rect x="45" y="297" width="100" height="6" fill="#66bb6a"/>
+  <text x="72" y="293" fill="#cdd6f4" font-family="monospace" font-size="11">终端</text>
+
+  <!-- Terminal content -->
+  <rect x="55" y="312" width="12" height="12" rx="3" fill="#66bb6a" opacity="0.15"/>
+  <text x="58" y="322" fill="#66bb6a" font-family="monospace" font-size="10">$</text>
+  <text x="73" y="322" fill="#cdd6f4" font-family="monospace" font-size="11">opencode --ai</text>
+
+  <text x="58" y="345" fill="#a6e3a1" font-family="monospace" font-size="11">⚡ 已连接到 AI 引擎</text>
+
+  <text x="58" y="368" fill="#a6e3a1" font-family="monospace" font-size="11">✓ 快速排序实现已生成 (quicksort.js)</text>
+
+  <text x="58" y="391" fill="#66bb6a" font-family="monospace" font-size="10">$</text>
+  <rect x="72" y="384" width="8" height="14" fill="#66bb6a">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Right panel -->
+  <rect x="550" y="38" width="250" height="362" fill="#1e1e2e"/>
+
+  <!-- Right panel header -->
+  <rect x="550" y="38" width="250" height="32" fill="#181825"/>
+  <text x="638" y="58" fill="#565f89" font-family="'Segoe UI', sans-serif" font-size="11" text-anchor="middle">AI 建议</text>
+
+  <!-- AI suggestion cards -->
+  <rect x="560" y="82" width="230" height="55" rx="6" fill="#2a2a3a"/>
+  <rect x="560" y="82" width="230" height="55" rx="6" fill="#66bb6a" opacity="0.05"/>
+  <rect x="560" y="82" width="3" height="55" fill="#66bb6a" rx="1.5"/>
+  <text x="574" y="102" fill="#cdd6f4" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600">快速排序</text>
+  <text x="574" y="120" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">时间复杂度 O(n log n)</text>
+  <text x="574" y="134" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">稳定 ✓  内存 O(log n)</text>
+
+  <rect x="560" y="148" width="230" height="55" rx="6" fill="#2a2a3a"/>
+  <rect x="560" y="148" width="230" height="55" rx="6" fill="#89b4fa" opacity="0.05"/>
+  <rect x="560" y="148" width="3" height="55" fill="#89b4fa" rx="1.5"/>
+  <text x="574" y="168" fill="#cdd6f4" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600">合并排序</text>
+  <text x="574" y="186" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">时间复杂度 O(n log n)</text>
+  <text x="574" y="200" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">稳定 ✓  内存 O(n)</text>
+
+  <rect x="560" y="214" width="230" height="55" rx="6" fill="#2a2a3a"/>
+  <rect x="560" y="214" width="230" height="55" rx="6" fill="#f9e2af" opacity="0.05"/>
+  <rect x="560" y="214" width="3" height="55" fill="#f9e2af" rx="1.5"/>
+  <text x="574" y="234" fill="#cdd6f4" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="600">内置排序</text>
+  <text x="574" y="252" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">直接使用 Array.sort()</text>
+  <text x="574" y="266" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="11">引擎优化 ✓</text>
+
+  <!-- Status bar -->
+  <rect x="0" y="380" width="800" height="20" fill="#181825" rx="0"/>
+  <rect x="0" y="380" width="800" height="20" fill="#181825"/>
+
+  <rect x="0" y="380" width="120" height="20" fill="#66bb6a"/>
+  <text x="10" y="394" fill="#1a1b26" font-family="'Segoe UI', sans-serif" font-size="10" font-weight="700">OpenCode</text>
+
+  <text x="140" y="394" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="10">JavaScript</text>
+  <text x="230" y="394" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="10">UTF-8</text>
+  <text x="310" y="394" fill="#6c7086" font-family="'Segoe UI', sans-serif" font-size="10">Ln 10, Col 25</text>
+
+  <text x="750" y="394" fill="#a6e3a1" font-family="'Segoe UI', sans-serif" font-size="10">✨ AI 已就绪</text>
 </svg>
