@@ -1,0 +1,330 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
+.article-hero-placeholder {
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 20px;
+}
+
+.article-detail .article-hero {
+    height: 300px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background: white;
+}
+
+.article-detail .article-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article-body {
+    flex: 1;
+    min-width: 0;
+    padding: 25px 35px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.article-body > h2 {
+    margin-bottom: 16px;
+}
+
+.article-detail .article-meta {
+    display: flex;
+    gap: 20px;
+    color: var(--gray);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+}
+
+.article-detail .article-meta span.liked {
+    color: #e74c3c;
+}
+
+.article-detail .article-content {
+    line-height: 1.8;
+    padding: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+}
+
+.markdown-body h1 { font-size: 1.8rem; }
+.markdown-body h2 { font-size: 1.5rem; }
+.markdown-body h3 { font-size: 1.25rem; }
+
+.markdown-body p {
+    margin-bottom: 16px;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+}
+
+.markdown-body li {
+    margin-bottom: 6px;
+}
+
+.markdown-body code {
+    background: var(--light-gray);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.markdown-body pre {
+    background: #f5f5f5;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 16px;
+}
+
+.markdown-body pre code {
+    background: none;
+    padding: 0;
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.markdown-body pre {
+    position: relative;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid var(--primary);
+    padding-left: 16px;
+    color: var(--gray);
+    margin-bottom: 16px;
+}
+
+.markdown-body img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.markdown-body a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.markdown-body a:hover {
+    color: var(--primary-dark);
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+}
+
+.article-actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.like-btn.liked {
+    background: #e74c3c;
+    color: white;
+}
+
+.like-btn.liked i {
+    color: white;
+}
+
+.like-btn .like-count {
+    margin-left: 4px;
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.article-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.article-toc-sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 10px;
+    max-height: calc(90vh - 60px);
+    overflow-y: auto;
+    background: white;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.article-toc-sidebar:empty {
+    display: none;
+}
+
+.article-toc-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.article-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.article-toc-item {
+    margin-bottom: 2px;
+}
+
+.article-toc-item a {
+    color: var(--gray);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: var(--transition);
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+.article-toc-item a:hover {
+    color: var(--primary);
+    background: var(--light);
+}
+
+.article-toc-item a.active {
+    color: var(--primary);
+    font-weight: 600;
+    background: var(--light);
+    border-left: 2px solid var(--primary);
+    border-radius: 0 4px 4px 0;
+}
+
+.article-comments {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.article-comments giscus-widget {
+    width: 100%;
+}
+
+#article-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.back-to-blog {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: var(--transition);
+}
+
+.back-to-blog:hover {
+    color: var(--primary-dark);
+}
+
+#article-page .article-toc-sidebar {
+    top: 80px;
+    max-height: calc(100vh - 120px);
+}
+
+.dark-mode .article-hero-placeholder {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+}
+
+.dark-mode .article-detail .article-hero,
+.dark-mode .article-detail .article-toc-sidebar,
+.dark-mode .article-detail .article-body {
+    background: var(--light);
+}
+
+.dark-mode #article-page .article-toc-sidebar,
+.dark-mode #article-page .article-body {
+    background: var(--light);
+}
+
+.dark-mode .article-detail .article-hero,
+.dark-mode .article-detail .article-toc-sidebar,
+.dark-mode .article-detail .article-body,
+.dark-mode #article-page .article-toc-sidebar,
+.dark-mode #article-page .article-body {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+}
+
+.dark-mode .markdown-body code {
+    background: var(--light-gray);
+}
+
+.dark-mode .markdown-body pre {
+    background: #0d0d1a;
+}
+
+.dark-mode .article-toc-sidebar a:hover {
+    background: var(--light-gray);
+}
+
+.dark-mode .like-btn.liked {
+    background: #e74c3c;
+}
+
+@media (max-width: 992px) {
+    .article-layout {
+        flex-direction: column;
+        gap: 0;
+    }
+    .article-toc-sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        margin-bottom: 20px;
+        padding: 12px 16px;
+        background: var(--light);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+    }
+    .article-toc-item a {
+        padding: 4px 0;
+    }
+    .article-toc-item a:hover {
+        background: none;
+    }
+    .dark-mode .article-toc-sidebar {
+        background: var(--light-gray);
+    }
+}

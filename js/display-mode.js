@@ -1,0 +1,21 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
+const DISPLAY_MODE_COOKIE = 'article_display_mode';
+
+function getArticleDisplayMode() {
+    const match = document.cookie.match(new RegExp('(^| )' + DISPLAY_MODE_COOKIE + '=([^;]+)'));
+    return match ? match[2] : 'modal';
+}
+
+function setArticleDisplayMode(mode) {
+    document.cookie = DISPLAY_MODE_COOKIE + '=' + mode + ';path=/;max-age=31536000';
+}
+
+function openArticle(article) {
+    if (getArticleDisplayMode() === 'page') {
+        window.open('article.html?id=' + article.id, '_blank');
+    } else {
+        showArticleDetail(article);
+    }
+}

@@ -6,10 +6,13 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 
 - **Entrypoint**: `index.html` — single-page blog with hash-based article modals
 - **Content**: `articles.json` — each article has Markdown `content` array (joined with `\n`, rendered via `marked.js`)
-- **JS load order** (index.html:125–130): `marked.min.js` → `pinyin-pro` → `articles.js` → `search.js` → `navigation.js` → `main.js`
-  - `articles.js` must load first (defines `articlesData`, `showArticleDetail`)
-- **CSS**: modular — `base.css` (vars/reset), `layout.css` (header/hero/footer), `components.css` (cards/modals/search), `responsive.css`
-- **External CDN deps**: Font Awesome 6.4.0, marked 9.1.6, pinyin-pro 3.26.0
+- **JS load order** (index.html:149–161): `marked.min.js` → `pinyin-pro` → `likes.js` → `display-mode.js` → `article-content.js` → `article-modal.js` → `articles.js` → `search.js` → `dark-mode.js` → `settings.js` → `navigation.js` → `main.js`
+  - `likes.js` and `display-mode.js` must load first (cookie utilities)
+  - `article-content.js` must load before `article-modal.js` (content builder → modal)
+  - `articles.js` defines `articlesData`, loads article cards
+- **JS for standalone article page** (article.html:101–109): `likes.js` → `display-mode.js` → `article-content.js` → `dark-mode.js` → `search.js` → `article-page.js`
+- **CSS**: modular — `base.css` (vars/reset), `layout.css` (header/hero/footer), `components/cards.css` (article grid/cards/tags), `components/overlay.css` (modal/search/settings overlays), `components/article.css` (article detail/TOC/comments), `responsive.css`
+- **External CDN deps**: Font Awesome 6.4.0, marked 9.1.6, highlight.js 11.9.0, pinyin-pro 3.26.0
 
 ## Key conventions
 

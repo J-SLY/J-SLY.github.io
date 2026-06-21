@@ -294,6 +294,33 @@
     gap: 15px;
 }
 
+.article-meta span.liked {
+    color: #e74c3c;
+}
+
+.like-btn.liked {
+    background: #e74c3c;
+    color: white;
+}
+
+.like-btn.liked i {
+    color: white;
+}
+
+.like-btn .like-count {
+    margin-left: 4px;
+}
+
+.article-detail .article-meta span.liked {
+    color: #e74c3c;
+}
+
+@keyframes likeAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
 /* 搜索弹窗 */
 .search-modal {
     position: fixed;
@@ -729,6 +756,10 @@
     .dark-mode .article-toc-sidebar {
         background: var(--light-gray);
     }
+}
+
+.dark-mode .like-btn.liked {
+    background: #e74c3c;
 }
 
 /* Custom scrollbar */

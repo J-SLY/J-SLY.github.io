@@ -1,0 +1,141 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+.article-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.article-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.article-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.pinned-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.pinned-badge i {
+    font-size: 0.75rem;
+}
+
+.article-image-placeholder {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.article-card:hover .article-image img {
+    transform: scale(1.1);
+}
+
+.article-card .article-content {
+    padding: 25px;
+}
+
+.article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.article-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.article-card .article-content p {
+    color: var(--gray);
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--gray);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+.article-meta span.liked {
+    color: #e74c3c;
+}
+
+.tag {
+    background: var(--light-gray);
+    color: var(--dark);
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.tag:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.article-tags .tag {
+    background: var(--primary-light);
+    color: white;
+    font-size: 0.8rem;
+    padding: 3px 12px;
+}
+
+.no-articles, .loading-message, .error-message {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.1rem;
+    color: var(--gray);
+}
+
+.error-message {
+    color: #e74c3c;
+}
+
+.dark-mode .article-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+}

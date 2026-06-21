@@ -4,7 +4,11 @@
       "id": 1,
       "title": "OpenCode 使用指南",
       "date": "2026-06-21",
-      "tags": ["OpenCode", "AI", "工具"],
+      "tags": [
+        "OpenCode",
+        "AI",
+        "工具"
+      ],
       "excerpt": "OpenCode 是一款强大的 AI 辅助编程 CLI 工具，本文将介绍它的核心功能和使用方法。",
       "content": [
         "## 什么是 OpenCode？",
@@ -124,7 +128,8 @@
       ],
       "image": "images/opencode-terminal.svg",
       "readTime": "3分钟阅读",
-      "views": 42
+      "views": 42,
+      "likes": 0
     },
     {
       "id": 2,
@@ -132,7 +137,10 @@
       "showImage": false,
       "title": "JSLY Blog 使用指南",
       "date": "2026-06-21",
-      "tags": ["指南", "教程"],
+      "tags": [
+        "指南",
+        "教程"
+      ],
       "excerpt": "欢迎来到 JSLY's Blog！本文详细介绍本站的各个功能模块和使用技巧，帮助你快速上手并充分体验博客的全部特性。",
       "content": [
         "## 欢迎来到 JSLY's Blog",
@@ -240,7 +248,8 @@
         "Happy reading!"
       ],
       "readTime": "约 5 分钟",
-      "views": 0
+      "views": 0,
+      "likes": 0
     }
   ]
 }
