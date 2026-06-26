@@ -33,8 +33,7 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - Matches: title, tags, excerpt, full content
 - Pinyin matching requires query length >= 2 (`search.js:49`)
 
-## Automated Deployment
+## Deployment
 
-- Every time you edit `articles.json`, `index.html`, CSS/JS files, or any static resource, you **must** immediately run `git add . && git commit -m "Update content" && git push` to push the changes to the `main` branch, which will trigger GitHub Pages to automatically redeploy.
-- If you want further automation, you can use a file watching tool locally (such as `entr` or `watch`) to automatically execute the above commands, or configure a post-commit hook in Git, but this repository does not require it.
-- Note: Any changes not pushed will cause the online site to be inconsistent with the local version, affecting access.
+- Push `main` branch to trigger GitHub Pages automatic redeployment.
+- No need to push immediately after each edit; you can push when ready.
