@@ -5,35 +5,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JSLY's Blog">
-    <meta name="keywords" content="博客, 个人博客, JSLY, 技术, 编程">
-    <meta property="og:title" content="JSLY's Blog">
-    <meta property="og:description" content="JSLY's Blog">
-    <link rel="icon" href="JS.svg">
-    <title>JSLY's Blog</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components/cards.css">
-    <link rel="stylesheet" href="css/components/overlay.css">
-    <link rel="stylesheet" href="css/components/article.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="description" content="公共投稿 - JSLY's Blog">
+    <meta name="keywords" content="博客, 投稿, 社区, JSLY">
+    <meta property="og:title" content="公共投稿 - JSLY's Blog">
+    <meta property="og:description" content="来自社区的投稿文章">
+    <link rel="icon" href="../JS.svg">
+    <title>公共投稿 - JSLY's Blog</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/components/cards.css">
+    <link rel="stylesheet" href="../css/components/overlay.css">
+    <link rel="stylesheet" href="../css/components/article.css">
+    <link rel="stylesheet" href="../css/components/public.css">
+    <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
-    <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="feed.xml">
+    <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="../feed.xml">
 </head>
 <body>
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#home" class="logo">JSLY's Blog</a>
-                
+                <a href="../index.html" class="logo">JSLY's Blog</a>
+
                 <ul class="nav-links">
-                    <li><a href="#home" class="active">首页</a></li>
-                    <li><a href="#articles">文章</a></li>
-                    <li><a href="/public/">公共投稿</a></li>
-                    <li><a href="#about">关于我</a></li>
+                    <li><a href="../index.html">首页</a></li>
+                    <li><a href="../index.html#articles">文章</a></li>
+                    <li><a href="index.html" class="active">公共投稿</a></li>
+                    <li><a href="../index.html#about">关于我</a></li>
                 </ul>
-                
+
                 <div class="nav-actions">
                     <div class="dark-mode-toggle" title="切换暗色模式">
                         <i class="fas fa-moon"></i>
@@ -75,49 +76,55 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>JSLY's Blog</h1>
-                <a href="#articles" class="btn">开始阅读</a>
+                <h1>JSLY's Public Blog</h1>
+                <p>来自社区的声音。欢迎提交你的文章，与更多人分享知识与见解。</p>
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+                    <a href="https://github.com/J-SLY/J-SLY.github.io/issues/new?template=public-submission.yml" class="btn" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> GitHub 投稿
+                    </a>
+                    <a href="mailto:jsly@jsly.asia?subject=投稿%3A%20" class="btn" target="_blank" rel="noopener">
+                        <i class="fas fa-envelope"></i> 邮件投稿
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <main class="container">
         <div class="blog-content">
-            <section id="articles" class="articles-section">
-                <h2 class="section-title">最新文章</h2>
-                <div id="articles-container" class="articles-grid">
+            <section class="articles-section">
+                <h2 class="section-title">投稿文章</h2>
+
+                <div class="public-info">
+                    <h3><i class="fas fa-info-circle"></i> 如何投稿？</h3>
+                    <p style="margin-bottom:12px">两种方式任选其一：</p>
+                    <ol>
+                        <li><strong>GitHub</strong> — 点击上方「GitHub 投稿」按钮，按模板填写 Issue 提交（你的 GitHub 用户名会自动作为作者名）。</li>
+                        <li><strong>邮件</strong> — 点击上方「邮件投稿」按钮，发送邮件至 <a href="mailto:jsly@jsly.asia">jsly@jsly.asia</a>，请附上文章标题、正文（Markdown）和你的署名。</li>
+                        <li>提交后等待审核，审核通过后文章会出现在这里。</li>
+                    </ol>
+                </div>
+
+                <div id="public-articles-container" class="articles-grid">
                 </div>
             </section>
-
         </div>
     </main>
 
-    <section id="about" class="section about-section">
-        <div class="container">
-            <div class="about-content">
-                <h2>关于我</h2>
-                <br/>
-                <img src="https://www.cpoauth.com/api/users/JSLY/card.svg?lang=en" alt="JSLY Profile Card" style="max-width:600px;width:100%;border-radius:10px;">
-            </div>
-        </div>
-    </section>
-
-    <footer id="subscribe">
+    <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
                     <h3>JSLY's Blog</h3>
-                    
+
                     <div class="social-links">
-                        <!-- <a href="#"><i class="fab fa-weibo"></i></a>
-                        <a href="#"><i class="fab fa-weixin"></i></a> -->
                         <a href="https://wpa.qq.com/msgrd?v=3&uin=2029872426&site=qq&menu=yes"><i class="fab fa-qq"></i></a>
                         <a href="https://github.com/J-SLY"><i class="fab fa-github"></i></a>
                         <a href="https://www.luogu.com.cn/user/1772464" class="social-luogu">
-                            <img src="images/luogu.svg" alt="Luogu" width="18" height="18">
+                            <img src="../images/luogu.svg" alt="Luogu" width="18" height="18">
                         </a>
                         <a href="https://luogu.me/user/1772464" class="social-luogu-me">
-                            <img src="images/luogu-me.svg" alt="Luogu" width="18" height="18">
+                            <img src="../images/luogu-me.svg" alt="Luogu" width="18" height="18">
                         </a>
                         <a href="https://user.qzone.qq.com/2029872426" class="social-qzone">
                             <span class="social-qzone-text">Qzone</span>
@@ -127,17 +134,17 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>快速链接</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#articles">文章</a></li>
-                        <li><a href="/public/">公共投稿</a></li>
-                        <li><a href="#about">关于我</a></li>
+                        <li><a href="../index.html#home">首页</a></li>
+                        <li><a href="../index.html#articles">文章</a></li>
+                        <li><a href="index.html">公共投稿</a></li>
+                        <li><a href="../index.html#about">关于我</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h3>联系我</h3>
                     <ul class="footer-links">
@@ -147,7 +154,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="copyright">
                 <p>&copy; 2026  JSLY. 保留所有权利. | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa">源代码 (AGPL-3.0)</a></p>
             </div>
@@ -157,20 +164,38 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
-    <script src="js/display-mode.js"></script>
-    <script src="js/article-content.js"></script>
-    <script src="js/article-toc.js"></script>
-    <script src="js/article-comments.js"></script>
-    <script src="js/article-share.js"></script>
-    <script src="js/article-og.js"></script>
-    <script src="js/article-modal.js"></script>
-    <script src="js/articles.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/dark-mode.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/nav-scroll.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/display-mode.js"></script>
+    <script src="../js/article-content.js"></script>
+    <script src="../js/article-toc.js"></script>
+    <script src="../js/article-comments.js"></script>
+    <script src="../js/article-share.js"></script>
+    <script src="../js/article-og.js"></script>
+    <script src="../js/article-modal.js"></script>
+    <script src="../js/articles-public.js"></script>
+    <script src="../js/search.js"></script>
+    <script src="../js/dark-mode.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/nav-scroll.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadPublicArticles();
+        initSearch();
+        initDarkMode();
+        initSettings();
+        initNavScroll();
+
+        var menuToggle = document.querySelector('.menu-toggle');
+        var navLinks = document.querySelector('.nav-links');
+        if (window.innerWidth <= 992) navLinks.style.display = 'none';
+        menuToggle.addEventListener('click', function() {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+        window.addEventListener('resize', function() {
+            navLinks.style.display = window.innerWidth > 992 ? 'flex' : 'none';
+        });
+    });
+    </script>
 </body>
 </html>
-

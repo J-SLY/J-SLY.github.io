@@ -1,0 +1,93 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
+/* 投稿说明区 */
+.public-info {
+    background: var(--light-gray);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 40px;
+    border: 1px solid var(--border);
+}
+
+.public-info h3 {
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.public-info ol {
+    padding-left: 20px;
+    color: var(--gray);
+    line-height: 2;
+}
+
+.public-info ol a {
+    color: #5c6bc0;
+    font-weight: 600;
+}
+
+.public-info ol a:hover {
+    text-decoration: underline;
+}
+
+/* 投稿文章卡片 */
+.public-card {
+    position: relative;
+}
+
+.public-card .author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: #5c6bc0;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.public-card .author-badge i {
+    font-size: 0.9rem;
+}
+
+.public-card .author-badge a {
+    color: inherit;
+}
+
+.public-card .author-badge a:hover {
+    text-decoration: underline;
+}
+
+/* 投稿文章详情中的作者信息 */
+.article-author-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 20px;
+    background: var(--light-gray);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+}
+
+.article-author-info i {
+    font-size: 1.3rem;
+    color: #5c6bc0;
+}
+
+.article-author-info .author-label {
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+.article-author-info .author-name {
+    font-weight: 600;
+    color: #5c6bc0;
+}
+
+.article-author-info .author-name a {
+    color: inherit;
+}
+
+.article-author-info .author-name a:hover {
+    text-decoration: underline;
+}

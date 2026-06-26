@@ -2,6 +2,13 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
 (function () {
+  function escapeHtml(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+
   function showNotFound() {
     document.getElementById('article-content').innerHTML = [
       '<div class="not-found">',
@@ -36,8 +43,52 @@
     initShareButton(container, article);
   }
 
+  function renderPublicArticle(article) {
+    document.title = article.title + ' - 公共投稿 - JSLY\'s Blog';
+    var container = document.getElementById('article-content');
+    var authorHtml = article.authorLink
+      ? '<a href="' + encodeURI(article.authorLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
+      : escapeHtml(article.author);
+    var authorSection = [
+      '<div class="article-author-info">',
+      '  <i class="fas fa-feather-alt"></i>',
+      '  <div>',
+      '    <div class="author-label">投稿作者</div>',
+      '    <div class="author-name">' + authorHtml + '</div>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
+    container.innerHTML = buildArticleContent(article, false).replace('<div class="article-body">', '<div class="article-body">' + authorSection);
+    initArticleHighlights(container);
+    generateTOC(container);
+    initGiscus(container, 'public-' + article.id);
+    updateOGTags(article);
+    initShareButton(container, article);
+  }
+
   function tryRenderArticleFromPath() {
     var pathname = window.location.pathname || '/';
+
+    var publicMatch = pathname.match(/^\/public\/article\/(\d+)\/?$/);
+    if (publicMatch) {
+      var pubId = parseInt(publicMatch[1], 10);
+      fetch('/articles-public.json')
+        .then(function (resp) {
+          if (!resp.ok) throw new Error('网络响应不正常');
+          return resp.json();
+        })
+        .then(function (data) {
+          var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
+          if (!article) { showNotFound(); return; }
+          renderPublicArticle(article);
+        })
+        .catch(function (err) {
+          console.error('加载投稿文章时出错:', err);
+          showNotFound();
+        });
+      return true;
+    }
+
     var match = pathname.match(/^\/article\/(\d+)\/?$/);
     if (match) {
       var id = parseInt(match[1], 10);

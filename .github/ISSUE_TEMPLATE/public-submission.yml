@@ -1,0 +1,64 @@
+name: 投稿文章
+description: 提交一篇文章到 JSLY's Blog 公共投稿栏目
+title: "[投稿] "
+labels: [public-submission]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        你的 GitHub 用户名将自动作为作者名称展示。
+
+  - type: input
+    id: title
+    attributes:
+      label: 文章标题
+      description: 你的文章标题（必填）
+      placeholder: 文章的标题
+    validations:
+      required: true
+
+  - type: dropdown
+    id: tags
+    attributes:
+      label: 标签
+      description: 选择文章标签（可多选）
+      multiple: true
+      options:
+        - 技术
+        - 生活
+        - 随笔
+        - 教程
+        - 分享
+        - 开源
+        - AI
+        - 前端
+        - 后端
+        - 其他
+
+  - type: textarea
+    id: excerpt
+    attributes:
+      label: 文章摘要
+      description: 简短的摘要描述（必填，建议 50-200 字）
+      placeholder: 用几句话概括你的文章内容
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: 文章正文
+      description: 使用 Markdown 格式撰写（必填）
+      placeholder: 在此撰写文章正文...
+      render: markdown
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 授权声明
+      description: 提交即表示你同意文章以 [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) 协议发布
+      options:
+        - label: 我同意以 AGPL-3.0 协议发布此文章
+          required: true
