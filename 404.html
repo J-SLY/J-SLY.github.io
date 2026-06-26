@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2026 JSLY -->
+﻿<!-- Copyright (C) 2026 JSLY -->
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -124,110 +124,20 @@
     <!-- App scripts (use absolute paths so they resolve correctly when 404.html is served at any path) -->
     <script src="/js/display-mode.js"></script>
     <script src="/js/article-content.js"></script>
+    <script src="/js/article-toc.js"></script>
+    <script src="/js/article-comments.js"></script>
+    <script src="/js/article-share.js"></script>
+    <script src="/js/article-og.js"></script>
+    <script src="/js/article-router.js"></script>
     <script src="/js/dark-mode.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/settings.js"></script>
     <script src="/js/navigation.js"></script>
+    <script src="/js/nav-scroll.js"></script>
 
     <script>
-    // 404 router: if path matches /article/<id> render the article using existing article rendering utilities.
-    (function() {
-        try { if (typeof initDarkMode === 'function') initDarkMode(); } catch(e) { /* noop */ }
-        try { if (typeof initSearch === 'function') initSearch(); } catch(e) { /* noop */ }
-        try { if (typeof initSettings === 'function') initSettings(); } catch(e) { /* noop */ }
-        try { if (typeof initNavScroll === 'function') initNavScroll(); } catch(e) { /* noop */ }
-        function showNotFound() {
-            document.getElementById('article-content').innerHTML = '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';
-        }
-
-        function tryRenderArticleFromPath() {
-            // pathnames we want to support:
-            // /article/123  -> id = 123
-            // /article/123/ -> id = 123
-            // also support legacy /article.html?id=123
-
-            var pathname = window.location.pathname || '/';
-            var match = pathname.match(/^\/article\/(\d+)\/?$/);
-            if (match) {
-                var id = parseInt(match[1], 10);
-                fetch('/articles.json').then(function(resp) {
-                    if (!resp.ok) throw new Error('网络响应不正常');
-                    return resp.json();
-                }).then(function(data) {
-                    var article = data.articles.find(function(a) { return Number(a.id) === id; });
-                    if (!article) {
-                        showNotFound();
-                        return;
-                    }
-                    // render article content into #article-content
-                    document.title = article.title + ' - JSLY\'s Blog';
-                    var container = document.getElementById('article-content');
-                    container.innerHTML = buildArticleContent(article, false);
-                    initArticleHighlights(container);
-                    generateTOC(container);
-                    initGiscus(container, article.id);
-                    updateOGTags(article);
-                    // hook up share button to the clean URL
-                    var shareBtn = container.querySelector('.share-btn');
-                    if (shareBtn) {
-                        shareBtn.addEventListener('click', function() {
-                            var url = window.location.origin + window.location.pathname;
-                            if (navigator.share) {
-                                navigator.share({ title: article.title, text: article.excerpt, url: url }).catch(function(e){console.log('分享出错:', e);});
-                            } else {
-                                navigator.clipboard.writeText(url).then(function(){ shareBtn.innerHTML = '<i class="fas fa-check"></i> 链接已复制'; });
-                            }
-                        }, {once: true});
-                    }
-                }).catch(function(err) {
-                    console.error('加载文章数据时出错:', err);
-                    showNotFound();
-                });
-                return true;
-            }
-
-            // legacy support: /article.html?id=123
-            var qs = window.location.search || '';
-            if (qs.indexOf('id=') !== -1 && pathname.indexOf('article.html') !== -1) {
-                var params = new URLSearchParams(qs);
-                var id2 = parseInt(params.get('id'), 10);
-                if (id2) {
-                    // redirect to clean path but keep URL as-is? We'll render in-place to preserve URL.
-                    fetch('/articles.json').then(function(resp){ if(!resp.ok) throw new Error('网络响应不正常'); return resp.json(); })
-                    .then(function(data){
-                        var article = data.articles.find(function(a){ return Number(a.id) === id2; });
-                        if (!article) { showNotFound(); return; }
-                        document.title = article.title + ' - JSLY\'s Blog';
-                        var container = document.getElementById('article-content');
-                        container.innerHTML = buildArticleContent(article, false);
-                        initArticleHighlights(container);
-                        generateTOC(container);
-                        initGiscus(container, article.id);
-                        updateOGTags(article);
-                        var shareBtn = container.querySelector('.share-btn');
-                        if (shareBtn) {
-                            shareBtn.addEventListener('click', function() {
-                                var url = window.location.origin + '/article/' + article.id;
-                                if (navigator.share) {
-                                    navigator.share({ title: article.title, text: article.excerpt, url: url }).catch(function(e){console.log('分享出错:', e);});
-                                } else {
-                                    navigator.clipboard.writeText(url).then(function(){ shareBtn.innerHTML = '<i class="fas fa-check"></i> 链接已复制'; });
-                                }
-                            }, {once: true});
-                        }
-                    }).catch(function(err){ console.error(err); showNotFound(); });
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        if (!tryRenderArticleFromPath()) {
-            // not an article route, show a simple 404 page
-            showNotFound();
-        }
-    })();
+    ;['initDarkMode','initSearch','initSettings','initNavScroll'].forEach(function(fn) { try { if (typeof window[fn] === 'function') window[fn](); } catch(e) { /* noop */ } });
     </script>
 </body>
 </html>
+

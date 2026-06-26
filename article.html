@@ -1,4 +1,4 @@
-<!-- Copyright (C) 2026 JSLY -->
+﻿<!-- Copyright (C) 2026 JSLY -->
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -93,13 +93,24 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
     <script src="js/display-mode.js"></script>
     <script src="js/article-content.js"></script>
+    <script src="js/article-toc.js"></script>
+    <script src="js/article-comments.js"></script>
+    <script src="js/article-share.js"></script>
+    <script src="js/article-og.js"></script>
+    <script src="js/article-router.js"></script>
     <script src="js/dark-mode.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/settings.js"></script>
     <script src="js/navigation.js"></script>
-    <script src="js/article-page.js"></script>
+    <script src="js/nav-scroll.js"></script>
+
+    <script>
+    ;['initDarkMode','initSearch','initSettings','initNavScroll'].forEach(function(fn) { try { if (typeof window[fn] === 'function') window[fn](); } catch(e) { /* noop */ } });
+    </script>
 </body>
 </html>
