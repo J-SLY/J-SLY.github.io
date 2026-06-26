@@ -45,6 +45,11 @@
                                 <input type="radio" name="display-mode" value="page">
                                 <span>新页面模式</span>
                             </label>
+                            <hr style="margin:12px 0;border-color:var(--border)">
+                            <label class="settings-option" style="display:flex;justify-content:space-between">
+                                <span>锁定导航栏</span>
+                                <input type="checkbox" id="nav-lock-toggle">
+                            </label>
                         </div>
                     </div>
                     <div class="search-icon">
@@ -120,12 +125,14 @@
     <script src="/js/article-content.js"></script>
     <script src="/js/dark-mode.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/navigation.js"></script>
 
     <script>
     // 404 router: if path matches /article/<id> render the article using existing article rendering utilities.
     (function() {
         try { if (typeof initDarkMode === 'function') initDarkMode(); } catch(e) { /* noop */ }
         try { if (typeof initSearch === 'function') initSearch(); } catch(e) { /* noop */ }
+        try { if (typeof initNavScroll === 'function') initNavScroll(); } catch(e) { /* noop */ }
         function showNotFound() {
             document.getElementById('article-content').innerHTML = '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';
         }

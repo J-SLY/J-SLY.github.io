@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initSearch();
     initDarkMode();
     initSettings();
+    initNavScroll();
 
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');

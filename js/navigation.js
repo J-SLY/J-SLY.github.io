@@ -71,3 +71,43 @@ const fadeInOnScroll = function() {
         }
     });
 };
+
+function initNavScroll() {
+    var header = document.querySelector('header');
+    if (!header) return;
+
+    var lastScrollY = window.scrollY;
+    var ticking = false;
+
+    function isLocked() {
+        return localStorage.getItem('nav_locked') === 'true';
+    }
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                var currentScrollY = window.scrollY;
+
+                if (isLocked()) {
+                    header.classList.remove('nav-hidden');
+                } else if (currentScrollY < lastScrollY) {
+                    header.classList.remove('nav-hidden');
+                } else if (currentScrollY > header.offsetHeight && currentScrollY > lastScrollY + 10) {
+                    header.classList.add('nav-hidden');
+                }
+
+                lastScrollY = currentScrollY;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+}
+
+function setNavLock(locked) {
+    localStorage.setItem('nav_locked', locked);
+    var header = document.querySelector('header');
+    if (header && locked) {
+        header.classList.remove('nav-hidden');
+    }
+}
