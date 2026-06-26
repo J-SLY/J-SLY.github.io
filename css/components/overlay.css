@@ -233,6 +233,22 @@
     margin-bottom: 16px;
 }
 
+.settings-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 20px 0 10px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+
+.settings-subtitle:first-of-type {
+    margin-top: 0;
+    border-top: none;
+}
+
 .settings-option {
     display: flex;
     align-items: center;
@@ -314,6 +330,11 @@
 
 .dark-mode .settings-title {
     color: var(--dark);
+}
+
+.dark-mode .settings-subtitle {
+    color: var(--gray);
+    border-top-color: var(--border);
 }
 
 .modal-content::-webkit-scrollbar,

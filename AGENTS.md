@@ -35,5 +35,5 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 
 ## Deployment
 
-- Push `main` branch to trigger GitHub Pages automatic redeployment.
-- No need to push immediately after each edit; you can push when ready.
+- **小修复**（typo、样式微调等）：可直接推送 `main` 分支触发自动部署。
+- **大功能**（新文章、重构等）：在本地改完，我说「推」再推，不要擅自推送。
