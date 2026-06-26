@@ -60,9 +60,16 @@ function generateTOC(container, scrollRoot) {
     const tocList = document.createElement('ul');
     tocList.className = 'article-toc-list';
 
+    const usedIds = {};
     headings.forEach(h => {
-        if (!h.id) {
-            h.id = h.textContent.toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/(^-|-$)/g, '');
+        let baseId = (h.id || h.textContent).toLowerCase().replace(/[^\w\u4e00-\u9fff]+/g, '-').replace(/(^-|-$)/g, '');
+        if (!baseId) baseId = 'heading';
+        if (usedIds[baseId]) {
+            usedIds[baseId]++;
+            h.id = baseId + '-' + usedIds[baseId];
+        } else {
+            usedIds[baseId] = 1;
+            h.id = baseId;
         }
         const li = document.createElement('li');
         li.className = 'article-toc-item';
@@ -141,8 +148,9 @@ function initShareButton(container, article) {
 }
 
 function initArticleHighlights(container) {
+    if (typeof hljs === 'undefined') return;
     container.querySelectorAll('.markdown-body pre code').forEach((block) => {
-        hljs.highlightElement(block);
+        try { hljs.highlightElement(block); } catch (e) { /* skip failed block */ }
     });
 }
 

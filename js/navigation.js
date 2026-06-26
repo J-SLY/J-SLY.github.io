@@ -4,9 +4,11 @@
 function initNavigation() {
     document.querySelectorAll('.nav-links a, .footer-links a').forEach(link => {
         link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href.startsWith('mailto:') || href.startsWith('http:') || href.startsWith('https:')) return;
             e.preventDefault();
 
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = href.startsWith('#') ? href.substring(1) : href;
             const targetSection = document.getElementById(targetId);
 
             if (targetSection) {

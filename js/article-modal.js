@@ -3,7 +3,10 @@
 
 function showArticleDetail(article) {
     const existingModal = document.querySelector('.article-modal');
-    if (existingModal) existingModal.remove();
+    if (existingModal) {
+        restoreOGTags();
+        existingModal.remove();
+    }
 
     const modal = document.createElement('div');
     modal.className = 'article-modal';

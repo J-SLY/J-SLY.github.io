@@ -126,6 +126,7 @@
     <script src="/js/article-content.js"></script>
     <script src="/js/dark-mode.js"></script>
     <script src="/js/search.js"></script>
+    <script src="/js/settings.js"></script>
     <script src="/js/navigation.js"></script>
 
     <script>
@@ -133,6 +134,7 @@
     (function() {
         try { if (typeof initDarkMode === 'function') initDarkMode(); } catch(e) { /* noop */ }
         try { if (typeof initSearch === 'function') initSearch(); } catch(e) { /* noop */ }
+        try { if (typeof initSettings === 'function') initSettings(); } catch(e) { /* noop */ }
         try { if (typeof initNavScroll === 'function') initNavScroll(); } catch(e) { /* noop */ }
         function showNotFound() {
             document.getElementById('article-content').innerHTML = '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';

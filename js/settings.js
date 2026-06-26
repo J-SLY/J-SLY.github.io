@@ -40,7 +40,7 @@ function initSettings() {
         });
     });
 
-    var lockToggle = settingsDropdown.querySelector('#nav-lock-toggle');
+    let lockToggle = settingsDropdown.querySelector('#nav-lock-toggle');
     if (lockToggle) {
         lockToggle.checked = localStorage.getItem('nav_locked') === 'true';
         lockToggle.addEventListener('change', function() {

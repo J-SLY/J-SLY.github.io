@@ -27,7 +27,7 @@ function renderAllArticles() {
     const sorted = [...articlesData].sort((a, b) => {
         if (a.pinned && !b.pinned) return -1;
         if (!a.pinned && b.pinned) return 1;
-        return 0;
+        return new Date(b.date) - new Date(a.date);
     });
     renderArticlesToContainer(sorted, container);
 }
