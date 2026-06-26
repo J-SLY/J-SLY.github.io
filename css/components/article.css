@@ -224,16 +224,22 @@
 }
 
 .back-to-blog {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     margin-bottom: 24px;
-    color: var(--primary);
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #fff;
     text-decoration: none;
     font-size: 0.95rem;
+    border-radius: 8px;
     transition: var(--transition);
 }
 
 .back-to-blog:hover {
-    color: var(--primary-dark);
+    background: var(--primary-dark);
+    color: #fff;
 }
 
 #article-page .article-toc-sidebar {
