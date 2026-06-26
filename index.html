@@ -44,6 +44,11 @@
                         <div class="settings-panel">
                             <span class="settings-close">&times;</span>
                             <div class="settings-title">文章打开方式</div>
+                            <label class="settings-option" style="display:flex;justify-content:space-between">
+                                <span>锁定导航栏</span>
+                                <input type="checkbox" id="nav-lock-toggle">
+                            </label>
+                            <hr style="margin:12px 0;border-color:var(--border)">
                             <label class="settings-option">
                                 <input type="radio" name="display-mode" value="modal" checked>
                                 <span>弹窗模式</span>
@@ -51,11 +56,6 @@
                             <label class="settings-option">
                                 <input type="radio" name="display-mode" value="page">
                                 <span>新页面模式</span>
-                            </label>
-                            <hr style="margin:12px 0;border-color:var(--border)">
-                            <label class="settings-option" style="display:flex;justify-content:space-between">
-                                <span>锁定导航栏</span>
-                                <input type="checkbox" id="nav-lock-toggle">
                             </label>
                         </div>
                     </div>
