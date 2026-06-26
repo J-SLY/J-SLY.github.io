@@ -23,47 +23,6 @@
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="/feed.xml">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <a href="index.html" class="logo">JSLY's Blog</a>
-                <ul class="nav-links">
-                    <li><a href="index.html#home" class="active">首页</a></li>
-                    <li><a href="index.html#articles">文章</a></li>
-                    <li><a href="index.html#about">关于我</a></li>
-                </ul>
-                <div class="nav-actions">
-                    <div class="dark-mode-toggle" title="切换暗色模式">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <div class="settings-toggle" title="阅读设置">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <div class="settings-dropdown">
-                        <div class="settings-panel">
-                            <span class="settings-close">&times;</span>
-                            <div class="settings-title">文章打开方式</div>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="modal" checked>
-                                <span>弹窗模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="page">
-                                <span>新页面模式</span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="search-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <div class="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </div>
-                </div>
-            </nav>
-        </div>
-    </header>
-
     <main class="container">
         <div id="article-page">
             <a href="index.html#articles" class="back-to-blog"><i class="fas fa-arrow-left"></i> 返回文章列表</a>
@@ -130,9 +89,6 @@
     <script>
     // 404 router: if path matches /article/<id> render the article using existing article rendering utilities.
     (function() {
-        // initialize UI widgets that article-page normally relies on
-        try { if (typeof initDarkMode === 'function') initDarkMode(); } catch(e) { /* noop */ }
-        try { if (typeof initSearch === 'function') initSearch(); } catch(e) { /* noop */ }
         function showNotFound() {
             document.getElementById('article-content').innerHTML = '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';
         }
