@@ -123,6 +123,20 @@ header.nav-hidden {
     left: 0;
 }
 
+/* 让 main 撑满视口剩余高度，确保 footer 在内容不足时仍贴底 */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 /* 页脚 */
 footer {
     background: var(--dark);
