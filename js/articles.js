@@ -56,10 +56,6 @@ function createArticleElement(article) {
     const tagsHtml = article.tags && article.tags.length
         ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
         : '';
-    const isLiked = getLikedArticles().has(Number(article.id));
-    const likedClass = isLiked ? ' class="liked"' : '';
-    const displayLikes = article.likes + (isLiked ? 1 : 0);
-
     articleCard.innerHTML = `
         ${imageHtml}
         <div class="article-content">
@@ -70,7 +66,6 @@ function createArticleElement(article) {
                 <span><i class="far fa-calendar"></i> ${article.date}</span>
                 <span><i class="far fa-clock"></i> ${article.readTime}</span>
                 <span><i class="far fa-eye"></i> ${article.views}</span>
-                <span${likedClass}><i class="${isLiked ? 'fas' : 'far'} fa-heart"></i> ${displayLikes}</span>
             </div>
         </div>
     `;

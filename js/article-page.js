@@ -58,7 +58,6 @@ function renderArticlePage(article) {
     generateTOC(container);
     initGiscus(container, article.id);
     updateOGTags(article);
-    initLikeButton(container, article);
 
     container.querySelector('.share-btn').addEventListener('click', function() {
         // Use the clean /article/{id} URL as canonical share link

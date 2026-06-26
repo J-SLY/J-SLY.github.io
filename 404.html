@@ -8,6 +8,7 @@
     <meta name="description" content="页面未找到 - JSLY's Blog">
     <meta property="og:title" content="JSLY's Blog">
     <meta property="og:description" content="JSLY's Blog">
+    <link rel="icon" href="/JS.svg">
     <meta name="robots" content="noindex">
     <base href="/">
     <title>404 - 页面未找到</title>
@@ -21,19 +22,36 @@
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="/feed.xml">
 </head>
-    <body>
+<body>
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="/" class="logo">JSLY's Blog</a>
+                <a href="index.html" class="logo">JSLY's Blog</a>
                 <ul class="nav-links">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/#articles">文章</a></li>
-                    <li><a href="/#about">关于我</a></li>
+                    <li><a href="index.html#home" class="active">首页</a></li>
+                    <li><a href="index.html#articles">文章</a></li>
+                    <li><a href="index.html#about">关于我</a></li>
                 </ul>
                 <div class="nav-actions">
                     <div class="dark-mode-toggle" title="切换暗色模式">
                         <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="settings-toggle" title="阅读设置">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="settings-dropdown">
+                        <div class="settings-panel">
+                            <span class="settings-close">&times;</span>
+                            <div class="settings-title">文章打开方式</div>
+                            <label class="settings-option">
+                                <input type="radio" name="display-mode" value="modal" checked>
+                                <span>弹窗模式</span>
+                            </label>
+                            <label class="settings-option">
+                                <input type="radio" name="display-mode" value="page">
+                                <span>新页面模式</span>
+                            </label>
+                        </div>
                     </div>
                     <div class="search-icon">
                         <i class="fas fa-search"></i>
@@ -46,13 +64,57 @@
         </div>
     </header>
 
-    <main class="container" id="app-root">
-        <!-- Content will be rendered by JS. If this is not an article route, a 404 message will be shown. -->
+    <main class="container">
         <div id="article-page">
-            <a href="/#articles" class="back-to-blog"><i class="fas fa-arrow-left"></i> 返回主页</a>
+            <a href="index.html#articles" class="back-to-blog"><i class="fas fa-arrow-left"></i> 返回文章列表</a>
             <div id="article-content"></div>
         </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>JSLY's Blog</h3>
+                    <div class="social-links">
+                        <a href="https://wpa.qq.com/msgrd?v=3&uin=2029872426&site=qq&menu=yes"><i class="fab fa-qq"></i></a>
+                        <a href="https://github.com/J-SLY"><i class="fab fa-github"></i></a>
+                        <a href="https://www.luogu.com.cn/user/1772464" class="social-luogu">
+                            <img src="/images/luogu.svg" alt="Luogu" width="18" height="18">
+                        </a>
+                        <a href="https://luogu.me/user/1772464" class="social-luogu-me">
+                            <img src="/images/luogu-me.svg" alt="Luogu" width="18" height="18">
+                        </a>
+                        <a href="https://user.qzone.qq.com/2029872426" class="social-qzone">
+                            <span class="social-qzone-text">Qzone</span>
+                        </a>
+                        <a href="https://atcoder.jp/users/JSLY" class="social-atcoder">
+                            <span class="social-atcoder-text">Atcoder</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html#home">首页</a></li>
+                        <li><a href="index.html#articles">文章</a></li>
+                        <li><a href="index.html#about">关于我</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>联系我</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:2029872426@qq.com">2029872426@qq.com</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:jsly@jsly.asia">jsly@jsly.asia</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> 中国，安徽，六安</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026  JSLY. 保留所有权利. | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa">源代码 (AGPL-3.0)</a></p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Third-party libs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
@@ -60,7 +122,6 @@
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
 
     <!-- App scripts (use absolute paths so they resolve correctly when 404.html is served at any path) -->
-    <script src="/js/likes.js"></script>
     <script src="/js/display-mode.js"></script>
     <script src="/js/article-content.js"></script>
     <script src="/js/dark-mode.js"></script>
@@ -69,6 +130,9 @@
     <script>
     // 404 router: if path matches /article/<id> render the article using existing article rendering utilities.
     (function() {
+        // initialize UI widgets that article-page normally relies on
+        try { if (typeof initDarkMode === 'function') initDarkMode(); } catch(e) { /* noop */ }
+        try { if (typeof initSearch === 'function') initSearch(); } catch(e) { /* noop */ }
         function showNotFound() {
             document.getElementById('article-content').innerHTML = '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';
         }
@@ -100,7 +164,6 @@
                     generateTOC(container);
                     initGiscus(container, article.id);
                     updateOGTags(article);
-                    initLikeButton(container, article);
                     // hook up share button to the clean URL
                     var shareBtn = container.querySelector('.share-btn');
                     if (shareBtn) {
@@ -138,7 +201,6 @@
                         generateTOC(container);
                         initGiscus(container, article.id);
                         updateOGTags(article);
-                        initLikeButton(container, article);
                         var shareBtn = container.querySelector('.share-btn');
                         if (shareBtn) {
                             shareBtn.addEventListener('click', function() {

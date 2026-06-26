@@ -34,9 +34,6 @@ function buildArticleContent(article, showHero) {
                     ${contentHtml}
                 </div>
                 <div class="article-actions">
-                    <button class="btn like-btn" data-article-id="${article.id}">
-                        <i class="far fa-heart"></i> <span class="like-count">${article.likes}</span>
-                    </button>
                     <button class="btn share-btn">
                         <i class="fas fa-share"></i> 分享
                     </button>
@@ -121,33 +118,6 @@ function initGiscus(container, articleId) {
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
     commentsDiv.appendChild(script);
-}
-
-function initLikeButton(container, article) {
-    const likedArticles = getLikedArticles();
-    const likeBtn = container.querySelector('.like-btn');
-    if (!likeBtn) return;
-    if (likedArticles.has(Number(article.id))) {
-        likeBtn.classList.add('liked');
-        likeBtn.querySelector('i').className = 'fas fa-heart';
-        likeBtn.querySelector('.like-count').textContent = article.likes + 1;
-    }
-    likeBtn.addEventListener('click', function() {
-        const isLiked = this.classList.toggle('liked');
-        const icon = this.querySelector('i');
-        const countSpan = this.querySelector('.like-count');
-        if (isLiked) {
-            icon.className = 'fas fa-heart';
-            countSpan.textContent = article.likes + 1;
-        } else {
-            icon.className = 'far fa-heart';
-            countSpan.textContent = article.likes;
-        }
-        setLikedArticle(article.id, isLiked);
-        this.style.animation = 'none';
-        void this.offsetHeight;
-        this.style.animation = 'likeAnimation 0.3s ease';
-    });
 }
 
 function initShareButton(container, article) {

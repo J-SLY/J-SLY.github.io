@@ -99,10 +99,6 @@
     padding-top: 15px;
 }
 
-.article-meta span.liked {
-    color: #e74c3c;
-}
-
 .tag {
     background: var(--light-gray);
     color: var(--dark);

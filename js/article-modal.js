@@ -37,7 +37,6 @@ function showArticleDetail(article) {
     initArticleHighlights(modal);
     generateTOC(modal, modalContent);
     initGiscus(modal, article.id);
-    initLikeButton(modal, article);
     initShareButton(modal, article);
 
     const handleEscapeKey = (e) => {

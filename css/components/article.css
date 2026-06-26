@@ -50,10 +50,6 @@
     padding-bottom: 15px;
 }
 
-.article-detail .article-meta span.liked {
-    color: #e74c3c;
-}
-
 .article-detail .article-content {
     line-height: 1.8;
     padding: 0;
@@ -143,25 +139,6 @@
     margin-top: 30px;
     display: flex;
     gap: 15px;
-}
-
-.like-btn.liked {
-    background: #e74c3c;
-    color: white;
-}
-
-.like-btn.liked i {
-    color: white;
-}
-
-.like-btn .like-count {
-    margin-left: 4px;
-}
-
-@keyframes likeAnimation {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
 }
 
 .article-layout {
@@ -297,10 +274,6 @@
 
 .dark-mode .article-toc-sidebar a:hover {
     background: var(--light-gray);
-}
-
-.dark-mode .like-btn.liked {
-    background: #e74c3c;
 }
 
 @media (max-width: 992px) {
