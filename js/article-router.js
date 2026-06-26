@@ -3,8 +3,26 @@
 
 (function () {
   function showNotFound() {
-    document.getElementById('article-content').innerHTML =
-      '<div style="padding:48px;text-align:center;"><h1>404 · 页面未找到</h1><p>您访问的页面不存在。</p><p><a href="/">返回首页</a></p></div>';
+    document.getElementById('article-content').innerHTML = [
+      '<div class="not-found">',
+      '  <div class="not-found-code">404</div>',
+      '  <div class="not-found-icon"><i class="fas fa-map-signs"></i></div>',
+      '  <h1>页面未找到</h1>',
+      '  <p class="not-found-message">您访问的页面不存在，可能已被移除或链接有误。</p>',
+      '  <div class="not-found-actions">',
+      '    <a href="/" class="btn"><i class="fas fa-home"></i> 返回首页</a>',
+      '    <a href="/#articles" class="btn btn-outline"><i class="fas fa-book"></i> 浏览文章</a>',
+      '  </div>',
+      '  <div class="not-found-suggestions">',
+      '    <h3>您可能想要</h3>',
+      '    <ul>',
+      '      <li><a href="/"><i class="fas fa-arrow-right"></i> 前往首页</a></li>',
+      '      <li><a href="/#articles"><i class="fas fa-arrow-right"></i> 查看文章列表</a></li>',
+      '      <li><a href="/#about"><i class="fas fa-arrow-right"></i> 了解关于我</a></li>',
+      '    </ul>',
+      '  </div>',
+      '</div>'
+    ].join('\n');
   }
 
   function renderArticle(article) {
