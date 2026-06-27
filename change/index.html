@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components/overlay.css">
-    <link rel="stylesheet" href="../css/components/changelog.css">
+    <link rel="stylesheet" href="../css/components/change.css">
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="../feed.xml">
@@ -75,7 +75,7 @@
         <div class="blog-content">
             <section class="articles-section">
                 <h2 class="section-title">变更历史</h2>
-                <div id="changelog-container" class="changelog-container"></div>
+                <div id="change-container" class="change-container"></div>
             </section>
         </div>
     </main>
@@ -136,12 +136,12 @@
     <script src="../js/dark-mode.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/navigation.js"></script>
-    <script src="../js/articles-changelog.js"></script>
+    <script src="../js/articles-change.js"></script>
     <script src="../js/nav-scroll.js"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        loadChangelog();
+        loadChangeLog();
         initDarkMode();
         initSettings();
         initNavScroll();

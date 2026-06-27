@@ -1,18 +1,18 @@
 /* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
-.changelog-container {
+.change-container {
     max-width: 800px;
     margin: 0 auto;
 }
 
-.changelog-entry {
+.change-entry {
     position: relative;
     padding: 24px 0 24px 32px;
     border-left: 2px solid #0d9488;
 }
 
-.changelog-entry::before {
+.change-entry::before {
     content: '';
     position: absolute;
     left: -7px;
@@ -24,22 +24,22 @@
     border: 2px solid var(--bg);
 }
 
-.changelog-entry-header {
+.change-entry-header {
     margin-bottom: 12px;
 }
 
-.changelog-entry-date {
+.change-entry-date {
     display: inline-block;
     font-size: 0.85rem;
     color: var(--gray);
     margin-bottom: 4px;
 }
 
-.changelog-entry-date i {
+.change-entry-date i {
     margin-right: 4px;
 }
 
-.changelog-entry-title {
+.change-entry-title {
     font-size: 1.15rem;
     font-weight: 600;
     color: var(--text);
@@ -47,32 +47,64 @@
     line-height: 1.4;
 }
 
-.changelog-entry-body {
+.change-entry-body {
     font-size: 0.95rem;
     line-height: 1.8;
     color: var(--gray);
 }
 
-.changelog-entry-body p {
+.change-entry-body p {
     margin: 0 0 8px 0;
 }
 
-.changelog-entry-body ul {
+.change-entry-body ul {
     margin: 4px 0;
     padding-left: 20px;
     list-style: none;
 }
 
-.changelog-entry-body ul li {
+.change-entry-body ul li {
     position: relative;
     padding-left: 16px;
     margin-bottom: 4px;
 }
 
-.changelog-entry-body ul li::before {
+.change-entry-body ul li::before {
     content: '-';
     position: absolute;
     left: 0;
     color: #0d9488;
     font-weight: 600;
+}
+
+.change-badge {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    vertical-align: middle;
+    line-height: 1.4;
+    text-transform: lowercase;
+}
+
+.change-badge-fix {
+    color: #fff;
+    background: #e53e3e;
+}
+
+.change-badge-feat {
+    color: #fff;
+    background: #38a169;
+}
+
+.change-badge-chore {
+    color: #fff;
+    background: #718096;
+}
+
+.change-badge-other {
+    color: #fff;
+    background: #718096;
 }

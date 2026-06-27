@@ -53,9 +53,10 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 
 ## Changelog
 
-- Every meaningful change must be recorded in `articles-changelog.json` before pushing
-- Add a new entry with incrementing `id`, today's `date`, descriptive `title`, and markdown `content` listing what changed
-- The changelog is rendered at `/changelog/` via `js/articles-changelog.js`
+- Every meaningful change must be recorded in `articles-change.json` before pushing
+- Add a new entry with incrementing `id`, today's `date`, a `type` field, descriptive `title`, and markdown `content` listing what changed
+- Type values: `fix` (bug 修复), `feat` (新功能), `chore` (重构/杂项)
+- The changelog is rendered at `/change/` via `js/articles-change.js`
 
 ## Deployment
 
