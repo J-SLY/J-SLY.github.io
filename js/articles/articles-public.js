@@ -4,7 +4,7 @@
 let articlesPublicData = [];
 
 function loadPublicArticles() {
-    return fetch('/articles-public.json')
+    return fetch('/data/articles-public.json')
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
             return resp.json();

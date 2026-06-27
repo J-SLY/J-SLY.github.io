@@ -5,7 +5,7 @@ var allArticles = [];
 var currentFilter = 'all';
 
 function loadChangeLog() {
-    fetch('/articles-change.json')
+    fetch('/data/articles-change.json')
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
             return resp.json();
@@ -77,12 +77,9 @@ function renderChangeLog(filterType) {
         return;
     }
 
-    function parseDate(str) {
-        var iso = str.indexOf(' ') !== -1 ? str.replace(' ', 'T') : str + 'T00:00';
-        return new Date(iso);
-    }
     var sorted = filtered.slice().sort(function (a, b) {
-        return parseDate(b.date) - parseDate(a.date);
+        if (a.date !== b.date) return a.date < b.date ? 1 : -1;
+        return 0;
     });
 
     container.innerHTML = '';

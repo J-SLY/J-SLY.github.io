@@ -8,10 +8,10 @@
     <meta name="description" content="页面未找到 - JSLY's Blog">
     <meta property="og:title" content="JSLY's Blog">
     <meta property="og:description" content="JSLY's Blog">
-    <meta property="og:image" content="https://www.jsly.asia/JS.svg">
+    <meta property="og:image" content="https://www.jsly.asia/images/JS.svg">
     <meta property="og:url" content="https://www.jsly.asia">
     <meta property="og:type" content="website">
-    <link rel="icon" href="/JS.svg">
+    <link rel="icon" href="/images/JS.svg">
     <meta name="robots" content="noindex">
     <base href="/">
     <title>404 - 页面未找到</title>
@@ -161,19 +161,19 @@
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js" integrity="sha256-MM3uFe6CqM98fl3F5J4uaR452PvLib+xY76XfoL5XjM=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- App scripts (use absolute paths so they resolve correctly when 404.html is served at any path) -->
-    <script src="/js/display-mode.js"></script>
-    <script src="/js/utils.js"></script>
-    <script src="/js/article-content.js"></script>
-    <script src="/js/article-toc.js"></script>
-    <script src="/js/article-comments.js"></script>
-    <script src="/js/article-share.js"></script>
-    <script src="/js/article-og.js"></script>
-    <script src="/js/article-router.js"></script>
-    <script src="/js/dark-mode.js"></script>
-    <script src="/js/search.js"></script>
-    <script src="/js/settings.js"></script>
-    <script src="/js/navigation.js"></script>
-    <script src="/js/nav-scroll.js"></script>
+    <script src="/js/core/display-mode.js"></script>
+    <script src="/js/core/utils.js"></script>
+    <script src="/js/article-view/article-content.js"></script>
+    <script src="/js/article-view/article-toc.js"></script>
+    <script src="/js/article-view/article-comments.js"></script>
+    <script src="/js/article-view/article-share.js"></script>
+    <script src="/js/article-view/article-og.js"></script>
+    <script src="/js/article-view/article-router.js"></script>
+    <script src="/js/core/dark-mode.js"></script>
+    <script src="/js/core/search.js"></script>
+    <script src="/js/core/settings.js"></script>
+    <script src="/js/core/navigation.js"></script>
+    <script src="/js/core/nav-scroll.js"></script>
 
     <script>
     ;['initDarkMode','initSearch','initSettings','initNavScroll','initMobileMenu'].forEach(function(fn) { try { if (typeof window[fn] === 'function') window[fn](); } catch(e) { /* noop */ } });

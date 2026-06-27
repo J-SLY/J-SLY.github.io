@@ -145,7 +145,7 @@ function buildSubmissionsFromArticles(articles) {
 }
 
 function loadLeaderboard() {
-    var articlesPromise = fetch('/articles-public.json').then(function (resp) {
+    var articlesPromise = fetch('/data/articles-public.json').then(function (resp) {
         if (!resp.ok) throw new Error('网络响应不正常');
         return resp.json();
     });
@@ -272,7 +272,7 @@ function renderBoard(type) {
 
         item.innerHTML = [
             '<div class="leaderboard-rank">' + getMedalHtml(entry.rank) + '</div>',
-            '<img class="leaderboard-avatar" src="' + avatarUrl + '" alt="' + escapeHtml(entry.username) + '" loading="lazy" onerror="this.src=\'../JS.svg\'">',
+            '<img class="leaderboard-avatar" src="' + avatarUrl + '" alt="' + escapeHtml(entry.username) + '" loading="lazy" onerror="this.src=\'../images/JS.svg\'">',
             '<div class="leaderboard-info">',
             '  <div class="leaderboard-name-row">' + nameHtml + '</div>',
             '  ' + descHtml,

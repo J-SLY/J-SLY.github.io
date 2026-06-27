@@ -1,24 +1,31 @@
 {
   "articles": [
     {
+      "id": 27,
+      "type": "chore",
+      "title": "重构项目目录结构",
+      "date": "2026-06-27 22:36",
+      "content": "将项目文件按功能分入子目录：\n\n- **JS 文件** — 从 `js/` 扁平结构分入 `js/core/`、`js/articles/`、`js/article-view/` 三个子目录\n- **数据文件** — `articles.json`、`articles-public.json`、`articles-change.json` 移至 `data/`\n- **图标文件** — `JS.svg` 移至 `images/`\n- 更新所有 HTML 中的 `<script src>`、`<link rel=\"icon\">`、`<meta og:image>` 路径\n- 更新 JS 中所有 `fetch()` 数据路径\n- 同步更新 `AGENTS.md` 中的目录结构和路径说明"
+    },
+    {
       "id": 26,
       "type": "feat",
       "title": "贡献榜 PR/Issues 榜接入 GitHub API",
-      "date": "2026-06-27",
+      "date": "2026-06-27 22:30",
       "content": "贡献榜（`/leaderboard/`）的 PR 榜和 Issues 榜改为从 GitHub API 实时获取数据：\n\n- **PR 榜** — 通过 `type:pr` 搜索仓库 PR，按创建者聚合统计，替代之前的硬编码数据\n- **Issues 榜** — 通过 `type:issue` 搜索仓库 Issue，排除 `public-submission` 和 `stats:exclude` 标签的条目\n- **排除机制** — 给 Issue 打上 `stats:exclude` 标签即可将其排除出统计\n- **投稿不计入** — 投稿模板自带 `public-submission` 标签，自动排除\n- 配置集中管理（`LEADERBOARD_CONFIG`），支持自定义排除标签列表"
     },
     {
       "id": 25,
       "type": "fix",
       "title": "不再暴露投稿者邮箱地址",
-      "date": "2026-06-27",
+      "date": "2026-06-27 22:23",
       "content": "修复投稿文章 `authorLink` 暴露投稿者邮箱的问题：\n\n- 从 `articles-public.json` 中移除 `\"authorLink\": \"mailto:...\"` 字段\n- `utils.js` 新增 `sanitizeAuthorLink()` 函数，自动过滤 `mailto:` 前缀的链接\n- `articles-public.js` 和 `article-router.js` 中三处渲染作者链接全部改为使用 `sanitizeAuthorLink()`\n- `mailto:` 链接不再生成 `<a>` 标签，仅显示作者纯文本名\n- 正常的 `https://` 等链接不受影响，照常渲染"
     },
     {
       "id": 23,
       "type": "feat",
       "title": "更新日志页面时间线可按类型筛选",
-      "date": "2026-06-27",
+      "date": "2026-06-27 21:51",
       "content": "更新日志页面（`/change/`）新增类型筛选功能：\n\n- 时间线上方新增筛选按钮栏，支持按「全部」「功能更新」「Bug 修复」「杂项」分类查看\n- 筛选按钮固定排序，动态高亮当前选中项\n- 点击筛选后仅显示对应类型的日志条目，无需重新加载页面"
     },
     {

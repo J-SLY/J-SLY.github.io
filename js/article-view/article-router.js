@@ -66,7 +66,7 @@
     var publicMatch = pathname.match(/^\/public\/article\/(\d+)\/?$/);
     if (publicMatch) {
       var pubId = parseInt(publicMatch[1], 10);
-      fetch('/articles-public.json')
+      fetch('/data/articles-public.json')
         .then(function (resp) {
           if (!resp.ok) throw new Error('网络响应不正常');
           return resp.json();
@@ -86,7 +86,7 @@
     var match = pathname.match(/^\/article\/(\d+)\/?$/);
     if (match) {
       var id = parseInt(match[1], 10);
-      fetch('/articles.json')
+      fetch('/data/articles.json')
         .then(function (resp) {
           if (!resp.ok) throw new Error('网络响应不正常');
           return resp.json();
@@ -112,7 +112,7 @@
       if (rawId && rawId.indexOf('pub-') === 0) {
         var pubId = parseInt(rawId.substring(4), 10);
         if (pubId) {
-          fetch('/articles-public.json')
+          fetch('/data/articles-public.json')
             .then(function (resp) { if (!resp.ok) throw new Error('网络响应不正常'); return resp.json(); })
             .then(function (data) {
               var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
@@ -128,7 +128,7 @@
 
       var id2 = parseInt(rawId, 10);
       if (id2) {
-        fetch('/articles.json')
+        fetch('/data/articles.json')
           .then(function (resp) { if (!resp.ok) throw new Error('网络响应不正常'); return resp.json(); })
           .then(function (data) {
             var article = data.articles.find(function (a) { return Number(a.id) === id2; });

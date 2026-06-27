@@ -4,7 +4,7 @@
 let articlesData = [];
 
 function loadArticlesFromJSON() {
-    return fetch('articles.json')
+    return fetch('data/articles.json')
         .then(response => {
             if (!response.ok) throw new Error('网络响应不正常');
             return response.json();
