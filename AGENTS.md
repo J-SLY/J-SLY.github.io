@@ -54,7 +54,7 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 
 ## Changelog
 
-- Every meaningful change must be recorded in `articles-change.json` before pushing
+- Every meaningful change must be recorded in `articles-change.json` before pushing（文章新增/修改不计入 changelog）
 - Add a new entry with incrementing `id`, today's `date` (format: `YYYY-MM-DD` 或 `YYYY-MM-DD HH:MM`)，a `type` field, descriptive `title`, and markdown `content` listing what changed
 - Type values: `fix` (bug 修复), `feat` (新功能), `chore` (重构/杂项)
 - The changelog is rendered at `/change/` via `js/articles-change.js`
@@ -62,4 +62,5 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 ## Deployment
 
 - **小修复**（typo、样式微调等）：可直接推送 `main` 分支触发自动部署。
-- **大功能**（新文章、重构等）：在本地改完，我说「推」再推，不要擅自推送。
+- **文章**（新增/修改）：文章不计入 changelog，可直接推送。
+- **大功能**（重构等）：在本地改完，我说「推」再推，不要擅自推送。
