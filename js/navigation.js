@@ -5,7 +5,7 @@ function initNavigation() {
     document.querySelectorAll('.nav-links a, .footer-links a').forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            if (!href || href.startsWith('mailto:') || href.startsWith('http:') || href.startsWith('https:') || href.startsWith('/')) return;
+            if (!href || href.startsWith('mailto:') || href.startsWith('http:') || href.startsWith('https:') || !href.startsWith('#')) return;
             e.preventDefault();
 
             const targetId = href.startsWith('#') ? href.substring(1) : href;
@@ -54,7 +54,8 @@ function updateNavOnScroll() {
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').substring(1) === currentSection) {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#') && href.substring(1) === currentSection) {
             link.classList.add('active');
         }
     });
