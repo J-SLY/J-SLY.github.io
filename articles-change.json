@@ -4,28 +4,28 @@
       "id": 21,
       "type": "chore",
       "title": "项目文件整理：SRI 哈希统一、JS 去重、汉堡菜单提取",
-      "date": "2026-06-27",
+      "date": "2026-06-27 11:00",
       "content": "全面整理项目文件结构，消除多处冗余和不一致：\n\n**SRI 哈希同步**\n- 统一 `index.html`、`article.html`、`404.html`、`public/index.html` 中 markdown、highlight.js、pinyin-pro 的 integrity 值，确保 CDN 脚本在所有页面正常加载\n\n**共享工具函数提取**\n- 新增 `js/utils.js`，定义全局 `escapeHtml()`，消除 `article-content.js` 和 `articles-change.js` 中的重复定义\n- 所有页面加载 `utils.js`（位于 `display-mode.js` 之后）\n- `articles-change.js` 中的 `escapeHtml` 使用更完备的类型检查（`typeof str !== 'string'`）\n\n**汉堡菜单统一**\n- 新增 `initMobileMenu()` 到 `navigation.js`，封装移动端菜单切换逻辑\n- 从 `main.js`、`public/index.html`、`change/index.html` 中移除重复的内联汉堡菜单代码\n- 所有页面统一调用 `initMobileMenu()`\n\n**清理孤立文件**\n- 移除未使用的 `images/logo.svg`"
     },
     {
       "id": 20,
       "type": "fix",
       "title": "全局滚动条样式统一",
-      "date": "2026-06-27",
+      "date": "2026-06-27 10:00",
       "content": "将全站滚动条样式统一为细圆角风格，与网站主题色协调：\n\n- `base.css` 新增全局 `::-webkit-scrollbar` 样式（6px 宽/高、圆角 thumb）\n- 新增 `--scrollbar-thumb` / `--scrollbar-thumb-hover` CSS 变量，随亮/暗模式自动切换\n- 新增 Firefox 兼容写法（`scrollbar-width: thin` + `scrollbar-color`）\n- 移除 `overlay.css` 中重复的 `.modal-content` / `.search-results` 滚动条样式\n- 文章目录（TOC）侧边栏等所有可滚动区域自动统一风格"
     },
     {
       "id": 19,
       "type": "chore",
       "title": "路径统一：changelog → change",
-      "date": "2026-06-27",
+      "date": "2026-06-27 09:00",
       "content": "将 `changelog/` 路径及相关文件统一重命名为 `change/`：\n\n- `changelog/` → `change/`\n- `articles-changelog.json` → `articles-change.json`\n- `js/articles-changelog.js` → `js/articles-change.js`\n- `css/components/changelog.css` → `css/components/change.css`\n- CSS 类名、JS 函数名同步更新"
     },
     {
       "id": 18,
       "type": "fix",
       "title": "搜索功能全面修复（数据时序/拼音空格/Content 拼音/CDN SRI 哈希）",
-      "date": "2026-06-27",
+      "date": "2026-06-27 08:00",
       "content": "修复搜索功能的多个问题：\n\n- **数据加载时序**：`initSearch()` 在 fetch 完成前被调用，`dataSource` 捕获空数组。修复方式：将 `initSearch()` 调用移至 fetch `.then()` 回调内，在 `articlesData = data.articles` 同一级执行。\n- **拼音空格匹配**：用户输入 `\"ru men\"`（带空格），但 pinyin-pro 输出的拼音串无空格（`\"rumen\"`），导致 `indexOf` 查找失败。修复方式：在 `findPinyinMatchRange()` 内对 query 先 `replace(/\\s+/g, '')` 去空格后再对比。\n- **Content 拼音搜索缺失**：filter 只对 article.title 和 article.excerpt 做了 pinyin 匹配，但 article.content 仅有直接文本匹配（`includes(q)`），中文内容无法通过拼音匹配。修复方式：filter 加上 `matchPinyin(a.content.join('\\n'), q)`。\n- **所有 CDN 脚本加载失败**：`marked`、`highlight.js`、`pinyin-pro` 的 SRI integrity 哈希值与 CDN 实际文件不匹配（CDN 文件内容更新但哈希未同步），浏览器拒绝执行脚本，导致 `pinyinPro` 为 undefined。修复方式：用浏览器控制台报错中的 computed SHA 值更新 integrity 属性。\n- 同步修复 `404.html`、`article.html`、`change/index.html` 中相同 CDN 脚本的 SRI 哈希。"
     },
     {

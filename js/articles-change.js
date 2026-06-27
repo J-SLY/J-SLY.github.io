@@ -28,14 +28,28 @@ function renderChangeLog(articles) {
         return;
     }
 
+    function parseDate(str) {
+        var iso = str.indexOf(' ') !== -1 ? str.replace(' ', 'T') : str + 'T00:00';
+        return new Date(iso);
+    }
     var sorted = articles.slice().sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
+        return parseDate(b.date) - parseDate(a.date);
     });
 
     container.innerHTML = '';
     sorted.forEach(function (entry) {
         container.appendChild(createChangeLogEntry(entry));
     });
+}
+
+function formatDate(dateStr) {
+    var parts = dateStr.split(' ');
+    var datePart = parts[0];
+    var timePart = parts[1];
+    var icon = timePart
+        ? '<i class="far fa-calendar-alt"></i> ' + datePart + ' <i class="far fa-clock"></i> ' + timePart
+        : '<i class="far fa-calendar"></i> ' + datePart;
+    return icon;
 }
 
 function createChangeLogEntry(entry) {
@@ -48,7 +62,7 @@ function createChangeLogEntry(entry) {
 
     el.innerHTML = [
         '<div class="change-entry-header">',
-        '  <span class="change-entry-date"><i class="far fa-calendar"></i> ' + entry.date + '</span>',
+        '  <span class="change-entry-date">' + formatDate(entry.date) + '</span>',
         '  <h3 class="change-entry-title"><span class="change-badge change-badge-' + escapeHtml(entry.type || 'other') + '">' + escapeHtml(entry.type || 'other') + '</span>' + escapeHtml(entry.title) + '</h3>',
         '</div>',
         '<div class="change-entry-body">' + contentHtml + '</div>'
