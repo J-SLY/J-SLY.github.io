@@ -1,6 +1,13 @@
 ﻿/* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
+function escapeHtml(str) {
+    if (!str) return '';
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
 function buildArticleContent(article, showHero) {
     if (showHero === undefined) showHero = true;
     if (article.showImage === false) showHero = false;
@@ -8,12 +15,12 @@ function buildArticleContent(article, showHero) {
 
     const heroHtml = showHero
         ? (article.image
-            ? `<div class="article-hero"><img src="${article.image}" alt="${article.title}"></div>`
-            : `<div class="article-hero article-hero-placeholder"><span>${article.title}</span></div>`)
+            ? `<div class="article-hero"><img src="${article.image}" alt="${escapeHtml(article.title)}"></div>`
+            : `<div class="article-hero article-hero-placeholder"><span>${escapeHtml(article.title)}</span></div>`)
         : '';
 
     const tagsHtml = article.tags && article.tags.length
-        ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>`
         : '';
 
     return `
@@ -21,12 +28,12 @@ function buildArticleContent(article, showHero) {
         <div class="article-layout">
             <div class="article-toc-sidebar"></div>
             <div class="article-body">
-                <h2>${article.title}</h2>
+                <h2>${escapeHtml(article.title)}</h2>
                 ${tagsHtml}
                 <div class="article-meta">
-                    <span><i class="far fa-calendar"></i> ${article.date}</span>
-                    <span><i class="far fa-clock"></i> ${article.readTime}</span>
-                    <span><i class="far fa-eye"></i> ${article.views}</span>
+                    <span><i class="far fa-calendar"></i> ${escapeHtml(article.date)}</span>
+                    <span><i class="far fa-clock"></i> ${escapeHtml(article.readTime)}</span>
+                    <span><i class="far fa-eye"></i> ${escapeHtml('' + article.views)}</span>
                 </div>
                 <div class="article-content markdown-body">
                     ${contentHtml}

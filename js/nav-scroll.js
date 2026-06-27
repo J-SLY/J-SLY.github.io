@@ -1,6 +1,15 @@
 ﻿/* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
+function setFadeInState() {
+    var elements = document.querySelectorAll('.fade-in');
+    elements.forEach(function(el) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    });
+}
+
 function initNavScroll() {
     var header = document.querySelector('header');
     if (!header) return;
@@ -31,6 +40,9 @@ function initNavScroll() {
             ticking = true;
         }
     });
+
+    setFadeInState();
+    fadeInOnScroll();
 }
 
 function setNavLock(locked) {

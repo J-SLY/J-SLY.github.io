@@ -25,13 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     window.addEventListener('scroll', updateNavOnScroll);
-
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach(element => {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(20px)";
-        element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-    });
 });
 
 window.addEventListener('scroll', fadeInOnScroll);

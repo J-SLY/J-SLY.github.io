@@ -1,0 +1,25 @@
+{
+  "articles": [
+    {
+      "id": 1,
+      "title": "网站新增更新日志子页面",
+      "date": "2026-06-27",
+      "tags": ["网站更新"],
+      "excerpt": "新增 changelog/ 子页面，用于记录博客功能更新与变更历史。",
+      "content": [
+        "## 概述",
+        "",
+        "即日起，博客新增 `/changelog/` 子页面，用于记录本站的功能更新、优化和修复历史。",
+        "",
+        "## 本次更新内容",
+        "",
+        "- **新增** `changelog/` 子页面，独立展示更新日志条目",
+        "- **新增** 导航栏「更新日志」链接，快速跳转至更新日志页",
+        "- **架构** 新增 `articles-changelog.json` 数据文件、`js/articles-changelog.js` 渲染逻辑",
+        "- **样式** 新增 `css/components/changelog.css` 独立样式"
+      ],
+      "readTime": "约 1 分钟",
+      "views": 0
+    }
+  ]
+}

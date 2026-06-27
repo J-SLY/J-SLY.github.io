@@ -50,25 +50,26 @@ function createArticleElement(article) {
     articleCard.setAttribute('data-article-id', article.id);
 
     const pinnedBadge = article.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> 置顶</span>' : '';
-    const imageHtml = article.image
-        ? `<div class="article-image">${pinnedBadge}<img src="${article.image}" alt="${article.title}" loading="lazy"></div>`
-        : `<div class="article-image article-image-placeholder">${pinnedBadge}<span>${article.title}</span></div>`;
-    const tagsHtml = article.tags && article.tags.length
-        ? `<div class="article-tags">${article.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+    var safeTitle = escapeHtml(article.title);
+    var imageHtml = article.image
+        ? `<div class="article-image">${pinnedBadge}<img src="${article.image}" alt="${safeTitle}" loading="lazy"></div>`
+        : `<div class="article-image article-image-placeholder">${pinnedBadge}<span>${safeTitle}</span></div>`;
+    var tagsHtml = article.tags && article.tags.length
+        ? `<div class="article-tags">${article.tags.map(function(tag) { return '<span class="tag">' + escapeHtml(tag) + '</span>'; }).join('')}</div>`
         : '';
-    articleCard.innerHTML = `
-        ${imageHtml}
-        <div class="article-content">
-            <h3>${article.title}</h3>
-            ${tagsHtml}
-            <p>${article.excerpt}</p>
-            <div class="article-meta">
-                <span><i class="far fa-calendar"></i> ${article.date}</span>
-                <span><i class="far fa-clock"></i> ${article.readTime}</span>
-                <span><i class="far fa-eye"></i> ${article.views}</span>
-            </div>
-        </div>
-    `;
+    articleCard.innerHTML = [
+        imageHtml,
+        '<div class="article-content">',
+        '  <h3>' + safeTitle + '</h3>',
+        '  ' + tagsHtml,
+        '  <p>' + escapeHtml(article.excerpt) + '</p>',
+        '  <div class="article-meta">',
+        '    <span><i class="far fa-calendar"></i> ' + escapeHtml(article.date) + '</span>',
+        '    <span><i class="far fa-clock"></i> ' + escapeHtml(article.readTime) + '</span>',
+        '    <span><i class="far fa-eye"></i> ' + escapeHtml('' + article.views) + '</span>',
+        '  </div>',
+        '</div>'
+    ].join('\n');
 
     return articleCard;
 }

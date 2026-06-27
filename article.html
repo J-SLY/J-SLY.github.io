@@ -9,6 +9,9 @@
     <meta name="keywords" content="博客, 个人博客, JSLY, 技术, 编程">
     <meta property="og:title" content="JSLY's Blog">
     <meta property="og:description" content="JSLY's Blog">
+    <meta property="og:image" content="https://www.jsly.asia/JS.svg">
+    <meta property="og:url" content="https://www.jsly.asia">
+    <meta property="og:type" content="website">
     <link rel="icon" href="JS.svg">
     <title>JSLY's Blog</title>
     <link rel="stylesheet" href="css/base.css">
@@ -18,8 +21,8 @@
     <link rel="stylesheet" href="css/components/article.css">
     <link rel="stylesheet" href="css/components/public.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7tFQq/ERx5T3nN3E3N5hBi/+wF9Rv0FEeBBfHUg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" integrity="sha512-7KFiSCD0N6ONc7J5SdK03e6R5GEUiDl8WXK49oUXuUSikVqIiG5JfFPFex0+wavypgfSJpFTfWDSUN7/hBCpGA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="feed.xml">
 </head>
 <body>
@@ -27,20 +30,47 @@
         <div class="container">
             <nav class="navbar">
                 <a href="index.html" class="logo">JSLY's Blog</a>
-                <ul class="nav-links">
+                <ul class="nav-links" id="nav-links-menu">
                     <li><a href="index.html">首页</a></li>
                     <li><a href="index.html#articles">文章</a></li>
                     <li><a href="public/">公共投稿</a></li>
                     <li><a href="index.html#about">关于我</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <div class="dark-mode-toggle" title="切换暗色模式">
+                    <div class="dark-mode-toggle" title="切换暗色模式" aria-label="切换暗色模式" role="button">
                         <i class="fas fa-moon"></i>
                     </div>
-                    <div class="search-icon">
+                    <div class="settings-toggle" title="阅读设置" aria-label="阅读设置" role="button">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="settings-dropdown">
+                        <div class="settings-panel">
+                            <span class="settings-close" aria-label="关闭设置">&times;</span>
+                            <div class="settings-title">阅读设置</div>
+                            <div class="settings-subtitle">导航栏</div>
+                            <label class="settings-option" style="flex-direction:column;align-items:flex-start;gap:8px">
+                                <span>锁定导航栏</span>
+                                <input type="checkbox" id="nav-lock-toggle">
+                            </label>
+                            <div class="settings-subtitle">阅读模式</div>
+                            <label class="settings-option">
+                                <input type="radio" name="display-mode" value="modal" checked>
+                                <span>弹窗模式</span>
+                            </label>
+                            <label class="settings-option">
+                                <input type="radio" name="display-mode" value="page">
+                                <span>新页面模式</span>
+                            </label>
+                            <label class="settings-option">
+                                <input type="radio" name="display-mode" value="legacy">
+                                <span>兼容模式 (article.html?id=)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="search-icon" aria-label="搜索" role="button">
                         <i class="fas fa-search"></i>
                     </div>
-                    <div class="menu-toggle">
+                    <div class="menu-toggle" aria-label="菜单" role="button" aria-expanded="false" aria-controls="nav-links-menu">
                         <i class="fas fa-bars"></i>
                     </div>
                 </div>
@@ -101,9 +131,9 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-ZRUaaEt3D7N7zuGDG6+81ONIaoiNG2A31U9l3G5oPkRKNXBYJScEl8FNt8P8s5FB+EO2rN2+js2eWTjxutNF1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-cS4CASNnAFW4RGQEWb3mRs9XKvafCzXAiEejoQYm/V3b7OB0ePGUSFGqqbR/jVjF1C7yH0kGA7nlhN+jH3Fr4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js" integrity="sha256-MoQb5wQ2GUFV6rWs6Mh6y8nxzZSL4C++v1ldzN5KTwU=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/display-mode.js"></script>
     <script src="js/article-content.js"></script>
     <script src="js/article-toc.js"></script>

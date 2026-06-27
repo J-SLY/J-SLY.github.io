@@ -11,7 +11,6 @@ function loadPublicArticles() {
         })
         .then(function (data) {
             articlesPublicData = data.articles;
-            window.articlesData = articlesPublicData;
             renderPublicArticles();
         })
         .catch(function (err) {
@@ -101,20 +100,11 @@ function openPublicArticle(article) {
 }
 
 function showPublicArticleDetail(article) {
-    var existing = document.querySelector('.article-modal');
-    if (existing) {
-        restoreOGTags();
-        existing.remove();
-    }
-
-    var modal = document.createElement('div');
-    modal.className = 'article-modal';
-
     var authorHtml = article.authorLink
         ? '<a href="' + encodeURI(article.authorLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
         : escapeHtml(article.author);
 
-    var authorSection = [
+    var authorSectionHtml = [
         '<div class="article-author-info">',
         '  <i class="fas fa-feather-alt"></i>',
         '  <div>',
@@ -124,62 +114,10 @@ function showPublicArticleDetail(article) {
         '</div>'
     ].join('\n');
 
-    var content = buildArticleContent(article);
-    content = content.replace('<div class="article-body">', '<div class="article-body">' + authorSection);
-
-    modal.innerHTML = [
-        '<div class="modal-content">',
-        '  <div class="reading-progress-bar"><div class="progress-fill"></div></div>',
-        '  <span class="close-modal">&times;</span>',
-        '  <div class="article-detail">',
-        '    ' + content,
-        '  </div>',
-        '</div>'
-    ].join('\n');
-
-    updateOGTags(article);
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-
-    var modalContent = modal.querySelector('.modal-content');
-    var progressFill = modal.querySelector('.progress-fill');
-    if (modalContent && progressFill) {
-        modalContent.addEventListener('scroll', function () {
-            var scrollTop = modalContent.scrollTop;
-            var scrollHeight = modalContent.scrollHeight - modalContent.clientHeight;
-            progressFill.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
-        });
-    }
-
-    initArticleHighlights(modal);
-    generateTOC(modal, modalContent);
-    initGiscus(modal, 'public-' + article.id);
-    initShareButton(modal, article);
-
-    function closeModalFn() {
-        if (document.body.contains(modal)) document.body.removeChild(modal);
-        document.body.style.overflow = 'auto';
-        restoreOGTags();
-        modal.removeEventListener('click', bgClick);
-        document.removeEventListener('keydown', escKey);
-    }
-
-    function escKey(e) {
-        if (e.key === 'Escape') closeModalFn();
-    }
-
-    function bgClick(e) {
-        if (e.target === modal) closeModalFn();
-    }
-
-    modal.querySelector('.close-modal').addEventListener('click', closeModalFn, { once: true });
-    modal.addEventListener('click', bgClick);
-    document.addEventListener('keydown', escKey);
+    showArticleModal(article, {
+        giscusIdPrefix: 'public-',
+        authorSectionHtml: authorSectionHtml
+    });
 }
 
-function escapeHtml(str) {
-    if (!str) return '';
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-}
+

@@ -78,6 +78,17 @@ header.nav-hidden {
     color: var(--gray);
 }
 
+.dark-mode-toggle {
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--gray);
+    transition: var(--transition);
+}
+
+.dark-mode-toggle:hover {
+    color: var(--primary);
+}
+
 /* 英雄区域 */
 .hero {
     padding-top: 150px;

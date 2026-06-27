@@ -29,65 +29,72 @@ function findPinyinMatchRange(text, query) {
     return null;
 }
 
-function initSearch() {
-    const searchIcon = document.querySelector('.search-icon');
+function initSearch(options) {
+    options = options || {};
+    var dataSource = options.dataSource || (typeof window !== 'undefined' ? window.articlesData : null) || [];
+    var onOpenArticle = options.onOpenArticle || (typeof window !== 'undefined' ? window.openArticle : null) || function() {};
+
+    var searchIcon = document.querySelector('.search-icon');
     searchIcon.style.cursor = 'pointer';
 
     searchIcon.addEventListener('click', function() {
-        const existing = document.querySelector('.search-modal');
+        var existing = document.querySelector('.search-modal');
         if (existing) return;
 
-        const modal = document.createElement('div');
+        var modal = document.createElement('div');
         modal.className = 'search-modal';
-        modal.innerHTML = `
-            <div class="search-modal-content">
-                <div class="search-modal-header">
-                    <input type="text" class="search-input" placeholder="搜索文章标题、标签、内容..." autofocus>
-                    <span class="search-close">&times;</span>
-                </div>
-                <div class="search-results"></div>
-                <div class="search-hint">输入关键词搜索，支持标题、标签、摘要和内容</div>
-            </div>
-        `;
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-label', '搜索');
+        modal.innerHTML = [
+            '<div class="search-modal-content">',
+            '  <div class="search-modal-header">',
+            '    <input type="text" class="search-input" placeholder="搜索文章标题、标签、内容..." autofocus>',
+            '    <span class="search-close">&times;</span>',
+            '  </div>',
+            '  <div class="search-results"></div>',
+            '  <div class="search-hint">输入关键词搜索，支持标题、标签、摘要和内容</div>',
+            '</div>'
+        ].join('\n');
 
         document.body.appendChild(modal);
         document.body.style.overflow = 'hidden';
 
-        const input = modal.querySelector('.search-input');
-        const results = modal.querySelector('.search-results');
-        const closeBtn = modal.querySelector('.search-close');
+        var input = modal.querySelector('.search-input');
+        var results = modal.querySelector('.search-results');
+        var closeBtn = modal.querySelector('.search-close');
 
         input.focus();
 
-        const closeSearch = () => {
+        function closeSearch() {
             document.body.removeChild(modal);
             document.body.style.overflow = 'auto';
-        };
+        }
 
         closeBtn.addEventListener('click', closeSearch);
         modal.addEventListener('click', function(e) {
             if (e.target === modal) closeSearch();
         });
 
-        let selectedIndex = -1;
+        var selectedIndex = -1;
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeSearch();
             } else if (e.key === 'ArrowDown') {
                 e.preventDefault();
-                const items = results.querySelectorAll('.search-result-item');
+                var items = results.querySelectorAll('.search-result-item');
                 if (items.length === 0) return;
                 selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
-                items.forEach((el, i) => el.classList.toggle('selected', i === selectedIndex));
+                items.forEach(function(el, i) { el.classList.toggle('selected', i === selectedIndex); });
             } else if (e.key === 'ArrowUp') {
                 e.preventDefault();
-                const items = results.querySelectorAll('.search-result-item');
+                var items = results.querySelectorAll('.search-result-item');
                 if (items.length === 0) return;
                 selectedIndex = Math.max(selectedIndex - 1, 0);
-                items.forEach((el, i) => el.classList.toggle('selected', i === selectedIndex));
+                items.forEach(function(el, i) { el.classList.toggle('selected', i === selectedIndex); });
             } else if (e.key === 'Enter') {
-                const items = results.querySelectorAll('.search-result-item');
+                var items = results.querySelectorAll('.search-result-item');
                 if (selectedIndex >= 0 && selectedIndex < items.length) {
                     items[selectedIndex].click();
                 }
@@ -99,49 +106,50 @@ function initSearch() {
         }
 
         input.addEventListener('input', function() {
-            const q = this.value.trim().toLowerCase();
+            var q = this.value.trim().toLowerCase();
             if (!q) {
                 results.innerHTML = '';
                 return;
             }
 
-            const matches = articlesData.filter(a =>
-                a.title.toLowerCase().includes(q) ||
-                matchPinyin(a.title, q) ||
-                (a.tags && a.tags.some(t => t.toLowerCase().includes(q) || matchPinyin(t, q))) ||
-                a.excerpt.toLowerCase().includes(q) ||
-                matchPinyin(a.excerpt, q) ||
-                a.content.join('\n').toLowerCase().includes(q)
-            );
+            var matches = dataSource.filter(function(a) {
+                return a.title.toLowerCase().includes(q) ||
+                    matchPinyin(a.title, q) ||
+                    (a.tags && a.tags.some(function(t) { return t.toLowerCase().includes(q) || matchPinyin(t, q); })) ||
+                    a.excerpt.toLowerCase().includes(q) ||
+                    matchPinyin(a.excerpt, q) ||
+                    a.content.join('\n').toLowerCase().includes(q);
+            });
 
             if (matches.length === 0) {
                 results.innerHTML = '<div class="search-empty">未找到匹配的文章</div>';
                 return;
             }
 
-            results.innerHTML = matches.map(a => {
-                const contentText = a.content.join('\n').replace(/[#*\-`]+/g, '').replace(/\s{2,}/g, ' ');
-                const excerptText = contentText.slice(0, 120);
-                return `
-                <div class="search-result-item" data-id="${a.id}">
-                    <div class="search-result-title">${highlight(a.title, q)}</div>
-                    <div class="search-result-excerpt">${highlight(excerptText, q)}</div>
-                    <div class="search-result-meta">
-                        ${a.tags ? a.tags.map(t => `<span class="tag">${t}</span>`).join('') : ''}
-                        <span>${a.date}</span>
-                    </div>
-                </div>
-            `}).join('');
+            results.innerHTML = matches.map(function(a) {
+                var contentText = a.content.join('\n').replace(/[#*\-`]+/g, '').replace(/\s{2,}/g, ' ');
+                var excerptText = contentText.slice(0, 120);
+                return [
+                    '<div class="search-result-item" data-id="' + a.id + '">',
+                    '  <div class="search-result-title">' + highlight(a.title, q) + '</div>',
+                    '  <div class="search-result-excerpt">' + highlight(excerptText, q) + '</div>',
+                    '  <div class="search-result-meta">',
+                    '    ' + (a.tags ? a.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') : ''),
+                    '    <span>' + a.date + '</span>',
+                    '  </div>',
+                    '</div>'
+                ].join('\n');
+            }).join('');
 
             selectedIndex = -1;
 
-            results.querySelectorAll('.search-result-item').forEach(item => {
+            results.querySelectorAll('.search-result-item').forEach(function(item) {
                 item.addEventListener('click', function() {
-                    const id = parseInt(this.dataset.id);
-                    const article = articlesData.find(a => a.id === id);
+                    var id = parseInt(this.dataset.id);
+                    var article = dataSource.find(function(a) { return a.id === id; });
                     if (article) {
                         closeSearch();
-                        openArticle(article);
+                        onOpenArticle(article);
                     }
                 });
             });

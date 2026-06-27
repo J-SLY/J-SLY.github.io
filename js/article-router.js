@@ -2,13 +2,6 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
 (function () {
-  function escapeHtml(str) {
-    if (!str) return '';
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
-
   function showNotFound() {
     document.getElementById('article-content').innerHTML = [
       '<div class="not-found">',
