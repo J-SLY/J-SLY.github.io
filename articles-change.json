@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 25,
+      "type": "fix",
+      "title": "不再暴露投稿者邮箱地址",
+      "date": "2026-06-27",
+      "content": "修复投稿文章 `authorLink` 暴露投稿者邮箱的问题：\n\n- 从 `articles-public.json` 中移除 `\"authorLink\": \"mailto:...\"` 字段\n- `utils.js` 新增 `sanitizeAuthorLink()` 函数，自动过滤 `mailto:` 前缀的链接\n- `articles-public.js` 和 `article-router.js` 中三处渲染作者链接全部改为使用 `sanitizeAuthorLink()`\n- `mailto:` 链接不再生成 `<a>` 标签，仅显示作者纯文本名\n- 正常的 `https://` 等链接不受影响，照常渲染"
+    },
+    {
       "id": 23,
       "type": "feat",
       "title": "更新日志页面时间线可按类型筛选",

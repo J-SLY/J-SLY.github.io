@@ -50,8 +50,9 @@ function createPublicArticleCard(article) {
     card.className = 'article-card public-card fade-in';
     card.setAttribute('data-article-id', article.id);
 
-    var authorHtml = article.authorLink
-        ? '<a href="' + encodeURI(article.authorLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
+    var safeLink = sanitizeAuthorLink(article.authorLink);
+    var authorHtml = safeLink
+        ? '<a href="' + encodeURI(safeLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
         : escapeHtml(article.author);
 
     var imageHtml = article.image
@@ -103,8 +104,9 @@ function openPublicArticle(article) {
 }
 
 function showPublicArticleDetail(article) {
-    var authorHtml = article.authorLink
-        ? '<a href="' + encodeURI(article.authorLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
+    var safeLink = sanitizeAuthorLink(article.authorLink);
+    var authorHtml = safeLink
+        ? '<a href="' + encodeURI(safeLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
         : escapeHtml(article.author);
 
     var authorSectionHtml = [

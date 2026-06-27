@@ -39,8 +39,9 @@
   function renderPublicArticle(article) {
     document.title = article.title + ' - 公共投稿 - JSLY\'s Blog';
     var container = document.getElementById('article-content');
-    var authorHtml = article.authorLink
-      ? '<a href="' + encodeURI(article.authorLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
+    var safeLink = sanitizeAuthorLink(article.authorLink);
+    var authorHtml = safeLink
+      ? '<a href="' + encodeURI(safeLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
       : escapeHtml(article.author);
     var authorSection = [
       '<div class="article-author-info">',

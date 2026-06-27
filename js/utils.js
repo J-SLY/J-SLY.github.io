@@ -7,3 +7,8 @@ function escapeHtml(str) {
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
 }
+
+function sanitizeAuthorLink(link) {
+    if (link && link.startsWith('mailto:')) return null;
+    return link;
+}
