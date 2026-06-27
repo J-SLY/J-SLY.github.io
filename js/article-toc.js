@@ -11,7 +11,10 @@ function generateTOC(container, scrollRoot) {
     toc.className = 'article-toc';
     const tocTitle = document.createElement('div');
     tocTitle.className = 'article-toc-title';
-    tocTitle.innerHTML = '<i class="fas fa-list"></i> 目录';
+    const chevron = document.createElement('i');
+    chevron.className = 'fas fa-chevron-down toc-chevron';
+    tocTitle.innerHTML = '<i class="fas fa-list"></i> 目录 ';
+    tocTitle.appendChild(chevron);
     toc.appendChild(tocTitle);
 
     const tocList = document.createElement('ul');
@@ -48,6 +51,20 @@ function generateTOC(container, scrollRoot) {
     const tocSidebar = container.querySelector('.article-toc-sidebar');
     if (!tocSidebar) return;
     tocSidebar.appendChild(toc);
+
+    function updateTOCCollapse() {
+        const isMobile = window.innerWidth <= 992;
+        toc.classList.toggle('collapsed', isMobile);
+    }
+    updateTOCCollapse();
+    window.addEventListener('resize', updateTOCCollapse);
+
+    tocTitle.addEventListener('click', (e) => {
+        if (window.innerWidth <= 992) {
+            e.stopPropagation();
+            toc.classList.toggle('collapsed');
+        }
+    });
 
     if (!scrollRoot) scrollRoot = container;
     const observer = new IntersectionObserver((entries) => {
