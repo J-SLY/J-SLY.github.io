@@ -12,6 +12,8 @@
     --light-gray: #e9ecef;
     --border: #dee2e6;
     --transition: all 0.3s ease;
+    --scrollbar-thumb: #ccc;
+    --scrollbar-thumb-hover: #aaa;
 }
 
 * {
@@ -19,6 +21,30 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Global scrollbar styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 body {
@@ -40,6 +66,8 @@ body {
         --gray: #b0b0b0;
         --light-gray: #2a2a3e;
         --border: #3a3a4e;
+        --scrollbar-thumb: #444;
+        --scrollbar-thumb-hover: #666;
     }
 }
 
@@ -53,6 +81,8 @@ body {
     --gray: #b0b0b0;
     --light-gray: #2a2a3e;
     --border: #3a3a4e;
+    --scrollbar-thumb: #444;
+    --scrollbar-thumb-hover: #666;
 }
 
 a {

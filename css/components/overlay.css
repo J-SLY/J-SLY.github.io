@@ -337,23 +337,4 @@
     border-top-color: var(--border);
 }
 
-.modal-content::-webkit-scrollbar,
-.search-results::-webkit-scrollbar {
-    width: 6px;
-}
 
-.modal-content::-webkit-scrollbar-track,
-.search-results::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.modal-content::-webkit-scrollbar-thumb,
-.search-results::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 3px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover,
-.search-results::-webkit-scrollbar-thumb:hover {
-    background: var(--gray);
-}
