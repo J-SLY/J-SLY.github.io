@@ -4,7 +4,7 @@
 let articlesPublicData = [];
 
 function loadPublicArticles() {
-    fetch('/articles-public.json')
+    return fetch('/articles-public.json')
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
             return resp.json();
@@ -12,6 +12,9 @@ function loadPublicArticles() {
         .then(function (data) {
             articlesPublicData = data.articles;
             renderPublicArticles();
+            if (typeof initSearch === 'function') {
+                initSearch({ dataSource: articlesPublicData, onOpenArticle: openPublicArticle });
+            }
         })
         .catch(function (err) {
             console.error('加载投稿文章时出错:', err);

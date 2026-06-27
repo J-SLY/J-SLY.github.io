@@ -2,12 +2,11 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadArticlesFromJSON();
     initNavigation();
-    initSearch();
     initDarkMode();
     initSettings();
     initNavScroll();
+    loadArticlesFromJSON();
 
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');

@@ -4,7 +4,7 @@
 let articlesData = [];
 
 function loadArticlesFromJSON() {
-    fetch('articles.json')
+    return fetch('articles.json')
         .then(response => {
             if (!response.ok) throw new Error('网络响应不正常');
             return response.json();
@@ -13,6 +13,9 @@ function loadArticlesFromJSON() {
             articlesData = data.articles;
             renderAllArticles();
             openArticleFromHash();
+            if (typeof initSearch === 'function') {
+                initSearch({ dataSource: articlesData });
+            }
         })
         .catch(error => {
             console.error('加载文章数据时出错:', error);

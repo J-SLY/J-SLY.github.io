@@ -1,69 +1,78 @@
 /* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
-/* 更新日志页面专属样式 */
-
-.changelog-info {
-    background: var(--light-gray);
-    border-radius: 12px;
-    padding: 32px;
-    margin-bottom: 40px;
-    border: 1px solid var(--border);
-    border-left: 4px solid #0d9488;
+.changelog-container {
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-.changelog-info h3 {
-    margin-bottom: 12px;
-    font-size: 1.2rem;
-    color: #0d9488;
-}
-
-.changelog-info p {
-    color: var(--gray);
-    line-height: 1.8;
-}
-
-/* 更新日志卡片 */
-.changelog-card {
+.changelog-entry {
     position: relative;
+    padding: 24px 0 24px 32px;
+    border-left: 2px solid #0d9488;
 }
 
-.changelog-card .article-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0d9488, #14b8a6);
-    color: #fff;
-    font-size: 2rem;
+.changelog-entry::before {
+    content: '';
+    position: absolute;
+    left: -7px;
+    top: 30px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #0d9488;
+    border: 2px solid var(--bg);
 }
 
-.changelog-card .changelog-image-placeholder {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #0d9488, #14b8a6);
-    color: #fff;
-    font-size: 2.5rem;
-    min-height: 180px;
+.changelog-entry-header {
+    margin-bottom: 12px;
 }
 
-.changelog-tag {
-    background: rgba(13, 148, 136, 0.1) !important;
-    color: #0d9488 !important;
-    border: 1px solid rgba(13, 148, 136, 0.25) !important;
+.changelog-entry-date {
+    display: inline-block;
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin-bottom: 4px;
 }
 
-/* 更新日志文章详情 - 版本标记 */
-.changelog-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.82rem;
-    color: #0d9488;
-    margin-bottom: 8px;
+.changelog-entry-date i {
+    margin-right: 4px;
+}
+
+.changelog-entry-title {
+    font-size: 1.15rem;
     font-weight: 600;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.4;
 }
 
-.changelog-badge i {
-    font-size: 0.9rem;
+.changelog-entry-body {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--gray);
+}
+
+.changelog-entry-body p {
+    margin: 0 0 8px 0;
+}
+
+.changelog-entry-body ul {
+    margin: 4px 0;
+    padding-left: 20px;
+    list-style: none;
+}
+
+.changelog-entry-body ul li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 4px;
+}
+
+.changelog-entry-body ul li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: #0d9488;
+    font-weight: 600;
 }

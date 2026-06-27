@@ -3,9 +3,11 @@
 
 function findPinyinMatchRange(text, query) {
     if (window.pinyinPro && query.length >= 2 && /[\u4e00-\u9fff]/.test(text)) {
+        const plainQuery = query.replace(/\s+/g, '');
+        if (plainQuery.length < 2) return null;
         const pinyinArr = pinyinPro.pinyin(text, { type: 'array', toneType: 'none' });
         const pinyinStr = pinyinArr.join('').toLowerCase();
-        const pIdx = pinyinStr.indexOf(query);
+        const pIdx = pinyinStr.indexOf(plainQuery);
         if (pIdx !== -1) {
             let pos = 0;
             let startChar = -1;
@@ -15,7 +17,7 @@ function findPinyinMatchRange(text, query) {
                 if (startChar === -1 && pIdx < end) {
                     startChar = i;
                 }
-                if (startChar !== -1 && pIdx + query.length <= end) {
+                if (startChar !== -1 && pIdx + plainQuery.length <= end) {
                     endChar = i + 1;
                     break;
                 }
@@ -118,7 +120,8 @@ function initSearch(options) {
                     (a.tags && a.tags.some(function(t) { return t.toLowerCase().includes(q) || matchPinyin(t, q); })) ||
                     a.excerpt.toLowerCase().includes(q) ||
                     matchPinyin(a.excerpt, q) ||
-                    a.content.join('\n').toLowerCase().includes(q);
+                    a.content.join('\n').toLowerCase().includes(q) ||
+                    matchPinyin(a.content.join('\n'), q);
             });
 
             if (matches.length === 0) {

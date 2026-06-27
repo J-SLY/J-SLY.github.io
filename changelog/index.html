@@ -16,13 +16,10 @@
     <title>更新日志 - JSLY's Blog</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components/cards.css">
     <link rel="stylesheet" href="../css/components/overlay.css">
-    <link rel="stylesheet" href="../css/components/article.css">
     <link rel="stylesheet" href="../css/components/changelog.css">
     <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7tFQq/ERx5T3nN3E3N5hBi/+wF9Rv0FEeBBfHUg==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" integrity="sha512-7KFiSCD0N6ONc7J5SdK03e6R5GEUiDl8WXK49oUXuUSikVqIiG5JfFPFex0+wavypgfSJpFTfWDSUN7/hBCpGA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="../feed.xml">
 </head>
 <body>
@@ -55,23 +52,7 @@
                                 <span>锁定导航栏</span>
                                 <input type="checkbox" id="nav-lock-toggle">
                             </label>
-                            <div class="settings-subtitle">阅读模式</div>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="modal" checked>
-                                <span>弹窗模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="page">
-                                <span>新页面模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="legacy">
-                                <span>兼容模式 (article.html?id=)</span>
-                            </label>
                         </div>
-                    </div>
-                    <div class="search-icon" aria-label="搜索" role="button">
-                        <i class="fas fa-search"></i>
                     </div>
                     <div class="menu-toggle" aria-label="菜单" role="button" aria-expanded="false" aria-controls="nav-links-menu">
                         <i class="fas fa-bars"></i>
@@ -94,14 +75,7 @@
         <div class="blog-content">
             <section class="articles-section">
                 <h2 class="section-title">变更历史</h2>
-
-                <div class="changelog-info">
-                    <h3><i class="fas fa-clipboard-list"></i> 关于更新日志</h3>
-                    <p>此页面记录了 JSLY's Blog 的功能更新、优化和修复。每次变更都会记录在这里，方便你了解博客的最新动态。</p>
-                </div>
-
-                <div id="changelog-articles-container" class="articles-grid">
-                </div>
+                <div id="changelog-container" class="changelog-container"></div>
             </section>
         </div>
     </main>
@@ -145,7 +119,7 @@
                     <h3>联系我</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-envelope"></i> <a href="mailto:2029872426@qq.com">2029872426@qq.com</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:jsly@jsly.asia">jsly@jsly.asia</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:support@blog.jsly.asia">support@blog.jsly.asia</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> 中国，安徽，六安</li>
                     </ul>
                 </div>
@@ -158,27 +132,156 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-ZRUaaEt3D7N7zuGDG6+81ONIaoiNG2A31U9l3G5oPkRKNXBYJScEl8FNt8P8s5FB+EO2rN2+js2eWTjxutNF1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-cS4CASNnAFW4RGQEWb3mRs9XKvafCzXAiEejoQYm/V3b7OB0ePGUSFGqqbR/jVjF1C7yH0kGA7nlhN+jH3Fr4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js" integrity="sha256-MoQb5wQ2GUFV6rWs6Mh6y8nxzZSL4C++v1ldzN5KTwU=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/display-mode.js"></script>
-    <script src="../js/article-content.js"></script>
-    <script src="../js/article-toc.js"></script>
-    <script src="../js/article-comments.js"></script>
-    <script src="../js/article-share.js"></script>
-    <script src="../js/article-og.js"></script>
-    <script src="../js/article-modal-shared.js"></script>
-    <script src="../js/article-modal.js"></script>
-    <script src="../js/articles-changelog.js"></script>
-    <script src="../js/search.js"></script>
     <script src="../js/dark-mode.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/navigation.js"></script>
     <script src="../js/nav-scroll.js"></script>
 
     <script>
+    var changelogData = [
+        {
+            "id": 17,
+            "title": "网站初始化",
+            "date": "2026-05-24",
+            "content": "JSLY's Blog 正式上线！\n\n- 配置自定义域名 www.jsly.asia（CNAME 记录）\n- 基于 GitHub Pages 部署\n- 纯静态 HTML/CSS/JS，无构建工具"
+        },
+        {
+            "id": 16,
+            "title": "文章系统与设计主题上线",
+            "date": "2026-06-21",
+            "content": "- 文章内容支持 Markdown 渲染（基于 marked.js）\n- 移除分类，改用标签 (tag) 模式，文章平铺展示\n- 整体主题改为淡绿色小清新风格\n- Hero 区域取消渐变，使用纯色背景\n- 移除右侧栏，内容改为全宽布局\n- 关于我改为展示 Profile Card SVG\n- 博客标题改为「JSLY Blog」\n- 新增 OpenCode 使用指南文章"
+        },
+        {
+            "id": 15,
+            "title": "搜索功能上线",
+            "date": "2026-06-21",
+            "content": "- 右上角搜索图标，点击弹出搜索面板\n- 支持标题、标签、文章摘要和全文内容匹配\n- 实时搜索，输入即反馈\n- 修复页面加载报错、空图片、导航高亮等 Bug\n- 添加中文回退字体和 SEO 标签"
+        },
+        {
+            "id": 14,
+            "title": "AGPL-3.0 开源协议与版权声明",
+            "date": "2026-06-21",
+            "content": "- 仓库添加 AGPL-3.0 开源协议\n- 所有源文件（HTML/CSS/JS）添加 SPDX 版权头\n- 页脚添加源代码链接，符合 AGPL-3.0 要求"
+        },
+        {
+            "id": 13,
+            "title": "社交链接全面接入",
+            "date": "2026-06-21",
+            "content": "页脚社交链接区域接入各平台：QQ、GitHub、Luogu、Luogu.me、AtCoder、Qzone。\n\n- 社交图标改用独立 SVG 文件\n- logo 改为纯图形 SVG 文字"
+        },
+        {
+            "id": 12,
+            "title": "内容系统与架构重构",
+            "date": "2026-06-21",
+            "content": "- articles.json 的 content 字段改为字符串数组\n- CSS 按功能拆分为 base.css、layout.css、components/ 目录\n- 新增 pinned 字段，支持文章置顶\n- 新增 showImage 字段，每篇文章可单独控制是否显示图片"
+        },
+        {
+            "id": 11,
+            "title": "文章分享、OG 标签与锚点深度链接",
+            "date": "2026-06-21",
+            "content": "- 文章详情新增分享按钮，支持复制链接\n- 动态更新 Open Graph 标签\n- 支持 #article-{id} Hash 锚点深度链接\n- 页脚新增 support@blog.jsly.asia 联系邮箱"
+        },
+        {
+            "id": 10,
+            "title": "语法高亮、RSS、深色模式、搜索增强、目录导航",
+            "date": "2026-06-21",
+            "content": "- 集成 highlight.js 11.9.0 代码高亮\n- 新增 feed.xml RSS 订阅\n- 新增暗色模式切换\n- 支持拼音搜索（基于 pinyin-pro 3.26.0）\n- 搜索结果高亮匹配关键词\n- 中文搜索要求最少 2 个字符\n- 文章生成自动目录导航 (TOC)\n- 文章阅读进度条\n- 修复 Escape 键监听泄漏、弹窗崩溃等 5 个问题"
+        },
+        {
+            "id": 9,
+            "title": "Giscus 评论系统集成",
+            "date": "2026-06-21",
+            "content": "- 集成 Giscus 评论系统，基于 GitHub Discussions\n- 使用动态 script 注入代替静态嵌入\n- Giscus 主题跟随手动暗色模式切换\n- 代码字体统一为 Fira Code\n- 移除了标签筛选功能"
+        },
+        {
+            "id": 8,
+            "title": "阅读进度条移入弹窗、暗色模式完善",
+            "date": "2026-06-21",
+            "content": "- 阅读进度条从页面顶部移至文章弹窗内\n- 修复暗色模式代码高亮双重 padding、弹窗 overflow、CSS 动画冲突\n- Hero 区域背景色适配暗色模式\n- 关于我 Profile Card 附加 theme=dark 参数\n- Giscus 评论区跟随手动暗色模式切换\n- 自定义暗色模式滚动条样式\n- 页脚响应式适配，添加 480px 断点"
+        },
+        {
+            "id": 7,
+            "title": "JS/CSS 模块化拆分与架构重构",
+            "date": "2026-06-26",
+            "content": "- JS 按功能拆分为 14 个独立文件\n- CSS 按布局拆分为 base.css、layout.css、cards.css、overlay.css、article.css、responsive.css\n- 阅读设置分组为「导航栏」和「阅读模式」两个子区域\n- 新增「锁定导航栏」开关\n- 移除点赞功能"
+        },
+        {
+            "id": 6,
+            "title": "独立文章路由与 404 页面",
+            "date": "2026-06-26",
+            "content": "- 基于 404.html 实现单页路由，支持 /article/{id} 干净 URL\n- 新增 js/article-router.js 独立路由模块\n- 统一 404 页面样式，包含返回首页、浏览文章等建议\n- 文章页和 404 页恢复顶部导航栏\n- 404 页使用 Flexbox sticky footer\n- 文章页「返回文章列表」按钮样式优化"
+        },
+        {
+            "id": 5,
+            "title": "JSLY's Public Blog 社区投稿系统上线",
+            "date": "2026-06-26",
+            "content": "博客正式上线「公共投稿」社区栏目。\n\n- 新增 /public/ 独立子页面，展示社区投稿文章\n- 独立数据源 articles-public.json，包含 author / authorLink 字段\n- 新增 js/articles-public.js，支持投稿卡片渲染（含作者徽章）\n- 新增 css/components/public.css，靛蓝色独立主题\n- 文章详情页展示投稿作者信息栏\n- 搜索功能支持公共文章数据源\n- article-router.js 支持 /public/article/{id} 独立页面和 article.html?id=pub-{id} 兼容路由\n- 用户通过 GitHub Issue 模板提交，审核后合并至 articles-public.json"
+        },
+        {
+            "id": 4,
+            "title": "阅读设置新增兼容模式、移动端 TOC 优化",
+            "date": "2026-06-27",
+            "content": "- 阅读设置新增「兼容模式 (article.html?id=)」\n- 移动端文章 TOC 可折叠收起\n- 修复弹窗关闭按钮与内容重叠的问题\n- Hero 区域新增「我要投稿」按钮，链接到 /public/\n- 新增 2029872426@qq.com 为首选投稿邮箱"
+        },
+        {
+            "id": 3,
+            "title": "Bug 修复：兼容模式、Giscus 暗色主题等",
+            "date": "2026-06-27",
+            "content": "- 修复公共文章在兼容模式 (article.html?id=pub-) 下跳错主站的问题\n- 修复 Giscus 评论区在手动切换暗色模式时主题不同步\n- 修复 navigation.js 错误拦截非锚点链接\n- 相对路径 /public/ -> public/，本地测试可正常跳转"
+        },
+        {
+            "id": 2,
+            "title": "模态框共享化、搜索参数化、安全与可访问性改进",
+            "date": "2026-06-27",
+            "content": "模态框提取为共享模块，搜索支持自定义数据源，统一 XSS 防御。\n\n- 模态框逻辑提取为 article-modal-shared.js + article-modal.js，子页面可复用\n- initSearch() 支持 dataSource / onOpenArticle 参数\n- 所有输出统一使用 escapeHtml() 转义，防止 XSS 注入\n- 搜索弹窗添加 role=\"dialog\" 和 aria-modal 属性\n- 所有 CDN 资源添加 SRI 完整性校验和 crossorigin 属性\n- OG 标签提取 updateOGTags() / restoreOGTags() 为独立模块\n- CSS 分离 cards.css、overlay.css、article.css 等独立样式文件"
+        },
+        {
+            "id": 1,
+            "title": "新增更新日志子页面",
+            "date": "2026-06-27",
+            "content": "新增 changelog/ 子页面，用于记录博客功能更新与变更历史。\n\n- 新增 changelog/ 子页面，独立展示更新日志条目\n- 导航栏新增「更新日志」链接\n- 新增 articles-changelog.json 数据文件、js/articles-changelog.js 渲染逻辑\n- 新增 css/components/changelog.css 独立样式"
+        }
+    ];
+
+    function escapeHtml(str) {
+        if (typeof str !== 'string') return '';
+        var div = document.createElement('div');
+        div.appendChild(document.createTextNode(str));
+        return div.innerHTML;
+    }
+
+    function renderChangelog() {
+        var container = document.getElementById('changelog-container');
+        if (!container) return;
+
+        var sorted = changelogData.slice().sort(function (a, b) {
+            return new Date(b.date) - new Date(a.date);
+        });
+
+        container.innerHTML = '';
+        sorted.forEach(function (entry) {
+            var el = document.createElement('div');
+            el.className = 'changelog-entry';
+
+            var contentHtml = typeof marked !== 'undefined' && marked.parse
+                ? marked.parse(entry.content)
+                : '<pre>' + escapeHtml(entry.content) + '</pre>';
+
+            el.innerHTML = [
+                '<div class="changelog-entry-header">',
+                '  <span class="changelog-entry-date"><i class="far fa-calendar"></i> ' + entry.date + '</span>',
+                '  <h3 class="changelog-entry-title">' + escapeHtml(entry.title) + '</h3>',
+                '</div>',
+                '<div class="changelog-entry-body">' + contentHtml + '</div>'
+            ].join('\n');
+
+            container.appendChild(el);
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
-        loadChangelogArticles();
-        initSearch({ dataSource: articlesChangelogData, onOpenArticle: openChangelogArticle });
+        renderChangelog();
         initDarkMode();
         initSettings();
         initNavScroll();
