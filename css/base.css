@@ -89,6 +89,25 @@ ul {
     box-shadow: 0 10px 20px rgba(102, 187, 106, 0.3);
 }
 
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-secondary:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 10px 20px rgba(102, 187, 106, 0.3);
+}
+
 .section {
     padding: 80px 0;
 }
