@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 26,
+      "type": "feat",
+      "title": "贡献榜 PR/Issues 榜接入 GitHub API",
+      "date": "2026-06-27",
+      "content": "贡献榜（`/leaderboard/`）的 PR 榜和 Issues 榜改为从 GitHub API 实时获取数据：\n\n- **PR 榜** — 通过 `type:pr` 搜索仓库 PR，按创建者聚合统计，替代之前的硬编码数据\n- **Issues 榜** — 通过 `type:issue` 搜索仓库 Issue，排除 `public-submission` 和 `stats:exclude` 标签的条目\n- **排除机制** — 给 Issue 打上 `stats:exclude` 标签即可将其排除出统计\n- **投稿不计入** — 投稿模板自带 `public-submission` 标签，自动排除\n- 配置集中管理（`LEADERBOARD_CONFIG`），支持自定义排除标签列表"
+    },
+    {
       "id": 25,
       "type": "fix",
       "title": "不再暴露投稿者邮箱地址",

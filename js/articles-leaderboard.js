@@ -3,16 +3,66 @@
 
 var currentBoard = 'pr';
 
-var defaultPrData = [
-    {
-        rank: 1,
-        username: 'J-SLY',
-        count: 135,
-        description: '项目维护者，核心功能开发与代码审查',
-        link: 'https://github.com/J-SLY'
+var LEADERBOARD_CONFIG = {
+    owner: 'J-SLY',
+    repo: 'J-SLY.github.io',
+    excludeLabels: ['public-submission', 'stats:exclude']
+};
+
+function fetchPaginated(url, extractItems) {
+    var allItems = [];
+    function fetchPage(pageUrl) {
+        return fetch(pageUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
+            .then(function (resp) {
+                if (!resp.ok) throw new Error('GitHub API 请求失败: ' + resp.status);
+                return resp.json().then(function (data) {
+                    var items = extractItems(data);
+                    allItems = allItems.concat(items);
+                    var link = resp.headers.get('Link');
+                    if (link) {
+                        var m = link.match(/<([^>]+)>;\s*rel="next"/);
+                        if (m) return fetchPage(m[1]);
+                    }
+                    return allItems;
+                });
+            });
     }
-];
-var defaultIssuesData = [];
+    return fetchPage(url);
+}
+
+function fetchLeaderboardData(type) {
+    var q = 'repo:' + LEADERBOARD_CONFIG.owner + '/' + LEADERBOARD_CONFIG.repo + '+type:' + type;
+    if (LEADERBOARD_CONFIG.excludeLabels) {
+        LEADERBOARD_CONFIG.excludeLabels.forEach(function (label) {
+            q += '+-label:' + encodeURIComponent(label);
+        });
+    }
+    var url = 'https://api.github.com/search/issues?q=' + q + '&per_page=100';
+    return fetchPaginated(url, function (data) { return data.items; }).then(function (items) {
+        var counts = {}, userInfo = {};
+        items.forEach(function (item) {
+            var user = item.user;
+            if (!user || !user.login) return;
+            var login = user.login;
+            if (!counts[login]) {
+                counts[login] = 0;
+                userInfo[login] = { username: login, profileUrl: user.html_url };
+            }
+            counts[login]++;
+        });
+        var entries = Object.keys(counts).map(function (login) {
+            var info = userInfo[login];
+            var label = type === 'pr' ? ' PR' : ' Issue';
+            return { username: info.username, count: counts[login], description: '共 ' + counts[login] + ' 个' + label, link: info.profileUrl };
+        });
+        entries.sort(function (a, b) {
+            if (b.count !== a.count) return b.count - a.count;
+            return (a.username || '').localeCompare(b.username || '');
+        });
+        entries.forEach(function (e, i) { e.rank = i + 1; });
+        return entries;
+    });
+}
 
 var leaderboardCache = {
     pr: null,
@@ -95,17 +145,28 @@ function buildSubmissionsFromArticles(articles) {
 }
 
 function loadLeaderboard() {
-    fetch('/articles-public.json')
-        .then(function (resp) {
-            if (!resp.ok) throw new Error('网络响应不正常');
-            return resp.json();
-        })
-        .then(function (data) {
+    var articlesPromise = fetch('/articles-public.json').then(function (resp) {
+        if (!resp.ok) throw new Error('网络响应不正常');
+        return resp.json();
+    });
+    var issuesPromise = fetchLeaderboardData('issue').catch(function (err) {
+        console.error('加载 Issues 数据时出错:', err);
+        return [];
+    });
+    var prPromise = fetchLeaderboardData('pr').catch(function (err) {
+        console.error('加载 PR 数据时出错:', err);
+        return [];
+    });
+
+    Promise.all([articlesPromise, issuesPromise, prPromise])
+        .then(function (results) {
+            var data = results[0];
+            var issuesData = results[1];
+            var prData = results[2];
             var articles = data.articles || [];
             leaderboardCache.submissions = buildSubmissionsFromArticles(articles);
-
-            leaderboardCache.pr = defaultPrData;
-            leaderboardCache.issues = defaultIssuesData;
+            leaderboardCache.pr = prData;
+            leaderboardCache.issues = issuesData;
 
             updateStats();
             renderFilters();
