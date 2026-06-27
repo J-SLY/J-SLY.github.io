@@ -51,6 +51,12 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - Fix: copy the computed SHA value from the error message into the `integrity` attribute
 - Affected CDNs: `cdnjs.cloudflare.com` (marked, highlight.js, Font Awesome), `cdn.jsdelivr.net` (pinyin-pro)
 
+## Changelog
+
+- Every meaningful change must be recorded in `articles-changelog.json` before pushing
+- Add a new entry with incrementing `id`, today's `date`, descriptive `title`, and markdown `content` listing what changed
+- The changelog is rendered at `/changelog/` via `js/articles-changelog.js`
+
 ## Deployment
 
 - **小修复**（typo、样式微调等）：可直接推送 `main` 分支触发自动部署。
