@@ -14,10 +14,12 @@ function initSettings() {
 
     settingsToggle.addEventListener('click', function() {
         settingsDropdown.classList.add('show');
+        document.body.style.overflow = 'hidden';
     });
 
     const closeSettings = function() {
         settingsDropdown.classList.remove('show');
+        document.body.style.overflow = '';
     };
 
     if (settingsClose) {
@@ -47,4 +49,14 @@ function initSettings() {
             setNavLock(this.checked);
         });
     }
+
+    var defaultPage = localStorage.getItem('default_page') || 'main';
+    var defaultPageRadio = settingsDropdown.querySelector('input[name="default-page"][value="' + defaultPage + '"]');
+    if (defaultPageRadio) defaultPageRadio.checked = true;
+
+    settingsDropdown.querySelectorAll('input[name="default-page"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            if (this.checked) localStorage.setItem('default_page', this.value);
+        });
+    });
 }

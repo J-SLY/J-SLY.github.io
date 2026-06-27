@@ -12,6 +12,12 @@ function setArticleDisplayMode(mode) {
     document.cookie = DISPLAY_MODE_COOKIE + '=' + mode + ';path=/;max-age=31536000';
 }
 
+var defaultPage = localStorage.getItem('default_page');
+var path = (window.location.pathname.replace(/\/+$/, '') || '/').toLowerCase();
+if (defaultPage === 'public' && (path === '/' || path === '/index.html') && !window.location.hash) {
+    window.location.replace('/public/');
+}
+
 function openArticle(article) {
     var mode = getArticleDisplayMode();
     if (mode === 'page') {
