@@ -64,3 +64,4 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - **小修复**（typo、样式微调等）：可直接推送 `main` 分支触发自动部署。
 - **文章**（新增/修改）：文章不计入 changelog，可直接推送。
 - **大功能**（重构等）：在本地改完，我说「推」再推，不要擅自推送。
+- **推送前**：更新 `change/index.html:71-72` 中的提交次数和推送次数（运行 `git rev-list --count HEAD` 和 `git rev-list --count --no-merges origin/main..HEAD` 等命令获取最新数字）。
