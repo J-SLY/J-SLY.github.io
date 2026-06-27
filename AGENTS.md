@@ -38,8 +38,18 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 ## Search
 
 - Client-side, supports pinyin matching via `pinyin-pro`
-- Matches: title, tags, excerpt, full content
+- Matches: title, tags, excerpt, full content (all four also support pinyin matching)
 - Pinyin matching requires query length >= 2 (`search.js:49`)
+- `initSearch(options)` is called from within the fetch `.then()` callback in `articles.js`/`articles-public.js`, AFTER data is assigned — never chain `.then()` from outside
+- `findPinyinMatchRange()` strips spaces from query (`query.replace(/\s+/g, '')`) before comparing against the concatenated pinyin string
+- Both title/excerpt and content use `matchPinyin()` for pinyin matching
+
+## CDN SRI Hashes
+
+- All CDN scripts use SRI `integrity` attributes for security
+- If CDN content changes, hashes become stale — browser console shows computed hash in error message
+- Fix: copy the computed SHA value from the error message into the `integrity` attribute
+- Affected CDNs: `cdnjs.cloudflare.com` (marked, highlight.js, Font Awesome), `cdn.jsdelivr.net` (pinyin-pro)
 
 ## Deployment
 
