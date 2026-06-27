@@ -6,23 +6,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initDarkMode();
     initSettings();
     initNavScroll();
+    initMobileMenu();
     loadArticlesFromJSON();
-
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (window.innerWidth <= 992) {
-        navLinks.style.display = 'none';
-    }
-
-    menuToggle.addEventListener('click', function() {
-        navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    window.addEventListener('resize', function() {
-        navLinks.style.display = window.innerWidth > 992 ? 'flex' : 'none';
-    });
-
     window.addEventListener('scroll', updateNavOnScroll);
 });
 

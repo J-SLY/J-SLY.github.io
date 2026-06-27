@@ -133,6 +133,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/display-mode.js"></script>
+    <script src="../js/utils.js"></script>
     <script src="../js/dark-mode.js"></script>
     <script src="../js/settings.js"></script>
     <script src="../js/navigation.js"></script>
@@ -145,16 +146,7 @@
         initDarkMode();
         initSettings();
         initNavScroll();
-
-        var menuToggle = document.querySelector('.menu-toggle');
-        var navLinks = document.querySelector('.nav-links');
-        if (window.innerWidth <= 992) navLinks.style.display = 'none';
-        menuToggle.addEventListener('click', function() {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-        });
-        window.addEventListener('resize', function() {
-            navLinks.style.display = window.innerWidth > 992 ? 'flex' : 'none';
-        });
+        initMobileMenu();
     });
     </script>
 </body>

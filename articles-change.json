@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 21,
+      "type": "chore",
+      "title": "项目文件整理：SRI 哈希统一、JS 去重、汉堡菜单提取",
+      "date": "2026-06-27",
+      "content": "全面整理项目文件结构，消除多处冗余和不一致：\n\n**SRI 哈希同步**\n- 统一 `index.html`、`article.html`、`404.html`、`public/index.html` 中 markdown、highlight.js、pinyin-pro 的 integrity 值，确保 CDN 脚本在所有页面正常加载\n\n**共享工具函数提取**\n- 新增 `js/utils.js`，定义全局 `escapeHtml()`，消除 `article-content.js` 和 `articles-change.js` 中的重复定义\n- 所有页面加载 `utils.js`（位于 `display-mode.js` 之后）\n- `articles-change.js` 中的 `escapeHtml` 使用更完备的类型检查（`typeof str !== 'string'`）\n\n**汉堡菜单统一**\n- 新增 `initMobileMenu()` 到 `navigation.js`，封装移动端菜单切换逻辑\n- 从 `main.js`、`public/index.html`、`change/index.html` 中移除重复的内联汉堡菜单代码\n- 所有页面统一调用 `initMobileMenu()`\n\n**清理孤立文件**\n- 移除未使用的 `images/logo.svg`"
+    },
+    {
       "id": 20,
       "type": "fix",
       "title": "全局滚动条样式统一",
