@@ -2,7 +2,7 @@
   "articles": [
     {
       "id": 20,
-      "type": "chore",
+      "type": "fix",
       "title": "全局滚动条样式统一",
       "date": "2026-06-27",
       "content": "将全站滚动条样式统一为细圆角风格，与网站主题色协调：\n\n- `base.css` 新增全局 `::-webkit-scrollbar` 样式（6px 宽/高、圆角 thumb）\n- 新增 `--scrollbar-thumb` / `--scrollbar-thumb-hover` CSS 变量，随亮/暗模式自动切换\n- 新增 Firefox 兼容写法（`scrollbar-width: thin` + `scrollbar-color`）\n- 移除 `overlay.css` 中重复的 `.modal-content` / `.search-results` 滚动条样式\n- 文章目录（TOC）侧边栏等所有可滚动区域自动统一风格"
