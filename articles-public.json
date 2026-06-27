@@ -1,6 +1,27 @@
 {
   "articles": [
     {
+      "id": 2,
+      "title": "欢迎使用洛谷保存站网盘",
+      "showImage": false,
+      "author": "Tony Tim",
+      "authorLink": "mailto:hongshi_hk@icloud.com",
+      "date": "2026-06-27",
+      "tags": ["工具", "网盘"],
+      "excerpt": "洛谷保存站网盘上线，登陆即送256MB超大空间，支持各种文件类型上传和WebDAV挂载，更有CPOauth快速登录。",
+      "content": [
+        "欢迎使用洛谷保存站网盘，登陆即送256MB超大空间。",
+        "",
+        "网盘支持上传各种文件类型，支持挂载WebDAV服务。",
+        "",
+        "不再需要繁琐的登陆步骤！你可以使用CPOauth进行快速登录！",
+        "",
+        "请访问 [s.luogu.me](https://s.luogu.me) 来体验我们的服务。"
+      ],
+      "readTime": "约 1 分钟",
+      "views": 0
+    },
+    {
       "id": 1,
       "title": "如何向 JSLY's Public Blog 投稿",
       "showImage": false,

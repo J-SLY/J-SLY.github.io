@@ -109,6 +109,35 @@
     background: #718096;
 }
 
+.change-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.change-filter-btn {
+    padding: 6px 18px;
+    border: 1px solid var(--border, #ddd);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.change-filter-btn:hover {
+    border-color: #0d9488;
+    color: #0d9488;
+}
+
+.change-filter-btn.active {
+    background: #0d9488;
+    color: #fff;
+    border-color: #0d9488;
+}
+
 .repo-stats {
     display: flex;
     gap: 20px;
