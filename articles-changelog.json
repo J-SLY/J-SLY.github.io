@@ -7,7 +7,6 @@
       "content": "修复搜索功能的多个问题：\n\n- **数据加载时序**：`initSearch()` 在 fetch 完成前被调用，`dataSource` 捕获空数组。修复方式：将 `initSearch()` 调用移至 fetch `.then()` 回调内，在 `articlesData = data.articles` 同一级执行。\n- **拼音空格匹配**：用户输入 `\"ru men\"`（带空格），但 pinyin-pro 输出的拼音串无空格（`\"rumen\"`），导致 `indexOf` 查找失败。修复方式：在 `findPinyinMatchRange()` 内对 query 先 `replace(/\\s+/g, '')` 去空格后再对比。\n- **Content 拼音搜索缺失**：filter 只对 article.title 和 article.excerpt 做了 pinyin 匹配，但 article.content 仅有直接文本匹配（`includes(q)`），中文内容无法通过拼音匹配。修复方式：filter 加上 `matchPinyin(a.content.join('\\n'), q)`。\n- **所有 CDN 脚本加载失败**：`marked`、`highlight.js`、`pinyin-pro` 的 SRI integrity 哈希值与 CDN 实际文件不匹配（CDN 文件内容更新但哈希未同步），浏览器拒绝执行脚本，导致 `pinyinPro` 为 undefined。修复方式：用浏览器控制台报错中的 computed SHA 值更新 integrity 属性。\n- 同步修复 `404.html`、`article.html`、`changelog/index.html` 中相同 CDN 脚本的 SRI 哈希。"
     },
     {
-    {
       "id": 1,
       "title": "新增更新日志子页面",
       "date": "2026-06-27",
