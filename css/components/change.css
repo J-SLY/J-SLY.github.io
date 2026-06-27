@@ -108,3 +108,19 @@
     color: #fff;
     background: #718096;
 }
+
+.repo-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.repo-stats span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}

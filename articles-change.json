@@ -1,13 +1,6 @@
 {
   "articles": [
     {
-      "id": 22,
-      "type": "chore",
-      "title": "仓库累计推送统计",
-      "date": "2026-06-27",
-      "content": "截至本次推送，本仓库累计数据：\n\n- **总提交数**：127 次\n- **累计推送**：124 次\n- **起止时间**：2026-05-24 至今\n\n数据来源：`git rev-list --count HEAD` 与 `git reflog`。"
-    },
-    {
       "id": 21,
       "type": "chore",
       "title": "项目文件整理：SRI 哈希统一、JS 去重、汉堡菜单提取",
