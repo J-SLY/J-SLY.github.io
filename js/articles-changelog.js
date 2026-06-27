@@ -49,7 +49,7 @@ function createChangelogEntry(entry) {
     var el = document.createElement('div');
     el.className = 'changelog-entry fade-in';
 
-    var contentHtml = marked.parse
+    var contentHtml = typeof marked !== 'undefined' && marked.parse
         ? marked.parse(entry.content)
         : '<pre>' + escapeHtml(entry.content) + '</pre>';
 
