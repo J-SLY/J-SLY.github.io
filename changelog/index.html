@@ -131,7 +131,7 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-ZRUaaEt3D7N7zuGDG6+81ONIaoiNG2A31U9l3G5oPkRKNXBYJScEl8FNt8P8s5FB+EO2rN2+js2eWTjxutNF1Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/display-mode.js"></script>
     <script src="../js/dark-mode.js"></script>
     <script src="../js/settings.js"></script>
@@ -140,6 +140,12 @@
 
     <script>
     var changelogData = [
+        {
+            "id": 18,
+            "title": "Bug 修复：搜索功能全面修复（数据时序/拼音空格/Content 拼音/CDN SRI 哈希）",
+            "date": "2026-06-27",
+            "content": "修复搜索功能的多个问题：\n\n- **数据加载时序**：修复 initSearch() 在 fetch 完成前被调用导致 dataSource 捕获空数组的问题\n- **拼音空格匹配**：修复用户输入带空格的拼音（如 \"ru men\"）匹配不到的问题\n- **Content 拼音搜索缺失**：filter 只对 title/excerpt 做拼音匹配，content 仅直接文本匹配，导致中文内容无法通过拼音搜索到\n- **CDN SRI 哈希过期**：marked、highlight.js、pinyin-pro 的 integrity 值与实际 CDN 文件不匹配，浏览器拒绝执行脚本\n- 同步修复 404.html、article.html、changelog/index.html 中相同 CDN 脚本的 SRI 哈希"
+        },
         {
             "id": 17,
             "title": "网站初始化",
