@@ -7,7 +7,7 @@
     <link>https://www.jsly.asia</link>
     <description>JSLY's Blog - 分享技术、编程与生活的个人博客</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sun, 21 Jun 2026 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0800</lastBuildDate>
     <atom:link href="https://www.jsly.asia/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>OpenCode 使用指南</title>
@@ -21,6 +21,18 @@
       <category>OpenCode</category>
       <category>AI</category>
       <category>工具</category>
+    </item>
+    <item>
+      <title>JSLY Blog 使用指南</title>
+      <link>https://www.jsly.asia/article/2</link>
+      <guid isPermaLink="true">https://www.jsly.asia/article/2</guid>
+      <pubDate>Sun, 21 Jun 2026 00:00:00 +0800</pubDate>
+      <description><![CDATA[欢迎来到 JSLY's Blog！本文详细介绍本站的各个功能模块和使用技巧，帮助你快速上手并充分体验博客的全部特性。]]></description>
+      <content:encoded><![CDATA[
+        <p>欢迎来到 JSLY's Blog！本文详细介绍本站的各个功能模块和使用技巧，帮助你快速上手并充分体验博客的全部特性。</p>
+      ]]></content:encoded>
+      <category>指南</category>
+      <category>教程</category>
     </item>
   </channel>
 </rss>

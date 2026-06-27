@@ -88,5 +88,7 @@ function openArticleFromHash() {
 }
 
 window.addEventListener('hashchange', function() {
-    openArticleFromHash();
+    if (typeof articlesData !== 'undefined' && articlesData.length > 0) {
+        openArticleFromHash();
+    }
 });

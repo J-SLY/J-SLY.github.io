@@ -94,7 +94,7 @@ function openPublicArticle(article) {
     if (mode === 'page') {
         window.open('/public/article/' + article.id, '_blank');
     } else if (mode === 'legacy') {
-        window.open('/article.html?id=' + article.id, '_blank');
+        window.open('/article.html?id=pub-' + article.id, '_blank');
     } else {
         showPublicArticleDetail(article);
     }

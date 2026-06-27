@@ -112,7 +112,27 @@
     var qs = window.location.search || '';
     if (qs.indexOf('id=') !== -1 && pathname.indexOf('article.html') !== -1) {
       var params = new URLSearchParams(qs);
-      var id2 = parseInt(params.get('id'), 10);
+      var rawId = params.get('id');
+
+      // pub- prefix → public article; otherwise → main blog article
+      if (rawId && rawId.indexOf('pub-') === 0) {
+        var pubId = parseInt(rawId.substring(4), 10);
+        if (pubId) {
+          fetch('/articles-public.json')
+            .then(function (resp) { if (!resp.ok) throw new Error('网络响应不正常'); return resp.json(); })
+            .then(function (data) {
+              var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
+              if (!article) { showNotFound(); return; }
+              renderPublicArticle(article);
+            })
+            .catch(function (err) { console.error('加载投稿文章时出错:', err); showNotFound(); });
+        } else {
+          showNotFound();
+        }
+        return true;
+      }
+
+      var id2 = parseInt(rawId, 10);
       if (id2) {
         fetch('/articles.json')
           .then(function (resp) { if (!resp.ok) throw new Error('网络响应不正常'); return resp.json(); })
@@ -121,7 +141,7 @@
             if (!article) { showNotFound(); return; }
             renderArticle(article);
           })
-          .catch(function (err) { console.error(err); showNotFound(); });
+          .catch(function (err) { console.error('加载文章数据时出错:', err); showNotFound(); });
         return true;
       }
     }

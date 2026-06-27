@@ -33,9 +33,12 @@ function initDarkMode() {
 
     function updateGiscusTheme(isDark) {
         const theme = isDark ? 'dark' : 'light';
-        const giscusIframe = document.querySelector('giscus-widget iframe');
-        if (giscusIframe) {
-            giscusIframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+        const giscusWidget = document.querySelector('giscus-widget');
+        if (giscusWidget && giscusWidget.shadowRoot) {
+            const iframe = giscusWidget.shadowRoot.querySelector('iframe');
+            if (iframe) {
+                iframe.contentWindow.postMessage({ giscus: { setConfig: { theme: theme } } }, 'https://giscus.app');
+            }
         }
     }
 
