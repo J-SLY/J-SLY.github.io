@@ -71,9 +71,14 @@ function openArticleFromHash() {
     const article = articlesData.find(a => a.id === articleId);
 
     if (article) {
-        if (getArticleDisplayMode() === 'page') {
+        var mode = getArticleDisplayMode();
+        if (mode === 'page') {
             // navigate to clean article URL
             window.location.href = '/article/' + article.id;
+            return;
+        }
+        if (mode === 'legacy') {
+            window.location.href = '/article.html?id=' + article.id;
             return;
         }
         setTimeout(() => showArticleDetail(article), 300);

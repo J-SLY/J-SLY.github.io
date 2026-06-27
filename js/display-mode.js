@@ -13,9 +13,13 @@ function setArticleDisplayMode(mode) {
 }
 
 function openArticle(article) {
-    if (getArticleDisplayMode() === 'page') {
+    var mode = getArticleDisplayMode();
+    if (mode === 'page') {
         // open the clean URL; 404.html will route /article/<id> to rendered content
         window.open('/article/' + article.id, '_blank');
+    } else if (mode === 'legacy') {
+        // legacy article.html?id=<id> path
+        window.open('article.html?id=' + article.id, '_blank');
     } else {
         showArticleDetail(article);
     }

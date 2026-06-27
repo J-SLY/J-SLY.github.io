@@ -90,8 +90,11 @@ function addPublicArticleClickEvents() {
 }
 
 function openPublicArticle(article) {
-    if (getArticleDisplayMode() === 'page') {
+    var mode = getArticleDisplayMode();
+    if (mode === 'page') {
         window.open('/public/article/' + article.id, '_blank');
+    } else if (mode === 'legacy') {
+        window.open('/article.html?id=' + article.id, '_blank');
     } else {
         showPublicArticleDetail(article);
     }
