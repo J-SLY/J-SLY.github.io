@@ -1,13 +1,6 @@
 {
   "articles": [
     {
-      "id": 29,
-      "type": "chore",
-      "title": "添加 .gitignore 并忽略 .vscode/ 目录",
-      "date": "2026-06-28 09:44",
-      "content": "- 新增 .gitignore 文件，将 .vscode/ 目录排除出版本控制"
-    },
-    {
       "id": 28,
       "type": "chore",
       "title": "添加 README 文档并同步提交统计",
