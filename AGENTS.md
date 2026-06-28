@@ -13,6 +13,7 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
   - Router: `js/article-view/article-router.js` handles `/public/article/{id}` standalone pages (loads `data/articles-public-{lang}.json`)
   - Submission workflow: users create GitHub Issues via `.github/ISSUE_TEMPLATE/public-submission.yml`, owner reviews and merges into `data/articles-public.json`
 - **JS directory structure**:
+  - `js/i18n/` — i18n, locales (zh/en/ja/ru)
   - `js/core/` — display-mode, utils, dark-mode, settings, navigation, nav-scroll, search, main
   - `js/articles/` — articles, articles-public, articles-change, articles-leaderboard
   - `js/article-view/` — article-content, article-toc, article-comments, article-share, article-og, article-modal-shared, article-modal, article-router
@@ -72,8 +73,8 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - **Data files**: per-language article data at `data/articles-{lang}.json`, `data/articles-public-{lang}.json`, `data/articles-change-{lang}.json`
 - **Data fallback**: JS fetches `articles-{lang}.json` first; if 404, falls back to `articles-zh.json`
 - **Giscus**: lang mapping — zh→zh-CN, en→en, ja→ja, ru→ru
-- **Adding a language**: add to `SUPPORTED` array in i18n.js, create locale JSON, add `<option>` to settings dropdowns in all 6 HTML files
-- **Changelog badges**: entry type labels rendered via `t('change.feat')`, `t('change.fix')`, `t('change.chore')`
+- **Adding a language**: add to `SUPPORTED` array in i18n.js, create locale JSON, add lang-dropdown link to all 6 HTML files
+- **Changelog badges**: raw `fix`/`feat`/`chore` type codes (no `t()` mapping)
 
 ## Deployment
 

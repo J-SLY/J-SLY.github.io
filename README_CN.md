@@ -52,6 +52,13 @@
 │       ├── article.css         # 文章详情、目录、评论
 │       └── public.css          # 公共投稿页面样式
 ├── js/
+│   ├── i18n/                   # 国际化
+│   │   ├── i18n.js             # 国际化引擎（语言检测、翻译函数）
+│   │   └── locales/            # UI 翻译文件
+│   │       ├── zh.json
+│   │       ├── en.json
+│   │       ├── ja.json
+│   │       └── ru.json
 │   ├── core/                   # 核心功能
 │   │   ├── display-mode.js     # 基于 Cookie 的显示模式
 │   │   ├── utils.js            # 共享工具函数
@@ -77,8 +84,11 @@
 │       └── article-router.js   # 独立页面路由
 ├── data/
 │   ├── articles.json           # 主博客文章数据
+│   ├── articles-{lang}.json    # 主博客多语言数据（zh/en/ja/ru）
 │   ├── articles-public.json    # 公共投稿文章数据
-│   └── articles-change.json    # 更新日志数据
+│   ├── articles-public-{lang}.json # 公共投稿多语言数据
+│   ├── articles-change.json    # 更新日志数据
+│   └── articles-change-{lang}.json # 更新日志多语言数据
 ├── public/
 │   └── index.html              # 公共投稿页面
 ├── leaderboard/
@@ -94,7 +104,7 @@
 
 ### 撰写文章
 
-编辑 `data/articles.json`：
+博客支持多语言（zh/en/ja/ru）。编辑 `data/articles-{lang}.json` 对应语言文件，新增文章需同步所有语言文件：
 
 ```json
 {
@@ -120,7 +130,7 @@
 
 ### 更新日志
 
-有意义的功能变更需记录在 `data/articles-change.json` 中（文章新增/修改不计入）。每条包含：
+有意义的功能变更需记录在 `data/articles-change-{lang}.json` 中（文章新增/修改不计入）。每条包含：
 - `type`：`fix`（修复）、`feat`（新功能）、`chore`（重构/杂项）
 - `title`：简短描述
 - `date`：`YYYY-MM-DD HH:MM`（**必须包含时间**，否则排序会因时区出错）
@@ -128,7 +138,7 @@
 
 ### 公共投稿
 
-社区成员通过创建 GitHub Issue（使用[公共投稿模板](.github/ISSUE_TEMPLATE/public-submission.yml)）提交文章。审核通过后合并到 `data/articles-public.json`。
+社区成员通过创建 GitHub Issue（使用[公共投稿模板](.github/ISSUE_TEMPLATE/public-submission.yml)）提交文章。审核通过后合并到 `data/articles-public-{lang}.json`。
 
 ## 搜索
 

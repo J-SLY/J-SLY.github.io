@@ -52,6 +52,13 @@ A static personal blog built with vanilla HTML/CSS/JS, deployed on GitHub Pages.
 │       ├── article.css         # Article detail, TOC, comments
 │       └── public.css          # Public submission page styles
 ├── js/
+│   ├── i18n/                   # Internationalization
+│   │   ├── i18n.js             # i18n engine (detection, translation)
+│   │   └── locales/            # UI locale files
+│   │       ├── zh.json
+│   │       ├── en.json
+│   │       ├── ja.json
+│   │       └── ru.json
 │   ├── core/                   # Core functionality
 │   │   ├── display-mode.js     # Cookie-based display mode
 │   │   ├── utils.js            # Shared utilities (escapeHtml, etc.)
@@ -77,8 +84,11 @@ A static personal blog built with vanilla HTML/CSS/JS, deployed on GitHub Pages.
 │       └── article-router.js   # Standalone page router
 ├── data/
 │   ├── articles.json           # Main blog articles (JSON array)
+│   ├── articles-{lang}.json    # Main blog per-language data (zh/en/ja/ru)
 │   ├── articles-public.json    # Public submission articles
-│   └── articles-change.json    # Changelog entries
+│   ├── articles-public-{lang}.json # Public submissions per-language data
+│   ├── articles-change.json    # Changelog entries
+│   └── articles-change-{lang}.json # Changelog per-language data
 ├── public/
 │   └── index.html              # Public submissions page
 ├── leaderboard/
@@ -94,7 +104,7 @@ A static personal blog built with vanilla HTML/CSS/JS, deployed on GitHub Pages.
 
 ### Writing Articles
 
-Edit `data/articles.json`:
+Multi-language support (zh/en/ja/ru). Edit `data/articles-{lang}.json` for the target language. When adding an article, add it to all language files:
 
 ```json
 {
@@ -120,7 +130,7 @@ Article deep link: `https://www.jsly.asia/#article-my-article`
 
 ### Changelog
 
-Record meaningful changes in `data/articles-change.json`. Each entry has:
+Record meaningful changes in `data/articles-change-{lang}.json`. Each entry has:
 - `type`: `fix`, `feat`, or `chore`
 - `title`: short description
 - `date`: `YYYY-MM-DD HH:MM` (including time — required for correct sorting)
@@ -128,7 +138,7 @@ Record meaningful changes in `data/articles-change.json`. Each entry has:
 
 ### Public Submissions
 
-Community members submit articles by creating a GitHub Issue using the [public submission template](.github/ISSUE_TEMPLATE/public-submission.yml). After review, approved articles are merged into `data/articles-public.json`.
+Community members submit articles by creating a GitHub Issue using the [public submission template](.github/ISSUE_TEMPLATE/public-submission.yml). After review, approved articles are merged into `data/articles-public-{lang}.json`.
 
 ## Search
 
