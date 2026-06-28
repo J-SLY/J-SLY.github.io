@@ -4,14 +4,14 @@
       "id": 29,
       "type": "chore",
       "title": "添加 .gitignore 并忽略 .vscode/ 目录",
-      "date": "2026-06-28 00:00",
+      "date": "2026-06-28 09:44",
       "content": "- 新增 .gitignore 文件，将 .vscode/ 目录排除出版本控制"
     },
     {
       "id": 28,
       "type": "chore",
       "title": "添加 README 文档并同步提交统计",
-      "date": "2026-06-28 00:00",
+      "date": "2026-06-28 09:43",
       "content": "- 添加英文 README.md 和中文 README_CN.md 项目文档\n- 同步更新 `change/index.html` 中提交次数（141→142）和推送次数（131→132）"
     },
     {
