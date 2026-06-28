@@ -7,10 +7,10 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - **Entrypoint**: `index.html` — single-page blog with hash-based article modals
 - **Content**: `data/articles.json` — each article has Markdown `content` array (joined with `\n`, rendered via `marked.js`)
 - **Public submission page**: `public/index.html` (served at `/public/`) — independent subpage for community-contributed articles
-  - Data source: `data/articles-public.json` (separate from main blog, includes `author`/`authorLink` fields)
+  - Data source: `data/articles-public-{lang}.json` (separate from main blog, includes `author`/`authorLink` fields; fallback to `articles-public-zh.json`)
   - JS: `js/articles/articles-public.js` — fetches data, renders cards with author badges; modal display via shared `showArticleModal()` in `js/article-view/article-modal-shared.js`
   - CSS: `css/components/public.css` — distinct indigo accent (`#5c6bc0`), author badge styles
-  - Router: `js/article-view/article-router.js` handles `/public/article/{id}` standalone pages (loads `data/articles-public.json`)
+  - Router: `js/article-view/article-router.js` handles `/public/article/{id}` standalone pages (loads `data/articles-public-{lang}.json`)
   - Submission workflow: users create GitHub Issues via `.github/ISSUE_TEMPLATE/public-submission.yml`, owner reviews and merges into `data/articles-public.json`
 - **JS directory structure**:
   - `js/core/` — display-mode, utils, dark-mode, settings, navigation, nav-scroll, search, main
@@ -37,7 +37,8 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 
 ## Content workflow
 
-- Edit `data/articles.json` to add/update articles — each article has `id`, `title`, `date`, `tags`, `excerpt`, `content` (array of Markdown lines), optional `image`
+- Edit `data/articles-{lang}.json` (per language) to add/update articles — each article has `id`, `title`, `date`, `tags`, `excerpt`, `content` (array of Markdown lines), optional `image`
+- When adding an article, add it to all language data files (`articles-zh.json`, `articles-en.json`, `articles-ja.json`, `articles-ru.json`)
 - Article deep link: `#article-<id>` in URL hash
 
 ## Search
@@ -62,6 +63,17 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - Add a new entry with incrementing `id`, today's `date` (format: `YYYY-MM-DD HH:MM`，**必须包含时间**，否则排序会因时区问题出错)，a `type` field, descriptive `title`, and markdown `content` listing what changed
 - Type values: `fix` (bug 修复), `feat` (新功能), `chore` (重构/杂项)
 - The changelog is rendered at `/change/` via `js/articles/articles-change.js`
+
+## i18n (Internationalization)
+
+- **Core**: `js/i18n/i18n.js` — language detection, `t()` for JS, `applyI18n()` for DOM, `setLanguage()`
+- **Language detection**: URL param (`?lang=`) → localStorage → `navigator.language` → `zh`
+- **UI Locales**: `js/i18n/locales/{zh,en,ja,ru}.json` (zh embedded in i18n.js)
+- **Data files**: per-language article data at `data/articles-{lang}.json`, `data/articles-public-{lang}.json`, `data/articles-change-{lang}.json`
+- **Data fallback**: JS fetches `articles-{lang}.json` first; if 404, falls back to `articles-zh.json`
+- **Giscus**: lang mapping — zh→zh-CN, en→en, ja→ja, ru→ru
+- **Adding a language**: add to `SUPPORTED` array in i18n.js, create locale JSON, add `<option>` to settings dropdowns in all 6 HTML files
+- **Changelog badges**: entry type labels rendered via `t('change.feat')`, `t('change.fix')`, `t('change.chore')`
 
 ## Deployment
 

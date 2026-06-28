@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "Главная",
+    "articles": "Статьи",
+    "public": "Публичное",
+    "leaderboard": "Рейтинг",
+    "changelog": "Обновления",
+    "about": "Обо мне"
+  },
+  "darkmode": {
+    "title": "Переключить тёмную тему"
+  },
+  "settings": {
+    "title": "Настройки",
+    "close": "Закрыть настройки",
+    "subtitleNav": "Навигация",
+    "lockNav": "Зафиксировать панель навигации",
+    "subtitleMode": "Режим чтения",
+    "modal": "Модальное окно",
+    "newPage": "Новая страница",
+    "legacy": "Устаревший режим (article.html?id=)",
+    "subtitleDefault": "Страница по умолчанию",
+    "mainSite": "Главный сайт",
+    "publicSite": "Публичные публикации",
+    "subtitleLang": "Язык"
+  },
+  "search": {
+    "aria": "Поиск",
+    "placeholder": "Поиск статей по названию, тегам, содержанию...",
+    "hint": "Поиск по ключевым словам (название, теги, краткое содержание, текст)",
+    "empty": "Статьи не найдены"
+  },
+  "menu": {
+    "aria": "Меню"
+  },
+  "hero": {
+    "ctaRead": "Начать чтение",
+    "ctaSubmit": "Предложить статью"
+  },
+  "section": {
+    "latestArticles": "Последние статьи",
+    "about": "Обо мне"
+  },
+  "footer": {
+    "quickLinks": "Быстрые ссылки",
+    "contact": "Контакты",
+    "address": "Луань, Аньхой, Китай",
+    "copyright": "Все права защищены.",
+    "sourceCode": "Исходный код (AGPL-3.0)"
+  },
+  "article": {
+    "pinned": "Закреплено",
+    "empty": "Пока нет статей, следите за обновлениями...",
+    "loadError": "Не удалось загрузить статьи. Проверьте подключение или обновите страницу.",
+    "readTime": "{minutes} мин. чтения",
+    "backToList": "Назад к статьям"
+  },
+  "share": {
+    "button": "Поделиться",
+    "copied": "Ссылка скопирована",
+    "copyFailed": "Не удалось скопировать"
+  },
+  "toc": {
+    "title": "Содержание"
+  },
+  "change": {
+    "all": "Все",
+    "feat": "Новые функции",
+    "fix": "Исправления",
+    "chore": "Прочее",
+    "empty": "Записей в журнале изменений нет.",
+    "loadError": "Не удалось загрузить журнал изменений. Пожалуйста, попробуйте позже."
+  },
+  "changePage": {
+    "title": "Журнал изменений",
+    "desc": "Отслеживание каждого улучшения блога.",
+    "modeLabel": "Режим:",
+    "modeUser": "Пользователь",
+    "modeDev": "Разработчик",
+    "sectionTitle": "История изменений",
+    "commits": "коммитов",
+    "pushes": "пушей",
+    "sinceUntil": "по настоящее время"
+  },
+  "leaderboard": {
+    "tabPR": "PR",
+    "tabIssue": "Issues",
+    "tabSubmission": "Публикации",
+    "anonymous": "Анонимно",
+    "countPR": "PR",
+    "countIssue": "Issue",
+    "countSubmission": "публикаций",
+    "empty": "Нет данных.",
+    "loadError": "Не удалось загрузить данные рейтинга. Пожалуйста, попробуйте позже.",
+    "countDesc": "{count}{type}"
+  },
+  "leaderboardPage": {
+    "title": "Рейтинг",
+    "desc": "Спасибо всем, кто внёс вклад через PR, Issues или публикации.",
+    "sectionTitle": "Рейтинг участников"
+  },
+  "public": {
+    "empty": "Пока нет публикаций. Будьте первым!",
+    "author": "Автор",
+    "loadError": "Не удалось загрузить статьи. Пожалуйста, попробуйте позже.",
+    "sectionTitle": "Опубликованные статьи"
+  },
+  "publicPage": {
+    "title": "Публичные публикации",
+    "heroTitle": "JSLY's Public Blog",
+    "desc": "Голоса сообщества. Публикуйте свои статьи и делитесь знаниями.",
+    "submitGitHub": "Опубликовать через GitHub",
+    "submitEmail": "Опубликовать по email",
+    "submitEmailAlt": "Опубликовать по email (запасной)",
+    "howTitle": "Как опубликовать?",
+    "howText": "Выберите один из способов:",
+    "howGithub": "<strong>GitHub</strong> — Нажмите кнопку «Опубликовать через GitHub» выше, заполните шаблон и отправьте Issue (ваше имя пользователя GitHub будет автоматически указано как автор).",
+    "howEmail": "<strong>Email</strong> — Нажмите кнопку «Опубликовать по email» выше, отправьте письмо на {email} с заголовком статьи, текстом (Markdown) и вашим именем.",
+    "howWait": "Дождитесь проверки. Одобренные статьи появятся здесь."
+  },
+  "router": {
+    "titleSuffix": " - JSLY's Blog",
+    "publicSuffix": " - Публичные публикации - JSLY's Blog",
+    "404heading": "Страница не найдена",
+    "404message": "Страница, которую вы ищете, не существует или ссылка неверна.",
+    "backHome": "На главную",
+    "browseArticles": "Просмотр статей",
+    "suggestions": "Возможно, вы ищете",
+    "goHome": "Перейти на главную",
+    "viewArticles": "Посмотреть статьи",
+    "aboutMe": "Обо мне"
+  },
+  "404page": {
+    "title": "404 - Страница не найдена",
+    "backLink": "Назад к статьям"
+  },
+  "lang": {
+    "zh": "Китайский",
+    "en": "Английский",
+    "ja": "Японский",
+    "ru": "Русский"
+  },
+  "meta": {
+    "siteName": "JSLY's Blog",
+    "siteTitle": "JSLY's Blog",
+    "description": "JSLY's Blog",
+    "keywords": "блог, личный блог, JSLY, технологии, программирование",
+    "changeTitle": "Журнал изменений - JSLY's Blog",
+    "publicKeywords": "блог, публикации, сообщество, JSLY",
+    "publicTitle": "Публичные публикации - JSLY's Blog",
+    "publicDesc": "Публичные публикации - JSLY's Blog",
+    "publicOGDesc": "Статьи, опубликованные сообществом",
+    "changeKeywords": "блог, журнал изменений, JSLY, обновления сайта",
+    "changeDesc": "Журнал изменений - JSLY's Blog",
+    "changeOGDesc": "Обновления функций и история изменений блога",
+    "leaderboardKeywords": "блог, рейтинг, PR, Issues, публикации, JSLY",
+    "leaderboardTitle": "Рейтинг - JSLY's Blog",
+    "leaderboardDesc": "Рейтинг - JSLY's Blog",
+    "leaderboardOGDesc": "Спасибо каждому участнику",
+    "errorDesc": "Страница не найдена - JSLY's Blog",
+    "errorTitle": "404 - Страница не найдена"
+  }
+}

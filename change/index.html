@@ -1,7 +1,7 @@
 <!-- Copyright (C) 2026 JSLY -->
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://www.jsly.asia">
     <meta property="og:type" content="website">
     <link rel="icon" href="../images/JS.svg">
-    <title>更新日志 - JSLY's Blog</title>
+    <title data-i18n="meta.changeTitle">更新日志 - JSLY's Blog</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
     <link rel="stylesheet" href="../css/components/overlay.css">
@@ -29,33 +29,45 @@
                 <a href="../index.html" class="logo">JSLY's Blog</a>
 
                 <ul class="nav-links" id="nav-links-menu">
-                    <li><a href="../index.html">首页</a></li>
-                    <li><a href="../index.html#articles">文章</a></li>
-                    <li><a href="../public/">公共投稿</a></li>
-                    <li><a href="../leaderboard/">贡献榜</a></li>
-                    <li><a href="index.html" class="active">更新日志</a></li>
-                    <li><a href="../index.html#about">关于我</a></li>
+                    <li><a href="../index.html" data-i18n="nav.home">首页</a></li>
+                    <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
+                    <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
+                    <li><a href="../leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                    <li><a href="index.html" class="active" data-i18n="nav.changelog">更新日志</a></li>
+                    <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                 </ul>
 
                 <div class="nav-actions">
-                    <div class="dark-mode-toggle" title="切换暗色模式" aria-label="切换暗色模式" role="button">
+                    <div class="dark-mode-toggle" data-i18n-title="darkmode.title" data-i18n-aria="darkmode.title" role="button">
                         <i class="fas fa-moon"></i>
                     </div>
-                    <div class="settings-toggle" title="阅读设置" aria-label="阅读设置" role="button">
+                    <div class="settings-toggle" data-i18n-title="settings.title" data-i18n-aria="settings.title" role="button">
                         <i class="fas fa-cog"></i>
                     </div>
                     <div class="settings-dropdown">
                         <div class="settings-panel">
-                            <span class="settings-close" aria-label="关闭设置">&times;</span>
-                            <div class="settings-title">阅读设置</div>
-                            <div class="settings-subtitle">导航栏</div>
+                            <span class="settings-close" data-i18n-aria="settings.close">&times;</span>
+                            <div class="settings-title" data-i18n="settings.title">阅读设置</div>
+                            <div class="settings-subtitle" data-i18n="settings.subtitleNav">导航栏</div>
                             <label class="settings-option" style="flex-direction:column;align-items:flex-start;gap:8px">
-                                <span>锁定导航栏</span>
+                                <span data-i18n="settings.lockNav">锁定导航栏</span>
                                 <input type="checkbox" id="nav-lock-toggle">
                             </label>
+
                         </div>
                     </div>
-                    <div class="menu-toggle" aria-label="菜单" role="button" aria-expanded="false" aria-controls="nav-links-menu">
+                    <div class="lang-switcher">
+                        <div class="lang-toggle" role="button" aria-label="Language">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="lang-dropdown">
+                            <a href="#" data-lang="zh">中文</a>
+                            <a href="#" data-lang="en">English</a>
+                            <a href="#" data-lang="ja">日本語</a>
+                            <a href="#" data-lang="ru">Русский</a>
+                        </div>
+                    </div>
+                    <div class="menu-toggle" data-i18n-aria="menu.aria" role="button" aria-expanded="false" aria-controls="nav-links-menu">
                         <i class="fas fa-bars"></i>
                     </div>
                 </div>
@@ -66,21 +78,26 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>更新日志</h1>
-                <p>记录博客的每一次改进。</p>
+                <h1 data-i18n="changePage.title">更新日志</h1>
+                <p data-i18n="changePage.desc">记录博客的每一次改进。</p>
                 <div class="repo-stats">
-                    <span><i class="fas fa-code-branch"></i> 142 次提交</span>
-                    <span><i class="fas fa-arrow-up"></i> 132 次推送</span>
-                    <span><i class="far fa-calendar-alt"></i> 2026-05-24 至今</span>
+                    <span><i class="fas fa-code-branch"></i> 146 <span data-i18n="changePage.commits">次提交</span></span>
+                    <span><i class="fas fa-arrow-up"></i> 133 <span data-i18n="changePage.pushes">次推送</span></span>
+                    <span><i class="far fa-calendar-alt"></i> 2026-05-24 <span data-i18n="changePage.sinceUntil">至今</span></span>
                 </div>
             </div>
         </div>
     </section>
 
     <main class="container">
+        <div class="change-mode-bar" id="change-mode-bar">
+            <span class="change-mode-label" data-i18n="changePage.modeLabel">模式：</span>
+            <button class="change-mode-btn active" data-mode="user" data-i18n="changePage.modeUser">用户版</button>
+            <button class="change-mode-btn" data-mode="developer" data-i18n="changePage.modeDev">开发者版</button>
+        </div>
         <div class="blog-content">
             <section class="articles-section">
-                <h2 class="section-title">变更历史</h2>
+                <h2 class="section-title" data-i18n="changePage.sectionTitle">变更历史</h2>
                 <div id="change-filters" class="change-filters"></div>
                 <div id="change-container" class="change-container"></div>
             </section>
@@ -112,35 +129,36 @@
                 </div>
 
                 <div class="footer-col">
-                    <h3>快速链接</h3>
+                    <h3 data-i18n="footer.quickLinks">快速链接</h3>
                     <ul class="footer-links">
-                        <li><a href="../index.html#home">首页</a></li>
-                        <li><a href="../index.html#articles">文章</a></li>
-                        <li><a href="../public/">公共投稿</a></li>
-                        <li><a href="../leaderboard/">贡献榜</a></li>
-                        <li><a href="index.html">更新日志</a></li>
-                        <li><a href="../index.html#about">关于我</a></li>
+                        <li><a href="../index.html#home" data-i18n="nav.home">首页</a></li>
+                        <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
+                        <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
+                        <li><a href="../leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                        <li><a href="index.html" data-i18n="nav.changelog">更新日志</a></li>
+                        <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h3>联系我</h3>
+                    <h3 data-i18n="footer.contact">联系我</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-envelope"></i> <a href="mailto:2029872426@qq.com">2029872426@qq.com</a></li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:support@blog.jsly.asia">support@blog.jsly.asia</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> 中国，安徽，六安</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">中国，安徽，六安</span></li>
                     </ul>
                 </div>
             </div>
 
             <div class="copyright">
-                <p>&copy; 2026  JSLY. 保留所有权利. | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa">源代码 (AGPL-3.0)</a></p>
+                <p>&copy; 2026  JSLY. <span data-i18n="footer.copyright">保留所有权利.</span> | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa" data-i18n="footer.sourceCode">源代码 (AGPL-3.0)</a></p>
             </div>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/core/display-mode.js"></script>
+    <script src="../js/i18n/i18n.js"></script>
     <script src="../js/core/utils.js"></script>
     <script src="../js/core/dark-mode.js"></script>
     <script src="../js/core/settings.js"></script>

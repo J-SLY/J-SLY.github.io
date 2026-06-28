@@ -59,4 +59,25 @@ function initSettings() {
             if (this.checked) localStorage.setItem('default_page', this.value);
         });
     });
+
+    var langToggle = document.querySelector('.lang-toggle');
+    var langDropdown = document.querySelector('.lang-dropdown');
+    if (langToggle && langDropdown) {
+        langToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            langDropdown.classList.toggle('show');
+        });
+        langDropdown.querySelectorAll('[data-lang]').forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                langDropdown.classList.remove('show');
+                if (typeof setLanguage === 'function') {
+                    setLanguage(this.getAttribute('data-lang'));
+                }
+            });
+        });
+        document.addEventListener('click', function () {
+            langDropdown.classList.remove('show');
+        });
+    }
 }

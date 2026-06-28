@@ -47,15 +47,15 @@ function initSearch(options) {
         modal.className = 'search-modal';
         modal.setAttribute('role', 'dialog');
         modal.setAttribute('aria-modal', 'true');
-        modal.setAttribute('aria-label', '搜索');
+        modal.setAttribute('aria-label', t('search.aria'));
         modal.innerHTML = [
             '<div class="search-modal-content">',
             '  <div class="search-modal-header">',
-            '    <input type="text" class="search-input" placeholder="搜索文章标题、标签、内容..." autofocus>',
+            '    <input type="text" class="search-input" placeholder="' + t('search.placeholder') + '" autofocus>',
             '    <span class="search-close">&times;</span>',
             '  </div>',
             '  <div class="search-results"></div>',
-            '  <div class="search-hint">输入关键词搜索，支持标题、标签、摘要和内容</div>',
+            '  <div class="search-hint">' + t('search.hint') + '</div>',
             '</div>'
         ].join('\n');
 
@@ -125,7 +125,7 @@ function initSearch(options) {
             });
 
             if (matches.length === 0) {
-                results.innerHTML = '<div class="search-empty">未找到匹配的文章</div>';
+                results.innerHTML = '<div class="search-empty">' + t('search.empty') + '</div>';
                 return;
             }
 

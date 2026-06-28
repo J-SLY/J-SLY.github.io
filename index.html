@@ -1,7 +1,7 @@
 <!-- Copyright (C) 2026 JSLY -->
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
     <meta property="og:url" content="https://www.jsly.asia">
     <meta property="og:type" content="website">
     <link rel="icon" href="images/JS.svg">
-    <title>JSLY's Blog</title>
+    <title data-i18n="meta.siteTitle">JSLY's Blog</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
     <link rel="stylesheet" href="css/components/cards.css">
@@ -31,58 +31,70 @@
                 <a href="#home" class="logo">JSLY's Blog</a>
                 
                 <ul class="nav-links" id="nav-links-menu">
-                    <li><a href="#home" class="active">首页</a></li>
-                    <li><a href="#articles">文章</a></li>
-                    <li><a href="public/">公共投稿</a></li>
-                    <li><a href="leaderboard/">贡献榜</a></li>
-                    <li><a href="change/">更新日志</a></li>
-                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#home" class="active" data-i18n="nav.home">首页</a></li>
+                    <li><a href="#articles" data-i18n="nav.articles">文章</a></li>
+                    <li><a href="public/" data-i18n="nav.public">公共投稿</a></li>
+                    <li><a href="leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                    <li><a href="change/" data-i18n="nav.changelog">更新日志</a></li>
+                    <li><a href="#about" data-i18n="nav.about">关于我</a></li>
                 </ul>
                 
                 <div class="nav-actions">
-                    <div class="dark-mode-toggle" title="切换暗色模式" aria-label="切换暗色模式" role="button">
+                    <div class="dark-mode-toggle" data-i18n-title="darkmode.title" data-i18n-aria="darkmode.title" role="button">
                         <i class="fas fa-moon"></i>
                     </div>
-                    <div class="settings-toggle" title="阅读设置" aria-label="阅读设置" role="button">
+                    <div class="settings-toggle" data-i18n-title="settings.title" data-i18n-aria="settings.title" role="button">
                         <i class="fas fa-cog"></i>
                     </div>
                     <div class="settings-dropdown">
                         <div class="settings-panel">
-                            <span class="settings-close" aria-label="关闭设置">&times;</span>
-                            <div class="settings-title">阅读设置</div>
-                            <div class="settings-subtitle">导航栏</div>
+                            <span class="settings-close" data-i18n-aria="settings.close">&times;</span>
+                            <div class="settings-title" data-i18n="settings.title">阅读设置</div>
+                            <div class="settings-subtitle" data-i18n="settings.subtitleNav">导航栏</div>
                             <label class="settings-option" style="flex-direction:column;align-items:flex-start;gap:8px">
-                                <span>锁定导航栏</span>
+                                <span data-i18n="settings.lockNav">锁定导航栏</span>
                                 <input type="checkbox" id="nav-lock-toggle">
                             </label>
-                            <div class="settings-subtitle">阅读模式</div>
+                            <div class="settings-subtitle" data-i18n="settings.subtitleMode">阅读模式</div>
                             <label class="settings-option">
                                 <input type="radio" name="display-mode" value="modal" checked>
-                                <span>弹窗模式</span>
+                                <span data-i18n="settings.modal">弹窗模式</span>
                             </label>
                             <label class="settings-option">
                                 <input type="radio" name="display-mode" value="page">
-                                <span>新页面模式</span>
+                                <span data-i18n="settings.newPage">新页面模式</span>
                             </label>
                             <label class="settings-option">
                                 <input type="radio" name="display-mode" value="legacy">
-                                <span>兼容模式 (article.html?id=)</span>
+                                <span data-i18n="settings.legacy">兼容模式 (article.html?id=)</span>
                             </label>
-                            <div class="settings-subtitle">默认页面</div>
+                            <div class="settings-subtitle" data-i18n="settings.subtitleDefault">默认页面</div>
                             <label class="settings-option">
                                 <input type="radio" name="default-page" value="main" checked>
-                                <span>主站</span>
+                                <span data-i18n="settings.mainSite">主站</span>
                             </label>
                             <label class="settings-option">
                                 <input type="radio" name="default-page" value="public">
-                                <span>公共投稿</span>
+                                <span data-i18n="settings.publicSite">公共投稿</span>
                             </label>
+
                         </div>
                     </div>
-                    <div class="search-icon" aria-label="搜索" role="button">
+                    <div class="lang-switcher">
+                        <div class="lang-toggle" role="button" aria-label="Language">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="lang-dropdown">
+                            <a href="#" data-lang="zh">中文</a>
+                            <a href="#" data-lang="en">English</a>
+                            <a href="#" data-lang="ja">日本語</a>
+                            <a href="#" data-lang="ru">Русский</a>
+                        </div>
+                    </div>
+                    <div class="search-icon" data-i18n-aria="search.aria" role="button">
                         <i class="fas fa-search"></i>
                     </div>
-                    <div class="menu-toggle" aria-label="菜单" role="button" aria-expanded="false" aria-controls="nav-links-menu">
+                    <div class="menu-toggle" data-i18n-aria="menu.aria" role="button" aria-expanded="false" aria-controls="nav-links-menu">
                         <i class="fas fa-bars"></i>
                     </div>
                 </div>
@@ -95,8 +107,8 @@
             <div class="hero-content">
                 <h1>JSLY's Blog</h1>
                 <div class="hero-buttons">
-                    <a href="#articles" class="btn">开始阅读</a>
-                    <a href="/public/" class="btn btn-secondary">我要投稿</a>
+                    <a href="#articles" class="btn" data-i18n="hero.ctaRead">开始阅读</a>
+                    <a href="/public/" class="btn btn-secondary" data-i18n="hero.ctaSubmit">我要投稿</a>
                 </div>
             </div>
         </div>
@@ -105,7 +117,7 @@
     <main class="container">
         <div class="blog-content">
             <section id="articles" class="articles-section">
-                <h2 class="section-title">最新文章</h2>
+                <h2 class="section-title" data-i18n="section.latestArticles">最新文章</h2>
                 <div id="articles-container" class="articles-grid">
                 </div>
             </section>
@@ -116,7 +128,7 @@
     <section id="about" class="section about-section">
         <div class="container">
             <div class="about-content">
-                <h2>关于我</h2>
+                <h2 data-i18n="section.about">关于我</h2>
                 <br/>
                 <img src="https://www.cpoauth.com/api/users/JSLY/card.svg?lang=en" alt="JSLY Profile Card" style="max-width:600px;width:100%;border-radius:10px;">
                 <br/>
@@ -152,29 +164,29 @@
                 </div>
                 
                 <div class="footer-col">
-                    <h3>快速链接</h3>
+                    <h3 data-i18n="footer.quickLinks">快速链接</h3>
                     <ul class="footer-links">
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="#articles">文章</a></li>
-                        <li><a href="public/">公共投稿</a></li>
-                        <li><a href="leaderboard/">贡献榜</a></li>
-                        <li><a href="change/">更新日志</a></li>
-                        <li><a href="#about">关于我</a></li>
+                        <li><a href="#home" data-i18n="nav.home">首页</a></li>
+                        <li><a href="#articles" data-i18n="nav.articles">文章</a></li>
+                        <li><a href="public/" data-i18n="nav.public">公共投稿</a></li>
+                        <li><a href="leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                        <li><a href="change/" data-i18n="nav.changelog">更新日志</a></li>
+                        <li><a href="#about" data-i18n="nav.about">关于我</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-col">
-                    <h3>联系我</h3>
+                    <h3 data-i18n="footer.contact">联系我</h3>
                     <ul class="footer-links">
                         <li><i class="fas fa-envelope"></i> <a href="mailto:2029872426@qq.com">2029872426@qq.com</a></li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:support@blog.jsly.asia">support@blog.jsly.asia</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> 中国，安徽，六安</li>
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-i18n="footer.address">中国，安徽，六安</span></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2026  JSLY. 保留所有权利. | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa">源代码 (AGPL-3.0)</a></p>
+                <p>&copy; 2026  JSLY. <span data-i18n="footer.copyright">保留所有权利.</span> | <a href="https://github.com/J-SLY/J-SLY.github.io" style="color:#aaa" data-i18n="footer.sourceCode">源代码 (AGPL-3.0)</a></p>
             </div>
         </div>
     </footer>
@@ -183,6 +195,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js" integrity="sha256-MM3uFe6CqM98fl3F5J4uaR452PvLib+xY76XfoL5XjM=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="js/core/display-mode.js"></script>
+    <script src="js/i18n/i18n.js"></script>
     <script src="js/core/utils.js"></script>
     <script src="js/article-view/article-content.js"></script>
     <script src="js/article-view/article-toc.js"></script>

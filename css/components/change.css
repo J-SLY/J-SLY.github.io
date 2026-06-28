@@ -109,6 +109,42 @@
     background: #718096;
 }
 
+.change-mode-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    margin: 24px 0 0;
+}
+
+.change-mode-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-right: 4px;
+}
+
+.change-mode-btn {
+    padding: 4px 14px;
+    border: 1px solid var(--border, #ddd);
+    border-radius: 16px;
+    background: transparent;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.change-mode-btn:hover {
+    border-color: #0d9488;
+    color: #0d9488;
+}
+
+.change-mode-btn.active {
+    background: #0d9488;
+    color: #fff;
+    border-color: #0d9488;
+}
+
 .change-filters {
     display: flex;
     gap: 10px;

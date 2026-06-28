@@ -17,7 +17,8 @@ function initGiscus(container, articleId) {
     script.setAttribute('data-input-position', 'bottom');
     const giscusTheme = document.documentElement.classList.contains('dark-mode') ? 'dark' : 'light';
     script.setAttribute('data-theme', giscusTheme);
-    script.setAttribute('data-lang', 'zh-CN');
+    var giscusLang = { zh: 'zh-CN', en: 'en', ja: 'ja', ru: 'ru' }[window.__currentLang] || 'zh-CN';
+    script.setAttribute('data-lang', giscusLang);
     script.setAttribute('crossorigin', 'anonymous');
     script.async = true;
     commentsDiv.appendChild(script);

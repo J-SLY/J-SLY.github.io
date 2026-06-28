@@ -4,7 +4,12 @@
 let articlesPublicData = [];
 
 function loadPublicArticles() {
-    return fetch('/data/articles-public.json')
+    var lang = (window.__currentLang || 'zh').split('-')[0];
+    var url = '/data/articles-public-' + lang + '.json';
+    return fetch(url).then(function (resp) {
+        if (!resp.ok) return fetch('/data/articles-public-zh.json');
+        return resp;
+    })
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
             return resp.json();
@@ -20,7 +25,7 @@ function loadPublicArticles() {
             console.error('加载投稿文章时出错:', err);
             var container = document.getElementById('public-articles-container');
             if (container) {
-                container.innerHTML = '<p class="error-message">无法加载文章，请稍后重试。</p>';
+                container.innerHTML = '<p class="error-message">' + t('public.loadError') + '</p>';
             }
         });
 }
@@ -30,7 +35,7 @@ function renderPublicArticles() {
     if (!container) return;
 
     if (!articlesPublicData || articlesPublicData.length === 0) {
-        container.innerHTML = '<p class="no-articles">暂无投稿，期待你的第一篇贡献！</p>';
+        container.innerHTML = '<p class="no-articles">' + t('public.empty') + '</p>';
         return;
     }
 
@@ -72,7 +77,7 @@ function createPublicArticleCard(article) {
         '  <p>' + escapeHtml(article.excerpt) + '</p>',
         '  <div class="article-meta">',
         '    <span><i class="far fa-calendar"></i> ' + article.date + '</span>',
-        '    <span><i class="far fa-clock"></i> ' + article.readTime + '</span>',
+        '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : article.readTime) + '</span>',
         '    <span><i class="far fa-eye"></i> ' + article.views + '</span>',
         '  </div>',
         '</div>'
@@ -113,7 +118,7 @@ function showPublicArticleDetail(article) {
         '<div class="article-author-info">',
         '  <i class="fas fa-feather-alt"></i>',
         '  <div>',
-        '    <div class="author-label">投稿作者</div>',
+        '    <div class="author-label">' + t('public.author') + '</div>',
         '    <div class="author-name">' + authorHtml + '</div>',
         '  </div>',
         '</div>'

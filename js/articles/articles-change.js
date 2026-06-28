@@ -3,15 +3,22 @@
 
 var allArticles = [];
 var currentFilter = 'all';
+var viewMode = localStorage.getItem('change-view-mode') || 'user';
 
 function loadChangeLog() {
-    fetch('/data/articles-change.json')
+    var lang = (window.__currentLang || 'zh').split('-')[0];
+    var url = '/data/articles-change-' + lang + '.json';
+    fetch(url).then(function (resp) {
+        if (!resp.ok) return fetch('/data/articles-change-zh.json');
+        return resp;
+    })
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
             return resp.json();
         })
         .then(function (data) {
             allArticles = data.articles;
+            initViewMode();
             renderFilters();
             renderChangeLog('all');
         })
@@ -19,9 +26,38 @@ function loadChangeLog() {
             console.error('加载更新日志时出错:', err);
             var container = document.getElementById('change-container');
             if (container) {
-                container.innerHTML = '<p class="error-message">无法加载更新日志，请稍后重试。</p>';
+                container.innerHTML = '<p class="error-message">' + t('change.loadError') + '</p>';
             }
         });
+}
+
+function initViewMode() {
+    var container = document.getElementById('change-mode-bar');
+    if (!container) return;
+    var btns = container.querySelectorAll('.change-mode-btn');
+    btns.forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.mode === viewMode);
+        btn.addEventListener('click', function () {
+            toggleViewMode(btn.dataset.mode);
+        });
+    });
+}
+
+function toggleViewMode(mode) {
+    if (mode === viewMode) return;
+    viewMode = mode;
+    localStorage.setItem('change-view-mode', mode);
+    var btns = document.querySelectorAll('.change-mode-btn');
+    btns.forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+    var filterType = currentFilter;
+    if (mode === 'user' && filterType === 'chore') {
+        filterType = 'all';
+    }
+    currentFilter = filterType;
+    renderFilters();
+    renderChangeLog(filterType);
 }
 
 function renderFilters() {
@@ -29,14 +65,16 @@ function renderFilters() {
     if (!container) return;
 
     var labels = {
-        all: '全部',
-        feat: '功能更新',
-        fix: 'Bug 修复',
-        chore: '杂项'
+        all: t('change.all'),
+        feat: t('change.feat'),
+        fix: t('change.fix'),
+        chore: t('change.chore')
     };
 
     var types = ['all', 'feat', 'fix', 'chore'].filter(function (t) {
-        return t === 'all' || allArticles.some(function (e) { return e.type === t; });
+        if (t === 'all') return true;
+        if (viewMode === 'user' && t === 'chore') return false;
+        return allArticles.some(function (e) { return e.type === t; });
     });
 
     container.innerHTML = '';
@@ -66,14 +104,19 @@ function renderChangeLog(filterType) {
     if (!container) return;
 
     var filtered = allArticles;
+    if (viewMode === 'user') {
+        filtered = filtered.filter(function (entry) {
+            return entry.type !== 'chore';
+        });
+    }
     if (filterType && filterType !== 'all') {
-        filtered = allArticles.filter(function (entry) {
+        filtered = filtered.filter(function (entry) {
             return entry.type === filterType;
         });
     }
 
     if (!filtered || filtered.length === 0) {
-        container.innerHTML = '<p class="no-articles">暂无更新日志。</p>';
+        container.innerHTML = '<p class="no-articles">' + t('change.empty') + '</p>';
         return;
     }
 

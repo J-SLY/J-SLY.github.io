@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "Home",
+    "articles": "Articles",
+    "public": "Public",
+    "leaderboard": "Leaderboard",
+    "changelog": "Changelog",
+    "about": "About"
+  },
+  "darkmode": {
+    "title": "Toggle Dark Mode"
+  },
+  "settings": {
+    "title": "Settings",
+    "close": "Close Settings",
+    "subtitleNav": "Navigation",
+    "lockNav": "Lock Navigation Bar",
+    "subtitleMode": "Reading Mode",
+    "modal": "Modal Window",
+    "newPage": "New Page",
+    "legacy": "Legacy Mode (article.html?id=)",
+    "subtitleDefault": "Default Page",
+    "mainSite": "Main Site",
+    "publicSite": "Public Submissions",
+    "subtitleLang": "Language"
+  },
+  "search": {
+    "aria": "Search",
+    "placeholder": "Search articles by title, tags, content...",
+    "hint": "Search by keywords, supports title, tags, excerpt and content",
+    "empty": "No articles found"
+  },
+  "menu": {
+    "aria": "Menu"
+  },
+  "hero": {
+    "ctaRead": "Start Reading",
+    "ctaSubmit": "Submit Article"
+  },
+  "section": {
+    "latestArticles": "Latest Articles",
+    "about": "About Me"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "contact": "Contact",
+    "address": "Lu'an, Anhui, China",
+    "copyright": "All rights reserved.",
+    "sourceCode": "Source Code (AGPL-3.0)"
+  },
+  "article": {
+    "pinned": "Pinned",
+    "empty": "No articles yet, stay tuned...",
+    "loadError": "Unable to load articles. Please check your connection or refresh.",
+    "readTime": "{minutes} min read",
+    "backToList": "Back to Articles"
+  },
+  "share": {
+    "button": "Share",
+    "copied": "Link copied",
+    "copyFailed": "Copy failed"
+  },
+  "toc": {
+    "title": "Table of Contents"
+  },
+  "change": {
+    "all": "All",
+    "feat": "Features",
+    "fix": "Bug Fixes",
+    "chore": "Chores",
+    "empty": "No changelog entries.",
+    "loadError": "Unable to load changelog. Please try again later."
+  },
+  "changePage": {
+    "title": "Changelog",
+    "desc": "Tracking every improvement of the blog.",
+    "modeLabel": "Mode:",
+    "modeUser": "User",
+    "modeDev": "Developer",
+    "sectionTitle": "Change History",
+    "commits": "commits",
+    "pushes": "pushes",
+    "sinceUntil": "to present"
+  },
+  "leaderboard": {
+    "tabPR": "PRs",
+    "tabIssue": "Issues",
+    "tabSubmission": "Submissions",
+    "anonymous": "Anonymous",
+    "countPR": "PRs",
+    "countIssue": "Issues",
+    "countSubmission": "Submissions",
+    "empty": "No data.",
+    "loadError": "Unable to load leaderboard data. Please try again later.",
+    "countDesc": "{count} {type}"
+  },
+  "leaderboardPage": {
+    "title": "Leaderboard",
+    "desc": "Thank you to everyone who contributed via PRs, Issues, or submissions.",
+    "sectionTitle": "Contributor Rankings"
+  },
+  "public": {
+    "empty": "No submissions yet. Be the first to contribute!",
+    "author": "Author",
+    "loadError": "Unable to load articles. Please try again later.",
+    "sectionTitle": "Submitted Articles"
+  },
+  "publicPage": {
+    "title": "Public Submissions",
+    "heroTitle": "JSLY's Public Blog",
+    "desc": "Voices from the community. Submit your articles and share your knowledge.",
+    "submitGitHub": "Submit via GitHub",
+    "submitEmail": "Submit via Email",
+    "submitEmailAlt": "Submit via Email (Alt)",
+    "howTitle": "How to Submit?",
+    "howText": "Choose one of the following:",
+    "howGithub": "<strong>GitHub</strong> — Click the \"Submit via GitHub\" button above, fill in the template and submit an Issue (your GitHub username will be automatically used as the author name).",
+    "howEmail": "<strong>Email</strong> — Click the \"Submit via Email\" button above, send an email to {email} with the article title, body (Markdown), and your name.",
+    "howWait": "Wait for review. Approved articles will appear here."
+  },
+  "router": {
+    "titleSuffix": " - JSLY's Blog",
+    "publicSuffix": " - Public Submissions - JSLY's Blog",
+    "404heading": "Page Not Found",
+    "404message": "The page you are looking for does not exist or the link is incorrect.",
+    "backHome": "Back to Home",
+    "browseArticles": "Browse Articles",
+    "suggestions": "You might want to",
+    "goHome": "Go to Home",
+    "viewArticles": "View Articles",
+    "aboutMe": "About Me"
+  },
+  "404page": {
+    "title": "404 - Page Not Found",
+    "backLink": "Back to Articles"
+  },
+  "lang": {
+    "zh": "Chinese",
+    "en": "English",
+    "ja": "Japanese",
+    "ru": "Russian"
+  },
+  "meta": {
+    "siteName": "JSLY's Blog",
+    "siteTitle": "JSLY's Blog",
+    "description": "JSLY's Blog",
+    "keywords": "blog, personal blog, JSLY, tech, programming",
+    "changeTitle": "Changelog - JSLY's Blog",
+    "publicKeywords": "blog, submissions, community, JSLY",
+    "publicTitle": "Public Submissions - JSLY's Blog",
+    "publicDesc": "Public Submissions - JSLY's Blog",
+    "publicOGDesc": "Community submitted articles",
+    "changeKeywords": "blog, changelog, JSLY, site updates",
+    "changeDesc": "Changelog - JSLY's Blog",
+    "changeOGDesc": "Blog feature updates and change history",
+    "leaderboardKeywords": "blog, leaderboard, PR, Issues, submissions, JSLY",
+    "leaderboardTitle": "Leaderboard - JSLY's Blog",
+    "leaderboardDesc": "Leaderboard - JSLY's Blog",
+    "leaderboardOGDesc": "Thank you to every contributor",
+    "errorDesc": "Page Not Found - JSLY's Blog",
+    "errorTitle": "404 - Page Not Found"
+  }
+}

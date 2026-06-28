@@ -16,11 +16,11 @@ function initShareButton(container, article) {
         } else {
             navigator.clipboard.writeText(url).then(function() {
                 var origHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fas fa-check"></i> 链接已复制';
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + t('share.copied');
                 setTimeout(function() { btn.innerHTML = origHtml; }, 2000);
             }).catch(function(error) {
                 console.log('复制链接出错:', error);
-                btn.innerHTML = '<i class="fas fa-times"></i> 复制失败';
+                btn.innerHTML = '<i class="fas fa-times"></i> ' + t('share.copyFailed');
             });
         }
     });

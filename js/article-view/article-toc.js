@@ -13,7 +13,7 @@ function generateTOC(container, scrollRoot) {
     tocTitle.className = 'article-toc-title';
     const chevron = document.createElement('i');
     chevron.className = 'fas fa-chevron-down toc-chevron';
-    tocTitle.innerHTML = '<i class="fas fa-list"></i> 目录 ';
+    tocTitle.innerHTML = '<i class="fas fa-list"></i> ' + t('toc.title') + ' ';
     tocTitle.appendChild(chevron);
     toc.appendChild(tocTitle);
 

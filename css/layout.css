@@ -65,6 +65,53 @@ header.nav-hidden {
     align-items: center;
 }
 
+.lang-switcher {
+    position: relative;
+}
+
+.lang-toggle {
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--gray);
+    transition: var(--transition);
+}
+
+.lang-toggle:hover {
+    color: var(--primary);
+}
+
+.lang-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    min-width: 110px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.lang-dropdown.show {
+    display: block;
+}
+
+.lang-dropdown a {
+    display: block;
+    padding: 8px 14px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.lang-dropdown a:hover {
+    background: var(--bg-hover);
+}
+
 .search-icon {
     font-size: 18px;
     cursor: pointer;

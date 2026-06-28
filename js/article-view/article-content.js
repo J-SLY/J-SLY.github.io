@@ -25,7 +25,7 @@ function buildArticleContent(article, showHero) {
                 ${tagsHtml}
                 <div class="article-meta">
                     <span><i class="far fa-calendar"></i> ${escapeHtml(article.date)}</span>
-                    <span><i class="far fa-clock"></i> ${escapeHtml(article.readTime)}</span>
+                    <span><i class="far fa-clock"></i> ${article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)}</span>
                     <span><i class="far fa-eye"></i> ${escapeHtml('' + article.views)}</span>
                 </div>
                 <div class="article-content markdown-body">
@@ -33,7 +33,7 @@ function buildArticleContent(article, showHero) {
                 </div>
                 <div class="article-actions">
                     <button class="btn share-btn">
-                        <i class="fas fa-share"></i> 分享
+                        <i class="fas fa-share"></i> ${t('share.button')}
                     </button>
                 </div>
                 <div class="article-comments giscus"></div>

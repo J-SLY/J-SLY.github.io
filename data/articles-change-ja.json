@@ -1,0 +1,200 @@
+{
+  "articles": [
+    {
+      "id": 29,
+      "type": "feat",
+      "title": "更新ログをユーザー版と開発者版に分割",
+      "date": "2026-06-28 10:30",
+      "content": "更新ログページ（`/change/`）にユーザー版／開発者版のデュアルモード切り替えを追加：\n\n- ページ上部に「ユーザー版」「開発者版」の切り替えボタンを追加\n- **ユーザー版** — 雑務（chore）ログを非表示にし、機能更新とバグ修正のみ表示\n- **開発者版** — すべてのログを表示（chore含む）\n- モード切替時に自動的にフィルターボタンを更新\n- モード設定は `localStorage` に保存され、ページ更新後も維持"
+    },
+    {
+      "id": 28,
+      "type": "chore",
+      "title": "READMEドキュメントを追加し、コミット統計を同期",
+      "date": "2026-06-28 09:43",
+      "content": "- 英語README.mdと中国語README_CN.mdのプロジェクトドキュメントを追加\n- `change/index.html` のコミット回数（141→142）とプッシュ回数（131→132）を更新"
+    },
+    {
+      "id": 27,
+      "type": "chore",
+      "title": "プロジェクトディレクトリ構造の再編成",
+      "date": "2026-06-27 22:36",
+      "content": "プロジェクトファイルを機能別にサブディレクトリに整理：\n\n- **JSファイル** — フラットな `js/` から `js/core/`、`js/articles/`、`js/article-view/` の3つのサブディレクトリに分類\n- **データファイル** — `articles.json`、`articles-public.json`、`articles-change.json` を `data/` に移動\n- **アイコンファイル** — `JS.svg` を `images/` に移動\n- すべてのHTMLの `<script src>`、`<link rel=\"icon\">`、`<meta og:image>` パスを更新\n- JS内のすべての `fetch()` データパスを更新\n- `AGENTS.md` のディレクトリ構造とパス説明を更新"
+    },
+    {
+      "id": 26,
+      "type": "feat",
+      "title": "貢献ランキング PR/IssuesがGitHub APIからデータを取得",
+      "date": "2026-06-27 22:30",
+      "content": "貢献ランキングページ（`/leaderboard/`）のPR・IssuesタブをGitHub APIからのリアルタイムデータ取得に変更：\n\n- **PRランキング** — `type:pr` でリポジトリPRを検索し、作成者ごとに集計。ハードコードされたデータを置き換え\n- **Issuesランキング** — `type:issue` でリポジトリIssueを検索し、`public-submission` および `stats:exclude` ラベルのエントリーを除外\n- **除外機構** — Issueに `stats:exclude` ラベルを付与すると統計から除外\n- **投稿はデフォルトで除外** — 投稿テンプレートは自動的に `public-submission` ラベルを保持\n- 設定を一元管理（`LEADERBOARD_CONFIG`）、カスタマイズ可能な除外ラベルリストをサポート"
+    },
+    {
+      "id": 25,
+      "type": "fix",
+      "title": "投稿者のメールアドレスを公開しないように修正",
+      "date": "2026-06-27 22:23",
+      "content": "投稿記事の `authorLink` が投稿者のメールアドレスを公開していた問題を修正：\n\n- `articles-public.json` から `\"authorLink\": \"mailto:...\"` フィールドを削除\n- `utils.js` に `sanitizeAuthorLink()` 関数を追加し、`mailto:` リンクを自動フィルタリング\n- `articles-public.js` と `article-router.js` の3箇所の作者リンク描画をすべて `sanitizeAuthorLink()` を使用するよう変更\n- `mailto:` リンクは `<a>` タグを生成せず、作者名のみを表示\n- 通常の `https://` リンクは影響を受けず、通常通り描画"
+    },
+    {
+      "id": 23,
+      "type": "feat",
+      "title": "更新ログのタイムラインを種類でフィルタリング可能に",
+      "date": "2026-06-27 21:51",
+      "content": "更新ログページ（`/change/`）に種類フィルター機能を追加：\n\n- タイムライン上部にフィルターボタンバーを追加。「すべて」「機能更新」「バグ修正」「雑務」で分類表示\n- フィルターボタンは固定順序で表示され、現在の選択を動的にハイライト\n- フィルタークリックで該当する種類のエントリーのみを表示、ページの再読み込み不要"
+    },
+    {
+      "id": 24,
+      "type": "feat",
+      "title": "貢献ランキングサブページを追加",
+      "date": "2026-06-27 22:08",
+      "content": "新規 `/leaderboard/` サブページを追加。3つのランキングを掲載：\n\n- **PRランキング** — コントリビューション数でカウント\n- **Issuesランキング** — 将来の使用のために予約\n- **投稿ランキング** — `articles-public.json` から作者ごとに動的に集計\n\nランキングはタブ切り替えに対応し、名前のアルファベット順にソート、上位3名に金・銀・銅のバッジを表示。"
+    },
+    {
+      "id": 21,
+      "type": "chore",
+      "title": "プロジェクト整理：SRIハッシュ統一、JS重複排除、ハンバーガーメニュー抽出",
+      "date": "2026-06-27 21:37",
+      "content": "プロジェクトファイルの包括的な整理：\n\n**SRIハッシュ同期**\n- `index.html`、`article.html`、`404.html`、`public/index.html` 間でmarked、highlight.js、pinyin-proの整合性値を統一\n\n**共有ユーティリティ抽出**\n- グローバル `escapeHtml()` を含む `js/utils.js` を追加し、`article-content.js` と `articles-change.js` の重複を排除\n- 全ページで `utils.js` をロード（`display-mode.js` の後）\n- `articles-change.js` の `escapeHtml` はより堅牢な型チェックを使用（`typeof str !== 'string'`）\n\n**ハンバーガーメニュー統一**\n- `navigation.js` に `initMobileMenu()` を追加し、モバイルメニューのトグルロジックをカプセル化\n- `main.js`、`public/index.html`、`change/index.html` から重複したインラインハンバーガーコードを削除\n- 全ページで統一して `initMobileMenu()` を呼び出し\n\n**孤立ファイルのクリーンアップ**\n- 未使用の `images/logo.svg` を削除"
+    },
+    {
+      "id": 20,
+      "type": "fix",
+      "title": "サイト全体のスクロールバースタイル統一",
+      "date": "2026-06-27 21:21",
+      "content": "サイト全体のスクロールバースタイルを細めの角丸デザインに統一：\n\n- `base.css` にグローバルな `::-webkit-scrollbar` スタイルを追加（6px幅/高さ、角丸thumb）\n- ライト/ダークモードの自動切替に対応した `--scrollbar-thumb` / `--scrollbar-thumb-hover` CSS変数を追加\n- Firefox互換性を追加（`scrollbar-width: thin` + `scrollbar-color`）\n- `overlay.css` の `.modal-content` / `.search-results` から重複したスクロールバースタイルを削除\n- 記事TOCサイドバーなど、すべてのスクロール可能領域が自動的に統一スタイルを適用"
+    },
+    {
+      "id": 19,
+      "type": "chore",
+      "title": "パス統一：changelog → change",
+      "date": "2026-06-27 21:14",
+      "content": "`changelog/` パスと関連ファイルを `change/` に名称変更：\n\n- `changelog/` → `change/`\n- `articles-changelog.json` → `articles-change.json`\n- `js/articles-changelog.js` → `js/articles-change.js`\n- `css/components/changelog.css` → `css/components/change.css`\n- CSSクラス名とJS関数名も合わせて更新"
+    },
+    {
+      "id": 18,
+      "type": "fix",
+      "title": "検索機能の修正：データタイミング/拼音スペース/コンテンツ拼音/CDN SRIハッシュ",
+      "date": "2026-06-27 20:59",
+      "content": "検索機能の複数の問題を修正：\n\n- **データ読み込みタイミング**：`initSearch()` がfetch完了前に呼び出され、`dataSource` が空の配列を取得。修正：`initSearch()` の呼び出しをfetch `.then()` コールバック内に移動し、`articlesData = data.articles` と同じ階層で実行。\n- **拼音スペースマッチング**：ユーザーが `\"ru men\"`（スペース付き）と入力するが、pinyin-proは拼音を連結して出力（`\"rumen\"`）、`indexOf` が失敗。修正：`findPinyinMatchRange()` 内でクエリを `replace(/\\s+/g, '')` でスペース除去後に比較。\n- **コンテンツ拼音検索の欠落**：フィルターは `article.title` と `article.excerpt` のみ拼音マッチングを行い、`article.content` は直接テキストマッチング（`includes(q)`）のみ。修正：フィルターに `matchPinyin(a.content.join('\\n'), q)` を追加。\n- **全CDNスクリプトの読み込み失敗**：`marked`、`highlight.js`、`pinyin-pro` のSRI整合性ハッシュが実際のCDNファイルと不一致。修正：ブラウザコンソールのエラーに表示された計算済みSHAで整合性属性を更新。\n- `404.html`、`article.html`、`change/index.html` の同一CDNスクリプトのSRIハッシュも同時に修正。"
+    },
+    {
+      "id": 1,
+      "type": "feat",
+      "title": "更新ログサブページを追加",
+      "date": "2026-06-27 21:02",
+      "content": "ブログの機能更新と変更履歴を記録するためのサブページを追加。\n\n- 更新ログエントリーを表示する新しい `change/` サブページ\n- ナビゲーションバーに「更新ログ」リンクを追加\n- `articles-change.json` データファイルと `js/articles-change.js` レンダリングロジックを追加\n- `css/components/change.css` スタイルシートを追加"
+    },
+    {
+      "id": 2,
+      "type": "feat",
+      "title": "モーダル共有化、検索パラメータ化、セキュリティとアクセシビリティの改善",
+      "date": "2026-06-27 10:41",
+      "content": "モーダルロジックを共有モジュールとして抽出、検索がカスタムデータソースをサポート、XSS防御を統一。\n\n- モーダルロジックを `article-modal-shared.js` + `article-modal.js` に抽出し、サブページで再利用可能に\n- `initSearch()` が `dataSource` / `onOpenArticle` パラメータをサポート\n- すべての出力を `escapeHtml()` でエスケープし、XSSインジェクションを防止\n- 検索ダイアログに `role=\"dialog\"` と `aria-modal` 属性を追加\n- すべてのCDNリソースにSRI整合性チェックと `crossorigin` 属性を追加\n- OGタグを `updateOGTags()` / `restoreOGTags()` として独立モジュールに抽出\n- CSSを `cards.css`、`overlay.css`、`article.css` などの独立ファイルに分割"
+    },
+    {
+      "id": 3,
+      "type": "fix",
+      "title": "互換モード、Giscusダークテーマなどのバグ修正",
+      "date": "2026-06-27 10:25",
+      "content": "- 互換モード（`article.html?id=pub-`）での公開記事がメインサイトにリダイレクトされる問題を修正\n- 手動でダークモードを切り替えた際にGiscusコメントのテーマが同期しない問題を修正\n- `navigation.js` がアンカー以外のリンクを誤ってインターセプトする問題を修正\n- 相対パス `/public/` → `public/` に変更し、ローカルテストで正しく動作するように修正"
+    },
+    {
+      "id": 4,
+      "type": "feat",
+      "title": "読書設定に互換モード追加、モバイルTOC改善",
+      "date": "2026-06-27 10:06",
+      "content": "- 読書設定に「互換モード（`article.html?id=`）」を追加\n- モバイルで記事TOCを折りたたみ可能に\n- モーダルの閉じるボタンがコンテンツと重なる問題を修正\n- Heroエリアに「投稿する」ボタンを追加、`/public/` にリンク\n- `2029872426@qq.com` を優先投稿メールアドレスに設定"
+    },
+    {
+      "id": 5,
+      "type": "feat",
+      "title": "JSLY's Public Blogコミュニティ投稿システムをリリース",
+      "date": "2026-06-26 23:11",
+      "content": "ブログがコミュニティ記事投稿システムを正式にリリース。\n\n- コミュニティ記事を表示する新しい `/public/` 独立サブページ\n- `author` / `authorLink` フィールドを持つ独立データソース `articles-public.json`\n- 投稿カードのレンダリング（作者バッジ含む）のための `js/articles-public.js` を追加\n- インディゴカラーの独立テーマ `css/components/public.css` を追加\n- 記事詳細ページに投稿者情報バーを表示\n- 検索が公開記事データソースをサポート\n- `article-router.js` が `/public/article/{id}` 独立ページと `article.html?id=pub-{id}` 互換ルートをサポート\n- ユーザーはGitHub Issueテンプレートで投稿、管理者がレビュー後 `articles-public.json` にマージ"
+    },
+    {
+      "id": 6,
+      "type": "feat",
+      "title": "独立記事ルーティングと404ページ",
+      "date": "2026-06-26 22:42",
+      "content": "- 404.htmlを使用したSPAルーティングを実装し、`/article/{id}` のクリーンURLをサポート\n- `js/article-router.js` 独立ルーティングモジュールを追加\n- 統一された404ページスタイル（トップに戻る、記事を読むなどの提案を含む）\n- 記事ページと404ページにトップナビゲーションバーを表示\n- 404ページはFlexboxスティッキーフッターを使用\n- 記事ページの「記事一覧に戻る」ボタンのスタイルを改善"
+    },
+    {
+      "id": 7,
+      "type": "chore",
+      "title": "JS/CSSのモジュール化とアーキテクチャリファクタ",
+      "date": "2026-06-26 22:10",
+      "content": "- JSを機能別に14の独立ファイルに分割\n- CSSを `base.css`、`layout.css`、`cards.css`、`overlay.css`、`article.css`、`responsive.css` に分割\n- 読書設定を「ナビゲーションバー」と「読書モード」の2つのセクションにグループ化\n- 「ナビゲーションバーを固定」トグルを追加\n- いいね機能を削除"
+    },
+    {
+      "id": 8,
+      "type": "feat",
+      "title": "読書進行バーをモーダル内に移動、ダークモード改善",
+      "date": "2026-06-21 18:46",
+      "content": "- 読書進行バーをページ上部から記事モーダル内に移動\n- ダークモードでのコード強調表示の二重パディング、モーダルオーバーフロー、CSSアニメーションの競合を修正\n- Heroエリアの背景がダークモードに適応\n- プロフィールカードに `theme=dark` パラメータを追加\n- Giscusコメントエリアが手動ダークモード切り替えに追従\n- カスタムダークモードスクロールバースタイル\n- 480pxブレークポイントでフッターのレスポンシブ対応"
+    },
+    {
+      "id": 9,
+      "type": "feat",
+      "title": "Giscusコメントシステム統合",
+      "date": "2026-06-21 14:12",
+      "content": "- GitHub DiscussionsベースのGiscusコメントシステムを統合\n- 静的埋め込みの代わりに動的スクリプトインジェクションを使用\n- Giscusテーマが手動ダークモード切り替えに追従\n- コードフォントをFira Codeに統一\n- タグフィルター機能を削除"
+    },
+    {
+      "id": 10,
+      "type": "feat",
+      "title": "シンタックスハイライト、RSS、ダークモード、検索強化、目次ナビ",
+      "date": "2026-06-21 14:08",
+      "content": "- highlight.js 11.9.0によるコードハイライトを統合\n- `feed.xml` RSS購読を追加\n- ダークモード切り替えを追加\n- 拼音検索を追加（pinyin-pro 3.26.0ベース）\n- 検索結果で一致キーワードをハイライト\n- 中国語検索は最低2文字必要\n- 記事の目次（TOC）を自動生成\n- 記事読書進行バー\n- Escapeキーリスナーリーク、モーダルクラッシュなど5つの問題を修正"
+    },
+    {
+      "id": 11,
+      "type": "feat",
+      "title": "記事共有、OGタグ、アンカーディープリンク",
+      "date": "2026-06-21 13:33",
+      "content": "- 記事詳細に共有ボタンを追加（リンクコピー対応）\n- Open Graphタグを動的に更新\n- `#article-{id}` ハッシュアンカーディープリンクをサポート\n- フッターに `support@blog.jsly.asia` 問い合わせメールを追加"
+    },
+    {
+      "id": 12,
+      "type": "chore",
+      "title": "コンテンツシステムとアーキテクチャのリファクタ",
+      "date": "2026-06-21 12:54",
+      "content": "- `articles.json` の `content` フィールドを文字列配列に変更\n- CSSを `base.css`、`layout.css`、`components/` ディレクトリに再編成\n- `pinned` フィールドを追加し、記事の固定表示をサポート\n- `showImage` フィールドを追加し、各記事が個別に画像表示を制御可能に"
+    },
+    {
+      "id": 13,
+      "type": "feat",
+      "title": "ソーシャルリンク統合",
+      "date": "2026-06-21 12:05",
+      "content": "フッターのソーシャルリンクを各プラットフォームに接続：QQ、GitHub、Luogu、Luogu.me、AtCoder、Qzone。\n\n- ソーシャルアイコンを独立したSVGファイルに変更\n- ロゴを純粋なグラフィックSVGテキストに変更"
+    },
+    {
+      "id": 14,
+      "type": "chore",
+      "title": "AGPL-3.0オープンソースライセンスと著作権表示",
+      "date": "2026-06-21 11:27",
+      "content": "- リポジトリにAGPL-3.0ライセンスを追加\n- すべてのソースファイル（HTML/CSS/JS）にSPDX著作権ヘッダーを追加\n- AGPL-3.0要件に準拠するためフッターにソースコードリンクを追加"
+    },
+    {
+      "id": 15,
+      "type": "feat",
+      "title": "検索機能をリリース",
+      "date": "2026-06-21 11:48",
+      "content": "- 右上の検索アイコン、クリックで検索パネルを表示\n- タイトル、タグ、記事要約、全文に対してマッチング\n- リアルタイム検索、入力即反映\n- ページ読み込みエラー、空画像、ナビハイライトなどのバグを修正\n- 中国語代替フォントとSEOタグを追加"
+    },
+    {
+      "id": 16,
+      "type": "feat",
+      "title": "記事システムとデザインテーマをリリース",
+      "date": "2026-06-21 09:04",
+      "content": "- 記事コンテンツがMarkdownレンダリングをサポート（marked.jsベース）\n- カテゴリを廃止し、タグ（tag）ベースのシステムに移行、記事をフラット表示\n- 全体テーマを薄緑の清爽なスタイルに変更\n- Heroエリアをグラデーションから単色背景に変更\n- サイドバーを削除し、全幅レイアウトに\n- プロフィールをProfile Card SVGで表示するよう変更\n- ブログタイトルを「JSLY Blog」に変更\n- OpenCode使用方法ガイド記事を追加"
+    },
+    {
+      "id": 17,
+      "type": "feat",
+      "title": "サイト初期化",
+      "date": "2026-05-24 14:23",
+      "content": "JSLY's Blog 正式公開！\n\n- カスタムドメイン www.jsly.asia を設定（CNAMEレコード）\n- GitHub Pages でデプロイ\n- ピュア静的HTML/CSS/JS、ビルドツール不要"
+    }
+  ]
+}

@@ -52,8 +52,8 @@ function fetchLeaderboardData(type) {
         });
         var entries = Object.keys(counts).map(function (login) {
             var info = userInfo[login];
-            var label = type === 'pr' ? ' PR' : ' Issue';
-            return { username: info.username, count: counts[login], description: '共 ' + counts[login] + ' 个' + label, link: info.profileUrl };
+            var typeDesc = type === 'pr' ? t('leaderboard.countPR') : t('leaderboard.countIssue');
+            return { username: info.username, count: counts[login], description: t('leaderboard.countDesc', { count: counts[login], type: typeDesc }), link: info.profileUrl };
         });
         entries.sort(function (a, b) {
             if (b.count !== a.count) return b.count - a.count;
@@ -70,11 +70,9 @@ var leaderboardCache = {
     submissions: null
 };
 
-var boardLabels = {
-    pr: 'PR 榜',
-    issues: 'Issues 榜',
-    submissions: '投稿榜'
-};
+function boardLabel(type) {
+    return t('leaderboard.tab' + type.charAt(0).toUpperCase() + type.slice(1));
+}
 
 var boardIcons = {
     pr: 'fa-code-branch',
@@ -110,7 +108,7 @@ function buildSubmissionsFromArticles(articles) {
     var authorInfo = {};
 
     articles.forEach(function (article) {
-        var author = article.author || '匿名';
+        var author = article.author || t('leaderboard.anonymous');
         if (!counts[author]) {
             counts[author] = 0;
             authorInfo[author] = {
@@ -129,7 +127,7 @@ function buildSubmissionsFromArticles(articles) {
             author: info.author,
             authorLink: info.authorLink,
             count: counts[author],
-            description: '共 ' + counts[author] + ' 篇投稿'
+            description: t('leaderboard.countDesc', { count: counts[author], type: t('leaderboard.countSubmission') })
         };
     });
 
@@ -145,7 +143,11 @@ function buildSubmissionsFromArticles(articles) {
 }
 
 function loadLeaderboard() {
-    var articlesPromise = fetch('/data/articles-public.json').then(function (resp) {
+    var lang = (window.__currentLang || 'zh').split('-')[0];
+    var articlesPromise = fetch('/data/articles-public-' + lang + '.json').then(function (resp) {
+        if (!resp.ok) return fetch('/data/articles-public-zh.json');
+        return resp;
+    }).then(function (resp) {
         if (!resp.ok) throw new Error('网络响应不正常');
         return resp.json();
     });
@@ -176,7 +178,7 @@ function loadLeaderboard() {
             console.error('加载贡献榜时出错:', err);
             var container = document.getElementById('leaderboard-container');
             if (container) {
-                container.innerHTML = '<p class="error-message">无法加载贡献榜数据，请稍后重试。</p>';
+                container.innerHTML = '<p class="error-message">' + t('leaderboard.loadError') + '</p>';
             }
         });
 }
@@ -211,7 +213,7 @@ function renderFilters() {
         btn.className = 'leaderboard-filter-btn' + (type === currentBoard ? ' active' : '');
         var color = boardAccentColors[type];
         btn.style.setProperty('--accent', color);
-        btn.innerHTML = '<i class="fas ' + boardIcons[type] + '"></i> ' + boardLabels[type];
+        btn.innerHTML = '<i class="fas ' + boardIcons[type] + '"></i> ' + boardLabel(type);
         btn.dataset.type = type;
         btn.addEventListener('click', function () {
             switchBoard(type);
@@ -235,7 +237,7 @@ function renderBoard(type) {
 
     var entries = leaderboardCache[type];
     if (!entries || entries.length === 0) {
-        container.innerHTML = '<p class="no-articles">暂无数据。</p>';
+        container.innerHTML = '<p class="no-articles">' + t('leaderboard.empty') + '</p>';
         return;
     }
 
@@ -287,10 +289,6 @@ function renderBoard(type) {
 }
 
 function getCountLabel(type) {
-    var labels = {
-        pr: '个 PR',
-        issues: '个 Issue',
-        submissions: '篇投稿'
-    };
-    return labels[type] || '';
+    var key = type === 'pr' ? 'leaderboard.countPR' : type === 'issues' ? 'leaderboard.countIssue' : 'leaderboard.countSubmission';
+    return t(key);
 }

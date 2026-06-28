@@ -1,0 +1,163 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "articles": "記事",
+    "public": "パブリック",
+    "leaderboard": "ランキング",
+    "changelog": "更新履歴",
+    "about": "について"
+  },
+  "darkmode": {
+    "title": "ダークモード切替"
+  },
+  "settings": {
+    "title": "設定",
+    "close": "設定を閉じる",
+    "subtitleNav": "ナビゲーション",
+    "lockNav": "ナビゲーションバーを固定",
+    "subtitleMode": "読書モード",
+    "modal": "モーダルウィンドウ",
+    "newPage": "新しいページ",
+    "legacy": "レガシーモード (article.html?id=)",
+    "subtitleDefault": "デフォルトページ",
+    "mainSite": "メインサイト",
+    "publicSite": "パブリック投稿",
+    "subtitleLang": "言語"
+  },
+  "search": {
+    "aria": "検索",
+    "placeholder": "記事のタイトル、タグ、内容を検索...",
+    "hint": "キーワードで検索（タイトル、タグ、概要、内容に対応）",
+    "empty": "該当する記事が見つかりません"
+  },
+  "menu": {
+    "aria": "メニュー"
+  },
+  "hero": {
+    "ctaRead": "読み始める",
+    "ctaSubmit": "投稿する"
+  },
+  "section": {
+    "latestArticles": "最新記事",
+    "about": "について"
+  },
+  "footer": {
+    "quickLinks": "クイックリンク",
+    "contact": "お問い合わせ",
+    "address": "中国、安徽省、六安市",
+    "copyright": "All rights reserved.",
+    "sourceCode": "ソースコード (AGPL-3.0)"
+  },
+  "article": {
+    "pinned": "ピン留め",
+    "empty": "まだ記事がありません。お楽しみに...",
+    "loadError": "記事を読み込めませんでした。接続を確認するか、再読み込みしてください。",
+    "readTime": "約{minutes}分",
+    "backToList": "記事一覧に戻る"
+  },
+  "share": {
+    "button": "シェア",
+    "copied": "リンクをコピーしました",
+    "copyFailed": "コピーに失敗しました"
+  },
+  "toc": {
+    "title": "目次"
+  },
+  "change": {
+    "all": "すべて",
+    "feat": "新機能",
+    "fix": "バグ修正",
+    "chore": "その他",
+    "empty": "更新履歴はありません。",
+    "loadError": "更新履歴を読み込めませんでした。後でもう一度お試しください。"
+  },
+  "changePage": {
+    "title": "更新履歴",
+    "desc": "ブログの改善点を記録しています。",
+    "modeLabel": "モード：",
+    "modeUser": "ユーザー",
+    "modeDev": "開発者",
+    "sectionTitle": "変更履歴",
+    "commits": "コミット",
+    "pushes": "プッシュ",
+    "sinceUntil": "から現在まで"
+  },
+  "leaderboard": {
+    "tabPR": "PR",
+    "tabIssue": "Issues",
+    "tabSubmission": "投稿",
+    "anonymous": "匿名",
+    "countPR": "PR",
+    "countIssue": "Issue",
+    "countSubmission": "投稿",
+    "empty": "データがありません。",
+    "loadError": "ランキングデータを読み込めませんでした。後でもう一度お試しください。",
+    "countDesc": "{count}{type}"
+  },
+  "leaderboardPage": {
+    "title": "ランキング",
+    "desc": "PR、Issue、投稿を通じてブログに貢献してくださった皆様に感謝します。",
+    "sectionTitle": "貢献者ランキング"
+  },
+  "public": {
+    "empty": "まだ投稿がありません。最初の投稿をお待ちしています！",
+    "author": "投稿者",
+    "loadError": "記事を読み込めませんでした。後でもう一度お試しください。",
+    "sectionTitle": "投稿記事"
+  },
+  "publicPage": {
+    "title": "パブリック投稿",
+    "heroTitle": "JSLY's Public Blog",
+    "desc": "コミュニティからの声。あなたの記事を投稿して、知識や見解を共有しましょう。",
+    "submitGitHub": "GitHubで投稿",
+    "submitEmail": "メールで投稿",
+    "submitEmailAlt": "メールで投稿（予備）",
+    "howTitle": "投稿方法は？",
+    "howText": "次のいずれかの方法をお選びください：",
+    "howGithub": "<strong>GitHub</strong> — 上の「GitHubで投稿」ボタンをクリックし、テンプレートに従ってIssueを送信してください（GitHubユーザー名が自動的に作者名として使用されます）。",
+    "howEmail": "<strong>メール</strong> — 上の「メールで投稿」ボタンをクリックし、{email} に記事のタイトル、本文（Markdown）、署名を添えて送信してください。",
+    "howWait": "審査をお待ちください。承認された記事はここに表示されます。"
+  },
+  "router": {
+    "titleSuffix": " - JSLY's Blog",
+    "publicSuffix": " - パブリック投稿 - JSLY's Blog",
+    "404heading": "ページが見つかりません",
+    "404message": "お探しのページは存在しないか、リンクが間違っています。",
+    "backHome": "ホームに戻る",
+    "browseArticles": "記事を見る",
+    "suggestions": "こちらもどうぞ",
+    "goHome": "ホームへ",
+    "viewArticles": "記事一覧を見る",
+    "aboutMe": "について"
+  },
+  "404page": {
+    "title": "404 - ページが見つかりません",
+    "backLink": "記事一覧に戻る"
+  },
+  "lang": {
+    "zh": "中国語",
+    "en": "英語",
+    "ja": "日本語",
+    "ru": "ロシア語"
+  },
+  "meta": {
+    "siteName": "JSLY's Blog",
+    "siteTitle": "JSLY's Blog",
+    "description": "JSLY's Blog",
+    "keywords": "ブログ, 個人ブログ, JSLY, 技術, プログラミング",
+    "changeTitle": "更新履歴 - JSLY's Blog",
+    "publicKeywords": "ブログ, 投稿, コミュニティ, JSLY",
+    "publicTitle": "パブリック投稿 - JSLY's Blog",
+    "publicDesc": "パブリック投稿 - JSLY's Blog",
+    "publicOGDesc": "コミュニティからの投稿記事",
+    "changeKeywords": "ブログ, 更新履歴, JSLY, サイト更新",
+    "changeDesc": "更新履歴 - JSLY's Blog",
+    "changeOGDesc": "ブログ機能の更新と変更履歴",
+    "leaderboardKeywords": "ブログ, ランキング, PR, Issues, 投稿, JSLY",
+    "leaderboardTitle": "ランキング - JSLY's Blog",
+    "leaderboardDesc": "ランキング - JSLY's Blog",
+    "leaderboardOGDesc": "すべての貢献者に感謝します",
+    "errorDesc": "ページが見つかりません - JSLY's Blog",
+    "errorTitle": "404 - ページが見つかりません"
+  }
+}

@@ -4,9 +4,14 @@
 let articlesData = [];
 
 function loadArticlesFromJSON() {
-    return fetch('data/articles.json')
+    var lang = (window.__currentLang || 'zh').split('-')[0];
+    var url = '/data/articles-' + lang + '.json';
+    return fetch(url).then(function (resp) {
+        if (!resp.ok) return fetch('/data/articles-zh.json');
+        return resp;
+    })
         .then(response => {
-            if (!response.ok) throw new Error('网络响应不正常');
+            if (!response.ok) throw new Error('Network response not ok');
             return response.json();
         })
         .then(data => {
@@ -20,7 +25,7 @@ function loadArticlesFromJSON() {
         .catch(error => {
             console.error('加载文章数据时出错:', error);
             document.getElementById('articles-container').innerHTML =
-                '<p class="error-message">无法加载文章，请检查网络连接或刷新页面重试。</p>';
+                '<p class="error-message">' + t('article.loadError') + '</p>';
         });
 }
 
@@ -38,7 +43,7 @@ function renderAllArticles() {
 function renderArticlesToContainer(articles, container) {
     if (!container) return;
     if (articles.length === 0) {
-        container.innerHTML = '<p class="no-articles">暂无文章，敬请期待...</p>';
+        container.innerHTML = '<p class="no-articles">' + t('article.empty') + '</p>';
         return;
     }
     articles.forEach(article => {
@@ -52,7 +57,8 @@ function createArticleElement(article) {
     articleCard.className = 'article-card fade-in';
     articleCard.setAttribute('data-article-id', article.id);
 
-    const pinnedBadge = article.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> 置顶</span>' : '';
+    var pinnedText = t('article.pinned');
+    const pinnedBadge = article.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> ' + pinnedText + '</span>' : '';
     var safeTitle = escapeHtml(article.title);
     var imageHtml = article.image
         ? `<div class="article-image">${pinnedBadge}<img src="${article.image}" alt="${safeTitle}" loading="lazy"></div>`
@@ -68,7 +74,7 @@ function createArticleElement(article) {
         '  <p>' + escapeHtml(article.excerpt) + '</p>',
         '  <div class="article-meta">',
         '    <span><i class="far fa-calendar"></i> ' + escapeHtml(article.date) + '</span>',
-        '    <span><i class="far fa-clock"></i> ' + escapeHtml(article.readTime) + '</span>',
+        '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)) + '</span>',
         '    <span><i class="far fa-eye"></i> ' + escapeHtml('' + article.views) + '</span>',
         '  </div>',
         '</div>'
