@@ -1,0 +1,518 @@
+articles:
+  - id: 1
+    title: OpenCode User Guide
+    series:
+      name: OpenCode 入门
+      order: 1
+    date: '2026-06-21'
+    tags:
+      - OpenCode
+      - AI
+      - Tools
+    excerpt: OpenCode is a powerful AI-assisted CLI programming tool. This article introduces its core features and usage.
+    content:
+      - '## What is OpenCode?'
+      - ''
+      - OpenCode is an AI-assisted programming tool that runs in the terminal. It understands your natural language instructions and helps you with code writing, refactoring, debugging, documentation generation, and other software engineering tasks.
+      - ''
+      - '## Installation'
+      - ''
+      - '### Method 1: Global npm Installation (Recommended)'
+      - ''
+      - '```bash'
+      - npm install -g @opencode/cli
+      - '```'
+      - ''
+      - After installation, run `opencode` in your terminal to start.
+      - ''
+      - '### Method 2: Using npx'
+      - ''
+      - '```bash'
+      - npx @opencode/cli
+      - '```'
+      - ''
+      - '### Method 3: Build from Source'
+      - ''
+      - '```bash'
+      - git clone https://github.com/anomalyco/opencode.git
+      - cd opencode
+      - npm install
+      - npm run build
+      - npm link
+      - '```'
+      - ''
+      - '## Quick Start'
+      - ''
+      - 'Run the following in your project directory:'
+      - ''
+      - '```bash'
+      - opencode
+      - '```'
+      - ''
+      - Once in the conversation interface, you can describe your needs in natural language. OpenCode will automatically analyze your codebase and perform the requested actions.
+      - ''
+      - '## Core Features'
+      - ''
+      - '### 1. Code Editing'
+      - ''
+      - 'OpenCode can precisely modify file contents, supporting:'
+      - ''
+      - '- String-based search and replace'
+      - '- Insert and delete code blocks'
+      - '- Batch replacements'
+      - ''
+      - '### 2. File Operations'
+      - ''
+      - 'No need to open files manually. OpenCode supports:'
+      - ''
+      - '- Reading file contents'
+      - '- Creating new files'
+      - '- Searching file contents (with regex support)'
+      - '- Finding files by glob patterns'
+      - ''
+      - '### 3. Git Integration'
+      - ''
+      - 'Manage version control directly in conversation:'
+      - ''
+      - '- View status and changes'
+      - '- Stage and commit'
+      - '- View history'
+      - ''
+      - '### 4. Web Search'
+      - ''
+      - 'When you need to look up information, OpenCode can:'
+      - ''
+      - '- Search the web'
+      - '- Fetch documentation pages'
+      - '- Get the latest tech news'
+      - ''
+      - '### 5. Task Management'
+      - ''
+      - 'Complex tasks can be broken into multiple steps:'
+      - ''
+      - '- Create task lists'
+      - '- Track progress'
+      - '- Auto-track completion status'
+      - ''
+      - '## Usage Tips'
+      - ''
+      - '### Be Specific'
+      - ''
+      - '```text'
+      - ❌ Fix this function
+      - ✅ Fix floating-point precision in calculateTotal
+      - '```'
+      - ''
+      - '### Leverage Multi-Agent Collaboration'
+      - ''
+      - 'OpenCode supports multiple specialized agents:'
+      - ''
+      - '- **explore**: Quickly explore the codebase'
+      - '- **general**: Execute complex multi-step tasks'
+      - ''
+      - '### Manage Context Effectively'
+      - ''
+      - Keep your context clear when conversing with OpenCode. Start a new task after finishing the current one to avoid context mixing.
+      - ''
+      - '## Important Notes'
+      - ''
+      - '- OpenCode does not automatically commit code; you need to explicitly request it'
+      - '- Sensitive information (keys, passwords) is never uploaded'
+      - '- Review generated code before deploying'
+      - ''
+      - '## Summary'
+      - ''
+      - OpenCode deeply integrates AI capabilities into your development workflow, allowing you to focus more on problem-solving and solution design. Whether for daily development or learning new technologies, it is a powerful assistant.
+    image: images/opencode-terminal.svg
+    readTimeMinutes: 3
+    views: 42
+  - id: 2
+    pinned: true
+    showImage: false
+    title: JSLY Blog User Guide
+    date: '2026-06-21'
+    tags:
+      - Guide
+      - Tutorial
+    excerpt: Welcome to JSLY's Blog! This guide introduces every feature of the blog to help you get started quickly and make the most of it.
+    content:
+      - '## Welcome to JSLY''s Blog'
+      - ''
+      - JSLY's Blog is a static blog built on GitHub Pages, using Vanilla HTML/CSS/JS with no build tools required. It offers a smooth reading experience, powerful search, and various personalization settings. This guide walks you through each feature.
+      - ''
+      - '## Navigation & Page Structure'
+      - ''
+      - 'The homepage consists of the following sections:'
+      - ''
+      - '### Hero Section'
+      - ''
+      - The top of the page displays the blog title and a welcome message. Click the "Start Reading" button to jump to the article list.
+      - ''
+      - '### Navigation Bar'
+      - ''
+      - The fixed top navigation bar contains links to Home, Articles, Public Submissions, and About. Click to smoothly scroll to the corresponding section. The current section's nav item is highlighted. On mobile, the nav bar collapses into a hamburger menu.
+      - ''
+      - 'Useful icons on the right side of the nav bar:'
+      - ''
+      - '- **Dark Mode Toggle** — Switch between light and dark themes with one click'
+      - '- **Settings Icon** — Open reading settings to change article viewing mode'
+      - '- **Search Icon** — Open the search dialog'
+      - '- **Menu Button** — Expand navigation links on mobile'
+      - ''
+      - '### Article List'
+      - ''
+      - The "Latest Articles" section displays all articles in a card grid. Each card contains the title, tags, excerpt, publication date, estimated reading time, and view count. Cards float upward with a shadow effect on hover.
+      - ''
+      - '### About Section'
+      - ''
+      - The "About Me" section shows the blogger's profile card with social links and statistics. The card automatically switches to a dark theme in dark mode.
+      - ''
+      - '### Footer'
+      - ''
+      - The footer includes social media links (QQ, GitHub, Luogu, Qzone, AtCoder), quick navigation links, and contact information.
+      - ''
+      - '## Article Card Interaction'
+      - ''
+      - Click any article card to view the article details. If the article has a cover image, it will be displayed at the top of the card; cards without a cover image use a gradient placeholder.
+      - ''
+      - '## Two Reading Modes'
+      - ''
+      - 'Click the gear icon in the navigation bar to open settings and switch between two viewing modes:'
+      - ''
+      - '### Modal Mode (Default)'
+      - ''
+      - Articles open in a modal dialog overlay on the current page. Features include reading progress bar, ESC to close, click-outside to close, and scroll-linked TOC highlighting.
+      - ''
+      - '### New Page Mode'
+      - ''
+      - Articles open in a new tab (`/article/{id}`), suitable for reading multiple articles or keeping the homepage intact. A "Back to Articles" link is provided at the top.
+      - ''
+      - Your preference is saved via Cookie and persists across browser sessions.
+      - ''
+      - '## Search'
+      - ''
+      - 'Click the search icon in the navigation bar to open the search dialog. Two search methods are supported:'
+      - ''
+      - '### Keyword Search'
+      - ''
+      - Enter keywords to match article titles, tags, excerpts, and full content in real-time. Matching keywords are highlighted.
+      - ''
+      - '### Pinyin Search'
+      - ''
+      - The pinyin-pro library is integrated for pinyin-based search. For example, searching "zhinan" will match articles with "指南" in the title. Pinyin search requires at least 2 characters.
+      - ''
+      - '### Keyboard Navigation'
+      - ''
+      - In the search dialog, use ↑/↓ to navigate results, Enter to open the selected article, and ESC to close.
+      - ''
+      - '## Article Features'
+      - ''
+      - 'Once an article is open, you can use the following features:'
+      - ''
+      - '### Table of Contents & Scroll Highlighting'
+      - ''
+      - A table of contents sidebar appears on the left, auto-generated from H1/H2/H3 headings. The current section is highlighted as you scroll. Click a TOC item to jump smoothly.
+      - ''
+      - '### Share'
+      - ''
+      - A share button is at the bottom of each article. On supported browsers, it invokes the native share dialog; otherwise, it copies the link to the clipboard.
+      - ''
+      - '### Comments'
+      - ''
+      - The Giscus comment system (based on GitHub Discussions) is integrated at the bottom of each article. Log in with your GitHub account to comment and reply. The comment theme follows dark mode automatically.
+      - ''
+      - '## Dark Mode'
+      - ''
+      - Click the moon/sun icon to toggle. The nav bar, article cards, code highlighting, profile card, and comments all adapt automatically. Your preference is saved in localStorage, and the system theme is detected on first visit.
+      - ''
+      - '## Deep Linking'
+      - ''
+      - 'Two types of deep links are supported:'
+      - ''
+      - '- **Hash Links**: `index.html#article-N` — opens the article modal directly on the homepage'
+      - '- **Page Links**: `/article/{id}` — displays the full article on a standalone page'
+      - ''
+      - If the specified article ID does not exist, the page automatically shows a 404. Both link types are compatible. Hash links in page mode will redirect to the homepage and open the modal. For sharing/bookmarking, use the `/article/{id}` format.
+      - ''
+      - '## Public Submissions'
+      - ''
+      - There is a dedicated [Public Submissions](/public/) section where community members can contribute articles.
+      - ''
+      - '### How to Access?'
+      - ''
+      - Click "Public Submissions" in the navigation bar, or visit `/public/` directly. The page has its own Hero section and article list, sharing the same UI style as the main blog.
+      - ''
+      - '### How to Submit?'
+      - ''
+      - 'Two submission methods are supported:'
+      - ''
+      - '- **GitHub Issue** (Recommended) — Click the "Submit via GitHub" button, fill in the template, and submit. Your GitHub username will be automatically used as the author name.'
+      - '- **Email** — Send an email to submit@blog.jsly.asia with the article title, body (Markdown), and your name.'
+      - ''
+      - Submissions are reviewed before publication. Approved articles will appear in the Public Submissions section.
+      - ''
+      - '### Reading Experience'
+      - ''
+      - Public articles also support Modal Mode and New Page Mode, with table of contents, code highlighting, comments (Giscus), and sharing. Author badges are displayed on cards to distinguish submitted articles from main blog articles.
+      - ''
+      - '## Summary'
+      - ''
+      - Although built on a simple static architecture, JSLY's Blog provides a complete and comfortable reading experience. The full source code is open source on GitHub (AGPL-3.0). If you have questions or suggestions, feel free to reach out via the footer contact info or article comments.
+      - ''
+      - Happy reading!
+    readTimeMinutes: 6
+    views: 0
+  - id: 3
+    title: OpenCode AI Agent Deep Dive
+    series:
+      name: OpenCode 入门
+      order: 2
+    date: '2026-06-30'
+    tags:
+      - OpenCode
+      - AI
+      - Agent
+    excerpt: Deep dive into OpenCode's agent system architecture. Learn how explore, general, and other specialized agents work and collaborate.
+    content:
+      - '## Agent System Overview'
+      - ''
+      - At the core of OpenCode is its Agent system. Each Agent is a specialized AI assistant that excels at specific types of tasks. By choosing and combining Agents effectively, you can efficiently handle everything from code exploration to complex refactoring.
+      - ''
+      - '## explore Agent'
+      - ''
+      - 'The explore Agent specializes in quickly exploring and understanding codebases. It''s ideal for:'
+      - ''
+      - '- **Quick Search**: Find relevant code by keywords or patterns'
+      - '- **Architecture Understanding**: Analyze project structure and module dependencies'
+      - '- **Code Review**: Identify potential issues and understand code logic'
+      - ''
+      - '### Usage Example'
+      - ''
+      - '```text'
+      - 'You: Find all code related to user authentication and briefly explain the flow'
+      - 'explore: Searching for files related to "auth", "login", "authentication"...'
+      - '     Found key files:'
+      - '     - src/auth/login.ts — Login logic'
+      - '     - src/auth/verify.ts — Token verification'
+      - '     - src/middleware/auth.ts — Auth middleware'
+      - '```'
+      - ''
+      - The explore Agent outputs file paths, relevant code snippets, and summary explanations to help you quickly understand the codebase.
+      - ''
+      - '## general Agent'
+      - ''
+      - 'The general Agent is OpenCode''s workhorse, capable of executing multi-step complex tasks:'
+      - ''
+      - '- **Code Refactoring**: Analyze existing code, plan and execute refactoring'
+      - '- **Feature Development**: Full workflow from requirements to implementation'
+      - '- **Bug Fixing**: Locate root causes and apply fixes'
+      - '- **Documentation**: Generate README, API docs for projects'
+      - ''
+      - '### Workflow'
+      - ''
+      - 'The general Agent follows these steps for complex tasks:'
+      - ''
+      - '1. **Understand Requirements**: Analyze your natural language description'
+      - '2. **Plan**: Break tasks into executable sub-steps'
+      - '3. **Execute**: Perform each sub-step sequentially, rolling back if needed'
+      - '4. **Verify**: Confirm each step''s output meets expectations'
+      - '5. **Report**: Provide a complete execution summary'
+      - ''
+      - '```text'
+      - 'You: Convert all callbacks in the project to Promise/async-await style'
+      - 'general: OK, let me analyze the codebase for refactoring targets.'
+      - '        Step 1: Search for callback patterns... found 12 occurrences'
+      - '        Step 2: Analyze each for safe conversion...'
+      - '        Step 3: Convert and verify one by one...'
+      - '        Step 4: Run tests to confirm no regressions'
+      - '        Completed all 12 conversions'
+      - '```'
+      - ''
+      - '## Task Management'
+      - ''
+      - 'OpenCode provides powerful task management:'
+      - ''
+      - '### Task Lists'
+      - ''
+      - 'Create structured task lists to organize work:'
+      - ''
+      - '```text'
+      - 'You: Create a task list for adding a user permission system'
+      - 'OpenCode: Tasks created:'
+      - '        [ ] 1. Design permission data model'
+      - '        [ ] 2. Implement role management CRUD'
+      - '        [ ] 3. Add permission check middleware'
+      - '        [ ] 4. Integrate with existing routes'
+      - '        [ ] 5. Write test cases'
+      - '```'
+      - ''
+      - '### Progress Tracking'
+      - ''
+      - Task lists automatically track completion status. Each step updates progress automatically. You can view overall progress, skip tasks, or reorder them at any time.
+      - ''
+      - '## Multi-Agent Collaboration'
+      - ''
+      - 'In complex scenarios, multiple Agents can work together:'
+      - ''
+      - '- **explore → general**: Have explore analyze the codebase, then pass findings to general for action'
+      - '- **Division of Labor**: explore analyzes, general executes modifications'
+      - '- **Relay Mode**: One Agent''s output becomes the next Agent''s input'
+      - ''
+      - '```text'
+      - 'You: (to explore) Analyze the project''s test coverage'
+      - 'explore: Found 45 test files, coverage approximately 67%'
+      - 'You: (to general) Based on the above, add tests for modules below 50%'
+      - 'general: OK, let me identify which modules need coverage...'
+      - '```'
+      - ''
+      - '## Best Practices'
+      - ''
+      - '- **Specify Agent Role**: Mention which Agent to use at the start of a conversation'
+      - '- **Step by Step**: Break complex tasks into smaller steps'
+      - '- **Confirm Progress**: Verify results after each key step'
+      - '- **Reset Context**: Start fresh after completing each task to avoid context pollution'
+      - ''
+      - '## Summary'
+      - ''
+      - Mastering OpenCode's Agent system is key to using it effectively. explore handles "reading" code, while general handles "modifying" code. Together they can handle everything from simple queries to complex refactoring.
+    image: images/opencode-terminal.svg
+    readTimeMinutes: 5
+    views: 0
+  - id: 4
+    title: OpenCode Advanced Tips & Best Practices
+    series:
+      name: OpenCode 入门
+      order: 3
+    date: '2026-06-30'
+    tags:
+      - OpenCode
+      - AI
+      - Tips
+    excerpt: Master advanced OpenCode techniques including configuration optimization, prompt engineering, security practices, and workflow integration.
+    content:
+      - '## Configuration File'
+      - ''
+      - 'OpenCode supports customization via configuration file. Create `.opencode.json` in your project root:'
+      - ''
+      - '```json'
+      - '{'
+      - '  "agents": {'
+      - '    "explore": { "maxFiles": 50 },'
+      - '    "general": { "autoConfirm": false }'
+      - '  },'
+      - '  "git": {'
+      - '    "autoFetch": true,'
+      - '    "commitTemplate": "feat: {message}"'
+      - '  },'
+      - '  "search": {'
+      - '    "excludePatterns": ["node_modules", "dist"]'
+      - '  }'
+      - '}'
+      - '```'
+      - ''
+      - '### Configuration Reference'
+      - ''
+      - '- **agents.explore.maxFiles**: Max files explore Agent can search at once'
+      - '- **agents.general.autoConfirm**: Auto-confirm file modifications'
+      - '- **git.autoFetch**: Auto-fetch latest remote status on startup'
+      - '- **git.commitTemplate**: Custom commit message template'
+      - '- **search.excludePatterns**: Directories or file patterns to exclude from search'
+      - ''
+      - '## Prompt Engineering'
+      - ''
+      - 'Communication quality directly affects output:'
+      - ''
+      - '### Structured Description'
+      - ''
+      - '```text'
+      - ❌ Optimize this function
+      - '✅ Please optimize the formatDate function in src/utils/format.ts:'
+      - '   - Current issue: doesn''t support timezone parameter, code is redundant'
+      - '   - Expect: accept timezone parameter, rewrite using Intl.DateTimeFormat'
+      - '   - Keep: existing interface signature unchanged'
+      - '```'
+      - ''
+      - '### Step-by-Step Guidance'
+      - ''
+      - '```text'
+      - 'You: First, analyze all API route definitions in the project'
+      - 'You: Second, find routes without input validation'
+      - 'You: Third, add request body validation for those routes'
+      - '```'
+      - ''
+      - '### Provide Context'
+      - ''
+      - 'Giving OpenCode project context significantly improves accuracy:'
+      - ''
+      - '```text'
+      - 'You: This is a Node.js project using Express + TypeORM,'
+      - '    with PostgreSQL. Please add user CRUD in src/routes.'
+      - '```'
+      - ''
+      - '## Security Practices'
+      - ''
+      - '### Sensitive Information'
+      - ''
+      - '- OpenCode does not upload sensitive information, but still:'
+      - '- Avoid pasting keys or passwords directly in conversation'
+      - '- Use environment variables or `.env` files for configuration'
+      - '- Review code changes for embedded test credentials'
+      - ''
+      - '### Code Review'
+      - ''
+      - 'Always review OpenCode-generated code before deployment:'
+      - ''
+      - '- Check for security issues (SQL injection, XSS, etc.)'
+      - '- Verify compliance with project coding standards'
+      - '- Ensure no accidental deletion of existing functionality'
+      - ''
+      - '## Workflow Optimization'
+      - ''
+      - '### Daily Development Flow'
+      - ''
+      - '```text'
+      - 1. Open project in morning → have explore check yesterday's changes
+      - 2. Start new feature → have general analyze requirements and plan
+      - 3. Implement → execute step by step, confirm after each step
+      - 4. Code review → have explore review the changes
+      - 5. Git operations → let OpenCode stage, commit, and push
+      - '```'
+      - ''
+      - '### Debugging Flow'
+      - ''
+      - '```text'
+      - 1. Describe the bug → general analyzes possible causes
+      - 2. explore searches relevant code → locates the problem file
+      - 3. general creates fix plan → applies modifications
+      - 4. Verify the fix → run related tests
+      - '```'
+      - ''
+      - '## Tool Integration'
+      - ''
+      - 'OpenCode integrates seamlessly with existing workflows:'
+      - ''
+      - '- **Editor**: Use OpenCode directly in VS Code terminal'
+      - '- **CI/CD**: Use OpenCode in GitHub Actions for code review'
+      - '- **Git Hooks**: Set up pre-commit hooks for automatic code quality checks'
+      - '- **Project Management**: Export task lists to project management tools'
+      - ''
+      - '## Troubleshooting'
+      - ''
+      - '### OpenCode doesn''t modify code as expected'
+      - ''
+      - Check if you provided sufficient context and clear requirements. Try breaking down into smaller steps.
+      - ''
+      - '### OpenCode can''t find relevant files'
+      - ''
+      - Ensure you're running from the project root. Check search exclusion patterns in config.
+      - ''
+      - '### How to handle errors?'
+      - ''
+      - Provide the full error message to OpenCode and describe what you were doing when the error occurred.
+      - ''
+      - '## Summary'
+      - ''
+      - With proper configuration and optimized usage, OpenCode becomes an indispensable assistant in your development workflow. Good prompt practices and a step-by-step approach are key to maximizing its potential.
+    image: images/opencode-terminal.svg
+    readTimeMinutes: 5
+    views: 0

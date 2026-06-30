@@ -71,14 +71,14 @@
     var publicMatch = pathname.match(/^\/public\/article\/(\d+)\/?$/);
     if (publicMatch) {
       var pubId = parseInt(publicMatch[1], 10);
-      fetch('/data/articles-public-' + lang + '.json')
+      fetch('/data/articles-public-' + lang + '.yaml')
         .then(function (resp) {
-          if (!resp.ok) return fetch('/data/articles-public-zh.json');
+          if (!resp.ok) return fetch('/data/articles-public-zh.yaml');
           return resp;
         })
         .then(function (resp) {
           if (!resp.ok) throw new Error('Network response not ok');
-          return resp.json();
+          return resp.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(function (data) {
           var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
@@ -96,10 +96,10 @@
     var match = pathname.match(/^\/article\/(\d+)\/?$/);
     if (match) {
       var id = parseInt(match[1], 10);
-      fetch('/data/articles-' + lang + '.json')
+      fetch('/data/articles-' + lang + '.yaml')
         .then(function (resp) {
           if (!resp.ok) throw new Error('网络响应不正常');
-          return resp.json();
+          return resp.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(function (data) {
           var article = data.articles.find(function (a) { return Number(a.id) === id; });
@@ -123,9 +123,9 @@
       if (rawId && rawId.indexOf('pub-') === 0) {
         var pubId = parseInt(rawId.substring(4), 10);
         if (pubId) {
-          fetch('/data/articles-public-' + lang + '.json')
-            .then(function (resp) { if (!resp.ok) return fetch('/data/articles-public-zh.json'); return resp; })
-            .then(function (resp) { if (!resp.ok) throw new Error('Network response not ok'); return resp.json(); })
+          fetch('/data/articles-public-' + lang + '.yaml')
+            .then(function (resp) { if (!resp.ok) return fetch('/data/articles-public-zh.yaml'); return resp; })
+            .then(function (resp) { if (!resp.ok) throw new Error('Network response not ok'); return resp.text().then(function (text) { return jsyaml.load(text); }); })
             .then(function (data) {
               var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
               if (!article) { showNotFound(); return; }
@@ -141,9 +141,9 @@
 
       var id2 = parseInt(rawId, 10);
       if (id2) {
-        fetch('/data/articles-' + lang + '.json')
-          .then(function (resp) { if (!resp.ok) return fetch('/data/articles-zh.json'); return resp; })
-          .then(function (resp) { if (!resp.ok) throw new Error('Network response not ok'); return resp.json(); })
+        fetch('/data/articles-' + lang + '.yaml')
+          .then(function (resp) { if (!resp.ok) return fetch('/data/articles-zh.yaml'); return resp; })
+          .then(function (resp) { if (!resp.ok) throw new Error('Network response not ok'); return resp.text().then(function (text) { return jsyaml.load(text); }); })
           .then(function (data) {
             var article = data.articles.find(function (a) { return Number(a.id) === id2; });
             if (!article) { showNotFound(); return; }

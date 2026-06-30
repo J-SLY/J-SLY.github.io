@@ -1,0 +1,380 @@
+articles:
+  - id: 33
+    type: feat
+    title: 数据存储从 JSON 迁移至 YAML
+    date: 2026-06-30 23:06
+    content: |-
+      所有数据文件从 `.json` 格式迁移至 `.yaml`，提升可读性和编辑体验：
+
+      - `data/articles-*.json` → `data/articles-*.yaml`
+      - `data/articles-public-*.json` → `data/articles-public-*.yaml`
+      - `data/articles-change-*.json` → `data/articles-change-*.yaml`
+      - 引入 js-yaml CDN 库，前端加载时自动解析 YAML
+      - 更新所有 fetch 调用改为加载 `.yaml` 并使用 `jsyaml.load()` 解析
+      - 旧 JSON 文件已删除
+  - id: 32
+    type: chore
+    title: 代码块字体优化：Fira Code CDN 加载 + 修复字体不一致问题
+    date: 2026-06-30 21:49
+    content: |-
+      代码块字体相关多项修复：
+
+      - 从 Google Fonts CDN 加载 Fira Code 字体（权重 400/600/700），不再依赖本地安装
+      - 修复深色模式下代码块背景覆盖 highlight.js 主题导致文字不可见的问题
+      - 移除字体栈中非等宽字体 `DengXian`/`Noto Sans Mono CJK SC`，避免拉丁字母回退到比例字体
+      - 强制代码块内所有高亮 `<span>` 继承统一的 `font-family`，消除语法高亮 span 边界处的字体分岔
+      - 禁用代码块内 `.hljs-built_in` 等高亮颜色差异，避免同一指令内部分词变色显突兀
+  - id: 31
+    type: feat
+    title: GitHub Roast 卡片适配深色模式
+    date: 2026-06-30 21:27
+    content: |-
+      GitHub Roast 卡片现在跟随站点深色模式自动切换主题：
+
+      - `index.html` 中卡片链接和图片添加 `id` 属性，域名改用 `githubroast.dev`
+      - `dark-mode.js` 新增 `updateGithubRoastTheme()`，根据深色/浅色模式切换 `?theme=dark` / `?theme=light` 参数
+      - 手动切换深色模式和跟随系统色盘变化时均自动更新
+  - id: 30
+    type: fix
+    title: 修复贡献榜标签名显示异常 & public 页面 <strong> 标签暴露
+    date: 2026-06-30 15:30
+    content: |-
+      修复两个显示 Bug：
+
+      - **贡献榜排行标签** — `boardLabel()` 函数构建的 i18n 键名大小写及单复数不匹配（`tabPr`/`tabIssues`/`tabSubmissions` vs `tabPR`/`tabIssue`/`tabSubmission`），导致标签直接显示属性名。已改用显式键名映射。
+      - **public 页面 <strong> 标签暴露** — `applyI18n()` 中 `data-i18n` 使用 `textContent` 赋值，导致翻译值中的 HTML 标签被转义为纯文本。已改用 `innerHTML`。
+  - id: 29
+    type: feat
+    title: 更新日志分流为用户版和开发者版
+    date: 2026-06-28 10:30
+    content: |-
+      更新日志页面（`/change/`）新增用户版/开发者版双模式：
+
+      - 页面顶部新增「用户版」「开发者版」切换按钮
+      - **用户版** — 隐藏与开发相关的杂项（chore）日志，仅展示功能更新和 Bug 修复
+      - **开发者版** — 展示全部日志，包含所有杂项（chore）记录
+      - 切换模式时自动过滤杂项类型筛选按钮
+      - 模式选择保存在 `localStorage` 中，刷新页面后保持
+  - id: 28
+    type: chore
+    title: 添加 README 文档并同步提交统计
+    date: 2026-06-28 09:43
+    content: |-
+      - 添加英文 README.md 和中文 README_CN.md 项目文档
+      - 同步更新 `change/index.html` 中提交次数（141→142）和推送次数（131→132）
+  - id: 27
+    type: chore
+    title: 重构项目目录结构
+    date: 2026-06-27 22:36
+    content: |-
+      将项目文件按功能分入子目录：
+
+      - **JS 文件** — 从 `js/` 扁平结构分入 `js/core/`、`js/articles/`、`js/article-view/` 三个子目录
+      - **数据文件** — `articles.json`、`articles-public.json`、`articles-change.json` 移至 `data/`
+      - **图标文件** — `JS.svg` 移至 `images/`
+      - 更新所有 HTML 中的 `<script src>`、`<link rel="icon">`、`<meta og:image>` 路径
+      - 更新 JS 中所有 `fetch()` 数据路径
+      - 同步更新 `AGENTS.md` 中的目录结构和路径说明
+  - id: 26
+    type: feat
+    title: 贡献榜 PR/Issues 榜接入 GitHub API
+    date: 2026-06-27 22:30
+    content: |-
+      贡献榜（`/leaderboard/`）的 PR 榜和 Issues 榜改为从 GitHub API 实时获取数据：
+
+      - **PR 榜** — 通过 `type:pr` 搜索仓库 PR，按创建者聚合统计，替代之前的硬编码数据
+      - **Issues 榜** — 通过 `type:issue` 搜索仓库 Issue，排除 `public-submission` 和 `stats:exclude` 标签的条目
+      - **排除机制** — 给 Issue 打上 `stats:exclude` 标签即可将其排除出统计
+      - **投稿不计入** — 投稿模板自带 `public-submission` 标签，自动排除
+      - 配置集中管理（`LEADERBOARD_CONFIG`），支持自定义排除标签列表
+  - id: 25
+    type: fix
+    title: 不再暴露投稿者邮箱地址
+    date: 2026-06-27 22:23
+    content: |-
+      修复投稿文章 `authorLink` 暴露投稿者邮箱的问题：
+
+      - 从 `articles-public.json` 中移除 `"authorLink": "mailto:..."` 字段
+      - `utils.js` 新增 `sanitizeAuthorLink()` 函数，自动过滤 `mailto:` 前缀的链接
+      - `articles-public.js` 和 `article-router.js` 中三处渲染作者链接全部改为使用 `sanitizeAuthorLink()`
+      - `mailto:` 链接不再生成 `<a>` 标签，仅显示作者纯文本名
+      - 正常的 `https://` 等链接不受影响，照常渲染
+  - id: 23
+    type: feat
+    title: 更新日志页面时间线可按类型筛选
+    date: 2026-06-27 21:51
+    content: |-
+      更新日志页面（`/change/`）新增类型筛选功能：
+
+      - 时间线上方新增筛选按钮栏，支持按「全部」「功能更新」「Bug 修复」「杂项」分类查看
+      - 筛选按钮固定排序，动态高亮当前选中项
+      - 点击筛选后仅显示对应类型的日志条目，无需重新加载页面
+  - id: 24
+    type: feat
+    title: 新增贡献榜子页面
+    date: 2026-06-27 22:08
+    content: |-
+      新增 `/leaderboard/` 贡献榜页面，包含三个榜单：
+
+      - **PR 榜** — 按提交次数统计
+      - **Issues 榜** — 预留，待后续填充
+      - **投稿榜** — 从 `articles-public.json` 动态按作者统计
+
+      榜单支持选项卡切换，并列按名字字典序排序，前三名显示金银铜徽章。
+  - id: 21
+    type: chore
+    title: 项目文件整理：SRI 哈希统一、JS 去重、汉堡菜单提取
+    date: 2026-06-27 21:37
+    content: |-
+      全面整理项目文件结构，消除多处冗余和不一致：
+
+      **SRI 哈希同步**
+      - 统一 `index.html`、`article.html`、`404.html`、`public/index.html` 中 markdown、highlight.js、pinyin-pro 的 integrity 值，确保 CDN 脚本在所有页面正常加载
+
+      **共享工具函数提取**
+      - 新增 `js/utils.js`，定义全局 `escapeHtml()`，消除 `article-content.js` 和 `articles-change.js` 中的重复定义
+      - 所有页面加载 `utils.js`（位于 `display-mode.js` 之后）
+      - `articles-change.js` 中的 `escapeHtml` 使用更完备的类型检查（`typeof str !== 'string'`）
+
+      **汉堡菜单统一**
+      - 新增 `initMobileMenu()` 到 `navigation.js`，封装移动端菜单切换逻辑
+      - 从 `main.js`、`public/index.html`、`change/index.html` 中移除重复的内联汉堡菜单代码
+      - 所有页面统一调用 `initMobileMenu()`
+
+      **清理孤立文件**
+      - 移除未使用的 `images/logo.svg`
+  - id: 20
+    type: fix
+    title: 全局滚动条样式统一
+    date: 2026-06-27 21:21
+    content: |-
+      将全站滚动条样式统一为细圆角风格，与网站主题色协调：
+
+      - `base.css` 新增全局 `::-webkit-scrollbar` 样式（6px 宽/高、圆角 thumb）
+      - 新增 `--scrollbar-thumb` / `--scrollbar-thumb-hover` CSS 变量，随亮/暗模式自动切换
+      - 新增 Firefox 兼容写法（`scrollbar-width: thin` + `scrollbar-color`）
+      - 移除 `overlay.css` 中重复的 `.modal-content` / `.search-results` 滚动条样式
+      - 文章目录（TOC）侧边栏等所有可滚动区域自动统一风格
+  - id: 19
+    type: chore
+    title: 路径统一：changelog → change
+    date: 2026-06-27 21:14
+    content: |-
+      将 `changelog/` 路径及相关文件统一重命名为 `change/`：
+
+      - `changelog/` → `change/`
+      - `articles-changelog.json` → `articles-change.json`
+      - `js/articles-changelog.js` → `js/articles-change.js`
+      - `css/components/changelog.css` → `css/components/change.css`
+      - CSS 类名、JS 函数名同步更新
+  - id: 18
+    type: fix
+    title: 搜索功能全面修复（数据时序/拼音空格/Content 拼音/CDN SRI 哈希）
+    date: 2026-06-27 20:59
+    content: |-
+      修复搜索功能的多个问题：
+
+      - **数据加载时序**：`initSearch()` 在 fetch 完成前被调用，`dataSource` 捕获空数组。修复方式：将 `initSearch()` 调用移至 fetch `.then()` 回调内，在 `articlesData = data.articles` 同一级执行。
+      - **拼音空格匹配**：用户输入 `"ru men"`（带空格），但 pinyin-pro 输出的拼音串无空格（`"rumen"`），导致 `indexOf` 查找失败。修复方式：在 `findPinyinMatchRange()` 内对 query 先 `replace(/\s+/g, '')` 去空格后再对比。
+      - **Content 拼音搜索缺失**：filter 只对 article.title 和 article.excerpt 做了 pinyin 匹配，但 article.content 仅有直接文本匹配（`includes(q)`），中文内容无法通过拼音匹配。修复方式：filter 加上 `matchPinyin(a.content.join('\n'), q)`。
+      - **所有 CDN 脚本加载失败**：`marked`、`highlight.js`、`pinyin-pro` 的 SRI integrity 哈希值与 CDN 实际文件不匹配（CDN 文件内容更新但哈希未同步），浏览器拒绝执行脚本，导致 `pinyinPro` 为 undefined。修复方式：用浏览器控制台报错中的 computed SHA 值更新 integrity 属性。
+      - 同步修复 `404.html`、`article.html`、`change/index.html` 中相同 CDN 脚本的 SRI 哈希。
+  - id: 1
+    type: feat
+    title: 新增更新日志子页面
+    date: 2026-06-27 21:02
+    content: |-
+      新增 change/ 子页面，用于记录博客功能更新与变更历史。
+
+      - 新增 change/ 子页面，独立展示更新日志条目
+      - 导航栏新增「更新日志」链接
+      - 新增 articles-change.json 数据文件、js/articles-change.js 渲染逻辑
+      - 新增 css/components/change.css 独立样式
+  - id: 2
+    type: feat
+    title: 模态框共享化、搜索参数化、安全与可访问性改进
+    date: 2026-06-27 10:41
+    content: |-
+      模态框提取为共享模块，搜索支持自定义数据源，统一 XSS 防御。
+
+      - 模态框逻辑提取为 article-modal-shared.js + article-modal.js，子页面可复用
+      - initSearch() 支持 dataSource / onOpenArticle 参数
+      - 所有输出统一使用 escapeHtml() 转义，防止 XSS 注入
+      - 搜索弹窗添加 role="dialog" 和 aria-modal 属性
+      - 所有 CDN 资源添加 SRI 完整性校验和 crossorigin 属性
+      - OG 标签提取 updateOGTags() / restoreOGTags() 为独立模块
+      - CSS 分离 cards.css、overlay.css、article.css 等独立样式文件
+  - id: 3
+    type: fix
+    title: 兼容模式、Giscus 暗色主题等 Bug 修复
+    date: 2026-06-27 10:25
+    content: |-
+      - 修复公共文章在兼容模式 (article.html?id=pub-) 下跳错主站的问题
+      - 修复 Giscus 评论区在手动切换暗色模式时主题不同步
+      - 修复 navigation.js 错误拦截非锚点链接
+      - 相对路径 /public/ -> public/，本地测试可正常跳转
+  - id: 4
+    type: feat
+    title: 阅读设置新增兼容模式、移动端 TOC 优化
+    date: 2026-06-27 10:06
+    content: |-
+      - 阅读设置新增「兼容模式 (article.html?id=)」
+      - 移动端文章 TOC 可折叠收起
+      - 修复弹窗关闭按钮与内容重叠的问题
+      - Hero 区域新增「我要投稿」按钮，链接到 /public/
+      - 新增 2029872426@qq.com 为首选投稿邮箱
+  - id: 5
+    type: feat
+    title: JSLY's Public Blog 社区投稿系统上线
+    date: 2026-06-26 23:11
+    content: |-
+      博客正式上线「公共投稿」社区栏目。
+
+      - 新增 /public/ 独立子页面，展示社区投稿文章
+      - 独立数据源 articles-public.json，包含 author / authorLink 字段
+      - 新增 js/articles-public.js，支持投稿卡片渲染（含作者徽章）
+      - 新增 css/components/public.css，靛蓝色独立主题
+      - 文章详情页展示投稿作者信息栏
+      - 搜索功能支持公共文章数据源
+      - article-router.js 支持 /public/article/{id} 独立页面和 article.html?id=pub-{id} 兼容路由
+      - 用户通过 GitHub Issue 模板提交，审核后合并至 articles-public.json
+  - id: 6
+    type: feat
+    title: 独立文章路由与 404 页面
+    date: 2026-06-26 22:42
+    content: |-
+      - 基于 404.html 实现单页路由，支持 /article/{id} 干净 URL
+      - 新增 js/article-router.js 独立路由模块
+      - 统一 404 页面样式，包含返回首页、浏览文章等建议
+      - 文章页和 404 页恢复顶部导航栏
+      - 404 页使用 Flexbox sticky footer
+      - 文章页「返回文章列表」按钮样式优化
+  - id: 7
+    type: chore
+    title: JS/CSS 模块化拆分与架构重构
+    date: 2026-06-26 22:10
+    content: |-
+      - JS 按功能拆分为 14 个独立文件
+      - CSS 按布局拆分为 base.css、layout.css、cards.css、overlay.css、article.css、responsive.css
+      - 阅读设置分组为「导航栏」和「阅读模式」两个子区域
+      - 新增「锁定导航栏」开关
+      - 移除点赞功能
+  - id: 8
+    type: feat
+    title: 阅读进度条移入弹窗、暗色模式完善
+    date: 2026-06-21 18:46
+    content: |-
+      - 阅读进度条从页面顶部移至文章弹窗内
+      - 修复暗色模式代码高亮双重 padding、弹窗 overflow、CSS 动画冲突
+      - Hero 区域背景色适配暗色模式
+      - 关于我 Profile Card 附加 theme=dark 参数
+      - Giscus 评论区跟随手动暗色模式切换
+      - 自定义暗色模式滚动条样式
+      - 页脚响应式适配，添加 480px 断点
+  - id: 9
+    type: feat
+    title: Giscus 评论系统集成
+    date: 2026-06-21 14:12
+    content: |-
+      - 集成 Giscus 评论系统，基于 GitHub Discussions
+      - 使用动态 script 注入代替静态嵌入
+      - Giscus 主题跟随手动暗色模式切换
+      - 代码字体统一为 Fira Code
+      - 移除了标签筛选功能
+  - id: 10
+    type: feat
+    title: 语法高亮、RSS、深色模式、搜索增强、目录导航
+    date: 2026-06-21 14:08
+    content: |-
+      - 集成 highlight.js 11.9.0 代码高亮
+      - 新增 feed.xml RSS 订阅
+      - 新增暗色模式切换
+      - 支持拼音搜索（基于 pinyin-pro 3.26.0）
+      - 搜索结果高亮匹配关键词
+      - 中文搜索要求最少 2 个字符
+      - 文章生成自动目录导航 (TOC)
+      - 文章阅读进度条
+      - 修复 Escape 键监听泄漏、弹窗崩溃等 5 个问题
+  - id: 11
+    type: feat
+    title: 文章分享、OG 标签与锚点深度链接
+    date: 2026-06-21 13:33
+    content: |-
+      - 文章详情新增分享按钮，支持复制链接
+      - 动态更新 Open Graph 标签
+      - 支持 #article-{id} Hash 锚点深度链接
+      - 页脚新增 support@blog.jsly.asia 联系邮箱
+  - id: 12
+    type: chore
+    title: 内容系统与架构重构
+    date: 2026-06-21 12:54
+    content: |-
+      - articles.json 的 content 字段改为字符串数组
+      - CSS 按功能拆分为 base.css、layout.css、components/ 目录
+      - 新增 pinned 字段，支持文章置顶
+      - 新增 showImage 字段，每篇文章可单独控制是否显示图片
+  - id: 13
+    type: feat
+    title: 社交链接全面接入
+    date: 2026-06-21 12:05
+    content: |-
+      页脚社交链接区域接入各平台：QQ、GitHub、Luogu、Luogu.me、AtCoder、Qzone。
+
+      - 社交图标改用独立 SVG 文件
+      - logo 改为纯图形 SVG 文字
+  - id: 14
+    type: chore
+    title: AGPL-3.0 开源协议与版权声明
+    date: 2026-06-21 11:27
+    content: |-
+      - 仓库添加 AGPL-3.0 开源协议
+      - 所有源文件（HTML/CSS/JS）添加 SPDX 版权头
+      - 页脚添加源代码链接，符合 AGPL-3.0 要求
+  - id: 15
+    type: feat
+    title: 搜索功能上线
+    date: 2026-06-21 11:48
+    content: |-
+      - 右上角搜索图标，点击弹出搜索面板
+      - 支持标题、标签、文章摘要和全文内容匹配
+      - 实时搜索，输入即反馈
+      - 修复页面加载报错、空图片、导航高亮等 Bug
+      - 添加中文回退字体和 SEO 标签
+  - id: 16
+    type: feat
+    title: 文章系统与设计主题上线
+    date: 2026-06-21 09:04
+    content: |-
+      - 文章内容支持 Markdown 渲染（基于 marked.js）
+      - 移除分类，改用标签 (tag) 模式，文章平铺展示
+      - 整体主题改为淡绿色小清新风格
+      - Hero 区域取消渐变，使用纯色背景
+      - 移除右侧栏，内容改为全宽布局
+      - 关于我改为展示 Profile Card SVG
+      - 博客标题改为「JSLY Blog」
+      - 新增 OpenCode 使用指南文章
+  - id: 17
+    type: feat
+    title: 网站初始化
+    date: 2026-05-24 14:23
+    content: |-
+      JSLY's Blog 正式上线！
+
+      - 配置自定义域名 www.jsly.asia（CNAME 记录）
+      - 基于 GitHub Pages 部署
+      - 纯静态 HTML/CSS/JS，无构建工具
+  - id: 33
+    type: fix
+    title: 安全修复：XSS 防护 + isSafeUrl 工具函数 + 代码质量改进
+    date: 2026-06-30 22:56
+    content: |-
+      - `sanitizeAuthorLink()` 改用白名单模式（仅允许 http/https 协议）
+      - 新增 `isSafeUrl()` / `resolveArticleImageUrl()` 工具函数
+      - 修复文章图片 `src` 和 OG 图片 URL 的 XSS 注入风险
+      - 修复 `articles-public.js` 中 `article.date`/`views`/`readTime` 缺少 `escapeHtml()` 的问题
+      - 修复公共投稿分享 URL 错误（原固定使用 `/article/`）
+      - 移除脆弱字符串 `.replace()` 注入作者信息方式，改为函数参数传递
+      - `isSafeUrl()` 改为黑名单模式，拦截 `javascript:`/`data:`/`file:` 等危险协议
+      - CSS：添加 `scroll-margin-top` 防止固定导航栏遮挡锚点标题
+      - 添加 `<meta name="theme-color">` 到所有 HTML
+      - 清理废弃的 `data/articles.json` 和 `data/articles-public.json`

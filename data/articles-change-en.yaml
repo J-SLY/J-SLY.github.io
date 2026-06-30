@@ -1,0 +1,380 @@
+articles:
+  - id: 33
+    type: feat
+    title: Migrate data storage from JSON to YAML
+    date: 2026-06-30 23:06
+    content: |-
+      All data files migrated from `.json` to `.yaml` format for better readability and editing experience:
+
+      - `data/articles-*.json` → `data/articles-*.yaml`
+      - `data/articles-public-*.json` → `data/articles-public-*.yaml`
+      - `data/articles-change-*.json` → `data/articles-change-*.yaml`
+      - Added js-yaml CDN library for client-side YAML parsing
+      - Updated all fetch calls to load `.yaml` files and parse with `jsyaml.load()`
+      - Removed old JSON files
+  - id: 32
+    type: chore
+    title: 'Code block font optimization: Fira Code CDN & font consistency fixes'
+    date: 2026-06-30 21:49
+    content: |-
+      Multiple fixes for code block font rendering:
+
+      - Load Fira Code from Google Fonts CDN (weights 400/600/700), no longer requiring local installation
+      - Fix dark mode code block background overriding highlight.js theme, making text invisible
+      - Remove non-monospace fonts (`DengXian`/`Noto Sans Mono CJK SC`) from the font stack to prevent proportional-width fallback for Latin characters
+      - Force all highlight `<span>` elements inside code blocks to inherit a unified `font-family`, eliminating font bifurcation at syntax highlight span boundaries
+      - Disable color variance for `.hljs-built_in` and other highlight classes inside code blocks to avoid jarring color differences mid-command
+  - id: 31
+    type: feat
+    title: GitHub Roast card dark mode support
+    date: 2026-06-30 21:27
+    content: |-
+      GitHub Roast card now automatically switches theme with the site's dark mode:
+
+      - Added `id` attributes to card links and images in `index.html`, switched domain to `githubroast.dev`
+      - Added `updateGithubRoastTheme()` in `dark-mode.js` that toggles `?theme=dark` / `?theme=light` parameter
+      - Updates automatically on both manual dark mode toggle and system color scheme changes
+  - id: 30
+    type: fix
+    title: Fix leaderboard tab labels & exposed <strong> tags on public page
+    date: 2026-06-30 15:30
+    content: |-
+      Fixed two display bugs:
+
+      - **Leaderboard tab labels** — `boardLabel()` constructed mismatched i18n keys (`tabPr`/`tabIssues`/`tabSubmissions` vs `tabPR`/`tabIssue`/`tabSubmission`), causing raw property names to be displayed. Switched to explicit key mapping.
+      - **Exposed `<strong>` tags on public page** — `applyI18n()` used `textContent` for `data-i18n` elements, which escaped HTML tags in translation values. Switched to `innerHTML`.
+  - id: 29
+    type: feat
+    title: Changelog split into User and Developer modes
+    date: 2026-06-28 10:30
+    content: |-
+      The changelog page (`/change/`) now has a User/Developer dual-mode toggle:
+
+      - A new "User" / "Developer" switch at the top of the page
+      - **User mode** — hides chore entries, only shows feature updates and bug fixes
+      - **Developer mode** — shows all entries including chores
+      - Filter type buttons are automatically updated when switching modes
+      - Mode preference is saved in `localStorage` and persists across refreshes
+  - id: 28
+    type: chore
+    title: Add README docs and sync commit stats
+    date: 2026-06-28 09:43
+    content: |-
+      - Add English README.md and Chinese README_CN.md project docs
+      - Update commit count (141→142) and push count (131→132) in `change/index.html`
+  - id: 27
+    type: chore
+    title: Restructure project directory layout
+    date: 2026-06-27 22:36
+    content: |-
+      Reorganized project files into subdirectories by function:
+
+      - **JS files** — from flat `js/` into `js/core/`, `js/articles/`, `js/article-view/`
+      - **Data files** — `articles.json`, `articles-public.json`, `articles-change.json` moved to `data/`
+      - **Icon files** — `JS.svg` moved to `images/`
+      - Updated all `<script src>`, `<link rel="icon">`, `<meta og:image>` paths in HTML
+      - Updated all `fetch()` data paths in JS
+      - Updated `AGENTS.md` directory structure and path documentation
+  - id: 26
+    type: feat
+    title: Leaderboard PR/Issues now fetches from GitHub API
+    date: 2026-06-27 22:30
+    content: |-
+      The leaderboard page (`/leaderboard/`) PR and Issues tabs now fetch real-time data from the GitHub API:
+
+      - **PR tab** — searches for repo PRs via `type:pr`, aggregates by creator, replaces hardcoded data
+      - **Issues tab** — searches for repo Issues via `type:issue`, excludes entries with `public-submission` and `stats:exclude` labels
+      - **Exclusion mechanism** — adding the `stats:exclude` label to an Issue excludes it from stats
+      - **Submissions excluded by default** — the submission template automatically carries the `public-submission` label
+      - Centralized configuration (`LEADERBOARD_CONFIG`) with customizable exclusion label lists
+  - id: 25
+    type: fix
+    title: Stop exposing contributor email addresses
+    date: 2026-06-27 22:23
+    content: |-
+      Fix the issue where `authorLink` in public articles exposed contributor email addresses:
+
+      - Removed the `"authorLink": "mailto:..."` field from `articles-public.json`
+      - Added `sanitizeAuthorLink()` function in `utils.js` to automatically filter `mailto:` links
+      - All three author-link renderings in `articles-public.js` and `article-router.js` now use `sanitizeAuthorLink()`
+      - `mailto:` links no longer generate `<a>` tags, only plain author name is displayed
+      - Normal `https://` links are unaffected and render normally
+  - id: 23
+    type: feat
+    title: Changelog timeline now filterable by type
+    date: 2026-06-27 21:51
+    content: |-
+      The changelog page (`/change/`) now supports type filtering:
+
+      - A filter button bar above the timeline, supporting "All", "Features", "Bug Fixes", and "Chores"
+      - Filter buttons have a fixed order with dynamic highlighting of the active selection
+      - Clicking a filter shows only matching entries without reloading the page
+  - id: 24
+    type: feat
+    title: New Leaderboard subpage
+    date: 2026-06-27 22:08
+    content: |-
+      New `/leaderboard/` subpage with three rankings:
+
+      - **PR Leaderboard** — counted by number of contributions
+      - **Issues Leaderboard** — reserved for future use
+      - **Submissions Leaderboard** — dynamically aggregated by author from `articles-public.json`
+
+      Rankings support tab switching, entries are sorted alphabetically by name, and the top three display gold/silver/bronze badges.
+  - id: 21
+    type: chore
+    title: 'Project cleanup: SRI hash alignment, JS dedup, hamburger menu extraction'
+    date: 2026-06-27 21:37
+    content: |-
+      Comprehensive project file cleanup:
+
+      **SRI hash sync**
+      - Unified integrity values for marked, highlight.js, and pinyin-pro across `index.html`, `article.html`, `404.html`, and `public/index.html`
+
+      **Shared utility extraction**
+      - Added `js/utils.js` with a global `escapeHtml()`, eliminating duplicates in `article-content.js` and `articles-change.js`
+      - All pages load `utils.js` (after `display-mode.js`)
+      - `escapeHtml` in `articles-change.js` uses more robust type checking (`typeof str !== 'string'`)
+
+      **Hamburger menu unification**
+      - Added `initMobileMenu()` to `navigation.js`, encapsulating mobile menu toggle logic
+      - Removed duplicate inline hamburger code from `main.js`, `public/index.html`, `change/index.html`
+      - All pages now uniformly call `initMobileMenu()`
+
+      **Orphan file cleanup**
+      - Removed unused `images/logo.svg`
+  - id: 20
+    type: fix
+    title: Unified scrollbar style across the site
+    date: 2026-06-27 21:21
+    content: |-
+      Unified scrollbar style across the site to a thin rounded-corner design:
+
+      - Added global `::-webkit-scrollbar` styles in `base.css` (6px width/height, rounded thumb)
+      - Added `--scrollbar-thumb` / `--scrollbar-thumb-hover` CSS variables for auto light/dark switching
+      - Added Firefox compatibility (`scrollbar-width: thin` + `scrollbar-color`)
+      - Removed duplicate scrollbar styles from `.modal-content` / `.search-results` in `overlay.css`
+      - All scrollable areas (article TOC sidebar etc.) automatically get the unified style
+  - id: 19
+    type: chore
+    title: 'Path unification: changelog → change'
+    date: 2026-06-27 21:14
+    content: |-
+      Renamed `changelog/` path and related files to `change/`:
+
+      - `changelog/` → `change/`
+      - `articles-changelog.json` → `articles-change.json`
+      - `js/articles-changelog.js` → `js/articles-change.js`
+      - `css/components/changelog.css` → `css/components/change.css`
+      - CSS class names and JS function names updated accordingly
+  - id: 18
+    type: fix
+    title: 'Search fixes: data timing / pinyin spaces / content pinyin / CDN SRI hashes'
+    date: 2026-06-27 20:59
+    content: |-
+      Fixed multiple search issues:
+
+      - **Data loading timing**: `initSearch()` was called before fetch completed, `dataSource` captured empty array. Fix: moved `initSearch()` call inside fetch `.then()` callback at the same level as `articlesData = data.articles`.
+      - **Pinyin space matching**: User input `"ru men"` (with space), but pinyin-pro outputs concatenated pinyin (`"rumen"`), causing `indexOf` to fail. Fix: in `findPinyinMatchRange()`, strip spaces from query with `replace(/\s+/g, '')` before comparison.
+      - **Missing content pinyin search**: The filter only matched pinyin against `article.title` and `article.excerpt`, but `article.content` only had direct text matching (`includes(q)`). Fix: added `matchPinyin(a.content.join('\n'), q)` to the filter.
+      - **All CDN scripts failing**: SRI integrity hashes for `marked`, `highlight.js`, and `pinyin-pro` didn't match actual CDN files. Fix: updated integrity attributes with computed SHAs from browser console errors.
+      - Also fixed SRI hashes for the same CDN scripts in `404.html`, `article.html`, and `change/index.html`.
+  - id: 1
+    type: feat
+    title: Add changelog subpage
+    date: 2026-06-27 21:02
+    content: |-
+      Added a changelog subpage for recording blog feature updates and change history.
+
+      - New `change/` subpage for displaying changelog entries
+      - New "Changelog" link in navigation bar
+      - Added `articles-change.json` data file and `js/articles-change.js` rendering logic
+      - Added `css/components/change.css` stylesheet
+  - id: 2
+    type: feat
+    title: Modal sharing, search parameterization, security & accessibility improvements
+    date: 2026-06-27 10:41
+    content: |-
+      Extracted modal as a shared module, search supports custom data source, unified XSS defense.
+
+      - Modal logic extracted into `article-modal-shared.js` + `article-modal.js`, reusable by subpages
+      - `initSearch()` supports `dataSource` / `onOpenArticle` parameters
+      - All output unified with `escapeHtml()` escaping to prevent XSS injection
+      - Search dialog added `role="dialog"` and `aria-modal` attributes
+      - All CDN resources now have SRI integrity checks and `crossorigin` attributes
+      - OG tags extracted into `updateOGTags()` / `restoreOGTags()` as standalone module
+      - CSS split into separate files: `cards.css`, `overlay.css`, `article.css` etc.
+  - id: 3
+    type: fix
+    title: Compatibility mode, Giscus dark theme, and other bug fixes
+    date: 2026-06-27 10:25
+    content: |-
+      - Fixed public articles in compatibility mode (`article.html?id=pub-`) redirecting to main site
+      - Fixed Giscus comments not syncing theme when manually switching dark mode
+      - Fixed `navigation.js` incorrectly intercepting non-anchor links
+      - Changed relative path `/public/` → `public/` for correct local testing
+  - id: 4
+    type: feat
+    title: 'Reading settings: compatibility mode, mobile TOC improvements'
+    date: 2026-06-27 10:06
+    content: |-
+      - Added compatibility mode to reading settings (`article.html?id=`)
+      - Article TOC is now collapsible on mobile
+      - Fixed modal close button overlapping with content
+      - Added "Submit an Article" button in Hero area, linking to `/public/`
+      - Set `2029872426@qq.com` as the preferred submission email
+  - id: 5
+    type: feat
+    title: JSLY's Public Blog community submission system launched
+    date: 2026-06-26 23:11
+    content: |-
+      The blog officially launched the community article submission system.
+
+      - New `/public/` standalone subpage for community articles
+      - Independent data source `articles-public.json` with `author` / `authorLink` fields
+      - Added `js/articles-public.js` for rendering submission cards (with author badges)
+      - Added `css/components/public.css` with distinct indigo theme
+      - Article detail page now shows author info bar
+      - Search supports public article data source
+      - `article-router.js` supports `/public/article/{id}` standalone page and `article.html?id=pub-{id}` compatibility route
+      - Users submit via GitHub Issue template; owner reviews and merges into `articles-public.json`
+  - id: 6
+    type: feat
+    title: Standalone article routing and 404 page
+    date: 2026-06-26 22:42
+    content: |-
+      - Implemented SPA routing via 404.html with `/article/{id}` clean URLs
+      - Added `js/article-router.js` standalone routing module
+      - Unified 404 page style with suggestions (return to home, browse articles)
+      - Article pages and 404 page now have top navigation bar
+      - 404 page uses Flexbox sticky footer
+      - "Back to article list" button style improved on article pages
+  - id: 7
+    type: chore
+    title: JS/CSS modularization and architecture refactor
+    date: 2026-06-26 22:10
+    content: |-
+      - JS split into 14 independent files by function
+      - CSS split into `base.css`, `layout.css`, `cards.css`, `overlay.css`, `article.css`, `responsive.css`
+      - Reading settings grouped into "Navigation Bar" and "Reading Mode" sections
+      - Added "Lock Navigation Bar" toggle
+      - Removed like button feature
+  - id: 8
+    type: feat
+    title: Reading progress bar moved into modal, dark mode improvements
+    date: 2026-06-21 18:46
+    content: |-
+      - Reading progress bar moved from page top into article modal
+      - Fixed code highlighting double padding in dark mode, modal overflow, CSS animation conflicts
+      - Hero area background adapts to dark mode
+      - About Me Profile Card now uses `theme=dark` parameter
+      - Giscus comment area follows manual dark mode toggle
+      - Custom dark mode scrollbar styles
+      - Footer responsive layout with 480px breakpoint
+  - id: 9
+    type: feat
+    title: Giscus comment system integration
+    date: 2026-06-21 14:12
+    content: |-
+      - Integrated Giscus comment system based on GitHub Discussions
+      - Used dynamic script injection instead of static embedding
+      - Giscus theme follows manual dark mode toggle
+      - Code font unified to Fira Code
+      - Removed tag filtering feature
+  - id: 10
+    type: feat
+    title: Syntax highlighting, RSS, dark mode, enhanced search, TOC navigation
+    date: 2026-06-21 14:08
+    content: |-
+      - Integrated highlight.js 11.9.0 code highlighting
+      - Added `feed.xml` RSS subscription
+      - Added dark mode toggle
+      - Added pinyin search (based on pinyin-pro 3.26.0)
+      - Search results highlight matching keywords
+      - Chinese search requires minimum 2 characters
+      - Article auto-generates table of contents (TOC)
+      - Article reading progress bar
+      - Fixed 5 issues including Escape key listener leak and modal crash
+  - id: 11
+    type: feat
+    title: Article sharing, OG tags, and hash deep links
+    date: 2026-06-21 13:33
+    content: |-
+      - Added share button on article detail page with link copy support
+      - Dynamic Open Graph tag updates
+      - Supports `#article-{id}` hash anchor deep links
+      - Added `support@blog.jsly.asia` contact email in footer
+  - id: 12
+    type: chore
+    title: Content system and architecture refactor
+    date: 2026-06-21 12:54
+    content: |-
+      - Changed `content` field in `articles.json` to an array of strings
+      - CSS reorganized into `base.css`, `layout.css`, `components/` directory
+      - Added `pinned` field for pinning articles
+      - Added `showImage` field, each article can independently control image display
+  - id: 13
+    type: feat
+    title: Social links integration
+    date: 2026-06-21 12:05
+    content: |-
+      Footer social links connected to: QQ, GitHub, Luogu, Luogu.me, AtCoder, Qzone.
+
+      - Social icons replaced with standalone SVG files
+      - Logo changed to pure graphic SVG text
+  - id: 14
+    type: chore
+    title: AGPL-3.0 open source license and copyright notices
+    date: 2026-06-21 11:27
+    content: |-
+      - Added AGPL-3.0 license to the repository
+      - All source files (HTML/CSS/JS) now have SPDX copyright headers
+      - Added source code link in footer to comply with AGPL-3.0 requirements
+  - id: 15
+    type: feat
+    title: Search feature launched
+    date: 2026-06-21 11:48
+    content: |-
+      - Search icon in top-right corner, click to open search panel
+      - Matching against title, tags, excerpt, and full content
+      - Real-time search with instant feedback
+      - Fixed page load errors, empty images, navigation highlight, and other bugs
+      - Added Chinese fallback font and SEO tags
+  - id: 16
+    type: feat
+    title: Article system and design theme launched
+    date: 2026-06-21 09:04
+    content: |-
+      - Article content supports Markdown rendering (via marked.js)
+      - Removed categories, switched to tag-based system with flat article layout
+      - Changed overall theme to light green fresh style
+      - Hero area switched from gradient to solid color background
+      - Removed sidebar, full-width content layout
+      - About Me section now displays Profile Card SVG
+      - Blog title changed to "JSLY Blog"
+      - Added OpenCode usage guide article
+  - id: 17
+    type: feat
+    title: Site initialization
+    date: 2026-05-24 14:23
+    content: |-
+      JSLY's Blog is officially online!
+
+      - Configured custom domain www.jsly.asia (CNAME record)
+      - Deployed via GitHub Pages
+      - Pure static HTML/CSS/JS, no build tools
+  - id: 33
+    type: fix
+    title: 'Security fixes: XSS protection + isSafeUrl utility + code quality improvements'
+    date: 2026-06-30 22:56
+    content: |-
+      - `sanitizeAuthorLink()` switched to whitelist mode (only http/https allowed)
+      - Added `isSafeUrl()` / `resolveArticleImageUrl()` utility functions
+      - Fixed XSS injection risk in article image `src` and OG image URLs
+      - Fixed missing `escapeHtml()` for `article.date`/`views`/`readTime` in `articles-public.js`
+      - Fixed public article share URL (was incorrectly using `/article/`)
+      - Removed fragile string `.replace()` author injection, using function parameter instead
+      - `isSafeUrl()` changed to blacklist mode, blocking `javascript:`/`data:`/`file:` protocols
+      - CSS: Added `scroll-margin-top` to prevent fixed header from covering anchor targets
+      - Added `<meta name="theme-color">` to all HTML files
+      - Cleaned up orphaned `data/articles.json` and `data/articles-public.json`

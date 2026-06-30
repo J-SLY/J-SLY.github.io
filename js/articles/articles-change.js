@@ -7,14 +7,14 @@ var viewMode = localStorage.getItem('change-view-mode') || 'user';
 
 function loadChangeLog() {
     var lang = (window.__currentLang || 'zh').split('-')[0];
-    var url = '/data/articles-change-' + lang + '.json';
+    var url = '/data/articles-change-' + lang + '.yaml';
     fetch(url).then(function (resp) {
-        if (!resp.ok) return fetch('/data/articles-change-zh.json');
+        if (!resp.ok) return fetch('/data/articles-change-zh.yaml');
         return resp;
     })
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
-            return resp.json();
+            return resp.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(function (data) {
             allArticles = data.articles;

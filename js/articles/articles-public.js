@@ -5,14 +5,14 @@ let articlesPublicData = [];
 
 function loadPublicArticles() {
     var lang = (window.__currentLang || 'zh').split('-')[0];
-    var url = '/data/articles-public-' + lang + '.json';
+    var url = '/data/articles-public-' + lang + '.yaml';
     return fetch(url).then(function (resp) {
-        if (!resp.ok) return fetch('/data/articles-public-zh.json');
+        if (!resp.ok) return fetch('/data/articles-public-zh.yaml');
         return resp;
     })
         .then(function (resp) {
             if (!resp.ok) throw new Error('网络响应不正常');
-            return resp.json();
+            return resp.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(function (data) {
             articlesPublicData = data.articles;

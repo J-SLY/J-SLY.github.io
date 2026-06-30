@@ -145,12 +145,12 @@ function buildSubmissionsFromArticles(articles) {
 
 function loadLeaderboard() {
     var lang = (window.__currentLang || 'zh').split('-')[0];
-    var articlesPromise = fetch('/data/articles-public-' + lang + '.json').then(function (resp) {
-        if (!resp.ok) return fetch('/data/articles-public-zh.json');
+    var articlesPromise = fetch('/data/articles-public-' + lang + '.yaml').then(function (resp) {
+        if (!resp.ok) return fetch('/data/articles-public-zh.yaml');
         return resp;
     }).then(function (resp) {
         if (!resp.ok) throw new Error('网络响应不正常');
-        return resp.json();
+        return resp.text().then(function (text) { return jsyaml.load(text); });
     });
     var issuesPromise = fetchLeaderboardData('issue').catch(function (err) {
         console.error('加载 Issues 数据时出错:', err);

@@ -5,14 +5,14 @@ let articlesData = [];
 
 function loadArticlesFromJSON() {
     var lang = (window.__currentLang || 'zh').split('-')[0];
-    var url = '/data/articles-' + lang + '.json';
+    var url = '/data/articles-' + lang + '.yaml';
     return fetch(url).then(function (resp) {
-        if (!resp.ok) return fetch('/data/articles-zh.json');
+        if (!resp.ok) return fetch('/data/articles-zh.yaml');
         return resp;
     })
         .then(response => {
             if (!response.ok) throw new Error('Network response not ok');
-            return response.json();
+            return response.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(data => {
             articlesData = data.articles;
