@@ -230,6 +230,13 @@
       "title": "网站初始化",
       "date": "2026-05-24 14:23",
       "content": "JSLY's Blog 正式上线！\n\n- 配置自定义域名 www.jsly.asia（CNAME 记录）\n- 基于 GitHub Pages 部署\n- 纯静态 HTML/CSS/JS，无构建工具"
+    },
+    {
+      "id": 33,
+      "type": "fix",
+      "title": "安全修复：XSS 防护 + isSafeUrl 工具函数 + 代码质量改进",
+      "date": "2026-06-30 22:56",
+      "content": "- `sanitizeAuthorLink()` 改用白名单模式（仅允许 http/https 协议）\n- 新增 `isSafeUrl()` / `resolveArticleImageUrl()` 工具函数\n- 修复文章图片 `src` 和 OG 图片 URL 的 XSS 注入风险\n- 修复 `articles-public.js` 中 `article.date`/`views`/`readTime` 缺少 `escapeHtml()` 的问题\n- 修复公共投稿分享 URL 错误（原固定使用 `/article/`）\n- 移除脆弱字符串 `.replace()` 注入作者信息方式，改为函数参数传递\n- `isSafeUrl()` 改为黑名单模式，拦截 `javascript:`/`data:`/`file:` 等危险协议\n- CSS：添加 `scroll-margin-top` 防止固定导航栏遮挡锚点标题\n- 添加 `<meta name=\"theme-color\">` 到所有 HTML\n- 清理废弃的 `data/articles.json` 和 `data/articles-public.json`"
     }
   ]
 }

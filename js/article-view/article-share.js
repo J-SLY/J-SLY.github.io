@@ -1,12 +1,13 @@
 ﻿/* Copyright (C) 2026 JSLY
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
-function initShareButton(container, article) {
+function initShareButton(container, article, isPublic) {
     const shareBtn = container.querySelector('.share-btn');
     if (!shareBtn) return;
     shareBtn.addEventListener('click', function() {
         var btn = this;
-        const url = window.location.origin + '/article/' + article.id;
+        const basePath = isPublic ? '/public/article/' : '/article/';
+        const url = window.location.origin + basePath + article.id;
         if (navigator.share) {
             navigator.share({
                 title: article.title,

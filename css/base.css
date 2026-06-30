@@ -79,6 +79,7 @@ body {
     }
 }
 
+/* .dark-mode class (JS toggle) uses same dark vars — keep in sync with above */
 :root.dark-mode {
     --primary: #81c784;
     --primary-light: #a5d6a7;

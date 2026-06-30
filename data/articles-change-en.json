@@ -216,6 +216,13 @@
       "title": "Site initialization",
       "date": "2026-05-24 14:23",
       "content": "JSLY's Blog is officially online!\n\n- Configured custom domain www.jsly.asia (CNAME record)\n- Deployed via GitHub Pages\n- Pure static HTML/CSS/JS, no build tools"
+    },
+    {
+      "id": 33,
+      "type": "fix",
+      "title": "Security fixes: XSS protection + isSafeUrl utility + code quality improvements",
+      "date": "2026-06-30 22:56",
+      "content": "- `sanitizeAuthorLink()` switched to whitelist mode (only http/https allowed)\n- Added `isSafeUrl()` / `resolveArticleImageUrl()` utility functions\n- Fixed XSS injection risk in article image `src` and OG image URLs\n- Fixed missing `escapeHtml()` for `article.date`/`views`/`readTime` in `articles-public.js`\n- Fixed public article share URL (was incorrectly using `/article/`)\n- Removed fragile string `.replace()` author injection, using function parameter instead\n- `isSafeUrl()` changed to blacklist mode, blocking `javascript:`/`data:`/`file:` protocols\n- CSS: Added `scroll-margin-top` to prevent fixed header from covering anchor targets\n- Added `<meta name=\"theme-color\">` to all HTML files\n- Cleaned up orphaned `data/articles.json` and `data/articles-public.json`"
     }
   ]
 }

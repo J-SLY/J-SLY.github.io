@@ -88,14 +88,15 @@ function buildSeriesNavHtml(article, seriesArticles, mode) {
     return { topHtml: topHtml, bottomHtml: bottomHtml };
 }
 
-function buildArticleContent(article, showHero, seriesNavOpts) {
+function buildArticleContent(article, showHero, seriesNavOpts, authorSectionHtml) {
     if (showHero === undefined) showHero = true;
     if (article.showImage === false) showHero = false;
     const contentHtml = marked.parse(article.content.join('\n'));
 
+    const heroImageSrc = article.image && isSafeUrl(article.image) ? article.image : '';
     const heroHtml = showHero
         ? (article.image
-            ? `<div class="article-hero"><img src="${article.image}" alt="${escapeHtml(article.title)}"></div>`
+            ? `<div class="article-hero"><img src="${heroImageSrc}" alt="${escapeHtml(article.title)}"></div>`
             : `<div class="article-hero article-hero-placeholder"><span>${escapeHtml(article.title)}</span></div>`)
         : '';
 
@@ -113,6 +114,7 @@ function buildArticleContent(article, showHero, seriesNavOpts) {
         <div class="article-layout">
             <div class="article-toc-sidebar"></div>
             <div class="article-body">
+                ${authorSectionHtml || ''}
                 <h2>${escapeHtml(article.title)}</h2>
                 ${tagsHtml}
                 <div class="article-meta">

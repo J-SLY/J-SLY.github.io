@@ -24,13 +24,14 @@ function updateOGTags(article) {
     const fullUrl = window.location.origin + '/article/' + article.id;
     if (ogUrl) ogUrl.setAttribute('content', fullUrl);
 
-    if (!ogImage && article.image) {
+    var safeImageUrl = article.image && isSafeUrl(article.image) ? resolveArticleImageUrl(article.image) : '';
+    if (!ogImage && safeImageUrl) {
         const meta = document.createElement('meta');
         meta.setAttribute('property', 'og:image');
-        meta.setAttribute('content', window.location.origin + '/' + article.image.replace(/^\//, ''));
+        meta.setAttribute('content', safeImageUrl);
         document.head.appendChild(meta);
-    } else if (ogImage && article.image) {
-        ogImage.setAttribute('content', window.location.origin + '/' + article.image.replace(/^\//, ''));
+    } else if (ogImage && safeImageUrl) {
+        ogImage.setAttribute('content', safeImageUrl);
     }
 }
 

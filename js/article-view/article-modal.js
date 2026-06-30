@@ -8,7 +8,7 @@ function showArticleDetail(article) {
     }
     var mode = getArticleDisplayMode();
     var seriesMode = mode === 'legacy' ? 'main-legacy' : mode === 'page' ? 'main-page' : 'main-modal';
-    showArticleModal(article, { giscusIdPrefix: '', seriesArticles: series, seriesMode: seriesMode });
+    showArticleModal(article, { giscusIdPrefix: '', seriesArticles: series, seriesMode: seriesMode, isPublic: false });
 }
 
 function openArticleFromHash() {

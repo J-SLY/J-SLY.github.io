@@ -35,7 +35,7 @@
     generateTOC(container);
     initGiscus(container, article.id);
     updateOGTags(article);
-    initShareButton(container, article);
+    initShareButton(container, article, false);
   }
 
   function renderPublicArticle(article, seriesArticles) {
@@ -56,12 +56,12 @@
     ].join('\n');
     var seriesMode = getArticleDisplayMode() === 'legacy' ? 'public-legacy' : 'public-page';
     var seriesNavOpts = seriesArticles ? buildSeriesNavHtml(article, seriesArticles, seriesMode) : null;
-    container.innerHTML = buildArticleContent(article, false, seriesNavOpts).replace('<div class="article-body">', '<div class="article-body">' + authorSection);
+    container.innerHTML = buildArticleContent(article, false, seriesNavOpts, authorSection);
     initArticleHighlights(container);
     generateTOC(container);
     initGiscus(container, 'public-' + article.id);
     updateOGTags(article);
-    initShareButton(container, article);
+    initShareButton(container, article, true);
   }
 
   function tryRenderArticleFromPath() {

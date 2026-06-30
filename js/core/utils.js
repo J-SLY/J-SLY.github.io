@@ -9,6 +9,17 @@ function escapeHtml(str) {
 }
 
 function sanitizeAuthorLink(link) {
-    if (link && link.startsWith('mailto:')) return null;
-    return link;
+    if (link && (link.startsWith('http://') || link.startsWith('https://'))) return link;
+    return null;
+}
+
+function isSafeUrl(url) {
+    if (!url || typeof url !== 'string') return false;
+    return !/^(javascript:|data:|file:|mailto:|vbscript:)/i.test(url);
+}
+
+function resolveArticleImageUrl(url) {
+    if (!url || !isSafeUrl(url)) return '';
+    if (/^https?:\/\//i.test(url)) return url;
+    return window.location.origin + '/' + url.replace(/^\/+/, '');
 }

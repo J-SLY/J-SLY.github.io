@@ -336,3 +336,11 @@ footer {
 .dark-mode footer {
     background: #0d0d1a;
 }
+
+/* Anchor scroll offset for fixed header */
+#home,
+#articles,
+#about,
+#subscribe {
+    scroll-margin-top: 80px;
+}

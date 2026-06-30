@@ -76,8 +76,9 @@ function createSeriesCardElement(seriesName, articles) {
     var total = articles.length;
     var imageUrl = null;
     articles.some(function (a) { if (a.image) { imageUrl = a.image; return true; } return false; });
+    var safeImageUrl = imageUrl && isSafeUrl(imageUrl) ? imageUrl : '';
     var imageHtml = imageUrl
-        ? '<div class="article-image"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><img src="' + imageUrl + '" alt="' + safeName + '" loading="lazy"></div>'
+        ? '<div class="article-image"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><img src="' + safeImageUrl + '" alt="' + safeName + '" loading="lazy"></div>'
         : '<div class="article-image article-image-placeholder article-image-placeholder-series"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><span>' + safeName + '</span></div>';
     var latestDate = '';
     articles.forEach(function (a) { if (a.date > latestDate) latestDate = a.date; });
@@ -102,8 +103,9 @@ function createArticleElement(article) {
     var pinnedText = t('article.pinned');
     const pinnedBadge = article.pinned ? '<span class="pinned-badge"><i class="fas fa-thumbtack"></i> ' + pinnedText + '</span>' : '';
     var safeTitle = escapeHtml(article.title);
+    var safeCardImage = article.image && isSafeUrl(article.image) ? article.image : '';
     var imageHtml = article.image
-        ? `<div class="article-image">${pinnedBadge}<img src="${article.image}" alt="${safeTitle}" loading="lazy"></div>`
+        ? `<div class="article-image">${pinnedBadge}<img src="${safeCardImage}" alt="${safeTitle}" loading="lazy"></div>`
         : `<div class="article-image article-image-placeholder">${pinnedBadge}<span>${safeTitle}</span></div>`;
     var tagsHtml = article.tags && article.tags.length
         ? `<div class="article-tags">${article.tags.map(function(tag) { return '<span class="tag">' + escapeHtml(tag) + '</span>'; }).join('')}</div>`

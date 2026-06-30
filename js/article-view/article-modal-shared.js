@@ -17,10 +17,7 @@ function showArticleModal(article, options) {
     if (options.seriesArticles) {
         seriesNavOpts = buildSeriesNavHtml(article, options.seriesArticles, options.seriesMode || 'main-modal');
     }
-    var content = buildArticleContent(article, undefined, seriesNavOpts);
-    if (options.authorSectionHtml) {
-        content = content.replace('<div class="article-body">', '<div class="article-body">' + options.authorSectionHtml);
-    }
+    var content = buildArticleContent(article, undefined, seriesNavOpts, options.authorSectionHtml);
 
     modal.innerHTML = [
         '<div class="modal-content">',
@@ -49,7 +46,7 @@ function showArticleModal(article, options) {
     initArticleHighlights(modal);
     generateTOC(modal, modalContent);
     initGiscus(modal, (options.giscusIdPrefix || '') + article.id);
-    initShareButton(modal, article);
+    initShareButton(modal, article, options.isPublic);
 
     function closeModalFn() {
         if (document.body.contains(modal)) document.body.removeChild(modal);

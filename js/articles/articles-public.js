@@ -77,8 +77,9 @@ function createPublicSeriesCardElement(seriesName, articles) {
     var total = articles.length;
     var imageUrl = null;
     articles.some(function (a) { if (a.image) { imageUrl = a.image; return true; } return false; });
+    var safeImageUrl = imageUrl && isSafeUrl(imageUrl) ? imageUrl : '';
     var imageHtml = imageUrl
-        ? '<div class="article-image"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><img src="' + imageUrl + '" alt="' + safeName + '" loading="lazy"></div>'
+        ? '<div class="article-image"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><img src="' + safeImageUrl + '" alt="' + safeName + '" loading="lazy"></div>'
         : '<div class="article-image article-image-placeholder article-image-placeholder-series"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><span>' + safeName + '</span></div>';
     var latestDate = '';
     articles.forEach(function (a) { if (a.date > latestDate) latestDate = a.date; });
@@ -113,8 +114,9 @@ function createPublicArticleCard(article) {
         ? '<a href="' + encodeURI(safeLink) + '" target="_blank" rel="noopener">' + escapeHtml(article.author) + '</a>'
         : escapeHtml(article.author);
 
+    var safeCardImage = article.image && isSafeUrl(article.image) ? article.image : '';
     var imageHtml = article.image
-        ? '<div class="article-image"><img src="' + article.image + '" alt="' + escapeHtml(article.title) + '" loading="lazy"></div>'
+        ? '<div class="article-image"><img src="' + safeCardImage + '" alt="' + escapeHtml(article.title) + '" loading="lazy"></div>'
         : '<div class="article-image article-image-placeholder"><span>' + escapeHtml(article.title) + '</span></div>';
 
     var tagsHtml = article.tags && article.tags.length
@@ -129,9 +131,9 @@ function createPublicArticleCard(article) {
         '  ' + tagsHtml,
         '  <p>' + escapeHtml(article.excerpt) + '</p>',
         '  <div class="article-meta">',
-        '    <span><i class="far fa-calendar"></i> ' + article.date + '</span>',
-        '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : article.readTime) + '</span>',
-        '    <span><i class="far fa-eye"></i> ' + article.views + '</span>',
+    '    <span><i class="far fa-calendar"></i> ' + escapeHtml(article.date) + '</span>',
+    '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)) + '</span>',
+    '    <span><i class="far fa-eye"></i> ' + escapeHtml('' + article.views) + '</span>',
         '  </div>',
         '</div>'
     ].join('\n');
@@ -201,7 +203,8 @@ function showPublicArticleDetail(article) {
         giscusIdPrefix: 'public-',
         authorSectionHtml: authorSectionHtml,
         seriesArticles: series,
-        seriesMode: seriesMode
+        seriesMode: seriesMode,
+        isPublic: true
     });
 }
 
