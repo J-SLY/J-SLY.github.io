@@ -5,7 +5,9 @@
       "type": "chore",
       "title": "代码块字体优化：Fira Code CDN 加载 + 修复字体不一致问题",
       "date": "2026-06-30 14:00",
-      "content": "代码块字体相关多项修复：\n\n- 从 Google Fonts CDN 加载 Fira Code 字体（权重 400/600/700），不再依赖本地安装\n- 修复深色模式下代码块背景覆盖 highlight.js 主题导致文字不可见的问题\n- 移除字体栈中非等宽字体 `DengXian`/`Noto Sans Mono CJK SC`，避免拉丁字母回退到比例字体\n- 强制代码块内所有高亮 `<span>` 继承统一的 `font-family`，消除语法高亮 span 边界处的字体分岔\n- 禁用代码块内 `.hljs-built_in` 等高亮颜色差异，避免同一指令内部分词变色显突兀",
+      "content": "代码块字体相关多项修复：\n\n- 从 Google Fonts CDN 加载 Fira Code 字体（权重 400/600/700），不再依赖本地安装\n- 修复深色模式下代码块背景覆盖 highlight.js 主题导致文字不可见的问题\n- 移除字体栈中非等宽字体 `DengXian`/`Noto Sans Mono CJK SC`，避免拉丁字母回退到比例字体\n- 强制代码块内所有高亮 `<span>` 继承统一的 `font-family`，消除语法高亮 span 边界处的字体分岔\n- 禁用代码块内 `.hljs-built_in` 等高亮颜色差异，避免同一指令内部分词变色显突兀"
+    },
+    {
       "id": 31,
       "type": "feat",
       "title": "GitHub Roast 卡片适配深色模式",
