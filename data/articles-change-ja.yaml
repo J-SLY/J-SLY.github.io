@@ -303,7 +303,7 @@ articles:
       - 記事詳細に共有ボタンを追加（リンクコピー対応）
       - Open Graphタグを動的に更新
       - `#article-{id}` ハッシュアンカーディープリンクをサポート
-      - フッターに `support@blog.jsly.asia` 問い合わせメールを追加
+      - フッターに `support@support.jsly.asia` 問い合わせメールを追加
   - id: 12
     type: chore
     title: コンテンツシステムとアーキテクチャのリファクタ

@@ -303,7 +303,7 @@ articles:
       - 文章详情新增分享按钮，支持复制链接
       - 动态更新 Open Graph 标签
       - 支持 #article-{id} Hash 锚点深度链接
-      - 页脚新增 support@blog.jsly.asia 联系邮箱
+      - 页脚新增 support@support.jsly.asia 联系邮箱
   - id: 12
     type: chore
     title: 内容系统与架构重构

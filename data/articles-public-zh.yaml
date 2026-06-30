@@ -57,7 +57,7 @@ articles:
       - ''
       - '### 方式二：邮件投稿'
       - ''
-      - 没有 GitHub 账号？直接发送邮件到 [submit@blog.jsly.asia](mailto:submit@blog.jsly.asia) 或 [2029872426@qq.com](mailto:2029872426@qq.com) 即可。邮件中请包含：
+      - 没有 GitHub 账号？直接发送邮件到 [submit@support.jsly.asia](mailto:submit@support.jsly.asia) 或 [2029872426@qq.com](mailto:2029872426@qq.com) 即可。邮件中请包含：
       - ''
       - '- **文章标题**'
       - '- **作者署名**（你希望展示的名字）'
@@ -124,7 +124,7 @@ articles:
       - '## 常见问题'
       - ''
       - '**Q: 投稿需要 GitHub 账号吗？**'
-      - 'A: 不一定。GitHub 方式需要账号，你也可以通过邮件发送到 submit@blog.jsly.asia 或 2029872426@qq.com。'
+      - 'A: 不一定。GitHub 方式需要账号，你也可以通过邮件发送到 submit@support.jsly.asia 或 2029872426@qq.com。'
       - ''
       - '**Q: 文章发布后可以修改吗？**'
       - 'A: 可以。提交 Issue 或联系我更新即可。'

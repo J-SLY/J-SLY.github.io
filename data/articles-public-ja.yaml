@@ -57,7 +57,7 @@ articles:
       - ''
       - '### 方法2：メール投稿'
       - ''
-      - GitHubアカウントをお持ちでない場合は、[submit@blog.jsly.asia](mailto:submit@blog.jsly.asia) または [2029872426@qq.com](mailto:2029872426@qq.com) にメールを送信してください。メールには以下を含めてください：
+      - GitHubアカウントをお持ちでない場合は、[submit@support.jsly.asia](mailto:submit@support.jsly.asia) または [2029872426@qq.com](mailto:2029872426@qq.com) にメールを送信してください。メールには以下を含めてください：
       - ''
       - '- **記事タイトル**'
       - '- **作者名**（表示したい名前）'
@@ -124,7 +124,7 @@ articles:
       - '## よくある質問'
       - ''
       - '**Q: 投稿にGitHubアカウントは必要ですか？**'
-      - 'A: 必須ではありません。GitHub方式ではアカウントが必要ですが、メールで submit@blog.jsly.asia または 2029872426@qq.com に送信することもできます。'
+      - 'A: 必須ではありません。GitHub方式ではアカウントが必要ですが、メールで submit@support.jsly.asia または 2029872426@qq.com に送信することもできます。'
       - ''
       - '**Q: 公開後に記事を修正できますか？**'
       - 'A: はい。Issueを送信するか、ご連絡いただければ更新します。'

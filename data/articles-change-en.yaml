@@ -303,7 +303,7 @@ articles:
       - Added share button on article detail page with link copy support
       - Dynamic Open Graph tag updates
       - Supports `#article-{id}` hash anchor deep links
-      - Added `support@blog.jsly.asia` contact email in footer
+      - Added `support@support.jsly.asia` contact email in footer
   - id: 12
     type: chore
     title: Content system and architecture refactor
