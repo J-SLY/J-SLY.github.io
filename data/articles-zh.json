@@ -127,7 +127,7 @@
         "OpenCode 将 AI 能力深度融入开发工作流，让你更专注于问题的思考和解决方案的设计。无论是日常开发还是学习新技术，它都是一个得力的助手。"
       ],
       "image": "images/opencode-terminal.svg",
-      "readTime": "3分钟阅读",
+      "readTimeMinutes": 3,
       "views": 42
     },
     {
@@ -267,7 +267,7 @@
         "",
         "Happy reading!"
       ],
-      "readTime": "约 6 分钟",
+      "readTimeMinutes": 6,
       "views": 0
     }
   ]

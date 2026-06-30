@@ -17,7 +17,7 @@
         "",
         "请访问 [s.luogu.me](https://s.luogu.me) 来体验我们的服务。"
       ],
-      "readTime": "约 1 分钟",
+      "readTimeMinutes": 1,
       "views": 0
     },
     {
@@ -140,7 +140,7 @@
         "",
         "期待你的精彩分享 🚀"
       ],
-      "readTime": "约 3 分钟",
+      "readTimeMinutes": 3,
       "views": 0
     }
   ]
