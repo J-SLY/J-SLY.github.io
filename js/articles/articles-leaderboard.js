@@ -71,7 +71,8 @@ var leaderboardCache = {
 };
 
 function boardLabel(type) {
-    return t('leaderboard.tab' + type.charAt(0).toUpperCase() + type.slice(1));
+    var keyMap = { pr: 'tabPR', issues: 'tabIssue', submissions: 'tabSubmission' };
+    return t('leaderboard.' + (keyMap[type] || type));
 }
 
 var boardIcons = {

@@ -165,7 +165,7 @@
     for (i = 0; i < els.length; i++) {
       key = els[i].getAttribute('data-i18n');
       text = t(key);
-      if (text !== key) els[i].textContent = text;
+      if (text !== key) els[i].innerHTML = text;
     }
 
     els = root.querySelectorAll('[data-i18n-title]');

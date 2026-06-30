@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 30,
+      "type": "fix",
+      "title": "Fix leaderboard tab labels & exposed <strong> tags on public page",
+      "date": "2026-06-30 15:30",
+      "content": "Fixed two display bugs:\n\n- **Leaderboard tab labels** — `boardLabel()` constructed mismatched i18n keys (`tabPr`/`tabIssues`/`tabSubmissions` vs `tabPR`/`tabIssue`/`tabSubmission`), causing raw property names to be displayed. Switched to explicit key mapping.\n- **Exposed `<strong>` tags on public page** — `applyI18n()` used `textContent` for `data-i18n` elements, which escaped HTML tags in translation values. Switched to `innerHTML`."
+    },
+    {
       "id": 29,
       "type": "feat",
       "title": "Changelog split into User and Developer modes",

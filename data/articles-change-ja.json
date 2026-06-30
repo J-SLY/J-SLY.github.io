@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 30,
+      "type": "fix",
+      "title": "リーダーボードのタブラベルと public ページの <strong> タグ表示問題を修正",
+      "date": "2026-06-30 15:30",
+      "content": "2つの表示バグを修正：\n\n- **リーダーボードのタブラベル** — `boardLabel()` が i18n キーを誤って生成（`tabPr`/`tabIssues`/`tabSubmissions` vs `tabPR`/`tabIssue`/`tabSubmission`）し、プロパティ名がそのまま表示されていました。明示的なキーマッピングに変更。\n- **public ページの `<strong>` タグ露出** — `applyI18n()` で `data-i18n` に `textContent` を使用していたため、翻訳値内の HTML タグがエスケープされていました。`innerHTML` に変更。"
+    },
+    {
       "id": 29,
       "type": "feat",
       "title": "更新ログをユーザー版と開発者版に分割",

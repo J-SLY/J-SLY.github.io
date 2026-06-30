@@ -1,6 +1,13 @@
 {
   "articles": [
     {
+      "id": 30,
+      "type": "fix",
+      "title": "修复贡献榜标签名显示异常 & public 页面 <strong> 标签暴露",
+      "date": "2026-06-30 15:30",
+      "content": "修复两个显示 Bug：\n\n- **贡献榜排行标签** — `boardLabel()` 函数构建的 i18n 键名大小写及单复数不匹配（`tabPr`/`tabIssues`/`tabSubmissions` vs `tabPR`/`tabIssue`/`tabSubmission`），导致标签直接显示属性名。已改用显式键名映射。\n- **public 页面 <strong> 标签暴露** — `applyI18n()` 中 `data-i18n` 使用 `textContent` 赋值，导致翻译值中的 HTML 标签被转义为纯文本。已改用 `innerHTML`。"
+    },
+    {
       "id": 29,
       "type": "feat",
       "title": "更新日志分流为用户版和开发者版",
