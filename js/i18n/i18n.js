@@ -43,6 +43,7 @@
     },
     "share": { "button": "分享", "copied": "链接已复制", "copyFailed": "复制失败" },
     "toc": { "title": "目录" },
+    "series": { "badge": "系列", "parts": "篇", "count": "第 {current}/{total} 篇", "prev": "上一篇", "next": "下一篇" },
     "change": {
       "all": "全部", "feat": "功能更新", "fix": "Bug 修复", "chore": "杂项",
       "empty": "暂无更新日志。", "loadError": "无法加载更新日志，请稍后重试。"

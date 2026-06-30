@@ -63,6 +63,13 @@
   "toc": {
     "title": "目录"
   },
+  "series": {
+    "badge": "系列",
+    "parts": "篇",
+    "count": "第 {current}/{total} 篇",
+    "prev": "上一篇",
+    "next": "下一篇"
+  },
   "change": {
     "all": "全部",
     "feat": "功能更新",

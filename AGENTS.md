@@ -5,9 +5,11 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 ## Architecture
 
 - **Entrypoint**: `index.html` — single-page blog with hash-based article modals
-- **Content**: `data/articles.json` — each article has Markdown `content` array (joined with `\n`, rendered via `marked.js`)
+- **Content**: `data/articles-{lang}.json` — each article has Markdown `content` array (joined with `\n`, rendered via `marked.js`)
+  - Optional `series` field: `{ "name": "Series Name", "order": 1 }` to group related articles
+  - Series map (`window.seriesMap`) built by `buildSeriesMap()` in `article-content.js`
 - **Public submission page**: `public/index.html` (served at `/public/`) — independent subpage for community-contributed articles
-  - Data source: `data/articles-public-{lang}.json` (separate from main blog, includes `author`/`authorLink` fields; fallback to `articles-public-zh.json`)
+  - Data source: `data/articles-public-{lang}.json` (separate from main blog, includes `author`/`authorLink` fields; also supports optional `series` field like main articles; fallback to `articles-public-zh.json`)
   - JS: `js/articles/articles-public.js` — fetches data, renders cards with author badges; modal display via shared `showArticleModal()` in `js/article-view/article-modal-shared.js`
   - CSS: `css/components/public.css` — distinct indigo accent (`#5c6bc0`), author badge styles
   - Router: `js/article-view/article-router.js` handles `/public/article/{id}` standalone pages (loads `data/articles-public-{lang}.json`)
@@ -21,11 +23,12 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
   - `core/display-mode.js` must load first (cookie utilities)
   - `core/utils.js` defines shared utilities like `escapeHtml()` globally
   - `article-view/article-content.js` must load before `article-view/article-modal.js` (content builder → modal)
+  - `article-content.js` also defines `buildSeriesMap()` (used by all article data sources) and `buildSeriesNavHtml()` (used by modal + router)
   - `article-view/article-modal-shared.js` must load before `article-view/article-modal.js` (shared modal logic)
   - `articles/articles.js` defines `articlesData`, loads article cards
   - `core/search.js` accepts `dataSource`/`onOpenArticle` options; falls back to `window.articlesData`/`window.openArticle`
 - **JS for standalone article page** (standalone route `/article/{id}` or `/public/article/{id}` served via `404.html` router): `core/display-mode.js` → `core/utils.js` → `article-view/article-content.js` → `article-view/article-toc.js` → `article-view/article-comments.js` → `article-view/article-share.js` → `article-view/article-og.js` → `article-view/article-router.js` → `core/dark-mode.js` → `core/search.js` → `core/settings.js` → `core/navigation.js` → `core/nav-scroll.js` (rendering handled by `article-view/article-router.js`)
-- **CSS**: modular — `base.css` (vars/reset), `layout.css` (header/hero/footer), `components/cards.css` (article grid/cards/tags), `components/overlay.css` (modal/search/settings overlays), `components/article.css` (article detail/TOC/comments), `components/public.css` (public submission page styles), `responsive.css`
+- **CSS**: modular — `base.css` (vars/reset), `layout.css` (header/hero/footer), `components/cards.css` (article grid/cards/tags/series badge), `components/overlay.css` (modal/search/settings overlays), `components/article.css` (article detail/TOC/comments/series nav), `components/public.css` (public submission page styles), `responsive.css`
 - **External CDN deps**: Font Awesome 6.4.0, marked 9.1.6, highlight.js 11.9.0, pinyin-pro 3.26.0
 
 ## Key conventions
@@ -41,6 +44,7 @@ Vanilla HTML/CSS/JS static blog, deployed on GitHub Pages.
 - Edit `data/articles-{lang}.json` (per language) to add/update articles — each article has `id`, `title`, `date`, `tags`, `excerpt`, `content` (array of Markdown lines), optional `image`
 - When adding an article, add it to all language data files (`articles-zh.json`, `articles-en.json`, `articles-ja.json`, `articles-ru.json`)
 - Article deep link: `#article-<id>` in URL hash
+- **Series**: add optional `series` field (`{ "name": "Series Name", "order": 1 }`) to group related articles; series name must be identical across language files for the same group
 
 ## Search
 

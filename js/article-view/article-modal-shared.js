@@ -13,7 +13,11 @@ function showArticleModal(article, options) {
     var modal = document.createElement('div');
     modal.className = 'article-modal';
 
-    var content = buildArticleContent(article);
+    var seriesNavOpts = null;
+    if (options.seriesArticles) {
+        seriesNavOpts = buildSeriesNavHtml(article, options.seriesArticles, options.seriesMode || 'main-modal');
+    }
+    var content = buildArticleContent(article, undefined, seriesNavOpts);
     if (options.authorSectionHtml) {
         content = content.replace('<div class="article-body">', '<div class="article-body">' + options.authorSectionHtml);
     }

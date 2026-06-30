@@ -16,6 +16,7 @@ function loadPublicArticles() {
         })
         .then(function (data) {
             articlesPublicData = data.articles;
+            window.seriesMap = buildSeriesMap(articlesPublicData);
             renderPublicArticles();
             if (typeof initSearch === 'function') {
                 initSearch({ dataSource: articlesPublicData, onOpenArticle: openPublicArticle });
@@ -39,15 +40,67 @@ function renderPublicArticles() {
         return;
     }
 
-    var sorted = articlesPublicData.slice().sort(function (a, b) {
-        return new Date(b.date) - new Date(a.date);
+    var standalone = [];
+    var seriesGroups = {};
+    articlesPublicData.forEach(function (a) {
+        if (a.series && a.series.name && window.seriesMap && window.seriesMap[a.series.name] && window.seriesMap[a.series.name].length > 1) {
+            var name = a.series.name;
+            if (!seriesGroups[name]) seriesGroups[name] = [];
+            seriesGroups[name].push(a);
+        } else {
+            standalone.push(a);
+        }
     });
 
+    var combined = [];
+    standalone.forEach(function (a) { combined.push({ type: 'article', article: a, date: a.date }); });
+    Object.keys(seriesGroups).forEach(function (name) {
+        var arts = seriesGroups[name];
+        var latestDate = '';
+        arts.forEach(function (a) { if (a.date > latestDate) latestDate = a.date; });
+        combined.push({ type: 'series', seriesName: name, articles: arts, date: latestDate });
+    });
+    combined.sort(function (a, b) { return new Date(b.date) - new Date(a.date); });
+
     container.innerHTML = '';
-    sorted.forEach(function (article) {
-        container.appendChild(createPublicArticleCard(article));
+    combined.forEach(function (item) {
+        container.appendChild(item.type === 'series' ? createPublicSeriesCardElement(item.seriesName, item.articles) : createPublicArticleCard(item.article));
     });
     addPublicArticleClickEvents();
+}
+
+function createPublicSeriesCardElement(seriesName, articles) {
+    var card = document.createElement('article');
+    card.className = 'article-card public-card series-card fade-in';
+    var firstArticle = articles[0];
+    var safeName = escapeHtml(seriesName);
+    var total = articles.length;
+    var imageUrl = null;
+    articles.some(function (a) { if (a.image) { imageUrl = a.image; return true; } return false; });
+    var imageHtml = imageUrl
+        ? '<div class="article-image"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><img src="' + imageUrl + '" alt="' + safeName + '" loading="lazy"></div>'
+        : '<div class="article-image article-image-placeholder article-image-placeholder-series"><span class="series-card-badge"><i class="fas fa-layer-group"></i> ' + total + t('series.parts') + '</span><span>' + safeName + '</span></div>';
+    var latestDate = '';
+    articles.forEach(function (a) { if (a.date > latestDate) latestDate = a.date; });
+    var authors = {};
+    articles.forEach(function (a) { if (a.author) authors[a.author] = true; });
+    var authorNames = Object.keys(authors);
+    var authorHtml = authorNames.length === 1
+        ? escapeHtml(authorNames[0])
+        : authorNames.length + ' ' + t('public.author');
+    card.setAttribute('data-series-name', seriesName);
+    card.setAttribute('data-series-public', '1');
+    card.innerHTML = [
+        imageHtml,
+        '<div class="article-content">',
+        '  <div class="author-badge"><i class="fas fa-feather-alt"></i> ' + authorHtml + '</div>',
+        '  <h3>' + safeName + '</h3>',
+        '  <div class="article-meta">',
+        '    <span><i class="far fa-calendar"></i> ' + escapeHtml(latestDate) + '</span>',
+        '  </div>',
+        '</div>'
+    ].join('\n');
+    return card;
 }
 
 function createPublicArticleCard(article) {
@@ -87,12 +140,21 @@ function createPublicArticleCard(article) {
 }
 
 function addPublicArticleClickEvents() {
-    document.querySelectorAll('#public-articles-container .article-card').forEach(function (card) {
+    document.querySelectorAll('#public-articles-container .article-card:not(.series-card)').forEach(function (card) {
         card.style.cursor = 'pointer';
         card.addEventListener('click', function () {
             var id = Number(this.getAttribute('data-article-id'));
             var article = articlesPublicData.find(function (a) { return Number(a.id) === id; });
             if (article) openPublicArticle(article);
+        });
+    });
+    document.querySelectorAll('#public-articles-container .series-card').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function () {
+            var name = this.getAttribute('data-series-name');
+            if (name && window.seriesMap && window.seriesMap[name] && window.seriesMap[name].length > 0) {
+                openPublicArticle(window.seriesMap[name][0]);
+            }
         });
     });
 }
@@ -106,6 +168,11 @@ function openPublicArticle(article) {
     } else {
         showPublicArticleDetail(article);
     }
+}
+
+function seriesOpenPublicArticle(id) {
+    var article = (window.articlesPublicData || []).find(function (a) { return Number(a.id) === Number(id); });
+    if (article) openPublicArticle(article);
 }
 
 function showPublicArticleDetail(article) {
@@ -124,9 +191,17 @@ function showPublicArticleDetail(article) {
         '</div>'
     ].join('\n');
 
+    var series = null;
+    if (article.series && article.series.name && window.seriesMap) {
+        series = window.seriesMap[article.series.name];
+    }
+    var mode = getArticleDisplayMode();
+    var seriesMode = mode === 'legacy' ? 'public-legacy' : mode === 'page' ? 'public-page' : 'public-modal';
     showArticleModal(article, {
         giscusIdPrefix: 'public-',
-        authorSectionHtml: authorSectionHtml
+        authorSectionHtml: authorSectionHtml,
+        seriesArticles: series,
+        seriesMode: seriesMode
     });
 }
 

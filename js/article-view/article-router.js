@@ -25,10 +25,12 @@
     ].join('\n');
   }
 
-  function renderArticle(article) {
+  function renderArticle(article, seriesArticles) {
     document.title = article.title + t('router.titleSuffix');
     var container = document.getElementById('article-content');
-    container.innerHTML = buildArticleContent(article, false);
+    var seriesMode = getArticleDisplayMode() === 'legacy' ? 'main-legacy' : 'main-page';
+    var seriesNavOpts = seriesArticles ? buildSeriesNavHtml(article, seriesArticles, seriesMode) : null;
+    container.innerHTML = buildArticleContent(article, false, seriesNavOpts);
     initArticleHighlights(container);
     generateTOC(container);
     initGiscus(container, article.id);
@@ -36,7 +38,7 @@
     initShareButton(container, article);
   }
 
-  function renderPublicArticle(article) {
+  function renderPublicArticle(article, seriesArticles) {
     document.title = article.title + t('router.publicSuffix');
     var container = document.getElementById('article-content');
     var safeLink = sanitizeAuthorLink(article.authorLink);
@@ -52,7 +54,9 @@
       '  </div>',
       '</div>'
     ].join('\n');
-    container.innerHTML = buildArticleContent(article, false).replace('<div class="article-body">', '<div class="article-body">' + authorSection);
+    var seriesMode = getArticleDisplayMode() === 'legacy' ? 'public-legacy' : 'public-page';
+    var seriesNavOpts = seriesArticles ? buildSeriesNavHtml(article, seriesArticles, seriesMode) : null;
+    container.innerHTML = buildArticleContent(article, false, seriesNavOpts).replace('<div class="article-body">', '<div class="article-body">' + authorSection);
     initArticleHighlights(container);
     generateTOC(container);
     initGiscus(container, 'public-' + article.id);
@@ -79,7 +83,8 @@
         .then(function (data) {
           var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
           if (!article) { showNotFound(); return; }
-          renderPublicArticle(article);
+          var pubSeries = article.series && article.series.name ? buildSeriesMap(data.articles)[article.series.name] : null;
+          renderPublicArticle(article, pubSeries);
         })
         .catch(function (err) {
           console.error('Failed to load public article:', err);
@@ -99,7 +104,8 @@
         .then(function (data) {
           var article = data.articles.find(function (a) { return Number(a.id) === id; });
           if (!article) { showNotFound(); return; }
-          renderArticle(article);
+          var series = article.series && article.series.name ? buildSeriesMap(data.articles)[article.series.name] : null;
+          renderArticle(article, series);
         })
         .catch(function (err) {
           console.error('加载文章数据时出错:', err);
@@ -123,7 +129,8 @@
             .then(function (data) {
               var article = data.articles.find(function (a) { return Number(a.id) === pubId; });
               if (!article) { showNotFound(); return; }
-              renderPublicArticle(article);
+              var pubSeries = article.series && article.series.name ? buildSeriesMap(data.articles)[article.series.name] : null;
+              renderPublicArticle(article, pubSeries);
             })
             .catch(function (err) { console.error('加载投稿文章时出错:', err); showNotFound(); });
         } else {
@@ -140,7 +147,8 @@
           .then(function (data) {
             var article = data.articles.find(function (a) { return Number(a.id) === id2; });
             if (!article) { showNotFound(); return; }
-            renderArticle(article);
+            var series = article.series && article.series.name ? buildSeriesMap(data.articles)[article.series.name] : null;
+            renderArticle(article, series);
           })
           .catch(function (err) { console.error('加载文章数据时出错:', err); showNotFound(); });
         return true;

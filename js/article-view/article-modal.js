@@ -2,7 +2,13 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
 function showArticleDetail(article) {
-    showArticleModal(article, { giscusIdPrefix: '' });
+    var series = null;
+    if (article.series && article.series.name && window.seriesMap) {
+        series = window.seriesMap[article.series.name];
+    }
+    var mode = getArticleDisplayMode();
+    var seriesMode = mode === 'legacy' ? 'main-legacy' : mode === 'page' ? 'main-page' : 'main-modal';
+    showArticleModal(article, { giscusIdPrefix: '', seriesArticles: series, seriesMode: seriesMode });
 }
 
 function openArticleFromHash() {

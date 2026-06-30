@@ -63,6 +63,13 @@
   "toc": {
     "title": "Table of Contents"
   },
+  "series": {
+    "badge": "Series",
+    "parts": " articles",
+    "count": "{current}/{total}",
+    "prev": "Previous",
+    "next": "Next"
+  },
   "change": {
     "all": "All",
     "feat": "Features",

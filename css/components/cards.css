@@ -46,6 +46,38 @@
     font-size: 0.75rem;
 }
 
+.series-card .article-image {
+    position: relative;
+}
+
+.series-card-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 6px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.series-card-badge i {
+    font-size: 0.75rem;
+}
+
+.article-image-placeholder-series {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light)) !important;
+}
+
+.series-card .article-content h3 {
+    margin-bottom: 4px;
+}
+
 .article-image-placeholder {
     background: linear-gradient(135deg, var(--primary-light), var(--primary));
     display: flex;

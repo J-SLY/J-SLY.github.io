@@ -63,6 +63,13 @@
   "toc": {
     "title": "目次"
   },
+  "series": {
+    "badge": "シリーズ",
+    "parts": "記事",
+    "count": "{current}/{total}",
+    "prev": "前の記事",
+    "next": "次の記事"
+  },
   "change": {
     "all": "すべて",
     "feat": "新機能",
