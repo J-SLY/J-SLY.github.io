@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": 31,
+      "type": "feat",
+      "title": "GitHub Roast 卡片适配深色模式",
+      "date": "2026-06-30 14:00",
+      "content": "GitHub Roast 卡片现在跟随站点深色模式自动切换主题：\n\n- `index.html` 中卡片链接和图片添加 `id` 属性，域名改用 `githubroast.dev`\n- `dark-mode.js` 新增 `updateGithubRoastTheme()`，根据深色/浅色模式切换 `?theme=dark` / `?theme=light` 参数\n- 手动切换深色模式和跟随系统色盘变化时均自动更新"
+    },
+    {
+      "id": 30,
+      "type": "fix",
+      "title": "修复语言选择栏背景透明问题",
+      "date": "2026-06-30 14:00",
+      "content": "修复语言下拉菜单（`.lang-dropdown`）背景透明不可见的问题：\n\n- `base.css` 的 `:root` 和 `:root.dark-mode` 中补全缺失的 `--bg-card`、`--text-color`、`--border-color`、`--bg-hover` CSS 变量定义\n- 语言菜单现在在浅色/深色模式下都有正确的背景色和文字颜色"
+    },
+    {
       "id": 29,
       "type": "feat",
       "title": "更新日志分流为用户版和开发者版",

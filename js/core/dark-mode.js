@@ -50,6 +50,14 @@ function initDarkMode() {
         }
     }
 
+    function updateGithubRoastTheme(isDark) {
+        const img = document.getElementById('github-roast-card');
+        if (img) {
+            const base = 'https://githubroast.dev/api/card/J-SLY';
+            img.src = isDark ? base + '?theme=dark' : base + '?theme=light';
+        }
+    }
+
     function applyDarkTheme(isDark) {
         if (isDark) {
             icon.classList.replace('fa-moon', 'fa-sun');
@@ -61,6 +69,7 @@ function initDarkMode() {
         updateHighlightTheme(isDark);
         updateGiscusTheme(isDark);
         updateProfileCardTheme(isDark);
+        updateGithubRoastTheme(isDark);
     }
 
     darkModeToggle.addEventListener('click', function() {
@@ -81,6 +90,7 @@ function initDarkMode() {
             updateHighlightTheme(isDark);
             updateGiscusTheme(isDark);
             updateProfileCardTheme(isDark);
+            updateGithubRoastTheme(isDark);
         }
     });
 }

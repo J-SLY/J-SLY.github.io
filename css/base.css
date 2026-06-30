@@ -11,6 +11,10 @@
     --gray: #6c757d;
     --light-gray: #e9ecef;
     --border: #dee2e6;
+    --bg-card: #ffffff;
+    --text-color: #333;
+    --border-color: #dee2e6;
+    --bg-hover: #e9ecef;
     --transition: all 0.3s ease;
     --scrollbar-thumb: #ccc;
     --scrollbar-thumb-hover: #aaa;
@@ -66,6 +70,10 @@ body {
         --gray: #b0b0b0;
         --light-gray: #2a2a3e;
         --border: #3a3a4e;
+        --bg-card: #2a2a3e;
+        --text-color: #e0e0e0;
+        --border-color: #3a3a4e;
+        --bg-hover: #3a3a4e;
         --scrollbar-thumb: #444;
         --scrollbar-thumb-hover: #666;
     }
@@ -81,6 +89,10 @@ body {
     --gray: #b0b0b0;
     --light-gray: #2a2a3e;
     --border: #3a3a4e;
+    --bg-card: #2a2a3e;
+    --text-color: #e0e0e0;
+    --border-color: #3a3a4e;
+    --bg-hover: #3a3a4e;
     --scrollbar-thumb: #444;
     --scrollbar-thumb-hover: #666;
 }
