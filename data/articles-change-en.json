@@ -1,6 +1,20 @@
 {
   "articles": [
     {
+      "id": 32,
+      "type": "chore",
+      "title": "Code block font optimization: Fira Code CDN & font consistency fixes",
+      "date": "2026-06-30 14:00",
+      "content": "Multiple fixes for code block font rendering:\n\n- Load Fira Code from Google Fonts CDN (weights 400/600/700), no longer requiring local installation\n- Fix dark mode code block background overriding highlight.js theme, making text invisible\n- Remove non-monospace fonts (`DengXian`/`Noto Sans Mono CJK SC`) from the font stack to prevent proportional-width fallback for Latin characters\n- Force all highlight `<span>` elements inside code blocks to inherit a unified `font-family`, eliminating font bifurcation at syntax highlight span boundaries\n- Disable color variance for `.hljs-built_in` and other highlight classes inside code blocks to avoid jarring color differences mid-command"
+    },
+    {
+      "id": 31,
+      "type": "feat",
+      "title": "GitHub Roast card dark mode support",
+      "date": "2026-06-30 14:00",
+      "content": "GitHub Roast card now automatically switches theme with the site's dark mode:\n\n- Added `id` attributes to card links and images in `index.html`, switched domain to `githubroast.dev`\n- Added `updateGithubRoastTheme()` in `dark-mode.js` that toggles `?theme=dark` / `?theme=light` parameter\n- Updates automatically on both manual dark mode toggle and system color scheme changes"
+    },
+    {
       "id": 30,
       "type": "fix",
       "title": "Fix leaderboard tab labels & exposed <strong> tags on public page",
