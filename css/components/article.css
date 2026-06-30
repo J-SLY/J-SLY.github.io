@@ -103,6 +103,10 @@
     line-height: 1.5;
 }
 
+.markdown-body pre code * {
+    font-family: inherit;
+}
+
 .markdown-body pre {
     position: relative;
 }
@@ -274,8 +278,21 @@
     background: var(--light-gray);
 }
 
+.dark-mode .markdown-body pre code {
+    background: none;
+}
+
 .dark-mode .markdown-body pre {
     background: #0d0d1a;
+}
+
+.markdown-body pre code [class^="hljs-"] {
+    font-family: inherit;
+}
+
+.markdown-body pre code .hljs-built_in,
+.markdown-body pre code .hljs-symbol {
+    color: inherit;
 }
 
 .dark-mode .article-toc-sidebar a:hover {
