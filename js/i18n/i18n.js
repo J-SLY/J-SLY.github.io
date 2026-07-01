@@ -34,14 +34,17 @@
       "address": "中国，安徽，六安",
       "copyright": "保留所有权利.", "sourceCode": "源代码 (AGPL-3.0)"
     },
-    "article": {
+"article": {
       "pinned": "置顶",
+      "loading": "加载中...",
       "empty": "暂无文章，敬请期待...",
+      "uncategorized": "未分类",
       "loadError": "无法加载文章，请检查网络连接或刷新页面重试。",
       "readTime": "约 {minutes} 分钟",
       "backToList": "返回文章列表"
     },
-    "share": { "button": "分享", "copied": "链接已复制", "copyFailed": "复制失败" },
+    "share": { "button": "分享", "copied": "链接已复制", "copyFailed": "复制失败", "copyBtn": "复制", "native": "系统分享", "copyLink": "复制链接" },
+    "category": { "all": "全部分类" },
     "toc": { "title": "目录" },
     "series": { "badge": "系列", "parts": "篇", "count": "第 {current}/{total} 篇", "prev": "上一篇", "next": "下一篇" },
     "change": {
@@ -97,6 +100,15 @@
     },
     "lang": {
       "zh": "中文", "en": "英文", "ja": "日文", "ru": "俄文"
+    },
+    "shortcuts": {
+      "title": "快捷键",
+      "help": "显示此帮助",
+      "search": "打开搜索",
+      "close": "关闭弹窗",
+      "navigate": "搜索结果导航",
+      "select": "选中搜索结果",
+      "prevNext": "上一篇/下一篇"
     },
     "meta": {
       "siteName": "JSLY's Blog", "description": "JSLY's Blog",
@@ -247,18 +259,31 @@
     if (SUPPORTED.indexOf(lang) === -1) lang = 'zh';
     localStorage.setItem('blog_lang', lang);
     if (noReload) {
-      loadLocale(lang, function () { applyI18n(); });
+      loadLocale(lang, function () {
+        document.querySelectorAll('.article-modal, .search-modal').forEach(function (m) {
+          m.remove();
+        });
+        document.body.style.overflow = '';
+        applyI18n();
+        document.dispatchEvent(new Event('languageChanged'));
+      });
     } else {
       window.location.reload();
     }
   };
 
+  window.getCurrentLang = function () {
+    return currentLang;
+  };
+
   window.applyI18n = applyI18n;
-  window.__currentLang = currentLang;
 
   currentLang = detectLanguage();
   document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : currentLang;
-  window.__currentLang = currentLang;
+  Object.defineProperty(window, '__currentLang', {
+    get: function () { return currentLang; },
+    set: function (v) { currentLang = v; }
+  });
 
   if (currentLang !== 'zh') {
     loadLocale(currentLang, function () {

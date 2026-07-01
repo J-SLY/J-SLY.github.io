@@ -44,9 +44,23 @@ function showArticleModal(article, options) {
     }
 
     initArticleHighlights(modal);
+    initCodeCopyButtons(modal);
+    initImageLightbox(modal);
     generateTOC(modal, modalContent);
     initGiscus(modal, (options.giscusIdPrefix || '') + article.id);
     initShareButton(modal, article, options.isPublic);
+
+    var dataSource = options.isPublic ? (window.publicArticlesData || null) : (window.articlesData || null);
+    if (dataSource && dataSource.length > 1) {
+        var related = findRelatedArticles(article, dataSource);
+        if (related.length > 0) {
+            var relatedHtml = renderRelatedArticles(related, options.isPublic);
+            var articleBody = modal.querySelector('.article-body');
+            if (articleBody) {
+                articleBody.insertAdjacentHTML('beforeend', relatedHtml);
+            }
+        }
+    }
 
     function closeModalFn() {
         if (document.body.contains(modal)) document.body.removeChild(modal);

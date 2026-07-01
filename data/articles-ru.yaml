@@ -1,6 +1,7 @@
 articles:
   - id: 1
     title: Руководство по OpenCode
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 1
@@ -130,6 +131,7 @@ articles:
     pinned: true
     showImage: false
     title: Руководство по JSLY Blog
+    category: Blog
     date: '2026-06-21'
     tags:
       - Руководство
@@ -264,6 +266,7 @@ articles:
     views: 0
   - id: 3
     title: Подробный разбор AI-агентов OpenCode
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 2
@@ -355,6 +358,7 @@ articles:
     views: 0
   - id: 4
     title: Продвинутые техники и лучшие практики OpenCode
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 3

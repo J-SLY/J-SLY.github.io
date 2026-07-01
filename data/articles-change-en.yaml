@@ -378,3 +378,50 @@ articles:
       - CSS: Added `scroll-margin-top` to prevent fixed header from covering anchor targets
       - Added `<meta name="theme-color">` to all HTML files
       - Cleaned up orphaned `data/articles.json` and `data/articles-public.json`
+  - id: 34
+    type: feat
+    title: Internationalization (i18n) support & multilingual data files
+    date: 2026-06-28 13:37
+    content: |-
+      Internationalization (i18n) support launched — the blog now supports four languages:
+      - **i18n engine** — Added `js/i18n/i18n.js` supporting URL parameter (`?lang=`), localStorage, and browser language auto-detection
+      - **Language switcher** — New globe icon + dropdown menu in the navigation bar, supporting zh/en/ja/ru switching
+      - **UI localization** — All 6 HTML files have `data-i18n` attributes, defined in `js/i18n/locales/{lang}.json`
+      - **Multilingual data** — Articles, public submissions, and changelog are split by language (`articles-{lang}.yaml`), with auto-fallback to Chinese
+      - **Giscus comments** — Language detection mapped to Giscus language parameters
+      - **Leaderboard fix** — `t()` call changed from module-level to runtime to ensure correct translation after language switch
+      - **Path unification** — All data fetch paths changed to absolute paths
+  - id: 35
+    type: chore
+    title: Unify article data readTime field name to readTimeMinutes
+    date: 2026-06-30 21:28
+    content: |-
+      Unified the reading time field name in article data to eliminate naming inconsistency:
+      - `readTime` → `readTimeMinutes`, updated across all language data files and YAML files
+   - id: 36
+     type: chore
+     title: Replace all @blog.jsly.asia email addresses with @support.jsly.asia
+     date: 2026-06-30 23:28
+     content: |-
+       Migrated all contact email addresses from @blog.jsly.asia to @support.jsly.asia:
+       - Updated email addresses across all HTML pages and data files (19 files)
+       - Including footer, articles, leaderboard, changelog, and all other locations
+   - id: 37
+     type: feat
+     title: Keyboard shortcuts & Category filter & Image lightbox & Code copy & Related articles
+     date: 2026-07-01 10:00
+     content: |-
+       Multiple new features and improvements:
+       - **Keyboard shortcuts** — `?` to show help, `s` to open search, `j/k` for prev/next article
+       - **Category filter** — Article list with category filter bar (`category` field)
+       - **Image lightbox** — Click article images to view full size, Esc to close
+       - **Code copy** — Copy button on code blocks for one-click copy
+       - **Related articles** — Tag-based related article recommendations at article bottom
+       - **Social sharing** — Share buttons for Twitter, Weibo, QQ platforms
+       - **Back to top** — Floating button at bottom-right corner
+       - **Print styles** — `print.css` for optimized article printing
+       - **SEO** — Added `robots.txt` and `sitemap.xml`
+       - **Seamless language switch** — No page reload needed on language change
+       - **Auto read time** — Calculated from article character count
+       - **TOC highlight** — Active heading highlighted on scroll
+       - **Dark mode improvement** — Smoother highlight.js theme switching

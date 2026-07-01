@@ -2,6 +2,54 @@
  * SPDX-License-Identifier: AGPL-3.0-or-later */
 
 let articlesData = [];
+var activeCategory = 'all';
+
+function getCategories() {
+    var cats = {};
+    if (!articlesData) return [];
+    articlesData.forEach(function (a) {
+        var c = a.category || 'Uncategorized';
+        cats[c] = true;
+    });
+    return Object.keys(cats).sort();
+}
+
+function renderCategoryFilter() {
+    var existing = document.querySelector('.category-filter-bar');
+    if (existing) existing.remove();
+
+    var categories = getCategories();
+    if (categories.length < 2) return;
+
+    var bar = document.createElement('div');
+    bar.className = 'category-filter-bar';
+
+    var allBtn = document.createElement('button');
+    allBtn.className = 'category-btn' + (activeCategory === 'all' ? ' active' : '');
+    allBtn.textContent = t('category.all') || '全部';
+    allBtn.setAttribute('data-cat', 'all');
+    bar.appendChild(allBtn);
+
+    categories.forEach(function (cat) {
+        var btn = document.createElement('button');
+        btn.className = 'category-btn' + (activeCategory === cat ? ' active' : '');
+        btn.textContent = cat;
+        btn.setAttribute('data-cat', cat);
+        bar.appendChild(btn);
+    });
+
+    bar.addEventListener('click', function (e) {
+        var btn = e.target.closest('.category-btn');
+        if (!btn) return;
+        activeCategory = btn.getAttribute('data-cat');
+        renderAllArticles();
+    });
+
+    var sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle && sectionTitle.parentNode) {
+        sectionTitle.parentNode.insertBefore(bar, sectionTitle.nextSibling);
+    }
+}
 
 function loadArticlesFromJSON() {
     var lang = (window.__currentLang || 'zh').split('-')[0];
@@ -33,13 +81,22 @@ function loadArticlesFromJSON() {
 function renderAllArticles() {
     const container = document.getElementById('articles-container');
     container.innerHTML = '';
+    renderCategoryFilter();
     if (!articlesData || articlesData.length === 0) {
+        container.innerHTML = '<p class="no-articles">' + t('article.empty') + '</p>';
+        return;
+    }
+    var filtered = articlesData;
+    if (activeCategory !== 'all') {
+        filtered = articlesData.filter(function (a) { return (a.category || 'Uncategorized') === activeCategory; });
+    }
+    if (filtered.length === 0) {
         container.innerHTML = '<p class="no-articles">' + t('article.empty') + '</p>';
         return;
     }
     var standalone = [];
     var seriesGroups = {};
-    articlesData.forEach(function (a) {
+    filtered.forEach(function (a) {
         if (a.series && a.series.name && window.seriesMap && window.seriesMap[a.series.name] && window.seriesMap[a.series.name].length > 1) {
             var name = a.series.name;
             if (!seriesGroups[name]) seriesGroups[name] = [];
@@ -107,9 +164,11 @@ function createArticleElement(article) {
     var imageHtml = article.image
         ? `<div class="article-image">${pinnedBadge}<img src="${safeCardImage}" alt="${safeTitle}" loading="lazy"></div>`
         : `<div class="article-image article-image-placeholder">${pinnedBadge}<span>${safeTitle}</span></div>`;
+    var cat = article.category;
+    var categoryBadge = cat ? '<span class="category-badge"><i class="fas fa-folder"></i> ' + escapeHtml(cat) + '</span>' : '';
     var tagsHtml = article.tags && article.tags.length
-        ? `<div class="article-tags">${article.tags.map(function(tag) { return '<span class="tag">' + escapeHtml(tag) + '</span>'; }).join('')}</div>`
-        : '';
+        ? `<div class="article-tags">${categoryBadge}${article.tags.map(function(tag) { return '<span class="tag">' + escapeHtml(tag) + '</span>'; }).join('')}</div>`
+        : (categoryBadge ? '<div class="article-tags">' + categoryBadge + '</div>' : '');
     articleCard.innerHTML = [
         imageHtml,
         '<div class="article-content">',
@@ -118,7 +177,7 @@ function createArticleElement(article) {
         '  <p>' + escapeHtml(article.excerpt) + '</p>',
         '  <div class="article-meta">',
         '    <span><i class="far fa-calendar"></i> ' + escapeHtml(article.date) + '</span>',
-        '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)) + '</span>',
+        '    <span><i class="far fa-clock"></i> ' + t('article.readTime', {minutes: calculateReadTime(article)}) + '</span>',
         '    <span><i class="far fa-eye"></i> ' + escapeHtml('' + article.views) + '</span>',
         '  </div>',
         '</div>'
@@ -126,6 +185,12 @@ function createArticleElement(article) {
 
     return articleCard;
 }
+
+window.__reloadContent = function () {
+    if (typeof loadArticlesFromJSON === 'function') {
+        loadArticlesFromJSON();
+    }
+};
 
 function addArticleClickEvents() {
     document.querySelectorAll('.article-card:not(.series-card)').forEach(card => {

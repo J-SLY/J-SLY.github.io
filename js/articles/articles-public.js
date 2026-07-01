@@ -177,6 +177,14 @@ function seriesOpenPublicArticle(id) {
     if (article) openPublicArticle(article);
 }
 
+var origReload = window.__reloadContent;
+window.__reloadContent = function () {
+    if (typeof origReload === 'function') origReload();
+    if (typeof loadPublicArticles === 'function') {
+        loadPublicArticles();
+    }
+};
+
 function showPublicArticleDetail(article) {
     var safeLink = sanitizeAuthorLink(article.authorLink);
     var authorHtml = safeLink

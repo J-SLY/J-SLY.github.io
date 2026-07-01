@@ -32,6 +32,8 @@
     var seriesNavOpts = seriesArticles ? buildSeriesNavHtml(article, seriesArticles, seriesMode) : null;
     container.innerHTML = buildArticleContent(article, false, seriesNavOpts);
     initArticleHighlights(container);
+    initCodeCopyButtons(container);
+    initImageLightbox(document.getElementById('article-page'));
     generateTOC(container);
     initGiscus(container, article.id);
     updateOGTags(article);
@@ -58,6 +60,8 @@
     var seriesNavOpts = seriesArticles ? buildSeriesNavHtml(article, seriesArticles, seriesMode) : null;
     container.innerHTML = buildArticleContent(article, false, seriesNavOpts, authorSection);
     initArticleHighlights(container);
+    initCodeCopyButtons(container);
+    initImageLightbox(document.getElementById('article-page'));
     generateTOC(container);
     initGiscus(container, 'public-' + article.id);
     updateOGTags(article);
@@ -163,6 +167,10 @@
       showNotFound();
     }
   }
+
+  window.__reloadContent = function () {
+    tryRenderArticleFromPath();
+  };
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initRouter);

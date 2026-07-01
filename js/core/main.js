@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initSettings();
     initNavScroll();
     initMobileMenu();
+    initBackToTop();
+    initKeyboardShortcuts();
     loadArticlesFromJSON();
     window.addEventListener('scroll', updateNavOnScroll);
 });

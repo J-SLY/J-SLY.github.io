@@ -66,15 +66,31 @@ function generateTOC(container, scrollRoot) {
         }
     });
 
-    if (!scrollRoot) scrollRoot = container;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                tocSidebar.querySelectorAll('.article-toc-item a').forEach(link => {
-                    link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
-                });
+    var scrollEl = scrollRoot || window;
+
+    function updateActiveHeading() {
+        var scrollTop = scrollEl === window ? window.scrollY : scrollEl.scrollTop;
+        var headerHeight = document.querySelector('header') ? document.querySelector('header').offsetHeight : 0;
+        var offset = headerHeight + 30;
+        var activeIdx = -1;
+        headings.forEach(function (h, i) {
+            var hTop;
+            if (scrollEl === window) {
+                hTop = h.getBoundingClientRect().top + window.scrollY;
+            } else {
+                hTop = h.offsetTop;
+            }
+            if (hTop - scrollTop < offset) {
+                activeIdx = i;
             }
         });
-    }, { root: scrollRoot, rootMargin: '0px 0px -80% 0px', threshold: 0 });
-    headings.forEach(h => observer.observe(h));
+        if (activeIdx >= 0) {
+            tocSidebar.querySelectorAll('.article-toc-item a').forEach(function (link, i) {
+                link.classList.toggle('active', i === activeIdx);
+            });
+        }
+    }
+
+    updateActiveHeading();
+    scrollEl.addEventListener('scroll', updateActiveHeading, { passive: true });
 }

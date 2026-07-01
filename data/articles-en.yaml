@@ -1,6 +1,7 @@
 articles:
   - id: 1
     title: OpenCode User Guide
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 1
@@ -130,6 +131,7 @@ articles:
     pinned: true
     showImage: false
     title: JSLY Blog User Guide
+    category: Blog
     date: '2026-06-21'
     tags:
       - Guide
@@ -264,6 +266,7 @@ articles:
     views: 0
   - id: 3
     title: OpenCode AI Agent Deep Dive
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 2
@@ -380,6 +383,7 @@ articles:
     views: 0
   - id: 4
     title: OpenCode Advanced Tips & Best Practices
+    category: OpenCode
     series:
       name: OpenCode 入门
       order: 3

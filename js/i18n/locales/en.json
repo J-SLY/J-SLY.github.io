@@ -52,17 +52,23 @@
     "pinned": "Pinned",
     "empty": "No articles yet, stay tuned...",
     "loadError": "Unable to load articles. Please check your connection or refresh.",
+    "loading": "Loading...",
     "readTime": "{minutes} min read",
-    "backToList": "Back to Articles"
+    "backToList": "Back to Articles",
+    "uncategorized": "Uncategorized"
   },
   "share": {
     "button": "Share",
     "copied": "Link copied",
-    "copyFailed": "Copy failed"
+    "copyFailed": "Copy failed",
+    "copyBtn": "Copy",
+    "native": "Native Share",
+    "copyLink": "Copy Link"
   },
   "toc": {
     "title": "Table of Contents"
   },
+  "category": { "all": "All Categories" },
   "series": {
     "badge": "Series",
     "parts": " articles",
@@ -147,6 +153,15 @@
     "ja": "Japanese",
     "ru": "Russian"
   },
+    "shortcuts": {
+      "title": "Keyboard Shortcuts",
+      "help": "Show this help",
+      "search": "Open search",
+      "close": "Close modal",
+      "navigate": "Navigate search results",
+      "select": "Select search result",
+      "prevNext": "Previous/Next article"
+    },
   "meta": {
     "siteName": "JSLY's Blog",
     "siteTitle": "JSLY's Blog",

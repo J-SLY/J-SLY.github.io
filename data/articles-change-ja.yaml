@@ -378,3 +378,50 @@ articles:
       - CSS: Added `scroll-margin-top` to prevent fixed header from covering anchor targets
       - Added `<meta name="theme-color">` to all HTML files
       - Cleaned up orphaned `data/articles.json` and `data/articles-public.json`
+  - id: 34
+    type: feat
+    title: 国際化対応 (i18n) と多言語データファイル
+    date: 2026-06-28 13:37
+    content: |-
+      国際化対応を開始しました。ブログは4言語に対応：
+      - **i18n エンジン** — `js/i18n/i18n.js` を追加。URL パラメータ（`?lang=`）、localStorage、ブラウザ言語の自動検出に対応
+      - **言語切替** — ナビゲーションバーに地球アイコン + ドロップダウンメニューを追加。中/英/日/露の切替に対応
+      - **UI ローカライゼーション** — 全6HTMLファイルに `data-i18n` 属性を追加。`js/i18n/locales/{lang}.json` で定義
+      - **多言語データ** — 記事、投稿、更新ログを言語別に分割（`articles-{lang}.yaml`）、中国語に自動フォールバック
+      - **Giscus コメント** — 言語検出を Giscus 言語パラメータにマッピング
+      - **ランキング修正** — `t()` 呼び出しをモジュールレベルから実行時に変更。言語切替後の翻訳を正確に
+      - **パス統一** — データ取得パスをすべて絶対パスに変更
+  - id: 35
+    type: chore
+    title: 記事データの readTime フィールド名を readTimeMinutes に統一
+    date: 2026-06-30 21:28
+    content: |-
+      記事データの読了時間フィールド名を統一し、命名の不整合を解消：
+      - `readTime` → `readTimeMinutes`、全言語のデータファイルとYAMLファイルで一括更新
+   - id: 36
+     type: chore
+     title: すべての @blog.jsly.asia メールアドレスを @support.jsly.asia に変更
+     date: 2026-06-30 23:28
+     content: |-
+       すべての連絡先メールアドレスを @blog.jsly.asia から @support.jsly.asia に移行：
+       - 全HTMLページとデータファイルのメールアドレスを更新（19ファイル）
+       - フッター、記事、貢献ランキング、更新ログなど、メールアドレスが表示されるすべての箇所を含む
+   - id: 37
+     type: feat
+     title: キーボードショートカット & カテゴリフィルター & 画像ライトボックス & コードコピー & 関連記事
+     date: 2026-07-01 10:00
+     content: |-
+       複数の新機能と改善：
+       - **キーボードショートカット** — `?` でヘルプ表示、`s` で検索、`j/k` で前/次の記事
+       - **カテゴリフィルター** — 記事一覧にカテゴリフィルターバーを追加（`category` フィールド）
+       - **画像ライトボックス** — 記事画像をクリックで拡大表示、Escで閉じる
+       - **コードコピー** — コードブロックにコピーボタンを追加
+       - **関連記事** — タグに基づく関連記事をおすすめ表示
+       - **ソーシャル共有** — Twitter、Weibo、QQ への共有ボタン
+       - **トップに戻る** — 右下にフローティングボタン
+       - **印刷スタイル** — `print.css` で印刷最適化
+       - **SEO** — `robots.txt` と `sitemap.xml` を追加
+       - **シームレスな言語切替** — 言語切替時にページリロード不要
+       - **読了時間自動計算** — 文字数から自動計算
+       - **目次ハイライト** — スクロールに応じて現在位置をハイライト
+       - **ダークモード改善** — highlight.js テーマ切替をスムーズに

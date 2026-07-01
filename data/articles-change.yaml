@@ -393,3 +393,50 @@ articles:
       - CSS：添加 `scroll-margin-top` 防止固定导航栏遮挡锚点标题
       - 添加 `<meta name="theme-color">` 到所有 HTML
       - 清理废弃的 `data/articles.json` 和 `data/articles-public.json`
+  - id: 35
+    type: feat
+    title: 国际化支持 & 多语言数据文件
+    date: 2026-06-28 13:37
+    content: |-
+      国际化支持上线，博客现支持四种语言：
+      - **i18n 引擎** — 新增 `js/i18n/i18n.js`，支持 URL 参数（`?lang=`）、localStorage、浏览器语言自动检测
+      - **语言切换器** — 导航栏新增地球图标 + 下拉菜单，支持中/英/日/俄四语切换
+      - **UI 本地化** — 所有 6 个 HTML 文件添加 `data-i18n` 属性，定义在 `js/i18n/locales/{lang}.json`
+      - **多语言数据** — 文章、公共投稿、更新日志均按语言拆分（`articles-{lang}.yaml`），自动 fallback 到中文
+      - **Giscus 评论** — 语言检测映射至 Giscus 语言参数
+      - **排行榜修复** — `t()` 调用从模块级改为运行时，确保语言切换后正确翻译
+      - **路径统一** — 数据获取路径全部改为绝对路径
+  - id: 36
+    type: chore
+    title: 统一文章数据 readTime 字段名为 readTimeMinutes
+    date: 2026-06-30 21:28
+    content: |-
+      统一文章数据中阅读时间字段名称，消除命名不一致：
+      - `readTime` → `readTimeMinutes`，在所有语言的数据文件和 YAML 文件中同步更新
+   - id: 37
+     type: chore
+     title: 将所有 @blog.jsly.asia 邮箱改为 @support.jsly.asia
+     date: 2026-06-30 23:28
+     content: |-
+       将所有联系方式从 @blog.jsly.asia 统一迁移至 @support.jsly.asia：
+       - 更新了所有 HTML 页面、数据文件中的邮箱地址（19 个文件）
+       - 包括页脚、文章、贡献榜、更新日志等所有出现邮箱的位置
+   - id: 38
+     type: feat
+     title: 键盘快捷键 & 分类筛选 & 图片灯箱 & 代码复制 & 相关文章
+     date: 2026-07-01 10:00
+     content: |-
+       新增多项功能和优化：
+       - **键盘快捷键** — `?` 查看快捷键帮助，`s` 打开搜索，`j/k` 浏览上一篇/下一篇文章
+       - **分类筛选** — 文章列表新增分类筛选栏，支持按分类过滤文章（`category` 字段）
+       - **图片灯箱** — 点击文章图片可放大查看，支持 Esc 关闭
+       - **代码复制** — 代码块右上角新增复制按钮，一键复制代码
+       - **相关文章** — 文章详情底部展示标签关联的相关文章推荐
+       - **社交分享** — 分享按钮新增 Twitter、微博、QQ 分享平台
+       - **回到顶部** — 页面右下角新增回到顶部按钮
+       - **打印样式** — 新增 `print.css` 优化文章打印效果
+       - **SEO** — 添加 `robots.txt` 和 `sitemap.xml`
+       - **语言切换优化** — 切换语言时无需刷新页面，自动重载内容
+       - **阅读时间自动计算** — 自动根据文章字符数计算阅读时间
+       - **目录高亮** — 滚动时自动高亮当前阅读的标题
+       - **深色模式改进** — highlight.js 主题切换更流畅

@@ -1,0 +1,99 @@
+/* Copyright (C) 2026 JSLY
+ * SPDX-License-Identifier: AGPL-3.0-or-later */
+
+@media print {
+    /* Hide non-essential elements */
+    header, footer, .article-toc-sidebar, .article-actions,
+    .article-comments, .back-to-top, .series-nav-top, .series-nav-bottom,
+    .settings-toggle, .dark-mode-toggle, .search-icon, .menu-toggle,
+    .lang-switcher, .reading-progress-bar, .hero, .about-section,
+    #back-to-top {
+        display: none !important;
+    }
+
+    /* Reset layout */
+    .article-layout {
+        display: block !important;
+    }
+
+    .article-body {
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        background: white !important;
+    }
+
+    .article-detail .article-hero {
+        height: auto !important;
+        max-height: 200px;
+        break-inside: avoid;
+    }
+
+    .modal-content {
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .article-modal {
+        position: static !important;
+        background: none !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    /* Ensure content is readable */
+    body {
+        font-size: 12pt !important;
+        line-height: 1.6 !important;
+        color: #000 !important;
+        background: white !important;
+    }
+
+    .markdown-body pre {
+        background: #f5f5f5 !important;
+        border: 1px solid #ddd !important;
+        break-inside: avoid;
+    }
+
+    .markdown-body code {
+        background: #f5f5f5 !important;
+        color: #000 !important;
+    }
+
+    .markdown-body a {
+        color: #000 !important;
+        text-decoration: underline !important;
+    }
+
+    .markdown-body img {
+        max-width: 100% !important;
+        break-inside: avoid;
+    }
+
+    .article-hero-placeholder {
+        background: #f0f0f0 !important;
+        color: #333 !important;
+        height: auto !important;
+        padding: 40px 20px !important;
+    }
+
+    /* Page breaks */
+    h1, h2, h3, h4 {
+        break-after: avoid;
+    }
+
+    .article-content {
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Article meta */
+    .article-meta {
+        border-bottom: 1px solid #ccc !important;
+    }
+
+    /* Series nav override */
+    .article-detail .article-body {
+        width: 100% !important;
+    }
+}

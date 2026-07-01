@@ -33,13 +33,21 @@ function findPinyinMatchRange(text, query) {
 
 function initSearch(options) {
     options = options || {};
-    var dataSource = options.dataSource || (typeof window !== 'undefined' ? window.articlesData : null) || [];
     var onOpenArticle = options.onOpenArticle || (typeof window !== 'undefined' ? window.openArticle : null) || function() {};
 
+    function getDataSource() {
+        return options.dataSource || (typeof window !== 'undefined' ? window.articlesData : null) || [];
+    }
+
     var searchIcon = document.querySelector('.search-icon');
+    if (!searchIcon) return;
     searchIcon.style.cursor = 'pointer';
 
-    searchIcon.addEventListener('click', function() {
+    if (searchIcon.__searchHandler) {
+        searchIcon.removeEventListener('click', searchIcon.__searchHandler);
+    }
+
+    var handler = function() {
         var existing = document.querySelector('.search-modal');
         if (existing) return;
 
@@ -114,7 +122,8 @@ function initSearch(options) {
                 return;
             }
 
-            var matches = dataSource.filter(function(a) {
+            var ds = getDataSource();
+            var matches = ds.filter(function(a) {
                 return a.title.toLowerCase().includes(q) ||
                     matchPinyin(a.title, q) ||
                     (a.tags && a.tags.some(function(t) { return t.toLowerCase().includes(q) || matchPinyin(t, q); })) ||
@@ -149,7 +158,7 @@ function initSearch(options) {
             results.querySelectorAll('.search-result-item').forEach(function(item) {
                 item.addEventListener('click', function() {
                     var id = parseInt(this.dataset.id);
-                    var article = dataSource.find(function(a) { return a.id === id; });
+                    var article = getDataSource().find(function(a) { return a.id === id; });
                     if (article) {
                         closeSearch();
                         onOpenArticle(article);
@@ -158,6 +167,9 @@ function initSearch(options) {
             });
         });
     });
+
+    searchIcon.addEventListener('click', handler);
+    searchIcon.__searchHandler = handler;
 }
 
 function highlight(text, query) {

@@ -25,6 +25,7 @@ function initDarkMode() {
     function updateHighlightTheme(isDark) {
         const link = document.getElementById('hljs-theme');
         if (link) {
+            link.removeAttribute('integrity');
             link.href = isDark
                 ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
                 : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';

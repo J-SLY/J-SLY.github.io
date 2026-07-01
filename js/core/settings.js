@@ -72,7 +72,8 @@ function initSettings() {
                 e.preventDefault();
                 langDropdown.classList.remove('show');
                 if (typeof setLanguage === 'function') {
-                    setLanguage(this.getAttribute('data-lang'));
+                    var lang = this.getAttribute('data-lang');
+                    setLanguage(lang, true);
                 }
             });
         });

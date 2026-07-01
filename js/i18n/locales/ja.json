@@ -52,17 +52,23 @@
     "pinned": "ピン留め",
     "empty": "まだ記事がありません。お楽しみに...",
     "loadError": "記事を読み込めませんでした。接続を確認するか、再読み込みしてください。",
+    "loading": "読み込み中...",
     "readTime": "約{minutes}分",
-    "backToList": "記事一覧に戻る"
+    "backToList": "記事一覧に戻る",
+    "uncategorized": "未分類"
   },
   "share": {
     "button": "シェア",
     "copied": "リンクをコピーしました",
-    "copyFailed": "コピーに失敗しました"
+    "copyFailed": "コピーに失敗しました",
+    "copyBtn": "コピー",
+    "native": "共有",
+    "copyLink": "リンクをコピー"
   },
   "toc": {
     "title": "目次"
   },
+  "category": { "all": "すべてのカテゴリ" },
   "series": {
     "badge": "シリーズ",
     "parts": "記事",
@@ -147,6 +153,15 @@
     "ja": "日本語",
     "ru": "ロシア語"
   },
+    "shortcuts": {
+      "title": "キーボードショートカット",
+      "help": "ヘルプを表示",
+      "search": "検索を開く",
+      "close": "モーダルを閉じる",
+      "navigate": "検索結果を移動",
+      "select": "検索結果を選択",
+      "prevNext": "前の記事/次の記事"
+    },
   "meta": {
     "siteName": "JSLY's Blog",
     "siteTitle": "JSLY's Blog",

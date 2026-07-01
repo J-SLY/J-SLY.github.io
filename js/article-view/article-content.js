@@ -119,7 +119,7 @@ function buildArticleContent(article, showHero, seriesNavOpts, authorSectionHtml
                 ${tagsHtml}
                 <div class="article-meta">
                     <span><i class="far fa-calendar"></i> ${escapeHtml(article.date)}</span>
-                    <span><i class="far fa-clock"></i> ${article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)}</span>
+                    <span><i class="far fa-clock"></i> ${t('article.readTime', {minutes: calculateReadTime(article)})}</span>
                     <span><i class="far fa-eye"></i> ${escapeHtml('' + article.views)}</span>
                 </div>
                 <div class="article-content markdown-body">
@@ -127,9 +127,7 @@ function buildArticleContent(article, showHero, seriesNavOpts, authorSectionHtml
                 </div>
                 ${seriesBottomHtml}
                 <div class="article-actions">
-                    <button class="btn share-btn">
-                        <i class="fas fa-share"></i> ${t('share.button')}
-                    </button>
+                    <div class="share-buttons"></div>
                 </div>
                 <div class="article-comments giscus"></div>
             </div>
@@ -137,9 +135,126 @@ function buildArticleContent(article, showHero, seriesNavOpts, authorSectionHtml
     `;
 }
 
+function findRelatedArticles(article, allArticles, maxCount) {
+    if (!allArticles || !article) return [];
+    if (maxCount === undefined) maxCount = 3;
+    var articleTags = (article.tags || []).map(function (t) { return t.toLowerCase(); });
+    if (articleTags.length === 0) return [];
+
+    var scored = [];
+    allArticles.forEach(function (a) {
+        if (Number(a.id) === Number(article.id)) return;
+        var aTags = (a.tags || []).map(function (t) { return t.toLowerCase(); });
+        var overlap = 0;
+        articleTags.forEach(function (t) { if (aTags.indexOf(t) !== -1) overlap++; });
+        if (overlap > 0) {
+            scored.push({ article: a, score: overlap });
+        }
+    });
+
+    scored.sort(function (a, b) { return b.score - a.score || new Date(b.article.date) - new Date(a.article.date); });
+    return scored.slice(0, maxCount).map(function (s) { return s.article; });
+}
+
+function renderRelatedArticles(articles, isPublic) {
+    if (!articles || articles.length === 0) return '';
+    var basePath = isPublic ? '/public/article/' : '/article/';
+    var items = articles.map(function (a) {
+        var imgHtml = a.image
+            ? '<img src="' + (isSafeUrl(a.image) ? a.image : '') + '" alt="' + escapeHtml(a.title) + '" loading="lazy">'
+            : '<div class="related-placeholder"><i class="fas fa-file-alt"></i></div>';
+        return '<a class="related-article-card" href="' + basePath + a.id + '">' +
+            '<div class="related-image">' + imgHtml + '</div>' +
+            '<div class="related-info">' +
+            '<div class="related-title">' + escapeHtml(a.title) + '</div>' +
+            '<div class="related-tags">' + (a.tags || []).map(function (t) { return '<span class="tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div>' +
+            '</div></a>';
+    }).join('');
+
+    return '<div class="related-articles-section">' +
+        '<h3 class="related-heading"><i class="fas fa-link"></i> ' +
+        (typeof t === 'function' ? t('article.related') || '相关文章' : '相关文章') + '</h3>' +
+        '<div class="related-articles-grid">' + items + '</div></div>';
+}
+
+function calculateReadTime(article) {
+    if (article.readTimeMinutes) return article.readTimeMinutes;
+    if (!article.content || !article.content.length) return 1;
+    var text = article.content.join('\n');
+    var charCount = text.replace(/\s/g, '').length;
+    var cjkChars = (text.match(/[\u4e00-\u9fff\u3040-\u309f\u30a0-\u30ff\uac00-\ud7af]/g) || []).length;
+    var readingTime = Math.max(1, Math.round(cjkChars / 300 + (charCount - cjkChars) / 500));
+    return readingTime;
+}
+
 function initArticleHighlights(container) {
     if (typeof hljs === 'undefined') return;
     container.querySelectorAll('.markdown-body pre code').forEach((block) => {
         try { hljs.highlightElement(block); } catch (e) { /* skip failed block */ }
+    });
+}
+
+function initImageLightbox(container) {
+    container.querySelectorAll('.markdown-body img').forEach(function (img) {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.innerHTML = '<span class="lightbox-close">&times;</span><img src="' + this.src + '" alt="' + (this.alt || '') + '">';
+            document.body.appendChild(overlay);
+            document.body.style.overflow = 'hidden';
+
+            function closeLightbox() {
+                overlay.classList.remove('active');
+                setTimeout(function () {
+                    if (overlay.parentNode) document.body.removeChild(overlay);
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+
+            overlay.querySelector('.lightbox-close').addEventListener('click', function (e) {
+                e.stopPropagation();
+                closeLightbox();
+            });
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeLightbox();
+            });
+
+            document.addEventListener('keydown', function handler(e) {
+                if (e.key === 'Escape' && overlay.parentNode) {
+                    closeLightbox();
+                    document.removeEventListener('keydown', handler);
+                }
+            });
+
+            requestAnimationFrame(function () {
+                overlay.classList.add('active');
+            });
+        });
+    });
+}
+
+function initCodeCopyButtons(container) {
+    container.querySelectorAll('.markdown-body pre').forEach(function (pre) {
+        var btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.innerHTML = '<i class="far fa-copy"></i> ' + (typeof t === 'function' ? t('share.copyBtn') || '复制' : '复制');
+        btn.addEventListener('click', function () {
+            var code = pre.querySelector('code');
+            var text = code ? code.textContent : pre.textContent;
+            navigator.clipboard.writeText(text).then(function () {
+                btn.innerHTML = '<i class="fas fa-check"></i> ' + (typeof t === 'function' ? t('share.copied') || '已复制' : '已复制');
+                btn.classList.add('copied');
+                setTimeout(function () {
+                    btn.innerHTML = '<i class="far fa-copy"></i> ' + (typeof t === 'function' ? t('share.copyBtn') || '复制' : '复制');
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(function () {
+                btn.innerHTML = '<i class="fas fa-times"></i> ' + (typeof t === 'function' ? t('share.copyFailed') || '复制失败' : '复制失败');
+            });
+        });
+        pre.appendChild(btn);
     });
 }

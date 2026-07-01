@@ -180,3 +180,60 @@
     background: var(--light);
     border: 1px solid var(--border);
 }
+
+/* Category filter bar */
+.category-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 4px 0;
+}
+
+.category-btn {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--gray);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.category-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(102, 187, 106, 0.05);
+}
+
+.category-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.dark-mode .category-btn {
+    background: var(--light);
+    border-color: var(--border);
+}
+
+.dark-mode .category-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Category badge on article cards */
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.category-badge i {
+    font-size: 0.75rem;
+}
