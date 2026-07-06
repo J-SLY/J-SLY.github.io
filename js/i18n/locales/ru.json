@@ -55,7 +55,8 @@
     "loading": "Загрузка...",
     "readTime": "{minutes} мин. чтения",
     "backToList": "Назад к статьям",
-    "uncategorized": "Без категории"
+    "uncategorized": "Без категории",
+    "related": "Похожие статьи"
   },
   "share": {
     "button": "Поделиться",

@@ -425,3 +425,14 @@ articles:
       - **Auto read time** — Calculated from article character count
       - **TOC highlight** — Active heading highlighted on scroll
       - **Dark mode improvement** — Smoother highlight.js theme switching
+  - id: 34
+    type: fix
+    title: 'Bug fix: Security, functionality and performance issues'
+    date: 2026-07-06 22:26
+    content: |-
+      Fixed multiple bugs covering security vulnerabilities, functional crashes, and memory leaks:
+
+      - **Security fixes**: XSS injection in search result tags and highlights, XSS in lightbox image attributes, `data-i18n` changed to use `textContent`
+      - **Functionality fixes**: Public article series navigation broken, standalone article page crash due to missing js-yaml, article ID type mismatch in comparison, incorrect OG URL for public articles, empty read time display
+      - **Memory leak**: TOC scroll/resize event listeners not removed after modal close
+      - **Other fixes**: Avatar onerror infinite loop, navigation header null pointer crash, settings panel CSS selector injection, clipboard failure button stuck, changelog null checks, missing `article.related` key in i18n locales, search performance optimization

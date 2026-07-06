@@ -17,7 +17,7 @@ function loadChangeLog() {
             return resp.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(function (data) {
-            allArticles = data.articles;
+            allArticles = data.articles || [];
             initViewMode();
             renderFilters();
             renderChangeLog('all');
@@ -146,8 +146,8 @@ function createChangeLogEntry(entry) {
     el.className = 'change-entry fade-in';
 
     var contentHtml = typeof marked !== 'undefined' && marked.parse
-        ? marked.parse(entry.content)
-        : '<pre>' + escapeHtml(entry.content) + '</pre>';
+        ? marked.parse(entry.content || '')
+        : '<pre>' + escapeHtml(entry.content || '') + '</pre>';
 
     el.innerHTML = [
         '<div class="change-entry-header">',

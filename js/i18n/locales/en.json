@@ -55,7 +55,8 @@
     "loading": "Loading...",
     "readTime": "{minutes} min read",
     "backToList": "Back to Articles",
-    "uncategorized": "Uncategorized"
+    "uncategorized": "Uncategorized",
+    "related": "Related Articles"
   },
   "share": {
     "button": "Share",

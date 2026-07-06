@@ -201,7 +201,7 @@ function initImageLightbox(container) {
             e.stopPropagation();
             var overlay = document.createElement('div');
             overlay.className = 'lightbox-overlay';
-            overlay.innerHTML = '<span class="lightbox-close">&times;</span><img src="' + this.src + '" alt="' + (this.alt || '') + '">';
+            overlay.innerHTML = '<span class="lightbox-close">&times;</span><img src="' + escapeHtml(this.src) + '" alt="' + escapeHtml(this.alt || '') + '">';
             document.body.appendChild(overlay);
             document.body.style.overflow = 'hidden';
 

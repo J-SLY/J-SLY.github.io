@@ -67,10 +67,11 @@ function generateTOC(container, scrollRoot) {
     });
 
     var scrollEl = scrollRoot || window;
+    var header = document.querySelector('header');
+    var headerHeight = header ? header.offsetHeight : 0;
 
     function updateActiveHeading() {
         var scrollTop = scrollEl === window ? window.scrollY : scrollEl.scrollTop;
-        var headerHeight = document.querySelector('header') ? document.querySelector('header').offsetHeight : 0;
         var offset = headerHeight + 30;
         var activeIdx = -1;
         headings.forEach(function (h, i) {
@@ -93,4 +94,10 @@ function generateTOC(container, scrollRoot) {
 
     updateActiveHeading();
     scrollEl.addEventListener('scroll', updateActiveHeading, { passive: true });
+
+    function cleanupTOCListeners() {
+        window.removeEventListener('resize', updateTOCCollapse);
+        scrollEl.removeEventListener('scroll', updateActiveHeading);
+    }
+    window.cleanupTOCListeners = cleanupTOCListeners;
 }

@@ -9,6 +9,8 @@ function initSettings() {
     if (!settingsToggle || !settingsDropdown) return;
 
     const currentMode = getArticleDisplayMode();
+    var validModes = ['modal', 'page', 'legacy'];
+    if (validModes.indexOf(currentMode) === -1) currentMode = 'modal';
     const checkedRadio = settingsDropdown.querySelector('input[value="' + currentMode + '"]');
     if (checkedRadio) checkedRadio.checked = true;
 
@@ -51,6 +53,8 @@ function initSettings() {
     }
 
     var defaultPage = localStorage.getItem('default_page') || 'main';
+    var validDefaults = ['main', 'public'];
+    if (validDefaults.indexOf(defaultPage) === -1) defaultPage = 'main';
     var defaultPageRadio = settingsDropdown.querySelector('input[name="default-page"][value="' + defaultPage + '"]');
     if (defaultPageRadio) defaultPageRadio.checked = true;
 

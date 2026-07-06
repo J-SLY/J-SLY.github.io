@@ -48,11 +48,12 @@ function handleShareClick(type, url, title, excerpt, btn) {
 }
 
 function copyToClipboard(text, btn) {
+    var origHtml = btn.innerHTML;
     navigator.clipboard.writeText(text).then(function () {
-        var origHtml = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-check"></i> ' + t('share.copied');
         setTimeout(function () { btn.innerHTML = origHtml; }, 2000);
     }).catch(function () {
         btn.innerHTML = '<i class="fas fa-times"></i> ' + t('share.copyFailed');
+        setTimeout(function () { btn.innerHTML = origHtml; }, 2000);
     });
 }

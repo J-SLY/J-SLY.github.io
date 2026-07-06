@@ -64,7 +64,8 @@ function showArticleModal(article, options) {
 
     function closeModalFn() {
         if (document.body.contains(modal)) document.body.removeChild(modal);
-        document.body.style.overflow = 'auto';
+        if (window.cleanupTOCListeners) window.cleanupTOCListeners();
+        document.body.style.overflow = '';
         restoreOGTags();
         modal.removeEventListener('click', bgClickFn);
         document.removeEventListener('keydown', escKeyFn);

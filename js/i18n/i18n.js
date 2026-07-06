@@ -41,7 +41,8 @@
       "uncategorized": "未分类",
       "loadError": "无法加载文章，请检查网络连接或刷新页面重试。",
       "readTime": "约 {minutes} 分钟",
-      "backToList": "返回文章列表"
+      "backToList": "返回文章列表",
+      "related": "相关文章"
     },
     "share": { "button": "分享", "copied": "链接已复制", "copyFailed": "复制失败", "copyBtn": "复制", "native": "系统分享", "copyLink": "复制链接" },
     "category": { "all": "全部分类" },
@@ -178,7 +179,7 @@
     for (i = 0; i < els.length; i++) {
       key = els[i].getAttribute('data-i18n');
       text = t(key);
-      if (text !== key) els[i].innerHTML = text;
+      if (text !== key) els[i].textContent = text;
     }
 
     els = root.querySelectorAll('[data-i18n-title]');

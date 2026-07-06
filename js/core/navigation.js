@@ -14,7 +14,8 @@ function initNavigation() {
             if (targetSection) {
                 updateActiveNav(this);
 
-                const headerHeight = document.querySelector('header').offsetHeight;
+                var header = document.querySelector('header');
+                var headerHeight = header ? header.offsetHeight : 0;
                 const targetPosition = targetSection.offsetTop - headerHeight - 20;
 
                 window.scrollTo({
@@ -63,7 +64,8 @@ function updateNavOnScroll() {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        const headerHeight = document.querySelector('header').offsetHeight;
+        var header = document.querySelector('header');
+        var headerHeight = header ? header.offsetHeight : 0;
 
         if (scrollY >= (sectionTop - headerHeight - 50)) {
             currentSection = section.getAttribute('id');

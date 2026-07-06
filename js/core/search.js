@@ -124,13 +124,14 @@ function initSearch(options) {
 
             var ds = getDataSource();
             var matches = ds.filter(function(a) {
+                var contentJoined = a.content.join('\n');
                 return a.title.toLowerCase().includes(q) ||
                     matchPinyin(a.title, q) ||
                     (a.tags && a.tags.some(function(t) { return t.toLowerCase().includes(q) || matchPinyin(t, q); })) ||
                     a.excerpt.toLowerCase().includes(q) ||
                     matchPinyin(a.excerpt, q) ||
-                    a.content.join('\n').toLowerCase().includes(q) ||
-                    matchPinyin(a.content.join('\n'), q);
+                    contentJoined.toLowerCase().includes(q) ||
+                    matchPinyin(contentJoined, q);
             });
 
             if (matches.length === 0) {
@@ -139,14 +140,15 @@ function initSearch(options) {
             }
 
             results.innerHTML = matches.map(function(a) {
-                var contentText = a.content.join('\n').replace(/[#*\-`]+/g, '').replace(/\s{2,}/g, ' ');
+                var contentJoined = a.content.join('\n');
+                var contentText = contentJoined.replace(/[#*\-`]+/g, '').replace(/\s{2,}/g, ' ');
                 var excerptText = contentText.slice(0, 120);
                 return [
                     '<div class="search-result-item" data-id="' + a.id + '">',
                     '  <div class="search-result-title">' + highlight(a.title, q) + '</div>',
                     '  <div class="search-result-excerpt">' + highlight(excerptText, q) + '</div>',
                     '  <div class="search-result-meta">',
-                    '    ' + (a.tags ? a.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') : ''),
+                    '    ' + (a.tags ? a.tags.map(function(t) { return '<span class="tag">' + escapeHtml(t) + '</span>'; }).join('') : ''),
                     '    <span>' + a.date + '</span>',
                     '  </div>',
                     '</div>'
@@ -173,6 +175,7 @@ function initSearch(options) {
 }
 
 function highlight(text, query) {
+    text = escapeHtml(text);
     const idx = text.toLowerCase().indexOf(query);
     if (idx !== -1) {
         return text.slice(0, idx) + '<strong>' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);

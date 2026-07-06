@@ -132,7 +132,7 @@ function createPublicArticleCard(article) {
         '  <p>' + escapeHtml(article.excerpt) + '</p>',
         '  <div class="article-meta">',
     '    <span><i class="far fa-calendar"></i> ' + escapeHtml(article.date) + '</span>',
-    '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : escapeHtml(article.readTime)) + '</span>',
+    '    <span><i class="far fa-clock"></i> ' + (article.readTimeMinutes ? t('article.readTime', {minutes: article.readTimeMinutes}) : calculateReadTime(article)) + '</span>',
     '    <span><i class="far fa-eye"></i> ' + escapeHtml('' + article.views) + '</span>',
         '  </div>',
         '</div>'
@@ -173,7 +173,7 @@ function openPublicArticle(article) {
 }
 
 function seriesOpenPublicArticle(id) {
-    var article = (window.articlesPublicData || []).find(function (a) { return Number(a.id) === Number(id); });
+    var article = (articlesPublicData || []).find(function (a) { return Number(a.id) === Number(id); });
     if (article) openPublicArticle(article);
 }
 

@@ -21,7 +21,8 @@ function updateOGTags(article) {
     if (ogTitle) ogTitle.setAttribute('content', article.title + ' - JSLY\'s Blog');
     if (ogDesc) ogDesc.setAttribute('content', article.excerpt);
 
-    const fullUrl = window.location.origin + '/article/' + article.id;
+    var pathPrefix = window.location.pathname.indexOf('/public/') === 0 ? '/public/article/' : '/article/';
+    const fullUrl = window.location.origin + pathPrefix + article.id;
     if (ogUrl) ogUrl.setAttribute('content', fullUrl);
 
     var safeImageUrl = article.image && isSafeUrl(article.image) ? resolveArticleImageUrl(article.image) : '';

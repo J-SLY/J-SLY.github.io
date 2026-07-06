@@ -63,7 +63,7 @@ function loadArticlesFromJSON() {
             return response.text().then(function (text) { return jsyaml.load(text); });
         })
         .then(data => {
-            articlesData = data.articles;
+            articlesData = data.articles || [];
             window.seriesMap = buildSeriesMap(articlesData);
             renderAllArticles();
             openArticleFromHash();
@@ -197,7 +197,7 @@ function addArticleClickEvents() {
         card.style.cursor = 'pointer';
         card.addEventListener('click', function() {
             const articleId = this.getAttribute('data-article-id');
-            const article = articlesData.find(a => a.id === Number(articleId));
+            const article = articlesData.find(a => Number(a.id) === Number(articleId));
             if (article) openArticle(article);
         });
     });
