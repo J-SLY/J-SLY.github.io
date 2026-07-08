@@ -7,7 +7,7 @@
 
 .tags-cloud { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 48px; padding: 24px; background: var(--bg-card, #fff); border-radius: 12px; }
 .tags-cloud .tag-cloud-item { display: inline-flex; align-items: center; gap: 4px; padding: 6px 18px; border-radius: 20px; background: #fff; color: var(--primary, #66bb6a); border: 1.5px solid var(--primary-light, #c8e6c9); text-decoration: none; transition: all 0.2s; line-height: 1.4; }
-.tags-cloud .tag-cloud-item:hover { background: var(--primary, #66bb6a); color: #fff; border-color: var(--primary, #66bb6a); transform: translateY(-2px); }
+.tags-cloud .tag-cloud-item:hover { border-color: var(--primary, #66bb6a); transform: translateY(-2px); }
 .tags-cloud .tag-cloud-item .tag-count { font-size: 0.75em; opacity: 0.7; background: var(--primary-light, #e8f5e9); color: var(--primary, #66bb6a); padding: 0 6px; border-radius: 8px; line-height: 1.5; }
 
 .tag-section { margin-bottom: 40px; }
@@ -23,6 +23,6 @@
 
 .dark-mode .tags-cloud { background: var(--light); }
 .dark-mode .tag-cloud-item { background: var(--bg); color: var(--primary-light, #a5d6a7); border-color: var(--border); }
-.dark-mode .tag-cloud-item:hover { background: var(--primary, #66bb6a); color: #fff; border-color: var(--primary, #66bb6a); }
+.dark-mode .tag-cloud-item:hover { border-color: var(--primary, #66bb6a); }
 .dark-mode .tag-cloud-item .tag-count { background: var(--light); color: var(--primary-light, #a5d6a7); }
 .dark-mode .tag-article-card { background: var(--light); border-color: var(--border); }
