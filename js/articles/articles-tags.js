@@ -69,7 +69,6 @@ function renderTags(articles) {
         var size = 0.8 + Math.pow(ratio, 0.6) * 1.6;
         var pad = Math.round(3 + Math.pow(ratio, 0.6) * 12);
         var encodedTag = encodeURIComponent(tag);
-        console.log('TAG:', tag, 'count:', count, 'ratio:', ratio, 'size:', size.toFixed(2), 'pad:', pad);
         html += '<a href="#tag-' + encodedTag + '" class="tag-cloud-item" style="font-size: ' + size.toFixed(2) + 'rem; padding: ' + pad + 'px ' + (pad + 9) + 'px">';
         html += escapeHtml(tag);
         html += ' <span class="tag-count">' + count + '</span>';
