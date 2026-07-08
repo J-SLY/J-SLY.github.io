@@ -6,30 +6,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#66bb6a">
-    <meta name="description" content="公共投稿 - JSLY's Blog">
-    <meta name="keywords" content="博客, 投稿, 社区, JSLY">
-    <meta property="og:title" content="公共投稿 - JSLY's Blog">
-    <meta property="og:description" content="来自社区的投稿文章">
+    <meta name="description" content="标签 - JSLY's Blog">
+    <meta name="keywords" content="博客, 标签, 文章分类, JSLY">
+    <meta property="og:title" content="标签 - JSLY's Blog">
+    <meta property="og:description" content="浏览所有文章标签">
     <meta property="og:image" content="https://www.jsly.asia/images/JS.svg">
     <meta property="og:url" content="https://www.jsly.asia">
     <meta property="og:type" content="website">
     <link rel="icon" href="../images/JS.svg">
-    <title data-i18n="meta.publicTitle">公共投稿 - JSLY's Blog</title>
+    <link rel="manifest" href="../manifest.json">
+    <title data-i18n="meta.tagsTitle">标签 - JSLY's Blog</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/layout.css">
-    <link rel="stylesheet" href="../css/components/cards.css">
     <link rel="stylesheet" href="../css/components/overlay.css">
-    <link rel="stylesheet" href="../css/components/article.css">
-    <link rel="stylesheet" href="../css/components/public.css">
+    <link rel="stylesheet" href="../css/components/tags.css">
     <link rel="stylesheet" href="../css/responsive.css">
     <link rel="stylesheet" href="../css/print.css" media="print">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="../feed.xml">
-    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <header>
@@ -40,9 +37,9 @@
                 <ul class="nav-links" id="nav-links-menu">
                     <li><a href="../index.html" data-i18n="nav.home">首页</a></li>
                     <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
-                    <li><a href="index.html" class="active" data-i18n="nav.public">公共投稿</a></li>
+                    <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
                     <li><a href="../leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
-                    <li><a href="../tags/" data-i18n="nav.tags">标签</a></li>
+                    <li><a href="index.html" class="active" data-i18n="nav.tags">标签</a></li>
                     <li><a href="../change/" data-i18n="nav.changelog">更新日志</a></li>
                     <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                 </ul>
@@ -63,28 +60,6 @@
                                 <span data-i18n="settings.lockNav">锁定导航栏</span>
                                 <input type="checkbox" id="nav-lock-toggle">
                             </label>
-                            <div class="settings-subtitle" data-i18n="settings.subtitleMode">阅读模式</div>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="modal" checked>
-                                <span data-i18n="settings.modal">弹窗模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="page">
-                                <span data-i18n="settings.newPage">新页面模式</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="display-mode" value="legacy">
-                                <span data-i18n="settings.legacy">兼容模式 (article.html?id=)</span>
-                            </label>
-                            <div class="settings-subtitle" data-i18n="settings.subtitleDefault">默认页面</div>
-                            <label class="settings-option">
-                                <input type="radio" name="default-page" value="main" checked>
-                                <span data-i18n="settings.mainSite">主站</span>
-                            </label>
-                            <label class="settings-option">
-                                <input type="radio" name="default-page" value="public">
-                                <span data-i18n="settings.publicSite">公共投稿</span>
-                            </label>
 
                         </div>
                     </div>
@@ -99,9 +74,6 @@
                             <a href="#" data-lang="ru">Русский</a>
                         </div>
                     </div>
-                    <div class="search-icon" data-i18n-aria="search.aria" role="button">
-                        <i class="fas fa-search"></i>
-                    </div>
                     <div class="menu-toggle" data-i18n-aria="menu.aria" role="button" aria-expanded="false" aria-controls="nav-links-menu">
                         <i class="fas fa-bars"></i>
                     </div>
@@ -113,19 +85,8 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 data-i18n="publicPage.heroTitle">JSLY's Public Blog</h1>
-                <p data-i18n="publicPage.desc">来自社区的声音。欢迎提交你的文章，与更多人分享知识与见解。</p>
-                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
-                    <a href="https://github.com/J-SLY/J-SLY.github.io/issues/new?template=public-submission.yml" class="btn" target="_blank" rel="noopener">
-                        <i class="fab fa-github"></i> <span data-i18n="publicPage.submitGitHub">GitHub 投稿</span>
-                    </a>
-                    <a href="mailto:2029872426@qq.com?subject=投稿%3A%20" class="btn" target="_blank" rel="noopener">
-                        <i class="fas fa-envelope"></i> <span data-i18n="publicPage.submitEmail">邮件投稿</span>
-                    </a>
-                    <a href="mailto:submit@support.jsly.asia?subject=投稿%3A%20" class="btn" target="_blank" rel="noopener">
-                        <i class="fas fa-envelope"></i> <span data-i18n="publicPage.submitEmailAlt">邮件投稿（备选）</span>
-                    </a>
-                </div>
+                <h1 data-i18n="tagsPage.title">标签</h1>
+                <p data-i18n="tagsPage.desc">浏览所有文章标签，快速找到感兴趣的内容。</p>
             </div>
         </div>
     </section>
@@ -133,20 +94,7 @@
     <main class="container">
         <div class="blog-content">
             <section class="articles-section">
-                <h2 class="section-title" data-i18n="public.sectionTitle">投稿文章</h2>
-
-                <div class="public-info">
-                    <h3><i class="fas fa-info-circle"></i> <span data-i18n="publicPage.howTitle">如何投稿？</span></h3>
-                    <p style="margin-bottom:12px" data-i18n="publicPage.howText">两种方式任选其一：</p>
-                    <ol>
-                        <li data-i18n="publicPage.howGithub"><strong>GitHub</strong> — 点击上方「GitHub 投稿」按钮，按模板填写 Issue 提交（你的 GitHub 用户名会自动作为作者名）。</li>
-                        <li data-i18n="publicPage.howEmail"><strong>邮件</strong> — 点击上方「邮件投稿」按钮，发送邮件至 <a href="mailto:submit@support.jsly.asia">submit@support.jsly.asia</a> 或 <a href="mailto:2029872426@qq.com">2029872426@qq.com</a>，请附上文章标题、正文（Markdown）和你的署名。</li>
-                        <li data-i18n="publicPage.howWait">提交后等待审核，审核通过后文章会出现在这里。</li>
-                    </ol>
-                </div>
-
-                <div id="public-articles-container" class="articles-grid">
-                </div>
+                <div id="tags-container" class="tags-container"></div>
             </section>
         </div>
     </main>
@@ -180,9 +128,9 @@
                     <ul class="footer-links">
                         <li><a href="../index.html#home" data-i18n="nav.home">首页</a></li>
                         <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
-                        <li><a href="index.html" data-i18n="nav.public">公共投稿</a></li>
+                        <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
                         <li><a href="../leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
-                        <li><a href="../tags/" data-i18n="nav.tags">标签</a></li>
+                        <li><a href="index.html" data-i18n="nav.tags">标签</a></li>
                         <li><a href="../change/" data-i18n="nav.changelog">更新日志</a></li>
                         <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                     </ul>
@@ -208,43 +156,33 @@
     <i class="fas fa-arrow-up"></i>
 </button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" integrity="sha512-pmjEJQ7CveksANaAKdCJZMig7eAcCFFzE1b5XnlnxdB/vU3AOStJ5SF7w4tFuqskuU31ETnAaWTYRQOYg2WHKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.min.js" integrity="sha256-MM3uFe6CqM98fl3F5J4uaR452PvLib+xY76XfoL5XjM=" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" integrity="sha384-+pxiN6T7yvpryuJmE1gM9PX7yQit15auDb+ZwwvJOd/4be2Cie5/IuVXgQb/S9du" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../js/core/display-mode.js"></script>
     <script src="../js/i18n/i18n.js"></script>
     <script src="../js/i18n/lang-reload.js"></script>
     <script src="../js/core/utils.js"></script>
-    <script src="../js/article-view/article-content.js"></script>
-    <script src="../js/article-view/article-toc.js"></script>
-    <script src="../js/article-view/article-comments.js"></script>
-    <script src="../js/article-view/article-share.js"></script>
-    <script src="../js/article-view/article-og.js"></script>
-    <script src="../js/article-view/article-modal-shared.js"></script>
-    <script src="../js/article-view/article-modal.js"></script>
-    <script src="../js/articles/articles-public.js"></script>
-    <script src="../js/core/search.js"></script>
     <script src="../js/core/dark-mode.js"></script>
     <script src="../js/core/settings.js"></script>
     <script src="../js/core/navigation.js"></script>
+    <script src="../js/articles/articles-tags.js"></script>
     <script src="../js/core/keyboard.js"></script>
     <script src="../js/core/nav-scroll.js"></script>
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
+        loadTags();
         initDarkMode();
         initSettings();
         initNavScroll();
         initMobileMenu();
         initBackToTop();
         initKeyboardShortcuts();
-        loadPublicArticles();
     });
     </script>
-<script>
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js');
-}
-</script>
+    <script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js');
+    }
+    </script>
 </body>
 </html>

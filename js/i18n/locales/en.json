@@ -5,6 +5,7 @@
     "public": "Public",
     "leaderboard": "Leaderboard",
     "changelog": "Changelog",
+    "tags": "Tags",
     "about": "About"
   },
   "darkmode": {
@@ -96,6 +97,12 @@
     "pushes": "pushes",
     "sinceUntil": "to present"
   },
+  "tagsPage": {
+    "title": "Tags",
+    "desc": "Browse all article tags to quickly find content that interests you.",
+    "empty": "No tags yet.",
+    "count": "{tags} tags \u00B7 {articles} articles"
+  },
   "leaderboard": {
     "tabPR": "PRs",
     "tabIssue": "Issues",
@@ -180,6 +187,10 @@
     "leaderboardTitle": "Leaderboard - JSLY's Blog",
     "leaderboardDesc": "Leaderboard - JSLY's Blog",
     "leaderboardOGDesc": "Thank you to every contributor",
+    "tagsTitle": "Tags - JSLY's Blog",
+    "tagsKeywords": "blog, tags, categories, JSLY",
+    "tagsDesc": "Tags - JSLY's Blog",
+    "tagsOGDesc": "Browse all article tags",
     "errorDesc": "Page Not Found - JSLY's Blog",
     "errorTitle": "404 - Page Not Found"
   }

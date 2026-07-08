@@ -5,6 +5,7 @@
     "public": "Публичное",
     "leaderboard": "Рейтинг",
     "changelog": "Обновления",
+    "tags": "Теги",
     "about": "Обо мне"
   },
   "darkmode": {
@@ -96,6 +97,12 @@
     "pushes": "пушей",
     "sinceUntil": "по настоящее время"
   },
+  "tagsPage": {
+    "title": "Теги",
+    "desc": "Просматривайте все теги статей, чтобы быстро найти интересующий вас контент.",
+    "empty": "Пока нет тегов.",
+    "count": "{tags} тегов \u00B7 {articles} статей"
+  },
   "leaderboard": {
     "tabPR": "PR",
     "tabIssue": "Issues",
@@ -180,6 +187,10 @@
     "leaderboardTitle": "Рейтинг - JSLY's Blog",
     "leaderboardDesc": "Рейтинг - JSLY's Blog",
     "leaderboardOGDesc": "Спасибо каждому участнику",
+    "tagsTitle": "Теги - JSLY's Blog",
+    "tagsKeywords": "блог, теги, категории, JSLY",
+    "tagsDesc": "Теги - JSLY's Blog",
+    "tagsOGDesc": "Просмотр всех тегов статей",
     "errorDesc": "Страница не найдена - JSLY's Blog",
     "errorTitle": "404 - Страница не найдена"
   }

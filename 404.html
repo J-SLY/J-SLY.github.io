@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link id="hljs-theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="/feed.xml">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <header>
@@ -41,6 +42,7 @@
                     <li><a href="index.html#articles" data-i18n="nav.articles">文章</a></li>
                     <li><a href="public/" data-i18n="nav.public">公共投稿</a></li>
                     <li><a href="leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                    <li><a href="tags/" data-i18n="nav.tags">标签</a></li>
                     <li><a href="change/" data-i18n="nav.changelog">更新日志</a></li>
                     <li><a href="index.html#about" data-i18n="nav.about">关于我</a></li>
                 </ul>
@@ -153,6 +155,7 @@
                         <li><a href="index.html#articles" data-i18n="nav.articles">文章</a></li>
                         <li><a href="public/" data-i18n="nav.public">公共投稿</a></li>
                         <li><a href="leaderboard/" data-i18n="nav.leaderboard">贡献榜</a></li>
+                        <li><a href="tags/" data-i18n="nav.tags">标签</a></li>
                         <li><a href="change/" data-i18n="nav.changelog">更新日志</a></li>
                         <li><a href="index.html#about" data-i18n="nav.about">关于我</a></li>
                     </ul>
@@ -202,6 +205,11 @@
     <script>
     ;['initDarkMode','initSearch','initSettings','initNavScroll','initMobileMenu','initBackToTop','initKeyboardShortcuts'].forEach(function(fn) { try { if (typeof window[fn] === 'function') window[fn](); } catch(e) { /* noop */ } });
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+}
+</script>
 </body>
 </html>
 

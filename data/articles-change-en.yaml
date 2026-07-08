@@ -425,6 +425,17 @@ articles:
       - **Auto read time** — Calculated from article character count
       - **TOC highlight** — Active heading highlighted on scroll
       - **Dark mode improvement** — Smoother highlight.js theme switching
+  - id: 38
+    type: feat
+    title: 'Tags page, article recommendation enhancement & PWA support'
+    date: 2026-07-06 22:27
+    content: |-
+      New features added:
+
+      - **Tags aggregation page** — New `/tags/` page grouping all articles by tag, with tag cloud + article card grid
+      - **Article recommendation enhancement** — Improved related articles algorithm with multi-dimensional weighted scoring: same series (+5), same category (+2), title keyword matching (+1)
+      - **PWA offline support** — Added `manifest.json` and Service Worker for app installation and offline caching
+      - **RSS update** — Added latest article entries to feed.xml
   - id: 34
     type: fix
     title: 'Bug fix: Security, functionality and performance issues'

@@ -9,6 +9,7 @@
       "public": "公共投稿",
       "leaderboard": "贡献榜",
       "changelog": "更新日志",
+      "tags": "标签",
       "about": "关于我"
     },
     "darkmode": { "title": "切换暗色模式" },
@@ -58,6 +59,12 @@
       "sectionTitle": "变更历史",
       "commits": "次提交", "pushes": "次推送",
       "sinceUntil": "至今"
+    },
+    "tagsPage": {
+      "title": "标签",
+      "desc": "浏览所有文章标签，快速找到感兴趣的内容。",
+      "empty": "暂无标签。",
+      "count": "共 {tags} 个标签 · {articles} 篇文章"
     },
     "leaderboard": {
       "tabPR": "PR 榜", "tabIssue": "Issues 榜", "tabSubmission": "投稿榜",
@@ -127,6 +134,10 @@
       "leaderboardTitle": "贡献榜 - JSLY's Blog",
       "leaderboardDesc": "贡献榜 - JSLY's Blog",
       "leaderboardOGDesc": "感谢每一位贡献者的付出",
+      "tagsTitle": "标签 - JSLY's Blog",
+      "tagsKeywords": "博客, 标签, 文章分类, JSLY",
+      "tagsDesc": "标签 - JSLY's Blog",
+      "tagsOGDesc": "浏览所有文章标签",
       "errorDesc": "页面未找到 - JSLY's Blog",
       "errorTitle": "404 - 页面未找到"
     }

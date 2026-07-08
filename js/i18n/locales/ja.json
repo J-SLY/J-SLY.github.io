@@ -5,6 +5,7 @@
     "public": "パブリック",
     "leaderboard": "ランキング",
     "changelog": "更新履歴",
+    "tags": "タグ",
     "about": "について"
   },
   "darkmode": {
@@ -96,6 +97,12 @@
     "pushes": "プッシュ",
     "sinceUntil": "から現在まで"
   },
+  "tagsPage": {
+    "title": "タグ",
+    "desc": "全てのタグを閲覧し、興味のあるコンテンツを素早く見つけましょう。",
+    "empty": "タグがまだありません。",
+    "count": "全 {tags} タグ \u00B7 {articles} 記事"
+  },
   "leaderboard": {
     "tabPR": "PR",
     "tabIssue": "Issues",
@@ -180,6 +187,10 @@
     "leaderboardTitle": "ランキング - JSLY's Blog",
     "leaderboardDesc": "ランキング - JSLY's Blog",
     "leaderboardOGDesc": "すべての貢献者に感謝します",
+    "tagsTitle": "タグ - JSLY's Blog",
+    "tagsKeywords": "ブログ, タグ, カテゴリー, JSLY",
+    "tagsDesc": "タグ - JSLY's Blog",
+    "tagsOGDesc": "全ての記事タグを閲覧",
     "errorDesc": "ページが見つかりません - JSLY's Blog",
     "errorTitle": "404 - ページが見つかりません"
   }

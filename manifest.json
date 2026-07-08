@@ -1,0 +1,17 @@
+{
+  "name": "JSLY's Blog",
+  "short_name": "JSLY Blog",
+  "description": "JSLY's Blog - 技术分享与个人随笔",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#66bb6a",
+  "icons": [
+    {
+      "src": "/images/JS.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

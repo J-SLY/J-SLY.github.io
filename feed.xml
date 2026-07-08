@@ -7,7 +7,7 @@
     <link>https://www.jsly.asia</link>
     <description>JSLY's Blog - 分享技术、编程与生活的个人博客</description>
     <language>zh-CN</language>
-    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2026 00:00:00 +0800</lastBuildDate>
     <atom:link href="https://www.jsly.asia/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>OpenCode 使用指南</title>
@@ -33,6 +33,32 @@
       ]]></content:encoded>
       <category>指南</category>
       <category>教程</category>
+    </item>
+    <item>
+      <title>OpenCode AI Agent 详解</title>
+      <link>https://www.jsly.asia/article/3</link>
+      <guid isPermaLink="true">https://www.jsly.asia/article/3</guid>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0800</pubDate>
+      <description><![CDATA[深入解析 OpenCode 的 Agent 系统架构，了解 explore、general 等专用 Agent 的工作原理和协作模式。]]></description>
+      <content:encoded><![CDATA[
+        <p>深入解析 OpenCode 的 Agent 系统架构，了解 explore、general 等专用 Agent 的工作原理和协作模式。</p>
+      ]]></content:encoded>
+      <category>OpenCode</category>
+      <category>AI</category>
+      <category>Agent</category>
+    </item>
+    <item>
+      <title>OpenCode 高级技巧与最佳实践</title>
+      <link>https://www.jsly.asia/article/4</link>
+      <guid isPermaLink="true">https://www.jsly.asia/article/4</guid>
+      <pubDate>Tue, 30 Jun 2026 00:00:00 +0800</pubDate>
+      <description><![CDATA[掌握 OpenCode 的高级使用技巧，包括配置优化、Prompt 工程、安全实践和工作流集成。]]></description>
+      <content:encoded><![CDATA[
+        <p>掌握 OpenCode 的高级使用技巧，包括配置优化、Prompt 工程、安全实践和工作流集成。</p>
+      ]]></content:encoded>
+      <category>OpenCode</category>
+      <category>AI</category>
+      <category>技巧</category>
     </item>
   </channel>
 </rss>

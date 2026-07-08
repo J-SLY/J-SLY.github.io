@@ -26,6 +26,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="alternate" type="application/rss+xml" title="JSLY's Blog" href="../feed.xml">
+    <link rel="manifest" href="/manifest.json">
 </head>
 <body>
     <header>
@@ -38,6 +39,7 @@
                     <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
                     <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
                     <li><a href="index.html" class="active" data-i18n="nav.leaderboard">贡献榜</a></li>
+                    <li><a href="../tags/" data-i18n="nav.tags">标签</a></li>
                     <li><a href="../change/" data-i18n="nav.changelog">更新日志</a></li>
                     <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                 </ul>
@@ -135,6 +137,7 @@
                         <li><a href="../index.html#articles" data-i18n="nav.articles">文章</a></li>
                         <li><a href="../public/" data-i18n="nav.public">公共投稿</a></li>
                         <li><a href="index.html" data-i18n="nav.leaderboard">贡献榜</a></li>
+                        <li><a href="../tags/" data-i18n="nav.tags">标签</a></li>
                         <li><a href="../change/" data-i18n="nav.changelog">更新日志</a></li>
                         <li><a href="../index.html#about" data-i18n="nav.about">关于我</a></li>
                     </ul>
@@ -182,5 +185,10 @@
         initKeyboardShortcuts();
     });
     </script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js');
+}
+</script>
 </body>
 </html>
