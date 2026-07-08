@@ -66,7 +66,7 @@ function renderTags(articles) {
     tagNames.forEach(function (tag) {
         var count = tagMap[tag].length;
         var ratio = (count - minCount) / sizeRange;
-        var size = 0.85 + ratio * 0.65;
+        var size = 0.85 + ratio * 1.15;
         var encodedTag = encodeURIComponent(tag);
         html += '<a href="#tag-' + encodedTag + '" class="tag-cloud-item" style="font-size: ' + size.toFixed(2) + 'rem">';
         html += escapeHtml(tag);
