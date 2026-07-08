@@ -66,8 +66,8 @@ function renderTags(articles) {
     tagNames.forEach(function (tag) {
         var count = tagMap[tag].length;
         var ratio = sizeRange > 1 ? (count - minCount) / sizeRange : count / maxCount;
-        var size = 0.8 + Math.pow(ratio, 0.6) * 1.6;
-        var pad = Math.round(3 + Math.pow(ratio, 0.6) * 12);
+        var size = 0.85 + Math.pow(ratio, 0.5) * 0.6;
+        var pad = Math.round(4 + Math.pow(ratio, 0.5) * 6);
         var encodedTag = encodeURIComponent(tag);
         html += '<a href="#tag-' + encodedTag + '" class="tag-cloud-item" style="font-size: ' + size.toFixed(2) + 'rem; padding: ' + pad + 'px ' + (pad + 9) + 'px">';
         html += escapeHtml(tag);
