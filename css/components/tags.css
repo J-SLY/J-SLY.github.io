@@ -6,7 +6,7 @@
 .tags-stats { text-align: center; margin-bottom: 32px; color: var(--gray); font-size: 0.95rem; }
 
 .tags-cloud { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 48px; padding: 24px; background: var(--bg-card, #fff); border-radius: 12px; }
-.tags-cloud .tag-cloud-item { display: inline-flex; align-items: center; gap: 4px; padding: 3px 12px; border-radius: 30px; background: var(--primary-light); color: white; font-size: 0.8rem; text-decoration: none; transition: var(--transition); line-height: 1.4; }
+.tags-cloud .tag-cloud-item { display: inline-flex; align-items: center; gap: 4px; border-radius: 30px; background: var(--primary-light); color: white; text-decoration: none; transition: var(--transition); padding: 3px 12px; }
 .tags-cloud .tag-cloud-item:hover { transform: translateY(-2px); }
 .tags-cloud .tag-cloud-item .tag-count { font-size: 0.75em; opacity: 0.7; margin-left: 2px; }
 
@@ -22,5 +22,4 @@
 .tag-article-card .tag-article-excerpt { font-size: 0.85rem; color: var(--gray); margin-top: 6px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
 .dark-mode .tags-cloud { background: var(--light); }
-.dark-mode .tag-cloud-item:hover { transform: translateY(-2px); }
 .dark-mode .tag-article-card { background: var(--light); border-color: var(--border); }
