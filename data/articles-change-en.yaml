@@ -425,6 +425,12 @@ articles:
       - **Auto read time** — Calculated from article character count
       - **TOC highlight** — Active heading highlighted on scroll
       - **Dark mode improvement** — Smoother highlight.js theme switching
+  - id: 39
+    type: chore
+    title: 'Rename tags page & reorder nav'
+    date: 2026-07-08 14:30
+    content: |-
+      Renamed tags page title from "标签" to "Tags", moved nav link after Articles.
   - id: 38
     type: feat
     title: 'Tags page, article recommendation enhancement & PWA support'
